@@ -11,11 +11,11 @@ const users = [
     lastName: `Abreu`,
     email: `diego@mail.com`,
     password: `password`,
-    street1: `123 Park St`,
-    street2: `12B`,
-    city: `New York`,
+    street1: `9529 Ashley Court`,
+    street2: `B`,
+    city: `Brooklyn`,
     state: 'NY',
-    zip: `10009`,
+    zip: `11209`,
   },
 
   {
