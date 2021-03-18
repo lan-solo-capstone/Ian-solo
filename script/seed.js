@@ -1,19 +1,169 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Item, ItemPhoto} = require('../server/db/models')
+
+//userData
+const users = [
+  {
+    firstName: `Diego`,
+    middleName: ``,
+    lastName: `Abreu`,
+    email: `diego@mail.com`,
+    password: `password`,
+    street1: `9529 Ashley Court`,
+    street2: `B`,
+    city: `Brooklyn`,
+    state: 'NY',
+    zip: `11209`,
+  },
+
+  {
+    firstName: `Melinda`,
+    middleName: ``,
+    lastName: `Armbruster`,
+    email: `melinda@mail.com`,
+    password: `password`,
+    street1: `49 Winchester Lane`,
+    street2: ``,
+    city: `New York`,
+    state: 'NY',
+    zip: `11211`,
+  },
+
+  {
+    firstName: `Yoshie`,
+    middleName: ``,
+    lastName: `Fujiwara`,
+    email: `yoshie@mail.com`,
+    password: `password`,
+    street1: `2 Cactus Road`,
+    street2: `3A`,
+    city: `Bronx`,
+    state: 'NY',
+    zip: `10461`,
+  },
+
+  {
+    firstName: `Jae`,
+    middleName: ``,
+    lastName: `Chung`,
+    email: `Jae@mail.com`,
+    password: `password`,
+    street1: `864 Paris Hill Dr.`,
+    street2: ``,
+    city: `New York`,
+    state: 'NY',
+    zip: `10002`,
+  },
+]
+
+//item data
+const items = [
+  {
+    itemListName:
+      'IBIS Titanium Racing Road Bike USA SEBASTOPOL 56cm Made in California',
+    description:
+      'Ibis TI Bike, highly collectible, Superb titanium tube set, superb ride, 56CM top tube, semi sloping geo. 52cm seat tube. FYI, I am keeping the saddle, wheel set and pedals for my other bike.Questions welcomed.',
+    itemType: 'Offer',
+    itemCondition: 'Used',
+    status: 'Open',
+    deliveryOption: 'Pickup_Only',
+    userId: 1,
+  },
+  {
+    itemListName: 'Samson CR4 Wireless Microphone Receiver - as-is',
+    description:
+      'Another band member left this in my flight case 15 years ago and does not want it back. I don’t have microphones or an AC adapter for it. I have never even tried to plug it in or turn it on.If you want it, please email me with a possible pickup time.',
+    itemType: 'Offer',
+    itemCondition: 'Used',
+    status: 'Open',
+    deliveryOption: 'Pickup_Only',
+    userId: 1,
+  },
+  {
+    itemListName: 'Queen bed frame and duvet',
+    description:
+      "A queen metal bedframe. Also duvet + cover + pillow. No mattress. The duvet has only been lightly used and are only several months old / the duvet cover just needs a regular wash in the laundry. I would have kept them but I needed to move fast and wasn't able to take them with me.",
+    itemType: 'Offer',
+    itemCondition: 'Used',
+    status: 'Open',
+    deliveryOption: 'Pickup_Only',
+    userId: 2,
+  },
+  {
+    itemListName: 'Gucci Gold Sandals',
+    description:
+      'Gold Sandals in good condition. It comes with the box and a dust bag. Worn once. Size 38.',
+    itemType: 'Offer',
+    itemCondition: 'Gently_Used',
+    status: 'Open',
+    deliveryOption: 'Pickup_Only',
+    userId: 4,
+  },
+  {
+    itemListName: 'Gucci Boots',
+    description:
+      'ISO of Gucci Boots since I lost my pair of Gucci sandals. Size 38.',
+    itemType: 'Seeking',
+    itemCondition: 'New',
+    status: 'Open',
+    userId: 4,
+  },
+  {
+    itemListName: 'FREE 87 REGAL AFT CABIN-NEEDS MOTOR',
+    description:
+      '87 REGAL 23 FT. NEEDS MOTOR. FULL V CABIN PLUS AFT CABIN! SLEEPS 6!! ,FRIDGE SINK,STOVE,FULL HEAD WITH TANK! JUST BOTTOM PAINTED 5 YR PAINT! Never got around to putting in an engine and was just going to donate to make room for my other boat. hard to work with the charitable org. during this pandemic so I figured I give it a shot to sell for same as donation. If you Know way around boats could pick up a deal. Boat is in water and would have to pick it up at nearby ramp.Very LOCAL Water delivery also possible. Thanks.',
+    itemType: 'Offer',
+    itemCondition: 'Used',
+    status: 'Open',
+    userId: 3,
+  },
+  {
+    itemListName: 'Bike',
+    description: 'ISO of Bike',
+    itemType: 'Seeking',
+    itemCondition: 'Used',
+    status: 'Open',
+    userId: 3,
+  },
+  {
+    itemListName: 'Bike Helmet',
+    description: 'ISO of Bike Helmet',
+    itemType: 'Seeking',
+    itemCondition: 'New',
+    status: 'Open',
+    userId: 3,
+  },
+  {
+    itemListName: 'A puppy',
+    description: 'ISO of cute puppy - prefer a pug',
+    itemType: 'Seeking',
+    itemCondition: 'New',
+    status: 'Open',
+    userId: 4,
+  },
+]
+
+// seed function
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
+  await Promise.all(
+    users.map((user) => {
+      return User.create(user)
+    })
+  )
   console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+
+  await Promise.all(
+    items.map((item) => {
+      return Item.create(item)
+    })
+  )
+  console.log(`seeded ${items.length} items`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
@@ -23,6 +173,7 @@ async function runSeed() {
   console.log('seeding...')
   try {
     await seed()
+    console.log(`seeded successfully`)
   } catch (err) {
     console.error(err)
     process.exitCode = 1
