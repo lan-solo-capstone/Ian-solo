@@ -10,6 +10,7 @@ import {
   MapAllItems,
   MapSingleItem,
   temp,
+  NewItemForm,
 } from './components'
 import {me} from './store'
 
@@ -37,6 +38,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/post" component={NewItemForm} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
