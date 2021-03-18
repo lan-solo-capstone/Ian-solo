@@ -19,3 +19,16 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.singleItem {
+  width: 400px;
+}
+
+.singleItemImg {
+  width: 150px;
+  height: 150px;
+}
+
+/* .singleItemInfo {
+  height: 150px;
+} */
