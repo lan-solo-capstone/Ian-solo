@@ -24,7 +24,8 @@ const Item = db.define('item', {
   itemCondition: {
     type: Sequelize.ENUM,
     values: ['New', 'Gently_Used', 'Used'],
-    allowNull: false,
+    // changed this to true so that "seeking" doesn't have to specify a condition -- JC
+    allowNull: true,
   },
   status: {
     type: Sequelize.ENUM,
