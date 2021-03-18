@@ -1,6 +1,11 @@
 {
   "root": true,
-  "extends": ["fullstack", "prettier", "prettier/react"],
+  "extends": [
+    "fullstack",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "semi": 0
   }
