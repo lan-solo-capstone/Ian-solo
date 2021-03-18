@@ -3,6 +3,7 @@ const Item = require('../db/models/item')
 module.exports = router
 
 // mounted on /api/users/post
+// TODO: only users should be allowed to do this
 
 router.post('/', async (req, res, next) => {
   try {
