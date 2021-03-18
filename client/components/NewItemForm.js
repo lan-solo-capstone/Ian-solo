@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {postNewItem} from '../store/item-jae.js'
 
-export default class NewItemForm extends Component {
+class NewItemForm extends Component {
   render() {
     return (
       <div className="container-fluid">
@@ -54,3 +55,10 @@ export default class NewItemForm extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewItem: (item) => dispatch(postNewItem(item)),
+  }
+}
+export default connect(null, mapDispatchToProps)(NewItemForm)
