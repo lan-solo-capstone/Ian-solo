@@ -3,15 +3,15 @@ import ReactMapGL, {Marker} from 'react-map-gl'
 
 const MapExp = () => {
   const [viewport, setViewport] = useState({
-    latitude: 42.192324,
-    longitude: -88.088098,
+    latitude: 40.73061,
+    longitude: -73.935242,
     width: '100vw',
     height: '100vh',
-    zoom: 12,
+    zoom: 11,
   })
 
   return (
-    <div className="container">
+    <div>
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken="pk.eyJ1IjoibWVsaW5kYWFybWJydXN0ZXIiLCJhIjoiY2trZTd6cHVlMDl5YzJwcXNvMWRvOHU4ciJ9.NdVU55Xhn75BzaVNjACSKQ"
