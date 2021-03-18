@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-export default class NewItemForm extends React {
+export default class NewItemForm extends Component {
   render() {
     return (
       <div className="container-fluid">
@@ -9,36 +9,40 @@ export default class NewItemForm extends React {
           <div className="col-md-12">
             <form role="form">
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                />
+                <label htmlFor="exampleInputEmail1">Item Name</label>
+                <input type="text" className="form-control" id="itemName" />
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
+                <label htmlFor="exampleInputPassword1">Item Description</label>
+                <textarea
                   className="form-control"
-                  id="exampleInputPassword1"
+                  id="itemDescription"
+                  rows="5"
                 />
+              </div>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <a className="dropdown-item disabled" href="#">
+                  Condition
+                </a>
+                <a className="dropdown-item" href="#">
+                  Like New
+                </a>
+                <a className="dropdown-item" href="#">
+                  Super Old
+                </a>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputFile">File input</label>
                 <input
                   type="file"
+                  // need to add other file types to support
+                  accept="image/x-png,image/jpeg,image/gif"
                   className="form-control-file"
                   id="exampleInputFile"
                 />
-                <p className="help-block">
-                  Example block-level help text here.
-                </p>
-              </div>
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" /> Check me out
-                </label>
               </div>
               <button type="submit" className="btn btn-primary">
                 Submit
