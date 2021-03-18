@@ -67,6 +67,12 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  latitude: {
+    type: Sequelize.DECIMAL(8, 6),
+  },
+  longitude: {
+    type: Sequelize.DECIMAL(9, 6),
+  },
 })
 
 module.exports = User
