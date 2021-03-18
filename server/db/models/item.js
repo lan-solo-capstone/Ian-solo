@@ -40,6 +40,7 @@ const Item = db.define('item', {
   },
   dateListed: {
     type: Sequelize.DATE,
+    defaultValue: Date.now(),
   },
   dateClosed: {
     type: Sequelize.DATE,

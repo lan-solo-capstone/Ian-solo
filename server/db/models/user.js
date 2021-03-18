@@ -65,7 +65,7 @@ const User = db.define('user', {
 
   zip: {
     type: Sequelize.STRING,
-    allowNull: true,
+    allowNull: false,
   },
 })
 
