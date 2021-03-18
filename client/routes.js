@@ -11,6 +11,7 @@ import {
   MapSingleItem,
   temp,
   NewItemForm,
+  ListAll
 } from './components'
 import {me} from './store'
 
@@ -29,6 +30,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/mapexp" component={MapExp} />
+        <Route path="/listAll" component={ListAll} />
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
         <Route path="/temp" component={temp} />
