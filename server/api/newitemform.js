@@ -4,6 +4,7 @@ module.exports = router
 
 // mounted on /api/users/post
 // TODO: only users should be allowed to do this
+// TODO: add photos
 
 router.post('/', async (req, res, next) => {
   try {
