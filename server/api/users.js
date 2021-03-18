@@ -3,7 +3,7 @@ const {User} = require('../db/models')
 module.exports = router
 
 // /api/users
-
+router.use('/post', require('./newitemform.js'))
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
