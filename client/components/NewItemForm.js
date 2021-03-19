@@ -11,13 +11,10 @@ class NewItemForm extends Component {
             <form role="form">
               <div className="row">
                 <div>
-                  <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">
+                  <label className="mr-sm-2" htmlFor="postType">
                     What type of post is this?
                   </label>
-                  <select
-                    className="custom-select mr-sm-2"
-                    id="inlineFormCustomSelect"
-                  >
+                  <select className="custom-select mr-sm-2" id="postType">
                     <option selected>Choose...</option>
                     <option value="Offer">It&apos;s an OFFER of an item</option>
                     <option value="Seeking">
@@ -28,15 +25,13 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Item Name</label>
+                  <label htmlFor="itemName">Item Name</label>
                   <input type="text" className="form-control" id="itemName" />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">
-                    Item Description
-                  </label>
+                  <label htmlFor="itemDescription">Item Description</label>
                   <textarea
                     className="form-control"
                     id="itemDescription"
@@ -46,13 +41,10 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div>
-                  <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">
+                  <label className="mr-sm-2" htmlFor="itemCondition">
                     Condition of your item
                   </label>
-                  <select
-                    className="custom-select mr-sm-2"
-                    id="inlineFormCustomSelect"
-                  >
+                  <select className="custom-select mr-sm-2" id="itemCondition">
                     <option selected>Choose...</option>
                     <option value="New">Like New</option>
                     <option value="Gently_Used">Gently Used</option>
@@ -62,13 +54,14 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="exampleInputFile">Upload a Photo</label>
+                  <label htmlFor="uploadPhoto">Upload a Photo</label>
                   <input
                     type="file"
                     // need to add other file types to support
                     accept="image/x-png,image/jpeg,image/gif"
                     className="form-control-file"
-                    id="exampleInputFile"
+                    id="uploadPhoto"
+                    multiple
                   />
                 </div>
               </div>
