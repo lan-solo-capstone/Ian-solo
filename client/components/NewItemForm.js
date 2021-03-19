@@ -5,9 +5,9 @@ import {postNewItem} from '../store/item-jae.js'
 
 // TODO: need to flesh out initialState?
 const initialState = {
-  postType: 'chooseOne',
-  itemName: '',
-  itemDescription: '',
+  itemType: 'chooseOne',
+  itemListName: '',
+  description: '',
   itemCondition: 'chooseOne',
 }
 class NewItemForm extends Component {
@@ -24,6 +24,11 @@ class NewItemForm extends Component {
     })
   }
 
+  handleSubmit(evt) {
+    // evt.preventDefault()
+    // const {itemType, itemListName, description, itemCondition} = this.state
+    this.props.addNewItem(this.state)
+  }
   render() {
     // this log makes sure that state changes when user types on form
     console.log('in NewFormItem render, this.state', this.state)
@@ -34,13 +39,13 @@ class NewItemForm extends Component {
             <form role="form">
               <div className="row">
                 <div>
-                  <label className="mr-sm-2" htmlFor="postType">
+                  <label className="mr-sm-2" htmlFor="itemType">
                     What type of post is this?
                   </label>
                   <select
                     className="custom-select mr-sm-2"
-                    name="postType"
-                    value={this.state.postType}
+                    name="itemType"
+                    value={this.state.itemType}
                     onChange={this.handleChange}
                   >
                     {/* TODO: need to remove selected and  */}
@@ -54,24 +59,24 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="itemName">Item Name</label>
+                  <label htmlFor="itemListName">Item Name</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="itemName"
-                    value={this.state.itemName}
+                    name="itemListName"
+                    value={this.state.itemListName}
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="itemDescription">Item Description</label>
+                  <label htmlFor="description">Item Description</label>
                   <textarea
                     className="form-control"
                     rows="5"
-                    name="itemDescription"
-                    value={this.state.itemDescription}
+                    name="description"
+                    value={this.state.description}
                     onChange={this.handleChange}
                   />
                 </div>
