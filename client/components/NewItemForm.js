@@ -1,15 +1,21 @@
+/* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item-jae.js'
 
 // TODO: need to flesh out initialState?
-const initialState = {itemName: '', itemDescription: ''}
+const initialState = {
+  itemType: 'chooseOne',
+  itemListName: '',
+  description: '',
+  itemCondition: 'chooseOne',
+}
 class NewItemForm extends Component {
   constructor() {
     super()
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(evt) {
@@ -18,24 +24,36 @@ class NewItemForm extends Component {
     })
   }
 
-  // TODO: need to add handleSubmit
-
+  handleSubmit(evt) {
+    evt.preventDefault()
+    // const {itemType, itemListName, description, itemCondition} = this.state
+    console.log('in handleSubmit this.state', this.state)
+    this.props.addNewItem(this.state)
+  }
   render() {
     // this log makes sure that state changes when user types on form
-    console.log('heeeey!', this.state)
+    console.log('in NewFormItem render, this.state', this.state)
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <form role="form">
+            <form role="form" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div>
-                  <label className="mr-sm-2" htmlFor="postType">
+                  <label className="mr-sm-2" htmlFor="itemType">
                     What type of post is this?
                   </label>
-                  <select className="custom-select mr-sm-2" name="postType">
-                    {/* TODO: need to remove selected and  */}
-                    <option defaultValue>Choose...</option>
+                  <select
+                    className="custom-select mr-sm-2"
+                    name="itemType"
+                    value={this.state.itemType}
+                    onChange={this.handleChange}
+                  >
+                    {/* TODO: maybe change these to React Bootstrap buttons
+                    https://react-bootstrap.github.io/getting-started/introduction/
+                    */}
+
+                    <option value="chooseOne">Choose...</option>
                     <option value="Offer">It&apos;s an OFFER of an item</option>
                     <option value="Seeking">
                       It&apos;s a request for a WANTED item
@@ -45,24 +63,24 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="itemName">Item Name</label>
+                  <label htmlFor="itemListName">Item Name</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="itemName"
-                    value={this.state.itemName}
+                    name="itemListName"
+                    value={this.state.itemListName}
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="itemDescription">Item Description</label>
+                  <label htmlFor="description">Item Description</label>
                   <textarea
                     className="form-control"
                     rows="5"
-                    name="itemDescription"
-                    value={this.state.itemDescription}
+                    name="description"
+                    value={this.state.description}
                     onChange={this.handleChange}
                   />
                 </div>
@@ -75,9 +93,11 @@ class NewItemForm extends Component {
                   <select
                     className="custom-select mr-sm-2"
                     name="itemCondition"
+                    value={this.state.itemCondition}
+                    onChange={this.handleChange}
                   >
                     {/* TODO: need to make this appear conditionally if user selects OFFER */}
-                    <option defaultValue>Choose...</option>
+                    <option value="chooseOne">Choose...</option>
                     <option value="New">Like New</option>
                     <option value="Gently_Used">Gently Used</option>
                     <option value="Used">Used</option>
