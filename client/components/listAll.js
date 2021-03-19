@@ -79,7 +79,7 @@ class ListAll extends React.Component {
               </a>
               <div
                 className="bg-secondary rounded-top text-light p-3"
-                style={{height: '780px'}}
+                style={{height: '95vh'}}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                 lacus libero, dignissim ac faucibus eget, suscipit id magna.
