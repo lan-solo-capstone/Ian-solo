@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/listAll'
 import SingleItem from './singleItem'
+import MapAllItems from './MapAllItems'
 
 // Render functional
 // const Placeholder = (props) => <div></div>
@@ -81,20 +82,7 @@ class ListAll extends React.Component {
                 className="bg-secondary rounded-top text-light p-3"
                 style={{height: '95vh'}}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                lacus libero, dignissim ac faucibus eget, suscipit id magna.
-                Duis maximus lacus elit, sit amet tincidunt libero tempus vel.
-                Mauris ac mollis ex, eu tempor eros. Donec turpis orci, placerat
-                in dui id, posuere fringilla erat. Nam ac arcu feugiat, aliquet
-                lectus ut, dictum ipsum. Duis eget lacus facilisis, rutrum lacus
-                sed, hendrerit tellus. Curabitur sagittis lacinia nulla ut
-                feugiat. Nulla condimentum diam vel ex bibendum suscipit. Duis
-                in mauris nulla. Suspendisse accumsan metus metus, semper
-                aliquet turpis elementum quis. Mauris posuere placerat lacinia.
-                Ut bibendum dolor nec odio dictum tristique. Interdum et
-                malesuada fames ac ante ipsum primis in faucibus. Maecenas non
-                eros suscipit, pretium est vel, ultrices neque. Donec imperdiet
-                urna odio, at pellentesque turpis mollis vehicula.
+                <MapAllItems itemsArray={items} />
               </div>
             </div>
           </div>
