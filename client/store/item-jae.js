@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 
