@@ -33,3 +33,8 @@ form div {
   opacity: 100%;
   transition: opacity 1s;
 }
+
+.singleViewFix {
+  height: 100% !important;
+  width: 100% !important;
+}

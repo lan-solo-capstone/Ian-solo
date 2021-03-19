@@ -14,7 +14,9 @@ router.get('/', async (req, res, next) => {
         'itemType',
         'dateListed',
       ],
-      include: [{model: User, attributes: ['latitude', 'longitude']}],
+      include: [
+        {model: User, attributes: ['firstName', 'latitude', 'longitude']},
+      ],
     })
     res.json(allItems)
   } catch (err) {
