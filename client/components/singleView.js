@@ -97,9 +97,9 @@ const singleView = (props) => {
         </button>
       </div>
       <div>
-        <h6 className="text-center mb-1">Description</h6>
+        <h3 className="text-center mb-1">Description</h3>
         <p
-          className="bg-secondary text-light py-1 px-2 mx-auto"
+          className="bg-secondary text-light py-4 px-5 mx-auto fs-6"
           style={{width: '80%'}}
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
