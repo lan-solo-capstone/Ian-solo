@@ -15,7 +15,7 @@ class NewItemForm extends Component {
     super()
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(evt) {
@@ -23,8 +23,6 @@ class NewItemForm extends Component {
       [evt.target.name]: evt.target.value,
     })
   }
-
-  // TODO: need to add handleSubmit
 
   render() {
     // this log makes sure that state changes when user types on form
@@ -43,6 +41,7 @@ class NewItemForm extends Component {
                     className="custom-select mr-sm-2"
                     name="postType"
                     value={this.state.postType}
+                    onChange={this.handleChange}
                   >
                     {/* TODO: need to remove selected and  */}
                     <option value="chooseOne">Choose...</option>
@@ -86,6 +85,7 @@ class NewItemForm extends Component {
                     className="custom-select mr-sm-2"
                     name="itemCondition"
                     value={this.state.itemCondition}
+                    onChange={this.handleChange}
                   >
                     {/* TODO: need to make this appear conditionally if user selects OFFER */}
                     <option value="chooseOne">Choose...</option>
