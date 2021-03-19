@@ -37,6 +37,11 @@ class NewItemForm extends Component {
       this.state.uploadPhoto
       // this.state.uploadPhoto.name
     )
+
+    for (var pair of formData.values()) {
+      console.log('form data pair!!!!!', pair)
+    }
+
     console.log('formData-------------------', formData)
     console.log('in handleSubmit photo', this.state.uploadPhoto)
     // const {itemType, itemListName, description, itemCondition} = this.state

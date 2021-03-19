@@ -7,6 +7,8 @@ module.exports = router
 // TODO: only users should be allowed to do this
 // TODO: add photos
 
+// TODO: look into multer
+
 router.post('/', async (req, res, next) => {
   try {
     const {
@@ -30,20 +32,21 @@ router.post('/', async (req, res, next) => {
 
     // yf 03.19.21 image file saving action
     // imageFiles
-    // const {name, data} = req.body.uploadPhoto
-    console.log('hello', 'in api route req.body', req.body)
+    console.log('hello', 'in api route req.files', req.files)
+    const {name, data} = req.files.uploadPhoto
     // console.log('hello', 'photo name and data', name, data)
     // saving to DB - itemPhoto
-    // const newFile = await ItemPhoto.create({
-    //   photoTitle: name,
-    //   photoFile: data,
-    // })
+    const newPhoto = await ItemPhoto.create({
+      photoTitle: name,
+      photoFile: data,
+    })
 
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods
-    // await newFile.createItem(newItem)
+    // await newPhoto.createItem(newItem)
 
     // res.status(201).send(newItem)
+    res.send(newPhoto)
   } catch (err) {
     next(err)
   }
