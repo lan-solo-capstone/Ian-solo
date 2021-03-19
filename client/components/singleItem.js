@@ -5,17 +5,37 @@ import {Link} from 'react-router-dom'
 
 // Render functional
 const singleItem = (props) => (
-  <div className="col singleItem p-0 d-flex bg-secondary text-white border border-dark overflow-hidden">
-    <img
-      src="https://media.tiffany.com/is/image/Tiffany/EcomItemL2/audubonafternoon-tea-spoon-10486688_992339_ED.jpg"
-      className="singleItemImg"
-    />
-
-    <div className="singleItemInfo d-flex flex-column justify-content-evenly ms-3">
-      <div>{props.itemType}</div>
-      <p className="text-nowrap mb-0">{props.itemListName}</p>
-      <div>Location</div>
-      <div>An hour ago</div>
+  <div>
+    <div className="card mb-3" style={{'max-width': '600px'}}>
+      <div className="row g-0">
+        <div className="col-md-4 d-flex align-items-center">
+          <img
+            className="img-fluid"
+            src="https://media.tiffany.com/is/image/Tiffany/EcomItemL2/audubonafternoon-tea-spoon-10486688_992339_ED.jpg"
+            alt="Spoon"
+          />
+        </div>
+        <div className="col-md-8">
+          <div className="card-body py-1">
+            <h5 className="card-title text-truncate">{props.itemListName}</h5>
+            {props.itemType === 'Offer' ? (
+              <div>
+                <p className="card-text text-success my-1">Offer</p>
+                <p>Location</p>
+              </div>
+            ) : (
+              <div>
+                <p className="card-text text-danger my-1">Seeking</p>
+                <p>Location</p>
+              </div>
+            )}
+            {/* <p className="card-text">Location</p> */}
+            <p className="card-text">
+              <small className="text-muted">An hour ago</small>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 )
@@ -42,3 +62,8 @@ export default singleItem
 // })
 
 // export default connect()()
+
+singleItem.propTypes = {
+  itemListName: PropTypes.string,
+  itemType: PropTypes.string,
+}

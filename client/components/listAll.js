@@ -17,13 +17,19 @@ class ListAll extends React.Component {
   render() {
     const items = this.props.items
     return this.props.loading ? (
-      <div className="spinner-border" role="status">
+      <div
+        className="spinner-border position-absolute top-50 start-50 translate-middle"
+        role="status"
+      >
         <span className="visually-hidden">Loading...</span>
       </div>
     ) : (
-      <div className="container px-5">
-        Hello we've loaded{console.log(this.props.items)}
-        <div className="row gx-5 row-cols-3">
+      <div className="container container-lg container-x">
+        <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
+          All Current offers
+        </h3>
+        {console.log(this.props.items)}
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {items.map((item) => (
             <SingleItem
               key={item.id}
@@ -31,6 +37,46 @@ class ListAll extends React.Component {
               itemListName={item.itemListName}
             />
           ))}
+        </div>
+        <div className="fixed-bottom d-md-none">
+          <div>
+            <a
+              className="btn btn-secondary m-auto rounded-0 rounded-top d-flex justify-content-center align-items-center"
+              data-bs-toggle="collapse"
+              href="#mapCollapse"
+              role="button"
+              style={{width: '70px', height: '30px'}}
+            >
+              <i
+                className="bi bi-chevron-compact-up"
+                style={{
+                  'font-size': '2rem',
+                  color: 'white',
+                }}
+              />
+            </a>
+            <div className="collapse" id="mapCollapse">
+              <div
+                className="bg-secondary rounded-top text-light p-3"
+                style={{height: '780px'}}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                lacus libero, dignissim ac faucibus eget, suscipit id magna.
+                Duis maximus lacus elit, sit amet tincidunt libero tempus vel.
+                Mauris ac mollis ex, eu tempor eros. Donec turpis orci, placerat
+                in dui id, posuere fringilla erat. Nam ac arcu feugiat, aliquet
+                lectus ut, dictum ipsum. Duis eget lacus facilisis, rutrum lacus
+                sed, hendrerit tellus. Curabitur sagittis lacinia nulla ut
+                feugiat. Nulla condimentum diam vel ex bibendum suscipit. Duis
+                in mauris nulla. Suspendisse accumsan metus metus, semper
+                aliquet turpis elementum quis. Mauris posuere placerat lacinia.
+                Ut bibendum dolor nec odio dictum tristique. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Maecenas non
+                eros suscipit, pretium est vel, ultrices neque. Donec imperdiet
+                urna odio, at pellentesque turpis mollis vehicula.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -53,3 +99,11 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(mapState, mapDispatch)(ListAll)
+
+/**
+ * PROP TYPES
+ */
+ListAll.propTypes = {
+  items: PropTypes.array,
+  loading: PropTypes.bool,
+}
