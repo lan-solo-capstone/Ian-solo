@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item-jae.js'
 
+// TODO: need to flesh out initialState?
 const initialState = {itemName: '', itemDescription: ''}
 class NewItemForm extends Component {
   constructor() {
@@ -17,7 +18,10 @@ class NewItemForm extends Component {
     })
   }
 
+  // TODO: need to add handleSubmit
+
   render() {
+    // this log makes sure that state changes when user types on form
     console.log('heeeey!', this.state)
     return (
       <div className="container-fluid">
@@ -30,7 +34,8 @@ class NewItemForm extends Component {
                     What type of post is this?
                   </label>
                   <select className="custom-select mr-sm-2" name="postType">
-                    <option selected>Choose...</option>
+                    {/* TODO: need to remove selected and  */}
+                    <option defaultValue>Choose...</option>
                     <option value="Offer">It&apos;s an OFFER of an item</option>
                     <option value="Seeking">
                       It&apos;s a request for a WANTED item
@@ -71,7 +76,8 @@ class NewItemForm extends Component {
                     className="custom-select mr-sm-2"
                     name="itemCondition"
                   >
-                    <option selected>Choose...</option>
+                    {/* TODO: need to make this appear conditionally if user selects OFFER */}
+                    <option defaultValue>Choose...</option>
                     <option value="New">Like New</option>
                     <option value="Gently_Used">Gently Used</option>
                     <option value="Used">Used</option>
@@ -83,7 +89,8 @@ class NewItemForm extends Component {
                   <label htmlFor="uploadPhoto">Upload a Photo</label>
                   <input
                     type="file"
-                    // need to add other file types to support
+                    // TODO: need to add other file types to support
+                    // TODO: need to validate file size and maybe number?
                     accept="image/x-png,image/jpeg,image/gif"
                     className="form-control-file"
                     name="uploadPhoto"
