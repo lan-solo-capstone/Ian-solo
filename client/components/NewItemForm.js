@@ -9,6 +9,7 @@ const initialState = {
   itemListName: '',
   description: '',
   itemCondition: 'chooseOne',
+  uploadPhoto: null,
 }
 class NewItemForm extends Component {
   constructor() {
@@ -16,9 +17,11 @@ class NewItemForm extends Component {
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.fileInput = React.createRef()
   }
 
   handleChange(evt) {
+    console.log('in handle change, evt.target.name', evt.target.name)
     this.setState({
       [evt.target.name]: evt.target.value,
     })
@@ -26,6 +29,16 @@ class NewItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    console.log('evt.target !!!!!!!!!!!!', evt.target)
+    console.log('evt.target.files', evt.target.file)
+    const formData = new FormData()
+    formData.append(
+      'photoName',
+      this.state.uploadPhoto
+      // this.state.uploadPhoto.name
+    )
+    console.log('formData-------------------', formData)
+    console.log('in handleSubmit photo', this.state.uploadPhoto)
     // const {itemType, itemListName, description, itemCondition} = this.state
     console.log('in handleSubmit this.state', this.state)
     this.props.addNewItem(this.state)
@@ -37,7 +50,7 @@ class NewItemForm extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <form role="form" onSubmit={this.handleSubmit}>
+            <form role="form" id="wholeform" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div>
                   <label className="mr-sm-2" htmlFor="itemType">
@@ -114,7 +127,16 @@ class NewItemForm extends Component {
                     accept="image/x-png,image/jpeg,image/gif"
                     className="form-control-file"
                     name="uploadPhoto"
-                    multiple
+                    ref={this.fileInput}
+                    // disable multiple for now -- JC
+                    // multiple
+
+                    // this is to set the state with the uploaded photo
+                    // but not sure if the photo is actually there
+                    onChange={(event) => {
+                      console.log('in upload photo form', event.target.files)
+                      this.setState({uploadPhoto: event.target.files[0]})
+                    }}
                   />
                 </div>
               </div>
