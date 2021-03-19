@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#chevron-rotate {
+  transform: rotate(180deg);
+}
+
+#mapCollapseButton:hover {
+  opacity: 0%;
+  transition: opacity 0.1s;
+}
+
+#mapCollapseButton {
+  opacity: 100%;
+  transition: opacity 1s;
+}

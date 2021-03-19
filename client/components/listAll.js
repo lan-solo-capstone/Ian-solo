@@ -14,16 +14,10 @@ class ListAll extends React.Component {
     this.props.fetchAllItems()
   }
 
-  CreateEventListener() {}
+  createEventListener() {}
 
   render() {
     const items = this.props.items
-    function createEventListener() {
-      this.showup = document.getElementById('mapCollapse')
-      this.showup.addEventListener('hidden.bs.collapse', () => {
-        console.log('hidden')
-      })
-    }
 
     return this.props.loading ? (
       <div
@@ -66,7 +60,6 @@ class ListAll extends React.Component {
                 }}
               />
             </a>
-            {(console.log('created'), createEventListener())}
             <div className="collapse" id="mapCollapse">
               <a
                 className="btn btn-secondary m-auto rounded-0 rounded-top d-flex justify-content-center align-items-center"
@@ -77,6 +70,7 @@ class ListAll extends React.Component {
               >
                 <i
                   className="bi bi-chevron-compact-up"
+                  id="chevron-rotate"
                   style={{
                     'font-size': '2rem',
                     color: 'white',
