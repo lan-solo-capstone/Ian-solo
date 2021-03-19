@@ -2,37 +2,175 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
-const AuthForm = props => {
+const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
+    <>
+      <div className="container-fluid login-bg text-center">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3">
+            <form
+              className="login-form-container"
+              onSubmit={handleSubmit}
+              name={name}
+            >
+              <div className="text-center mb-1">
+                <h3>Freeshare {displayName}</h3>
+              </div>
+              <div className="mb-1">
+                <input
+                  name="email"
+                  type="email"
+                  className="form-control mb-1"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Email"
+                />
+                {displayName === 'Sign Up' ? (
+                  <>
+                    <input
+                      name="firstName"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="First Name"
+                    />
 
-            <input name="email" type="text" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
+                    <input
+                      name="lastName"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="Last Name"
+                    />
 
-            <input name="password" type="password" />
-          </label>
+                    <input
+                      name="street1"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="Street Address Line 1"
+                    />
+
+                    <input
+                      name="street2"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="Street Address Line 2"
+                    />
+
+                    <input
+                      name="city"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="City"
+                    />
+
+                    <input
+                      name="state"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="State"
+                    />
+
+                    <input
+                      name="zip"
+                      type="text"
+                      className="form-control mb-1"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="Zip"
+                    />
+                  </>
+                ) : (
+                  ''
+                )}
+
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control mb-1"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                />
+              </div>
+
+              <div className="d-grid gap-2 px-5">
+                <button type="submit" className="btn btn-primary mb-3">
+                  {displayName}
+                </button>
+              </div>
+              {error && error.response && (
+                <div
+                  className="alert alert-danger alert-dismissible fade show"
+                  role="alert"
+                >
+                  {' '}
+                  {error.response.data}{' '}
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  />{' '}
+                </div>
+              )}
+              {/* <a href="/auth/google">{displayName} with Google</a> */}
+              <div className="mt-3">
+                {displayName === 'Login' ? (
+                  <span>
+                    Not registered? <Link to="/signup">Sign Up</Link>
+                  </span>
+                ) : (
+                  <span>
+                    Already registered? <Link to="/login">Login</Link>
+                  </span>
+                )}
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+      </div>
+    </>
+
+    // <div>
+    //   <form onSubmit={handleSubmit} name={name}>
+    //     <div>
+    //       <label htmlFor="email">
+    //         <small>Email</small>
+
+    //         <input name="email" type="text" />
+    //       </label>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="password">
+    //         <small>Password</small>
+
+    //         <input name="password" type="password" />
+    //       </label>
+    //     </div>
+    //     <div>
+    //       <button type="submit">{displayName}</button>
+    //     </div>
+    //     {error && error.response && <div> {error.response.data} </div>}
+    //   </form>
+    //   <a href="/auth/google">{displayName} with Google</a>
+    // </div>
   )
 }
 
@@ -43,23 +181,23 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = state => {
+const mapLogin = (state) => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
   }
 }
 
-const mapSignup = state => {
+const mapSignup = (state) => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.error,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -67,7 +205,7 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(auth(email, password, formName))
-    }
+    },
   }
 }
 
@@ -81,5 +219,5 @@ AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
 }
