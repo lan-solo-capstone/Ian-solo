@@ -9,45 +9,74 @@ class NewItemForm extends Component {
         <div className="row">
           <div className="col-md-12">
             <form role="form">
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Item Name</label>
-                <input type="text" className="form-control" id="itemName" />
+              <div className="row">
+                <div>
+                  <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">
+                    What type of post is this?
+                  </label>
+                  <select
+                    className="custom-select mr-sm-2"
+                    id="inlineFormCustomSelect"
+                  >
+                    <option selected>Choose...</option>
+                    <option value="Offer">It&apos;s an OFFER of an item</option>
+                    <option value="Seeking">
+                      It&apos;s a request for a WANTED item
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Item Description</label>
-                <textarea
-                  className="form-control"
-                  id="itemDescription"
-                  rows="5"
-                />
+              <div className="row">
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Item Name</label>
+                  <input type="text" className="form-control" id="itemName" />
+                </div>
               </div>
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <a className="dropdown-item disabled" href="#">
-                  Condition
-                </a>
-                <a className="dropdown-item" href="#">
-                  Like New
-                </a>
-                <a className="dropdown-item" href="#">
-                  Super Old
-                </a>
+              <div className="row">
+                <div className="form-group">
+                  <label htmlFor="exampleInputPassword1">
+                    Item Description
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="itemDescription"
+                    rows="5"
+                  />
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputFile">File input</label>
-                <input
-                  type="file"
-                  // need to add other file types to support
-                  accept="image/x-png,image/jpeg,image/gif"
-                  className="form-control-file"
-                  id="exampleInputFile"
-                />
+              <div className="row">
+                <div>
+                  <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">
+                    Condition of your item
+                  </label>
+                  <select
+                    className="custom-select mr-sm-2"
+                    id="inlineFormCustomSelect"
+                  >
+                    <option selected>Choose...</option>
+                    <option value="New">Like New</option>
+                    <option value="Gently_Used">Gently Used</option>
+                    <option value="Used">Used</option>
+                  </select>
+                </div>
               </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
+              <div className="row">
+                <div className="form-group">
+                  <label htmlFor="exampleInputFile">Upload a Photo</label>
+                  <input
+                    type="file"
+                    // need to add other file types to support
+                    accept="image/x-png,image/jpeg,image/gif"
+                    className="form-control-file"
+                    id="exampleInputFile"
+                  />
+                </div>
+              </div>
+              <div>
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>
