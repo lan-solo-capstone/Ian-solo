@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 //accepts props: item=object <MapSingleItem item=object>
 const MapSingleItem = (props) => {
   const [viewport, setViewport] = useState({
     latitude: props.location.item
-      ? props.location.item.user.geoLocation.coordinates[0]
+      ? +props.location.item.user.latitude
       : 40.73061,
     longitude: props.location.item
-      ? props.location.item.user.geoLocation.coordinates[1]
+      ? +props.location.item.user.longitude
       : -73.935242,
     width: '100vw',
     height: '100vh',
@@ -28,8 +29,8 @@ const MapSingleItem = (props) => {
       >
         {props.location.item && (
           <Marker
-            latitude={props.location.item.user.geoLocation.coordinates[0]}
-            longitude={props.location.item.user.geoLocation.coordinates[1]}
+            latitude={+props.location.item.user.latitude}
+            longitude={+props.location.item.user.longitude}
           >
             <strong>
               <i className="bi bi-pin-fill text-success"></i>
@@ -39,8 +40,8 @@ const MapSingleItem = (props) => {
 
         {props.isLoggedIn && (
           <Marker
-            latitude={props.user.geoLocation.coordinates[0]}
-            longitude={props.user.geoLocation.coordinates[1]}
+            latitude={+props.user.latitude}
+            longitude={+props.user.longitude}
           >
             <strong>
               <i className="bi bi-house-door-fill text-danger"></i>
@@ -62,3 +63,9 @@ const mapState = (state) => {
 }
 
 export default connect(mapState, null)(MapSingleItem)
+
+MapSingleItem.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  user: PropTypes.object,
+  location: PropTypes.object,
+}

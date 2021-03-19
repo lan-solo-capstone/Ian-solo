@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 //accepts props: <MapAllItems items=objectArray>
 const MapAllItems = (props) => {
   const [viewport, setViewport] = useState({
-    latitude: 40.73061,
-    longitude: -73.935242,
+    latitude: props.isLoggedIn ? +props.user.latitude : 40.73061,
+    longitude: props.isLoggedIn ? +props.user.longitude : -73.935242,
     width: '100vw',
     height: '100vh',
     zoom: 11,
@@ -27,9 +28,9 @@ const MapAllItems = (props) => {
           props.location.itemsArray.map((item) => {
             return (
               <Marker
-                // key={item.id}
-                latitude={item.user.geoLocation.coordinates[0]}
-                longitude={item.user.geoLocation.coordinates[1]}
+                key={item.id}
+                latitude={+item.user.latitude}
+                longitude={+item.user.longitude}
               >
                 <strong>
                   <i className="bi bi-pin-fill text-success"></i>
@@ -40,8 +41,8 @@ const MapAllItems = (props) => {
 
         {props.isLoggedIn && (
           <Marker
-            latitude={props.user.geoLocation.coordinates[0]}
-            longitude={props.user.geoLocation.coordinates[1]}
+            latitude={+props.user.latitude}
+            longitude={+props.user.longitude}
           >
             <strong>
               <i className="bi bi-house-door-fill text-danger"></i>
@@ -63,3 +64,9 @@ const mapState = (state) => {
 }
 
 export default connect(mapState, null)(MapAllItems)
+
+MapAllItems.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  user: PropTypes.object,
+  location: PropTypes.object,
+}
