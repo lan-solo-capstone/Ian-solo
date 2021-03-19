@@ -23,9 +23,9 @@ const MapAllItems = (props) => {
           setViewport(viewport)
         }}
       >
-        {props.location.itemsArray &&
-          props.location.itemsArray.length > 0 &&
-          props.location.itemsArray.map((item) => {
+        {props.itemsArray &&
+          props.itemsArray.length > 0 &&
+          props.itemsArray.map((item) => {
             return (
               <Marker
                 key={item.id}
