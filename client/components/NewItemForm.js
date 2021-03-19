@@ -105,25 +105,6 @@ class NewItemForm extends Component {
                 </div>
               </div>
               <div className="row">
-                <div>
-                  <label className="mr-sm-2" htmlFor="itemCondition">
-                    Condition of your item
-                  </label>
-                  <select
-                    className="custom-select mr-sm-2"
-                    name="itemCondition"
-                    value={this.state.itemCondition}
-                    onChange={this.handleChange}
-                  >
-                    {/* TODO: need to make this appear conditionally if user selects OFFER */}
-                    <option value="chooseOne">Choose...</option>
-                    <option value="New">Like New</option>
-                    <option value="Gently_Used">Gently Used</option>
-                    <option value="Used">Used</option>
-                  </select>
-                </div>
-              </div>
-              <div className="row">
                 <div className="form-group">
                   <label htmlFor="uploadPhoto">Upload a Photo</label>
                   <input
