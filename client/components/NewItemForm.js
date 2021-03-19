@@ -4,7 +4,12 @@ import {connect} from 'react-redux'
 import {postNewItem} from '../store/item-jae.js'
 
 // TODO: need to flesh out initialState?
-const initialState = {itemName: '', itemDescription: ''}
+const initialState = {
+  postType: 'chooseOne',
+  itemName: '',
+  itemDescription: '',
+  itemCondition: 'chooseOne',
+}
 class NewItemForm extends Component {
   constructor() {
     super()
