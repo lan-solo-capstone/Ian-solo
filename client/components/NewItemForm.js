@@ -49,7 +49,10 @@ class NewItemForm extends Component {
                     value={this.state.itemType}
                     onChange={this.handleChange}
                   >
-                    {/* TODO: need to remove selected and  */}
+                    {/* TODO: maybe change these to React Bootstrap buttons
+                    https://react-bootstrap.github.io/getting-started/introduction/
+                    */}
+
                     <option value="chooseOne">Choose...</option>
                     <option value="Offer">It&apos;s an OFFER of an item</option>
                     <option value="Seeking">
@@ -80,6 +83,25 @@ class NewItemForm extends Component {
                     value={this.state.description}
                     onChange={this.handleChange}
                   />
+                </div>
+              </div>
+              <div className="row">
+                <div>
+                  <label className="mr-sm-2" htmlFor="itemCondition">
+                    Condition of your item
+                  </label>
+                  <select
+                    className="custom-select mr-sm-2"
+                    name="itemCondition"
+                    value={this.state.itemCondition}
+                    onChange={this.handleChange}
+                  >
+                    {/* TODO: need to make this appear conditionally if user selects OFFER */}
+                    <option value="chooseOne">Choose...</option>
+                    <option value="New">Like New</option>
+                    <option value="Gently_Used">Gently Used</option>
+                    <option value="Used">Used</option>
+                  </select>
                 </div>
               </div>
               <div className="row">
