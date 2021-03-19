@@ -25,8 +25,9 @@ class NewItemForm extends Component {
   }
 
   handleSubmit(evt) {
-    // evt.preventDefault()
+    evt.preventDefault()
     // const {itemType, itemListName, description, itemCondition} = this.state
+    console.log('in handleSubmit this.state', this.state)
     this.props.addNewItem(this.state)
   }
   render() {
@@ -36,7 +37,7 @@ class NewItemForm extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <form role="form">
+            <form role="form" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div>
                   <label className="mr-sm-2" htmlFor="itemType">
