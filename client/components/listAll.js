@@ -35,11 +35,7 @@ class ListAll extends React.Component {
         {console.log(this.props.items)}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {items.map((item) => (
-            <SingleItem
-              key={item.id}
-              itemType={item.itemType}
-              itemListName={item.itemListName}
-            />
+            <SingleItem key={item.id} item={item} />
           ))}
         </div>
         <div className="fixed-bottom d-md-none">

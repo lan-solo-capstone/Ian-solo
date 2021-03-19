@@ -11,7 +11,8 @@ import {
   MapSingleItem,
   temp,
   NewItemForm,
-  ListAll
+  ListAll,
+  SingleView,
 } from './components'
 import {me} from './store'
 
@@ -33,6 +34,7 @@ class Routes extends Component {
         <Route path="/listAll" component={ListAll} />
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
+        <Route path="/singleview" component={SingleView} />
         <Route path="/temp" component={temp} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
