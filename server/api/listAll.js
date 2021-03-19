@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Item} = require('../db/models')
+const {Item, User} = require('../db/models')
 module.exports = router
 
 // /api/allItems
@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
         'itemType',
         'dateListed',
       ],
+      include: [{model: User, attributes: ['latitude', 'longitude']}],
     })
     res.json(allItems)
   } catch (err) {
