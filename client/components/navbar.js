@@ -5,28 +5,54 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/post">Post an Item</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+  <>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <span className="navbar-brand">
+          <strong>Freeshare</strong>
+        </span>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {isLoggedIn ? (
+              <>
+                {/* The navbar will show these links after you log in */}
+                <Link className="nav-item nav-link mx-2" to="/home">
+                  Home
+                </Link>
+                <Link className="nav-item nav-link mx-2" to="/post">
+                  Post an Item
+                </Link>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </>
+            ) : (
+              <>
+                {/* The navbar will show these links before you log in */}
+                <Link className="nav-item nav-link mx-2" to="/login">
+                  Login
+                </Link>
+                <Link className="nav-item nav-link mx-2" to="/signup">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </ul>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+      </div>
     </nav>
-    <hr />
-  </div>
+  </>
 )
 
 /**

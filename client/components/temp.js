@@ -12,9 +12,8 @@ const temp = () => {
       description: 'ten speed Schwinn',
       //other fields would be here
       user: {
-        geoLocation: {
-          coordinates: [40.732, -73.937],
-        },
+        latitude: '40.732',
+        longitude: '-73.937',
       },
     },
     {
@@ -23,9 +22,8 @@ const temp = () => {
       description: 'color smart tv',
       //other fields would be here
       user: {
-        geoLocation: {
-          coordinates: [40.731, -73.936],
-        },
+        latitude: '40.73',
+        longitude: '-73.935',
       },
     },
   ]
@@ -36,9 +34,8 @@ const temp = () => {
     description: 'ten speed Schwinn',
     //other fields would be here
     user: {
-      geoLocation: {
-        coordinates: [40.732, -73.937],
-      },
+      latitude: '40.732',
+      longitude: '-73.937',
     },
   }
 
