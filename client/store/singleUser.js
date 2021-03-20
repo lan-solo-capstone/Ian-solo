@@ -1,7 +1,16 @@
 import axios from 'axios'
 
+// I think we need to separate this subreducer from the user subreducer
+// the user subreducer will be for validating logins
+// this one will be to fetch a single user to view as an admin -- JC
+
+// Action type
 const GET_EXISTING_USER = 'GET_EXISTING_USER'
+
+// Action creator
 const getExistingUser = (user) => ({type: GET_EXISTING_USER, user})
+
+// Thunk creator
 export const fetchExistingUser = (userId) => {
   return async (dispatch) => {
     try {
@@ -13,8 +22,8 @@ export const fetchExistingUser = (userId) => {
   }
 }
 
+// Subreducer
 const defaultUser = {}
-
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_EXISTING_USER:
