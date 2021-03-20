@@ -1,34 +1,32 @@
 import React from 'react'
-import {me} from '../store/user.js'
 
 const User = (props) => {
-  // const {
-  //   firstName,
-  //   middleName,
-  //   lastName,
-  //   email,
-  //   street1,
-  //   street2,
-  //   city,
-  //   state,
-  //   zip,
-  // } = props
+  const {
+    id,
+    firstName,
+    middleName,
+    lastName,
+    email,
+    street1,
+    street2,
+    city,
+    state,
+    zip,
+  } = props.user
 
-  const {user} = props
-
+  console.log('in User, props', props)
   return (
-    <div className="col-md-4 mb-4" key={user.id}>
+    <div className="col-md-4 mb-4" key={id}>
       <div className="card">
         <h5 className="card-header">
-          {user.firstName} {user.middleName} {user.lastName}
+          {firstName} {middleName} {lastName}
         </h5>
         <div className="card-body">
-          <p className="card-text">E: {user.email}</p>
+          <p className="card-text">E: {email}</p>
           <p>
-            {/* <p className="card-text">P: {user.phone}</p> */}
-            {user.street1} {user.street2}
+            {street1} {street2}
             <br></br>
-            {user.city}, {user.state}, {user.zip}
+            {city}, {state}, {zip}
           </p>
         </div>
       </div>
