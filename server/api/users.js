@@ -32,3 +32,15 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// GET single user
+// TODO: limit access to this route to admins only
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const user = await User.findByPk(userId)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
