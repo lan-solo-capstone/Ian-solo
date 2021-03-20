@@ -48,3 +48,16 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+// DELETE a single user
+
+router.delete('/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const deletedUser = await User.findByPk(userId)
+    await deletedUser.destroy()
+    res.json(deletedUser)
+  } catch (err) {
+    next(err)
+  }
+})
