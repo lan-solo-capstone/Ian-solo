@@ -13,6 +13,7 @@ import {
   NewItemForm,
   ListAll,
   SingleView,
+  AllUsers,
 } from './components'
 import {me} from './store'
 
@@ -31,7 +32,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/mapexp" component={MapExp} />
-        <Route path="/listAll" component={ListAll} />
+        <Route path="/listall" component={ListAll} />
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
         <Route path="/singleview" component={SingleView} />
@@ -43,6 +44,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/post" component={NewItemForm} />
+            <Route path="/users" component={AllUsers} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

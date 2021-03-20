@@ -8,49 +8,47 @@ const MapAllItems = (props) => {
   const [viewport, setViewport] = useState({
     latitude: props.isLoggedIn ? +props.user.latitude : 40.73061,
     longitude: props.isLoggedIn ? +props.user.longitude : -73.935242,
-    width: '100vw',
-    height: '100vh',
-    zoom: 11,
+    width: props.width ? props.width : '100%',
+    height: props.height ? props.height : '100%',
+    zoom: 10,
   })
 
   return (
-    <div>
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken="pk.eyJ1IjoibWVsaW5kYWFybWJydXN0ZXIiLCJhIjoiY2trZTd6cHVlMDl5YzJwcXNvMWRvOHU4ciJ9.NdVU55Xhn75BzaVNjACSKQ"
-        mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
-        onViewportChange={(viewport) => {
-          setViewport(viewport)
-        }}
-      >
-        {props.itemsArray &&
-          props.itemsArray.length > 0 &&
-          props.itemsArray.map((item) => {
-            return (
-              <Marker
-                key={item.id}
-                latitude={+item.user.latitude}
-                longitude={+item.user.longitude}
-              >
-                <strong>
-                  <i className="bi bi-pin-fill text-success"></i>
-                </strong>
-              </Marker>
-            )
-          })}
+    <ReactMapGL
+      {...viewport}
+      mapboxApiAccessToken="pk.eyJ1IjoibWVsaW5kYWFybWJydXN0ZXIiLCJhIjoiY2trZTd6cHVlMDl5YzJwcXNvMWRvOHU4ciJ9.NdVU55Xhn75BzaVNjACSKQ"
+      mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
+      onViewportChange={(viewport) => {
+        setViewport(viewport)
+      }}
+    >
+      {props.itemsArray &&
+        props.itemsArray.length > 0 &&
+        props.itemsArray.map((item) => {
+          return (
+            <Marker
+              key={item.id}
+              latitude={+item.user.latitude}
+              longitude={+item.user.longitude}
+            >
+              <strong>
+                <i className="bi bi-pin-fill text-success"></i>
+              </strong>
+            </Marker>
+          )
+        })}
 
-        {props.isLoggedIn && (
-          <Marker
-            latitude={+props.user.latitude}
-            longitude={+props.user.longitude}
-          >
-            <strong>
-              <i className="bi bi-house-door-fill text-danger"></i>
-            </strong>
-          </Marker>
-        )}
-      </ReactMapGL>
-    </div>
+      {props.isLoggedIn && (
+        <Marker
+          latitude={+props.user.latitude}
+          longitude={+props.user.longitude}
+        >
+          <strong>
+            <i className="bi bi-house-door-fill text-danger"></i>
+          </strong>
+        </Marker>
+      )}
+    </ReactMapGL>
   )
 }
 

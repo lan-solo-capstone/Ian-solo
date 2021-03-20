@@ -33,15 +33,15 @@ router.post('/', async (req, res, next) => {
     })
 
     // imageFiles upload to DB  -- working as of 3.20.21
-
+    console.log('newItemId', newItem.id)
     const {name, data} = req.files.file
-
     const newPhoto = await ItemPhoto.create({
       photoTitle: name,
       photoFile: data,
+      itemId: newItem.id,
     })
 
-    console.log('newPhoto', newPhoto)
+    // console.log('newPhoto', newPhoto)
 
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods

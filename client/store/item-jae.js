@@ -38,7 +38,6 @@ export const postNewItem = (item) => {
       //sending formData to api
       const {data} = await axios.post(`/api/users/post`, formData)
       // {itemListName, description, itemType, itemCondition, uploadPhoto}
-
       //console.log('hello', 'in postNewItem thunk', {formData, data})
       dispatch(createNewItem(data))
     } catch (err) {

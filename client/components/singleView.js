@@ -12,17 +12,17 @@ const singleView = (props) => {
       style={{height: '90vh'}}
     >
       <div>
-        <h4 className="text-center mb-1">{props.location.item.itemListName}</h4>
-        <h5 className="text-center">
+        <h5 className="text-center mb-1">{props.location.item.itemListName}</h5>
+        <h6 className="text-center text-secondary">
           Submitted by: {props.location.item.user.firstName}
-        </h5>
+        </h6>
       </div>
 
       <div
         id="itemImageIndicator"
         className="carousel slide mx-auto"
         data-bs-ride="carousel"
-        style={{width: '80vw', height: '45vw'}}
+        style={{width: '80vw', height: '55vw'}}
       >
         <div className="carousel-indicators" style={{filter: 'invert(1)'}}>
           <button
@@ -96,10 +96,56 @@ const singleView = (props) => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+      <a
+        className="btn btn-secondary mx-auto mb-1 rounded-pill d-flex justify-content-evenly align-items-center"
+        data-bs-toggle="collapse"
+        href="#mapCollapse"
+        role="button"
+        id="mapCollapseButton"
+        style={{width: '150px', height: '30px'}}
+      >
+        <p className="m-0">View on map</p>
+        <i
+          className="bi bi-compass"
+          style={{
+            'font-size': '1.4rem',
+            color: 'white',
+          }}
+        />
+      </a>
+      <div className="fixed-bottom d-md-none">
+        <div>
+          <div className="collapse" id="mapCollapse">
+            <a
+              className="btn btn-secondary m-auto rounded-0 rounded-top d-flex justify-content-center align-items-center"
+              data-bs-toggle="collapse"
+              href="#mapCollapse"
+              role="button"
+              style={{width: '70px', height: '30px'}}
+            >
+              <i
+                className="bi bi-chevron-compact-up"
+                id="chevron-rotate"
+                style={{
+                  'font-size': '2rem',
+                  color: 'white',
+                }}
+              />
+            </a>
+            <div
+              className="bg-secondary rounded-top text-light"
+              style={{height: '95vh'}}
+            >
+              Lorem Ipsum text and what not
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div>
         <h3 className="text-center mb-1">Description</h3>
         <p
-          className="bg-secondary text-light py-4 px-5 mx-auto fs-6"
+          className="bg-secondary text-light py-3 px-4 mx-auto fs-6"
           style={{width: '80%'}}
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -107,49 +153,6 @@ const singleView = (props) => {
           dapibus purus at accumsan. Aliquam ligula quam, consectetur sit amet
           tristique in, condimentum eu eros.
         </p>
-      </div>
-      <div>
-        <a
-          className="btn btn-secondary mx-auto mb-3 rounded-pill d-flex justify-content-evenly align-items-center"
-          data-bs-toggle="collapse"
-          href="#mapCollapse"
-          role="button"
-          id="mapCollapseButton"
-          style={{width: '150px', height: '30px'}}
-        >
-          <p className="m-0">View on map</p>
-          <i
-            className="bi bi-compass"
-            style={{
-              'font-size': '1.4rem',
-              color: 'white',
-            }}
-          />
-        </a>
-      </div>
-      <div className="collapse" id="mapCollapse">
-        <a
-          className="btn btn-secondary m-auto rounded-0 rounded-top d-flex justify-content-center align-items-center"
-          data-bs-toggle="collapse"
-          href="#mapCollapse"
-          role="button"
-          style={{width: '70px', height: '30px'}}
-        >
-          <i
-            className="bi bi-chevron-compact-up"
-            id="chevron-rotate"
-            style={{
-              'font-size': '2rem',
-              color: 'white',
-            }}
-          />
-        </a>
-        <div
-          className="bg-secondary rounded-top text-light p-3"
-          style={{height: '95vh'}}
-        >
-          Some great text {':)'}
-        </div>
       </div>
     </div>
   )

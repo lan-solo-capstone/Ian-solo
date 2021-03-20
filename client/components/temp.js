@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {MapSingleItem, MapAllItems} from '../components'
 
 //the object format is expected to change per Yoshie and I will address
 //that inside both map components. For now, if you link to the map components
@@ -41,7 +42,7 @@ const temp = () => {
 
   return (
     <>
-      <div>
+      {/* <div>
         <Link to={{pathname: '/mapallitems', itemsArray: [...itemsArray]}}>
           <button>Map All Items</button>
         </Link>
@@ -51,7 +52,9 @@ const temp = () => {
         <Link to={{pathname: '/mapsingleitem', item: singleItem}}>
           <button>Map One Item</button>
         </Link>
-      </div>
+      </div> */}
+      <MapSingleItem item={singleItem} width="100vw" height="100vh" />
+      {/* <MapSingleItem item={singleItem} /> */}
     </>
   )
 }
