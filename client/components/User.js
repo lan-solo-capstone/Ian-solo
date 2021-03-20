@@ -1,7 +1,8 @@
 /* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {me, fetchExistingUser} from '../store/user.js'
+import {me} from '../store/user.js'
+import {fetchExistingUser} from '../store/singleUser.js'
 import {UserView} from './index.js'
 
 class User extends Component {
@@ -33,6 +34,7 @@ class User extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
+    singleUser: state.singelUser,
   }
 }
 
