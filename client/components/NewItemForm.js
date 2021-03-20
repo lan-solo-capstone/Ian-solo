@@ -17,6 +17,7 @@ class NewItemForm extends Component {
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
 
@@ -27,27 +28,22 @@ class NewItemForm extends Component {
     })
   }
 
+  handleFileSelect(event) {
+    console.log('in upload photo form', event.target.files)
+    this.setState({uploadPhoto: event.target.files[0]})
+  }
+
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log('evt.target !!!!!!!!!!!!', evt.target)
-    console.log('evt.target.files', evt.target.file)
-    const formData = new FormData()
-    formData.append(
-      'photoName',
-      this.state.uploadPhoto
-      // this.state.uploadPhoto.name
-    )
+    // console.log('evt.target !!!!!!!!!!!!', evt.target)
+    // console.log('evt.target.files', evt.target.file)
 
-    for (var pair of formData.values()) {
-      console.log('form data pair!!!!!', pair)
-    }
-
-    console.log('formData-------------------', formData)
     console.log('in handleSubmit photo', this.state.uploadPhoto)
     // const {itemType, itemListName, description, itemCondition} = this.state
     console.log('in handleSubmit this.state', this.state)
     this.props.addNewItem(this.state)
   }
+
   render() {
     // this log makes sure that state changes when user types on form
     console.log('in NewFormItem render, this.state', this.state)
@@ -138,10 +134,7 @@ class NewItemForm extends Component {
 
                     // this is to set the state with the uploaded photo
                     // but not sure if the photo is actually there
-                    onChange={(event) => {
-                      console.log('in upload photo form', event.target.files)
-                      this.setState({uploadPhoto: event.target.files[0]})
-                    }}
+                    onChange={this.handleFileSelect}
                   />
                 </div>
               </div>

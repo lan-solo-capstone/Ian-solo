@@ -19,31 +19,33 @@ router.post('/', async (req, res, next) => {
       // status,
       deliveryOption,
       // dateListed,
-      // uploadPhoto,
     } = req.body
 
-    // const newItem = await Item.create({
-    //   itemListName,
-    //   description,
-    //   itemType,
-    //   itemCondition,
-    //   deliveryOption,
-    // })
+    console.log('req.body in api', req.body)
 
-    // yf 03.19.21 image file saving action
-    // imageFiles
-    console.log('hello', 'in api route req.files', req.files)
-    const {name, data} = req.files.uploadPhoto
-    // console.log('hello', 'photo name and data', name, data)
-    // saving to DB - itemPhoto
+    //create new item data in item table -- working as of 3.20.21
+    const newItem = await Item.create({
+      itemListName,
+      description,
+      itemType,
+      itemCondition,
+      deliveryOption,
+    })
+
+    // imageFiles upload to DB  -- working as of 3.20.21
+
+    const {name, data} = req.files.file
+
     const newPhoto = await ItemPhoto.create({
       photoTitle: name,
       photoFile: data,
     })
 
+    console.log('newPhoto', newPhoto)
+
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods
-    // await newPhoto.createItem(newItem)
+    //await ItemPhoto.setItem(newItem)
 
     // res.status(201).send(newItem)
     res.send(newPhoto)
