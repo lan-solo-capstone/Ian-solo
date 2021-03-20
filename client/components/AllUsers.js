@@ -28,12 +28,16 @@ class AllUsers extends Component {
               <div className="col-md-4 mb-4" key={user.id}>
                 <div className="card">
                   <h5 className="card-header">
-                    {user.firstName} {user.lastName}
+                    {user.firstName} {user.middleName} {user.lastName}
                   </h5>
                   <div className="card-body">
                     <p className="card-text">E: {user.email}</p>
-                    {/* <p className="card-text">P: {user.phone}</p> */}
-                    <p className="card-text">Address: {user.street1}</p>
+                    <p>
+                      {/* <p className="card-text">P: {user.phone}</p> */}
+                      {user.street1} {user.street2}
+                      <br></br>
+                      {user.city}, {user.state}, {user.zip}
+                    </p>
                   </div>
                 </div>
               </div>
