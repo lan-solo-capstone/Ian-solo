@@ -8,9 +8,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <span className="navbar-brand">
-          <strong>Freeshare</strong>
-        </span>
+        <Link to="/listall" className="text-decoration-none text-dark m-0">
+          <span className="navbar-brand">
+            <strong>Freeshare</strong>
+          </span>
+        </Link>
+
         <button
           className="navbar-toggler"
           type="button"
