@@ -14,7 +14,7 @@ export const postNewItem = (item) => {
   return async (dispatch) => {
     try {
       console.log('processing thunk')
-      console.log('item', item)
+      console.log('thunk item', item)
 
       //append text data from the form
       const formData = new FormData()
@@ -23,6 +23,7 @@ export const postNewItem = (item) => {
       formData.append('itemListName', item.itemListName)
       formData.append('description', item.description)
       formData.append('itemCondition', item.itemCondition)
+      formData.append('userId', item.user.id)
 
       //append file data from the form
       formData.append('file', item.uploadPhoto)

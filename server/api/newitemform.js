@@ -19,6 +19,7 @@ router.post('/', async (req, res, next) => {
       // status,
       deliveryOption,
       // dateListed,
+      userId,
     } = req.body
 
     console.log('req.body in api', req.body)
@@ -30,22 +31,23 @@ router.post('/', async (req, res, next) => {
       itemType,
       itemCondition,
       deliveryOption,
+      userId,
     })
 
     // imageFiles upload to DB  -- working as of 3.20.21
     console.log('newItemId', newItem.id)
     const {name, data} = req.files.file
+
     const newPhoto = await ItemPhoto.create({
       photoTitle: name,
       photoFile: data,
-      itemId: newItem.id,
     })
 
     // console.log('newPhoto', newPhoto)
 
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods
-    //await ItemPhoto.setItem(newItem)
+    await newPhoto.setItem(newItem)
 
     // res.status(201).send(newItem)
     res.send(newPhoto)

@@ -22,31 +22,25 @@ class NewItemForm extends Component {
   }
 
   handleChange(evt) {
-    console.log('in handle change, evt.target.name', evt.target.name)
     this.setState({
       [evt.target.name]: evt.target.value,
     })
   }
 
   handleFileSelect(event) {
-    console.log('in upload photo form', event.target.files)
     this.setState({uploadPhoto: event.target.files[0]})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    // console.log('evt.target !!!!!!!!!!!!', evt.target)
-    // console.log('evt.target.files', evt.target.file)
-
-    console.log('in handleSubmit photo', this.state.uploadPhoto)
-    // const {itemType, itemListName, description, itemCondition} = this.state
-    console.log('in handleSubmit this.state', this.state)
+    this.setState({user: this.props.user}) // adding the userId
     this.props.addNewItem(this.state)
   }
 
   render() {
     // this log makes sure that state changes when user types on form
     console.log('in NewFormItem render, this.state', this.state)
+
     return (
       <div className="container-fluid">
         <div className="row">
@@ -132,8 +126,6 @@ class NewItemForm extends Component {
                     // disable multiple for now -- JC
                     // multiple
 
-                    // this is to set the state with the uploaded photo
-                    // but not sure if the photo is actually there
                     onChange={this.handleFileSelect}
                   />
                 </div>
@@ -151,9 +143,13 @@ class NewItemForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewItem: (item) => dispatch(postNewItem(item)),
   }
 }
-export default connect(null, mapDispatchToProps)(NewItemForm)
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm)
