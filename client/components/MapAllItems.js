@@ -8,9 +8,9 @@ const MapAllItems = (props) => {
   const [viewport, setViewport] = useState({
     latitude: props.isLoggedIn ? +props.user.latitude : 40.73061,
     longitude: props.isLoggedIn ? +props.user.longitude : -73.935242,
-    width: '100%',
-    height: '100%',
-    zoom: 11,
+    width: props.width ? props.width : '100%',
+    height: props.height ? props.height : '100%',
+    zoom: 10,
   })
 
   return (
