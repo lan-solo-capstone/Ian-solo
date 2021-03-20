@@ -8,14 +8,15 @@ import {UserView} from './index.js'
 class User extends Component {
   componentDidMount() {
     this.props.fetchUser()
-    const userId = this.props.match.params.id
+    const userId = this.props.match.params.userId
+    console.log('in componentDidMount', {userId})
     this.props.fetchExistingUser(userId)
   }
 
   componentDidUpdate(prevProps) {
     const userId = this.props.match.params.id
 
-    if (!prevProps.user.id && this.props.user.id)
+    if (!prevProps.user.id && this.props.userId)
       this.props.fetchExistingUser(userId)
   }
 

@@ -12,6 +12,7 @@ const getExistingUser = (user) => ({type: GET_EXISTING_USER, user})
 
 // Thunk creator
 export const fetchExistingUser = (userId) => {
+  console.log('in fetchExistingUser', {userId})
   return async (dispatch) => {
     try {
       const {data} = await axios.get(`/api/users/${userId}`)
