@@ -4,6 +4,7 @@ module.exports = router
 
 // all routes here are mounted on /api/users
 
+// /api/users/post will be sent to newItemForm.js
 router.use('/post', require('./newitemform.js'))
 
 router.get('/', async (req, res, next) => {
