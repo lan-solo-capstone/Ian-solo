@@ -10,7 +10,9 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const fileUpload = require('express-fileupload')
 const seed = require('../script/seed')
+
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -48,6 +50,9 @@ const createApp = () => {
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
+
+  // yf 03.19.21 fileupload middleware w/debug option
+  app.use(fileUpload({debug: true}))
 
   // compression middleware
   app.use(compression())
