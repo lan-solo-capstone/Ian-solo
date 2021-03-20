@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
@@ -5,6 +6,7 @@ module.exports = router
 // all routes here are mounted on /api/users
 
 // /api/users/post will be sent to newItemForm.js
+// TODO: change the capitalization
 router.use('/post', require('./newitemform.js'))
 
 // GET all users
