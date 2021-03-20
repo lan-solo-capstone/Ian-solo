@@ -7,6 +7,7 @@ module.exports = router
 // /api/users/post will be sent to newItemForm.js
 router.use('/post', require('./newitemform.js'))
 
+// GET all users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
