@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchUsers} from '../store/users.js'
 import {me} from '../store/user.js'
-import {User} from './index.js'
+import {UserView} from './index.js'
 class AllUsers extends Component {
   // need to fetch all the users
   // need to fetch the current logged in user to later check if admin
@@ -33,7 +33,7 @@ class AllUsers extends Component {
       <div className="container mt-4">
         <div className="row">
           {users.map((user) => {
-            return <User key={user.id} user={user} />
+            return <UserView key={user.id} user={user} />
           })}
         </div>
       </div>
