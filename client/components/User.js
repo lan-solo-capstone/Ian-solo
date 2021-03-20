@@ -5,15 +5,23 @@ import {me, fetchExistingUser} from '../store/user.js'
 import {UserView} from './index.js'
 
 class User extends Component {
+  // constructor(props) {
+  //   super(props)
+  // }
+
   componentDidMount() {
     this.props.fetchUser()
     // TODO: this needs a userId
-    this.props.fetchExistingUser()
+    const userId = this.props.match.params.id
+    this.props.fetchExistingUser(userId)
   }
 
   componentDidUpdate(prevProps) {
     // TODO: this needs a userId
-    if (!prevProps.user.id && this.props.user.id) this.props.fetchExistingUser()
+    const userId = this.props.match.params.id
+
+    if (!prevProps.user.id && this.props.user.id)
+      this.props.fetchExistingUser(userId)
   }
 
   render() {
