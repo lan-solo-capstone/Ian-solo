@@ -15,10 +15,33 @@ class AllUsers extends Component {
     }
   }
   render() {
+    console.log('in render this.props', this.props)
     if (this.props.users.length === 0) {
       return <div>Loading, or we have no users =(</div>
     }
-    return <div>All Users</div>
+    const {users} = this.props || []
+    return (
+      <div className="container mt-4">
+        <div className="row">
+          {users.map((user) => {
+            return (
+              <div className="col-md-4 mb-4" key={user.id}>
+                <div className="card">
+                  <h5 className="card-header">
+                    {user.firstName} {user.lastName}
+                  </h5>
+                  <div className="card-body">
+                    <p className="card-text">E: {user.email}</p>
+                    {/* <p className="card-text">P: {user.phone}</p> */}
+                    <p className="card-text">Address: {user.street1}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 }
 
@@ -34,9 +57,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchUsers: () => {
       dispatch(fetchUsers())
     },
-    fetchuser: () => {
-      dispatch(me())
-    },
+    fetchUser: () => dispatch(me()),
   }
 }
 
