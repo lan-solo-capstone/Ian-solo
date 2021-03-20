@@ -15,7 +15,7 @@ const UserView = (props) => {
     zip,
   } = props.user
 
-  console.log('in User, props', props)
+  console.log('in UserView, props', props)
   return (
     <div className="col-md-4 mb-4" key={id}>
       <div className="card">
