@@ -6,7 +6,6 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const GET_EXISTING_USER = 'GET_EXISTING_USER'
 /**
  * INITIAL STATE
  */
@@ -17,7 +16,6 @@ const defaultUser = {}
  */
 const getUser = (user) => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const getExistingUser = (user) => ({type: GET_EXISTING_USER, user})
 /**
  * THUNK CREATORS
  */
@@ -53,17 +51,6 @@ export const logout = () => async (dispatch) => {
     history.push('/login')
   } catch (err) {
     console.error(err)
-  }
-}
-
-export const fetchExistingUser = (userId) => {
-  return async (dispatch) => {
-    try {
-      const {data} = await axios.get(`/api/users/${userId}`)
-      dispatch(getExistingUser(data))
-    } catch (err) {
-      console.error(err)
-    }
   }
 }
 
