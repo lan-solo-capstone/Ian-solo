@@ -59,11 +59,11 @@ class ListAll extends React.Component {
             </a>
             <div className="collapse" id="mapCollapse">
               <a
-                className="btn btn-secondary m-auto rounded-0 rounded-top d-flex justify-content-center align-items-center"
+                className="btn btn-secondary m-auto rounded-0 d-flex justify-content-center align-items-center"
                 data-bs-toggle="collapse"
                 href="#mapCollapse"
                 role="button"
-                style={{width: '70px', height: '30px'}}
+                style={{width: '100vw', height: '5vh'}}
               >
                 <i
                   className="bi bi-chevron-compact-up"
@@ -75,7 +75,7 @@ class ListAll extends React.Component {
                 />
               </a>
               <div
-                className="bg-secondary rounded-top text-light p-3"
+                className="bg-secondary rounded-top text-light"
                 style={{height: '95vh'}}
               >
                 <MapAllItems itemsArray={items} />
