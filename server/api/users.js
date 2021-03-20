@@ -2,7 +2,8 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
-// /api/users
+// all routes here are mounted on /api/users
+
 router.use('/post', require('./newitemform.js'))
 
 router.get('/', async (req, res, next) => {
