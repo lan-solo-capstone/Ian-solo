@@ -22,14 +22,14 @@ class User extends Component {
 
   render() {
     console.log('in User render, this.props', this.props)
-    return <div>test</div>
+    return <UserView user={this.props.singleUser} />
   }
 }
 
 const mapState = (state) => {
   return {
     user: state.user,
-    singleUser: state.singelUser,
+    singleUser: state.singleUser,
   }
 }
 
