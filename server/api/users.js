@@ -36,10 +36,12 @@ router.get('/', async (req, res, next) => {
 })
 
 // GET single user
+// mounted on api/users/:userId
 // TODO: limit access to this route to admins only
 router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
+    console.log('hello', 'typeof userId', typeof userId)
     const user = await User.findByPk(userId)
     res.json(user)
   } catch (err) {
