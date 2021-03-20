@@ -6,9 +6,11 @@ import axios from 'axios'
 
 // Action type
 const GET_EXISTING_USER = 'GET_EXISTING_USER'
+const DELETE_EXISTING_USER = 'DELETE_EXISTING_USER'
 
 // Action creator
 const getExistingUser = (user) => ({type: GET_EXISTING_USER, user})
+const deleteExistingUser = (user) => ({type: DELETE_EXISTING_USER, user})
 
 // Thunk creator
 export const fetchExistingUser = (userId) => {
@@ -17,6 +19,17 @@ export const fetchExistingUser = (userId) => {
     try {
       const {data} = await axios.get(`/api/users/${userId}`)
       dispatch(getExistingUser(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const removeExistingUser = (userId) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.delete(`/api/users/${userId}`)
+      dispatch(deleteExistingUser(data))
     } catch (err) {
       console.error(err)
     }

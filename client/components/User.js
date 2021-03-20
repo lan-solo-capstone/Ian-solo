@@ -14,7 +14,7 @@ class User extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const userId = this.props.match.params.id
+    const userId = this.props.match.params.userId
 
     if (!prevProps.user.id && this.props.userId)
       this.props.fetchExistingUser(userId)

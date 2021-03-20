@@ -10,6 +10,7 @@ module.exports = router
 router.use('/post', require('./newitemform.js'))
 
 // GET all users
+// TODO: limit access to admins only
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -50,6 +51,7 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 // DELETE a single user
+// TODO: limit access to admins only
 
 router.delete('/:userId', async (req, res, next) => {
   try {
