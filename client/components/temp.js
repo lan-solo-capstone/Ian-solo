@@ -23,9 +23,7 @@ const temp = () => {
         console.log(data)
         console.log("ERROR: Can't find address!")
       }
-      // console.log(data.data.features)
     }
-
     fetchData()
   }, [])
 
