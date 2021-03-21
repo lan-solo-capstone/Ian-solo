@@ -25,10 +25,10 @@ export const fetchExistingUser = (userId) => {
   }
 }
 
-export const modifyExistingUser = (userId) => {
+export const modifyExistingUser = (userId, modifications) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.put(`/api/users/${userId}`)
+      const {data} = await axios.put(`/api/users/${userId}`, modifications)
       dispatch(editExistingUser(data))
     } catch (err) {
       console.error(err)
