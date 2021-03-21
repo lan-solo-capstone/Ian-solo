@@ -50,6 +50,43 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+// PUT single user
+// mounted on api/users/:userId
+// TODO: limit access to admins only
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const {
+      firstName,
+      middleName,
+      lastName,
+      street1,
+      street2,
+      city,
+      state,
+      zip,
+      email,
+    } = req.body
+    const user = await User.findByPk(userId)
+
+    await user.update({
+      firstName,
+      middleName,
+      lastName,
+      street1,
+      street2,
+      city,
+      state,
+      zip,
+      email,
+    })
+
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // DELETE a single user
 // TODO: limit access to admins only
 
