@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers} from '../store/users.js'
+import {fetchUsers, removeExistingUser} from '../store/users.js'
 import {me} from '../store/user.js'
 import {UserView} from './index.js'
+
 class AllUsers extends Component {
   // need to fetch all the users
   // need to fetch the current logged in user to later check if admin
@@ -33,7 +34,22 @@ class AllUsers extends Component {
       <div className="container mt-4">
         <div className="row">
           {users.map((user) => {
-            return <UserView key={user.id} user={user} />
+            return (
+              <div key={user.id}>
+                <div className="col-md-4 mb-4">
+                  <div className="card">
+                    <UserView user={user} />
+                    <button
+                      type="button"
+                      onClick={() => this.props.removeExistingUser(user.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete User
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
           })}
         </div>
       </div>
@@ -52,6 +68,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchUsers: () => {
       dispatch(fetchUsers())
+    },
+    removeExistingUser: (userId) => {
+      dispatch(removeExistingUser(userId))
     },
     fetchUser: () => dispatch(me()),
   }
