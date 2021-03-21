@@ -13,9 +13,6 @@ export const createNewItem = (item) => {
 export const postNewItem = (item) => {
   return async (dispatch) => {
     try {
-      console.log('processing thunk')
-      console.log('thunk item', item)
-
       //append text data from the form
       const formData = new FormData()
 
@@ -25,10 +22,14 @@ export const postNewItem = (item) => {
       formData.append('itemCondition', item.itemCondition)
       formData.append('userId', item.user.id)
 
-      //append file data from the form
-      formData.append('file', item.uploadPhoto)
+      //append file data from the form - if item.uploadPhoto IS NOT null
+      if (item.uploadPhoto) {
+        for (let i = 0; i < item.uploadPhoto.length; i++) {
+          formData.append(`${item.uploadPhoto[i].name}`, item.uploadPhoto[i])
+        }
+      }
 
-      //vv below axios call are for the testing purpose vv //
+      // vv test vv  below axios call is for testing purpose - visualize formData vv //
       axios
         .post('https://httpbin.org/anything', formData)
         .then((res) => console.log(res))
@@ -36,10 +37,9 @@ export const postNewItem = (item) => {
 
       // ^^ test ^^//
 
-      //sending formData to api
+      //sending formData to api(express)
       const {data} = await axios.post(`/api/users/post`, formData)
-      // {itemListName, description, itemType, itemCondition, uploadPhoto}
-      //console.log('hello', 'in postNewItem thunk', {formData, data})
+
       dispatch(createNewItem(data))
     } catch (err) {
       console.error(err)

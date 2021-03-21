@@ -10,6 +10,7 @@ const initialState = {
   description: '',
   itemCondition: 'chooseOne',
   uploadPhoto: null,
+  userId: null,
 }
 class NewItemForm extends Component {
   constructor() {
@@ -27,19 +28,23 @@ class NewItemForm extends Component {
     })
   }
 
-  handleFileSelect(event) {
-    this.setState({uploadPhoto: event.target.files[0]})
+  handleFileSelect(evt) {
+    // yf 03/21/21  below line works for both single and multiple file uploads
+    const photoFiles = Array.from(evt.target.files)
+    this.setState({uploadPhoto: photoFiles})
   }
+
+  // yf 03.21.21  Buggy - user needs to click twice to fire up thunk.  the issue only happens for the first time the page is loaded.
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.setState({user: this.props.user}) // adding the userId
+    this.setState({user: this.props.user}) // adding the user info right before the submit
     this.props.addNewItem(this.state)
   }
 
   render() {
     // this log makes sure that state changes when user types on form
-    console.log('in NewFormItem render, this.state', this.state)
+    //console.log('in NewFormItem render, this.state', this.state)
 
     return (
       <div className="container-fluid">
@@ -117,15 +122,13 @@ class NewItemForm extends Component {
                   <label htmlFor="uploadPhoto">Upload a Photo</label>
                   <input
                     type="file"
+                    multiple
                     // TODO: need to add other file types to support
                     // TODO: need to validate file size and maybe number?
                     accept="image/x-png,image/jpeg,image/gif"
                     className="form-control-file"
                     name="uploadPhoto"
                     ref={this.fileInput}
-                    // disable multiple for now -- JC
-                    // multiple
-
                     onChange={this.handleFileSelect}
                   />
                 </div>
@@ -143,6 +146,7 @@ class NewItemForm extends Component {
   }
 }
 
+// yf 03.21.21  added state - need user info to associate with the created item.
 const mapStateToProps = (state) => ({
   user: state.user,
 })

@@ -1,13 +1,15 @@
 const router = require('express').Router()
 const Item = require('../db/models/item')
 const ItemPhoto = require('../db/models/ItemPhoto')
+
 module.exports = router
 
 // mounted on /api/users/post
+
 // TODO: only users should be allowed to do this
 // TODO: add photos
 
-// TODO: look into multer
+// TODO: look into multer:  YF 03.21.21  Currently using express-fileupload middleware
 
 router.post('/', async (req, res, next) => {
   try {
@@ -16,13 +18,11 @@ router.post('/', async (req, res, next) => {
       description,
       itemType,
       itemCondition,
-      // status,
       deliveryOption,
-      // dateListed,
       userId,
+      // status,
+      // dateListed,
     } = req.body
-
-    console.log('req.body in api', req.body)
 
     //create new item data in item table -- working as of 3.20.21
     const newItem = await Item.create({
@@ -35,22 +35,22 @@ router.post('/', async (req, res, next) => {
     })
 
     // imageFiles upload to DB  -- working as of 3.20.21
-    console.log('newItemId', newItem.id)
-    const {name, data} = req.files.file
+    if (req.files) {
+      //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
+      for (let key in req.files) {
+        await ItemPhoto.create({
+          photoTitle: req.files[key].name,
+          photoFile: req.files[key].data,
+        })
+      }
+    }
 
-    const newPhoto = await ItemPhoto.create({
-      photoTitle: name,
-      photoFile: data,
-    })
-
-    // console.log('newPhoto', newPhoto)
-
+    /**  THIS STILL NEEDS TO WORK - CURRENTLY NO ITEM AND ITEMPHOTO ASSOCIATION 03/21/21 */
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods
-    await newPhoto.setItem(newItem)
+    //await newItem.addItemPhoto()
 
-    // res.status(201).send(newItem)
-    res.send(newPhoto)
+    res.status(201).send(newItem)
   } catch (err) {
     next(err)
   }

@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
 const fileUpload = require('express-fileupload')
-const multer = require('multer')
 const seed = require('../script/seed')
 
 module.exports = app
