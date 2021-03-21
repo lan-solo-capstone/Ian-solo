@@ -10,7 +10,7 @@ const initialState = {
   description: '',
   itemCondition: 'chooseOne',
   uploadPhoto: null,
-  userId: null,
+  user: null,
 }
 class NewItemForm extends Component {
   constructor() {
@@ -23,6 +23,7 @@ class NewItemForm extends Component {
   }
 
   handleChange(evt) {
+    this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
     this.setState({
       [evt.target.name]: evt.target.value,
     })
@@ -34,11 +35,10 @@ class NewItemForm extends Component {
     this.setState({uploadPhoto: photoFiles})
   }
 
-  // yf 03.21.21  Buggy - user needs to click twice to fire up thunk.  the issue only happens for the first time the page is loaded.
+  // yf 03.21.21  Buggy submit button was fixed.  Cause -timing of updating state.user
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.setState({user: this.props.user}) // adding the user info right before the submit
     this.props.addNewItem(this.state)
   }
 
