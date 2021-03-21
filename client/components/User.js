@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {me} from '../store/user.js'
 import {fetchExistingUser} from '../store/singleUser.js'
-import {UserView} from './index.js'
+import {UserView, EditUserForm} from './index.js'
 
 class User extends Component {
   componentDidMount() {
@@ -22,7 +22,12 @@ class User extends Component {
 
   render() {
     console.log('in User render, this.props', this.props)
-    return <UserView user={this.props.singleUser} />
+    return (
+      <div>
+        <UserView user={this.props.singleUser} />
+        <EditUserForm />
+      </div>
+    )
   }
 }
 

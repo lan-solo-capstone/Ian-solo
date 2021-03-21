@@ -18,11 +18,12 @@ class EditUserForm extends Component {
     }
   }
   componentDidMount() {
-    const userId = this.props.match.params.userId
-    this.props.fetchExistingUser(userId)
+    // const userId = this.props.match.params.userId
+    // this.props.fetchExistingUser(userId)
   }
 
   render() {
+    console.log('in EditUserForm render, this.props', this.props)
     return (
       <div className="container-fluid">
         <div className="row">
