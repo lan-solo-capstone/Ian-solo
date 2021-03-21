@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchUsers, removeExistingUser} from '../store/users.js'
 import {me} from '../store/user.js'
 import {UserView} from './index.js'
+import {Link} from 'react-router-dom'
 
 class AllUsers extends Component {
   // need to fetch all the users
@@ -38,7 +39,9 @@ class AllUsers extends Component {
               <div key={user.id}>
                 <div className="col-md-4 mb-4">
                   <div className="card">
-                    <UserView user={user} />
+                    <Link to={`/users/${user.id}`}>
+                      <UserView user={user} />
+                    </Link>
                     <button
                       type="button"
                       onClick={() => this.props.removeExistingUser(user.id)}
