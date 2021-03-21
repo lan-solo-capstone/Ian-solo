@@ -58,12 +58,12 @@ class EditUserForm extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    const userId = this.props.singleuser.id
-    this.props.modifyExistingUser(this.state, userId)
+    const userId = this.props.singleUser.id
+    this.props.modifyExistingUser(userId, this.state)
     this.setState(initialState)
   }
   render() {
-    // console.log('in EditUserForm render, this.props', this.props)
+    console.log('in EditUserForm render, this.props', this.props)
     console.log('in EditUserForm render this.state', this.state)
     return (
       <div className="container-fluid">
@@ -180,7 +180,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchExistingUser: (userId) => dispatch(fetchExistingUser(userId)),
-    modifyExistingUser: (userId) => dispatch(modifyExistingUser(userId)),
+    modifyExistingUser: (userId, modifications) =>
+      dispatch(modifyExistingUser(userId, modifications)),
   }
 }
 

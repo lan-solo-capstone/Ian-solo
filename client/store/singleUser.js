@@ -26,6 +26,11 @@ export const fetchExistingUser = (userId) => {
 }
 
 export const modifyExistingUser = (userId, modifications) => {
+  console.log(
+    'in modifyExistingUser, userId, modifications',
+    userId,
+    modifications
+  )
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`/api/users/${userId}`, modifications)
