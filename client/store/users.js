@@ -34,6 +34,13 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case GET_USERS:
       return action.users
+    case DELETE_EXISTING_USER: {
+      const newState = [...state].filter((user) => {
+        return user.id !== action.user.id
+      })
+      return newState
+    }
+
     default:
       return state
   }
