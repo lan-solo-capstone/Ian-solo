@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Item = require('../db/models/item')
-const ItemPhoto = require('../db/models/ItemPhoto')
+const ItemPhoto = require('../db/models/itemPhoto')
 module.exports = router
 
 // mounted on /api/users/post
