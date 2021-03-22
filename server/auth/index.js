@@ -34,7 +34,7 @@ router.post('/signup', async (req, res, next) => {
     )
     const data = (
       await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?types=address&limit=1&access_token=pk.eyJ1IjoibWVsaW5kYWFybWJydXN0ZXIiLCJhIjoiY2trZTd6cHVlMDl5YzJwcXNvMWRvOHU4ciJ9.NdVU55Xhn75BzaVNjACSKQ`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?types=address&limit=1&access_token=${process.env.MAPBOX_PK}`
       )
     ).data
     if (data && data.features[0] && data.features[0].center) {

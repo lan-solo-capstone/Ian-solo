@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import ReactMapGL, {Marker} from 'react-map-gl'
+import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+/* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
 const MapAllItems = (props) => {
@@ -12,6 +13,8 @@ const MapAllItems = (props) => {
     height: props.height ? props.height : '100%',
     zoom: 10,
   })
+
+  const [selectedItem, setSelectedItem] = useState(null)
 
   return (
     <ReactMapGL
@@ -31,12 +34,33 @@ const MapAllItems = (props) => {
               latitude={+item.user.latitude}
               longitude={+item.user.longitude}
             >
-              <strong>
-                <i className="bi bi-pin-fill text-success"></i>
-              </strong>
+              <button
+                onClick={(evt) => {
+                  evt.preventDefault()
+                  setSelectedItem(item)
+                }}
+              >
+                <strong>
+                  <i className="bi bi-pin-fill text-success"></i>
+                </strong>
+              </button>
             </Marker>
           )
         })}
+      {selectedItem ? (
+        <Popup
+          latitude={+selectedItem.user.latitude}
+          longitude={+selectedItem.user.longitude}
+          onClose={() => {
+            setSelectedItem(null)
+          }}
+        >
+          {/* just a test route for now */}
+          <a href="https://google.com" className="text-primary">
+            {selectedItem.itemListName}
+          </a>
+        </Popup>
+      ) : null}
 
       {props.isLoggedIn && (
         <Marker
