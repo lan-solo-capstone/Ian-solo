@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/items'
-import SingleItem from './singleItem'
+import SingleItem from './SingleItem'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './MobileFooter'
 
