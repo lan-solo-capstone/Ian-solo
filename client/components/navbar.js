@@ -6,8 +6,9 @@ import {logout} from '../store'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './mobileFooter'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = (props) => (
   <>
+    {console.log('from navbar:', props)}
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/listall" className="text-decoration-none text-dark m-0">
@@ -29,7 +30,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {isLoggedIn ? (
+            {props.isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
                 <Link className="nav-item nav-link mx-2" to="/post">
@@ -38,7 +39,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <a
                   className="nav-item nav-link mx-2"
                   href="#"
-                  onClick={handleClick}
+                  onClick={props.handleClick}
                 >
                   Logout
                 </a>
