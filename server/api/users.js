@@ -6,7 +6,7 @@ module.exports = router
 // all routes here are mounted on /api/users
 
 // /api/users/post will be sent to newItemForm.js
-router.use('/post', require('./newItemForm.js'))
+// router.use('/post', require('./newItemForm.js'))
 
 // GET all users
 // TODO: limit access to admins only
