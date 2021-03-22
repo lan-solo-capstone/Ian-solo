@@ -6,8 +6,9 @@ import user from './user'
 import users from './users'
 import singleUser from './singleUser'
 import items from './items'
+import item from './item'
 
-const reducer = combineReducers({user, singleUser, users, items})
+const reducer = combineReducers({user, singleUser, users, item, items})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
