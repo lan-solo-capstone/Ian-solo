@@ -24,14 +24,14 @@ form div {
   transform: rotate(180deg);
 }
 
-#mapCollapseButton:hover {
-  opacity: 0%;
-  transition: opacity 0.1s;
-}
-
-#mapCollapseButton {
+#collapseButton {
   opacity: 100%;
   transition: opacity 1s;
+}
+
+#collapseButton:hover {
+  opacity: 0%;
+  transition: opacity 0.1s;
 }
 
 .singleViewFix {

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import MapAllItems from './MapAllItems'
+import MobileFooter from './mobileFooter'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <>
@@ -94,6 +95,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             {/* Ends modal */}
           </ul>
         </div>
+      </div>
+      <div className="fixed-bottom d-md-none">
+        <MobileFooter />
       </div>
     </nav>
   </>
