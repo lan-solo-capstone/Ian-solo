@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import MapAllItems from './MapAllItems'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <>
@@ -51,6 +52,46 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 </Link>
               </>
             )}
+            {/* <!-- Button trigger modal --> */}
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              View Map
+            </button>
+
+            {/* <!-- Modal --> */}
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Map
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body p-0">
+                    <div style={{width: '500px', height: '500px'}}>
+                      <MapAllItems />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Ends modal */}
           </ul>
         </div>
       </div>
