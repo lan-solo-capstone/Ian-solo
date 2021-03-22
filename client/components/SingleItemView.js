@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import MapSingleItem from './MapSingleItem'
-import MobileFooter from './mobileFooter'
+import MobileFooter from './MobileFooter'
 
 // Render functional
-const singleView = (props) => {
+const SingleItemView = (props) => {
   console.log(props)
   return (
     <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
@@ -178,4 +178,4 @@ const singleView = (props) => {
 //   },
 // })
 
-export default singleView
+export default SingleItemView

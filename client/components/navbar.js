@@ -4,13 +4,13 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import MapAllItems from './MapAllItems'
-import MobileFooter from './mobileFooter'
+import MobileFooter from './MobileFooter'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/listall" className="text-decoration-none text-dark m-0">
+        <Link to="/items" className="text-decoration-none text-dark m-0">
           <span className="navbar-brand">
             <strong>Freeshare</strong>
           </span>

@@ -1,7 +1,7 @@
 /* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {postNewItem} from '../store/item-jae.js'
+import {postNewItem} from '../store/item.js'
 
 // TODO: need to flesh out initialState?
 const initialState = {
