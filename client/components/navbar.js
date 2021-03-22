@@ -12,7 +12,7 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
     {console.log(currentPage)}
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/listall" className="text-decoration-none text-dark m-0">
+        <Link to="/home" className="text-decoration-none text-dark m-0">
           <span className="navbar-brand">
             <strong>Freeshare</strong>
           </span>
@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
-                <Link className="nav-item nav-link mx-2" to="/home">
+                <Link className="nav-item nav-link mx-2" to="/useraccount">
                   Account
                 </Link>
                 <Link className="nav-item nav-link mx-2" to="/post">

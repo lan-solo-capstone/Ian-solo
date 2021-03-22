@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 const mobileFooter = (props) => (
   <div className="row cols-3 gx-2 bg-secondary">
     <div className="col text-center">
-      <Link to="/listall" className="text-decoration-none m-0">
+      <Link to="/home" className="text-decoration-none m-0">
         <i
           className="bi bi-house text-white"
           style={{
@@ -27,7 +27,7 @@ const mobileFooter = (props) => (
       </Link>
     </div>
     <div className="col text-center">
-      <Link to="/home" className="text-decoration-none m-0">
+      <Link to="/useraccount" className="text-decoration-none m-0">
         <i
           className="bi bi-person-circle text-white"
           style={{

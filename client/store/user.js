@@ -40,7 +40,6 @@ export const auth = (
   state,
   zip
 ) => async (dispatch) => {
-
   let res
   try {
     res = await axios.post(`/auth/${method}`, {
@@ -60,7 +59,7 @@ export const auth = (
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/useraccount')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }

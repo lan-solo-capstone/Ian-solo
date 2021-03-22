@@ -33,7 +33,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/mapexp" component={MapExp} />
-        <Route path="/listall" component={ListAll} />
+        <Route path="/home" component={ListAll} />
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
         <Route path="/singleview" component={SingleView} />
@@ -43,7 +43,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/useraccount" component={UserHome} />
             <Route path="/post" component={NewItemForm} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:userId" component={User} />
