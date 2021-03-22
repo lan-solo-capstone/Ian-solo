@@ -38,7 +38,7 @@ const AuthForm = (props) => {
                       name="firstName"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputFirstName"
                       aria-describedby="emailHelp"
                       placeholder="First Name"
                     />
@@ -47,7 +47,7 @@ const AuthForm = (props) => {
                       name="lastName"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputLastName"
                       aria-describedby="emailHelp"
                       placeholder="Last Name"
                     />
@@ -56,7 +56,7 @@ const AuthForm = (props) => {
                       name="street1"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputStreet1"
                       aria-describedby="emailHelp"
                       placeholder="Street Address Line 1"
                     />
@@ -65,7 +65,7 @@ const AuthForm = (props) => {
                       name="street2"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputStreet2"
                       aria-describedby="emailHelp"
                       placeholder="Street Address Line 2"
                     />
@@ -74,7 +74,7 @@ const AuthForm = (props) => {
                       name="city"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputCity"
                       aria-describedby="emailHelp"
                       placeholder="City"
                     />
@@ -83,7 +83,7 @@ const AuthForm = (props) => {
                       name="state"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputState"
                       aria-describedby="emailHelp"
                       placeholder="State"
                     />
@@ -92,7 +92,7 @@ const AuthForm = (props) => {
                       name="zip"
                       type="text"
                       className="form-control mb-1"
-                      id="exampleInputEmail1"
+                      id="exampleInputZip"
                       aria-describedby="emailHelp"
                       placeholder="Zip"
                     />
@@ -204,7 +204,27 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const firstName = evt.target.firstName ? evt.target.firstName.value : null
+      const lastName = evt.target.lastName ? evt.target.lastName.value : null
+      const street1 = evt.target.street1 ? evt.target.street1.value : null
+      const street2 = evt.target.street2 ? evt.target.street2.value : null
+      const city = evt.target.city ? evt.target.city.value : null
+      const state = evt.target.state ? evt.target.state.value : null
+      const zip = evt.target.zip ? evt.target.zip.value : null
+      dispatch(
+        auth(
+          email,
+          password,
+          formName,
+          firstName,
+          lastName,
+          street1,
+          street2,
+          city,
+          state,
+          zip
+        )
+      )
     },
   }
 }
