@@ -10,6 +10,7 @@ const initialState = {
   description: '',
   itemCondition: 'chooseOne',
   uploadPhoto: null,
+  user: null,
 }
 class NewItemForm extends Component {
   constructor() {
@@ -17,40 +18,34 @@ class NewItemForm extends Component {
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
 
   handleChange(evt) {
-    console.log('in handle change, evt.target.name', evt.target.name)
+    this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
     this.setState({
       [evt.target.name]: evt.target.value,
     })
   }
 
+  handleFileSelect(evt) {
+    // yf 03/21/21  below line works for both single and multiple file uploads
+    const photoFiles = Array.from(evt.target.files)
+    this.setState({uploadPhoto: photoFiles})
+  }
+
+  // yf 03.21.21  Buggy submit button was fixed.  Cause -timing of updating state.user
+
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log('evt.target !!!!!!!!!!!!', evt.target)
-    console.log('evt.target.files', evt.target.file)
-    const formData = new FormData()
-    formData.append(
-      'photoName',
-      this.state.uploadPhoto
-      // this.state.uploadPhoto.name
-    )
-
-    for (var pair of formData.values()) {
-      console.log('form data pair!!!!!', pair)
-    }
-
-    console.log('formData-------------------', formData)
-    console.log('in handleSubmit photo', this.state.uploadPhoto)
-    // const {itemType, itemListName, description, itemCondition} = this.state
-    console.log('in handleSubmit this.state', this.state)
     this.props.addNewItem(this.state)
   }
+
   render() {
     // this log makes sure that state changes when user types on form
-    console.log('in NewFormItem render, this.state', this.state)
+    //console.log('in NewFormItem render, this.state', this.state)
+
     return (
       <div className="container-fluid">
         <div className="row">
@@ -127,21 +122,14 @@ class NewItemForm extends Component {
                   <label htmlFor="uploadPhoto">Upload a Photo</label>
                   <input
                     type="file"
+                    multiple
                     // TODO: need to add other file types to support
                     // TODO: need to validate file size and maybe number?
                     accept="image/x-png,image/jpeg,image/gif"
                     className="form-control-file"
                     name="uploadPhoto"
                     ref={this.fileInput}
-                    // disable multiple for now -- JC
-                    // multiple
-
-                    // this is to set the state with the uploaded photo
-                    // but not sure if the photo is actually there
-                    onChange={(event) => {
-                      console.log('in upload photo form', event.target.files)
-                      this.setState({uploadPhoto: event.target.files[0]})
-                    }}
+                    onChange={this.handleFileSelect}
                   />
                 </div>
               </div>
@@ -158,9 +146,14 @@ class NewItemForm extends Component {
   }
 }
 
+// yf 03.21.21  added state - need user info to associate with the created item.
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewItem: (item) => dispatch(postNewItem(item)),
   }
 }
-export default connect(null, mapDispatchToProps)(NewItemForm)
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm)
