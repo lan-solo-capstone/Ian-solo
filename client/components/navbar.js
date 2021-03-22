@@ -5,10 +5,11 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './mobileFooter'
+import MapSingleItem from './MapSingleItem'
 
-const Navbar = (props) => (
+const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
   <>
-    {console.log('from navbar:', props)}
+    {console.log(currentPage)}
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/listall" className="text-decoration-none text-dark m-0">
@@ -30,16 +31,19 @@ const Navbar = (props) => (
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {props.isLoggedIn ? (
+            {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
+                <Link className="nav-item nav-link mx-2" to="/home">
+                  Account
+                </Link>
                 <Link className="nav-item nav-link mx-2" to="/post">
                   Post an Item
                 </Link>
                 <a
                   className="nav-item nav-link mx-2"
                   href="#"
-                  onClick={props.handleClick}
+                  onClick={handleClick}
                 >
                   Logout
                 </a>
@@ -56,14 +60,16 @@ const Navbar = (props) => (
               </>
             )}
             {/* <!-- Button trigger modal --> */}
-            <button
-              type="button"
-              className="btn btn-primary d-none d-md-block"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              View Map
-            </button>
+            {currentPage.page ? (
+              <button
+                type="button"
+                className="btn btn-primary d-none d-md-block"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                View Map
+              </button>
+            ) : null}
 
             {/* <!-- Modal --> */}
             <div
@@ -88,7 +94,12 @@ const Navbar = (props) => (
                   </div>
                   <div className="modal-body p-0">
                     <div style={{width: '100%', height: '85vh'}}>
-                      <MapAllItems />
+                      {currentPage.page === 'listall' ? (
+                        <MapAllItems itemsArray={currentPage.items} />
+                      ) : null}
+                      {currentPage.page === 'singleview' ? (
+                        <MapSingleItem item={currentPage.items} />
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -111,6 +122,7 @@ const Navbar = (props) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    currentPage: state.navbar,
   }
 }
 

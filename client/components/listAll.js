@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/listAll'
+import {updateNavbar} from '../store/navbar'
 import SingleItem from './singleItem'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './mobileFooter'
@@ -16,7 +17,9 @@ class ListAll extends React.Component {
     this.props.fetchAllItems()
   }
 
-  createEventListener() {}
+  componentWillUnmount() {
+    this.props.updateNavbar(null, {})
+  }
 
   render() {
     const items = this.props.items
@@ -35,6 +38,7 @@ class ListAll extends React.Component {
         </h3>
         {console.log(this.props.items)}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {this.props.updateNavbar('listall', items)}
           {items.map((item) => (
             <SingleItem key={item.id} item={item} />
           ))}
@@ -102,6 +106,9 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchAllItems: () => {
     dispatch(fetchAllItems())
+  },
+  updateNavbar: (page, items) => {
+    dispatch(updateNavbar(page, items))
   },
 })
 
