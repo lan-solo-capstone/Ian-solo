@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchAllItems} from '../store/listAll'
+import {fetchAllItems} from '../store/items'
 import SingleItem from './singleItem'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './mobileFooter'
@@ -11,7 +11,7 @@ import MobileFooter from './mobileFooter'
 // const Placeholder = (props) => <div></div>
 
 // Render Class
-class ListAll extends React.Component {
+class Items extends React.Component {
   componentDidMount() {
     this.props.fetchAllItems()
   }
@@ -95,8 +95,8 @@ class ListAll extends React.Component {
  */
 
 const mapState = (state) => ({
-  items: state.listAll.items,
-  loading: state.listAll.loading,
+  items: state.items.items,
+  loading: state.items.loading,
 })
 
 const mapDispatch = (dispatch) => ({
@@ -105,12 +105,12 @@ const mapDispatch = (dispatch) => ({
   },
 })
 
-export default connect(mapState, mapDispatch)(ListAll)
+export default connect(mapState, mapDispatch)(Items)
 
 /**
  * PROP TYPES
  */
-ListAll.propTypes = {
+Items.propTypes = {
   items: PropTypes.array,
   loading: PropTypes.bool,
 }

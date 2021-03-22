@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {Item, User} = require('../db/models')
 module.exports = router
 
-// /api/allItems
+// /api/items
 
 router.get('/', async (req, res, next) => {
   try {
