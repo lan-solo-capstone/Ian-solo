@@ -5,15 +5,17 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import users from './users'
 import singleUser from './singleUser'
-import listAll from './listAll'
+import item from './item'
+import items from './items'
 import navbar from './navbar'
 import useritems from './useritems'
 
 const reducer = combineReducers({
   user,
-  singleUser,
   users,
-  listAll,
+  singleUser,
+  item,
+  items,
   navbar,
   useritems,
 })

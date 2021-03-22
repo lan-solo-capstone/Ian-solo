@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import MobileFooter from './mobileFooter'
 import {fetchUserItems} from '../store/useritems'
-import SingleItem from './singleItem'
+import SingleItem from './SingleItem'
 
 /**
  * COMPONENT

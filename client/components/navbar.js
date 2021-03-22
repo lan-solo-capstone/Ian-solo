@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import MapAllItems from './MapAllItems'
-import MobileFooter from './mobileFooter'
+import MobileFooter from './MobileFooter'
 import MapSingleItem from './MapSingleItem'
 
 const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
@@ -12,7 +12,7 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
     {console.log(currentPage)}
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/home" className="text-decoration-none text-dark m-0">
+        <Link to="/items" className="text-decoration-none text-dark m-0">
           <span className="navbar-brand">
             <strong>Freeshare</strong>
           </span>

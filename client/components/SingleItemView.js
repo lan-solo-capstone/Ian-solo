@@ -12,7 +12,7 @@ import MapSingleItem from './MapSingleItem'
 // }
 
 // Render Class
-class singleView extends React.Component {
+class SingleItemView extends React.Component {
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
@@ -191,4 +191,4 @@ const mapDispatch = (dispatch) => ({
   },
 })
 
-export default connect(null, mapDispatch)(singleView)
+export default connect(null, mapDispatch)(SingleItemView)

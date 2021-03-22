@@ -5,11 +5,8 @@ module.exports = router
 
 // all routes here are mounted on /api/users
 
-// /api/users/post will be sent to newItemForm.js
-// TODO: change the capitalization
-router.use('/post', require('./newitemform.js'))
-
 // GET all users
+// mounted on /api/users
 // TODO: limit access to admins only
 router.get('/', async (req, res, next) => {
   try {
@@ -37,7 +34,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // GET single user
-// mounted on api/users/:userId
+// mounted on /api/users/:userId
 // TODO: limit access to this route to admins only
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -64,7 +61,7 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 // PUT single user
-// mounted on api/users/:userId
+// mounted on /api/users/:userId
 // TODO: limit access to admins only
 router.put('/:userId', async (req, res, next) => {
   try {
@@ -101,6 +98,7 @@ router.put('/:userId', async (req, res, next) => {
 })
 
 // DELETE a single user
+// mounted on /api/users/:userId
 // TODO: limit access to admins only
 
 router.delete('/:userId', async (req, res, next) => {

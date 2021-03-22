@@ -21,7 +21,7 @@ const allItems = (items) => ({type: ALL_ITEMS, items})
  */
 export const fetchAllItems = () => async (dispatch) => {
   try {
-    const res = await axios.get('/api/listAll')
+    const res = await axios.get('/api/items')
     dispatch(allItems(res.data))
   } catch (err) {
     console.error(err)
