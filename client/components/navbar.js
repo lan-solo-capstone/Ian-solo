@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import MapAllItems from './MapAllItems'
+import MobileFooter from './mobileFooter'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <>
@@ -36,7 +38,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Link className="nav-item nav-link mx-2" to="/post">
                   Post an Item
                 </Link>
-                <a href="#" onClick={handleClick}>
+                <a
+                  className="nav-item nav-link mx-2"
+                  href="#"
+                  onClick={handleClick}
+                >
                   Logout
                 </a>
               </>
@@ -51,8 +57,51 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 </Link>
               </>
             )}
+            {/* <!-- Button trigger modal --> */}
+            <button
+              type="button"
+              className="btn btn-primary d-none d-md-block"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              View Map
+            </button>
+
+            {/* <!-- Modal --> */}
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-lg modal-xl">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Map
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body p-0">
+                    <div style={{width: '100%', height: '85vh'}}>
+                      <MapAllItems />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Ends modal */}
           </ul>
         </div>
+      </div>
+      <div className="fixed-bottom d-md-none">
+        <MobileFooter />
       </div>
     </nav>
   </>
