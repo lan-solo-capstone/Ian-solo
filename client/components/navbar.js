@@ -38,7 +38,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Link className="nav-item nav-link mx-2" to="/post">
                   Post an Item
                 </Link>
-                <a href="#" onClick={handleClick}>
+                <a
+                  className="nav-item nav-link mx-2"
+                  href="#"
+                  onClick={handleClick}
+                >
                   Logout
                 </a>
               </>

@@ -9,8 +9,11 @@ import MobileFooter from './mobileFooter'
 const singleView = (props) => {
   console.log(props)
   return (
-    <div className="container-fluid mt-4 p-0" style={{height: '90vh'}}>
-      <div className="d-flex flex-column justify-content-evenly">
+    <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
+      <div
+        className="d-flex flex-column justify-content-evenly"
+        style={{height: '100%'}}
+      >
         <div>
           <h5 className="text-center mb-1">
             {props.location.item.itemListName}
