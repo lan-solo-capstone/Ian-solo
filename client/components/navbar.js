@@ -55,7 +55,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             {/* <!-- Button trigger modal --> */}
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary d-none d-md-block"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
@@ -70,7 +70,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
-              <div className="modal-dialog">
+              <div className="modal-dialog modal-lg modal-xl">
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
@@ -84,7 +84,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                     ></button>
                   </div>
                   <div className="modal-body p-0">
-                    <div style={{width: '500px', height: '500px'}}>
+                    <div style={{width: '100%', height: '85vh'}}>
                       <MapAllItems />
                     </div>
                   </div>
