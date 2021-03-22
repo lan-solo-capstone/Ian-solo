@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 // Render functional
-const mobileFooter = (props) => (
+const MobileFooter = (props) => (
   <div className="row cols-3 gx-2 bg-secondary">
     <div className="col text-center">
       <Link to="/items" className="text-decoration-none m-0">
@@ -58,4 +58,4 @@ const mobileFooter = (props) => (
 //   },
 // })
 
-export default mobileFooter
+export default MobileFooter
