@@ -1,6 +1,6 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Item} = require('../db/models')
 module.exports = router
 
 // all routes here are mounted on /api/users
@@ -43,7 +43,20 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
     console.log('hello', 'typeof userId', typeof userId)
-    const user = await User.findByPk(userId)
+    const user = await User.findByPk(userId, {
+      include: [
+        {
+          model: Item,
+          attributes: [
+            'id',
+            'itemListName',
+            'description',
+            'itemType',
+            'dateListed',
+          ],
+        },
+      ],
+    })
     res.json(user)
   } catch (err) {
     next(err)

@@ -7,8 +7,16 @@ import users from './users'
 import singleUser from './singleUser'
 import listAll from './listAll'
 import navbar from './navbar'
+import useritems from './useritems'
 
-const reducer = combineReducers({user, singleUser, users, listAll, navbar})
+const reducer = combineReducers({
+  user,
+  singleUser,
+  users,
+  listAll,
+  navbar,
+  useritems,
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
