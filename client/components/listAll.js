@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/listAll'
 import SingleItem from './singleItem'
 import MapAllItems from './MapAllItems'
+import MobileFooter from './mobileFooter'
 
 // Render functional
 // const Placeholder = (props) => <div></div>
@@ -28,7 +29,7 @@ class ListAll extends React.Component {
         <span className="visually-hidden">Loading...</span>
       </div>
     ) : (
-      <div className="container container-lg container-x">
+      <div className="mb-5 container container-lg container-x">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
           All Current offers
         </h3>
@@ -45,7 +46,7 @@ class ListAll extends React.Component {
               data-bs-toggle="collapse"
               href="#mapCollapse"
               role="button"
-              id="mapCollapseButton"
+              id="collapseButton"
               style={{width: '150px', height: '30px'}}
             >
               <p className="m-0">View on map</p>
@@ -57,6 +58,7 @@ class ListAll extends React.Component {
                 }}
               />
             </a>
+            <MobileFooter />
             <div className="collapse" id="mapCollapse">
               <a
                 className="btn btn-secondary m-auto rounded-0 d-flex justify-content-center align-items-center"
