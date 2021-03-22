@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import MapSingleItem from './MapSingleItem'
 
 // Render functional
 const singleView = (props) => {
@@ -136,7 +137,7 @@ const singleView = (props) => {
               className="bg-secondary rounded-top text-light"
               style={{height: '95vh'}}
             >
-              Lorem Ipsum text and what not
+              <MapSingleItem item={props.location.item} />
             </div>
           </div>
         </div>
