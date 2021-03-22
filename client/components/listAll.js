@@ -29,7 +29,7 @@ class ListAll extends React.Component {
         <span className="visually-hidden">Loading...</span>
       </div>
     ) : (
-      <div className="mb-5 container container-lg container-x">
+      <div className="mb-5 container container-lg container-xxl">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
           All Current offers
         </h3>

@@ -68,8 +68,12 @@ class EditUserForm extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-12">
-            <form role="form" onSubmit={this.handleSubmit}>
+          <div className="col-md-12 p-0">
+            <form
+              role="form"
+              onSubmit={this.handleSubmit}
+              style={{width: '90vw'}}
+            >
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
                 <input
