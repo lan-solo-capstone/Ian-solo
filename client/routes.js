@@ -6,7 +6,6 @@ import {
   Login,
   Signup,
   UserHome,
-  MapExp,
   MapAllItems,
   MapSingleItem,
   temp,
@@ -32,7 +31,6 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/mapexp" component={MapExp} />
         <Route path="/items" component={Items} />
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
