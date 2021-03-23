@@ -155,6 +155,29 @@ const items = [
   },
 ]
 
+const itemPhotos = [
+  {
+    photoTitle: 'default.jpeg',
+    photoURL:
+      'https://images-na.ssl-images-amazon.com/images/I/81vkislowDL._AC_SL1500_.jpg',
+    itemId: 9,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    photoURL: 'public/images/freeShareDefaultPic.jpeg',
+    itemId: 8,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    photoURL: 'public/images/freeShareDefaultPic.jpeg',
+    itemId: 7,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    photoURL: 'public/images/freeShareDefaultPic.jpeg',
+    itemId: 5,
+  },
+]
 // seed function
 
 async function seed() {
@@ -171,6 +194,13 @@ async function seed() {
   await Promise.all(
     items.map((item) => {
       return Item.create(item)
+    })
+  )
+  console.log(`seeded ${items.length} items`)
+
+  await Promise.all(
+    itemPhotos.map((photo) => {
+      return ItemPhoto.create(photo)
     })
   )
   console.log(`seeded ${items.length} items`)

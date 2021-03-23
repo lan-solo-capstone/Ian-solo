@@ -8,8 +8,11 @@ module.exports = router
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log(req.params.id)
     const rawImage = await ItemPhoto.findByPk(req.params.id)
+    console.log('row image', rawImage)
+
+    const pic = rawImage.photoFile.decode('utf-8')
+    console.log(pic)
 
     // const reader = new FileReader()
     // console.log('reader', reader)

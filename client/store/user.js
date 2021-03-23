@@ -40,7 +40,6 @@ export const auth = (
   state,
   zip
 ) => async (dispatch) => {
-
   let res
   try {
     res = await axios.post(`/auth/${method}`, {
