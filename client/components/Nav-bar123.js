@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
+import MobileFooter from './mobile-footer'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <>

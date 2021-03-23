@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/items'
 import SingleItem from './SingleItem'
 import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
+import MobileFooter from './mobile-footer'
 
 // Render functional
 // const Placeholder = (props) => <div></div>
