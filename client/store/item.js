@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import {storage} from '../../firebase/firebase'
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 
@@ -34,16 +33,6 @@ export const postNewItem = (item) => {
       axios
         .post('https://httpbin.org/anything', formData)
         .then((res) => {
-          storage
-            .ref(`/images/${Object.keys(res.data.files)}`)
-            .putString(res.data.files['pexels-pixabay-207962.jpg'], 'data_url')
-            .then((response) => {
-              try {
-                console.log(response, 'WE DID IT')
-              } catch (error) {
-                console.log('failed')
-              }
-            })
           console.log(res)
         })
         .catch((err) => console.log(err))

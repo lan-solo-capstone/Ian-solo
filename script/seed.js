@@ -87,7 +87,7 @@ const items = [
       'Another band member left this in my flight case 15 years ago and does not want it back. I don’t have microphones or an AC adapter for it. I have never even tried to plug it in or turn it on.If you want it, please email me with a possible pickup time.',
     itemType: 'Offer',
     itemCondition: 'Used',
-    status: 'Open',
+    status: 'Closed',
     deliveryOption: 'Pickup_Only',
     userId: 1,
   },
