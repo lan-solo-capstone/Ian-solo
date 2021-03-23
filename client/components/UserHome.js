@@ -16,7 +16,7 @@ class UserHome extends React.Component {
 
   render() {
     const {user} = this.props
-    let {items} = this.props?.useritems
+    let {items} = this.props.useritems
 
     // Attach the user to each item
     items = items.map((item) => {
