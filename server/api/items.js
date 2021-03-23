@@ -27,6 +27,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// GET single item
+// this may be necessary to re-route the user after they create a new post
+router.get('/:itemId', async (req, res, next) => {
+  const {itemId} = req.params
+  try {
+    const item = await Item.findByPk(itemId)
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // api/items POST a new item
 router.post(
   '/',

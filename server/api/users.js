@@ -1,6 +1,6 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Item} = require('../db/models')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
 module.exports = router

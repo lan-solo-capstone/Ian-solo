@@ -41,6 +41,7 @@ export const postNewItem = (item) => {
       const {data} = await axios.post(`/api/items`, formData)
 
       dispatch(createNewItem(data))
+      history.push('/useraccount')
     } catch (err) {
       console.error(err)
     }
