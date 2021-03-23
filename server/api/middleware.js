@@ -23,6 +23,7 @@ function ensureLogin(req, res, next) {
 
   console.log('hello', 'in ensureLogin', req.user, req.session.passport)
 
+  // TODO: ask team if this is how they authenticated in previous projects -- JC
   if (id && id === passportId) {
     next()
   } else {
