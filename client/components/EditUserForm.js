@@ -21,47 +21,53 @@ class EditUserForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  componentDidMount() {
-    // const userId = this.props.match.params.userId
-    // this.props.fetchExistingUser(userId)
-    const {
-      firstName,
-      middleName,
-      lastName,
-      email,
-      street1,
-      street2,
-      city,
-      state,
-      zip,
-    } = this.props.singleUser
 
-    if (this.props.singleUser.id) {
-      this.setState({
-        firstName,
-        middleName,
-        lastName,
-        email,
-        street1,
-        street2,
-        city,
-        state,
-        zip,
-      })
+  // The parent component will fetch the user we are editing.
+  // If that user changes, componentDidUpdate will grab the new user's info
+  // to pre-populate the edit form. JC
+  componentDidUpdate(prevProps) {
+    if (prevProps.singleUser.id !== this.props.singleUser.id) {
+      if (this.props.singleUser.id) {
+        const {
+          firstName,
+          middleName,
+          lastName,
+          email,
+          street1,
+          street2,
+          city,
+          state,
+          zip,
+        } = this.props.singleUser
+        this.setState({
+          firstName,
+          middleName,
+          lastName,
+          email,
+          street1,
+          street2,
+          city,
+          state,
+          zip,
+        })
+      }
     }
   }
 
+  // update form with user input
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
     })
   }
+
+  // upon submit, grab the user id and the state and dispatch modifyExistingUser
   handleSubmit(evt) {
     evt.preventDefault()
     const userId = this.props.singleUser.id
     this.props.modifyExistingUser(userId, this.state)
-    this.setState(initialState)
   }
+
   render() {
     console.log('in EditUserForm render, this.props', this.props)
     console.log('in EditUserForm render this.state', this.state)
@@ -179,7 +185,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchExistingUser: (userId) => dispatch(fetchExistingUser(userId)),
     modifyExistingUser: (userId, modifications) =>
       dispatch(modifyExistingUser(userId, modifications)),
   }

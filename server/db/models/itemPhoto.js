@@ -6,6 +6,10 @@ const ItemPhoto = db.define('itemPhoto', {
   photoFile: {
     type: Sequelize.BLOB,
   },
+  photoURL: {
+    type: Sequelize.TEXT,
+    defaultValue: 'public/images/freeShareDefaultPic.jpeg',
+  },
 })
 
 module.exports = ItemPhoto

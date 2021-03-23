@@ -1,6 +1,8 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
-const {User, Item} = require('../db/models')
+const {User} = require('../db/models')
+const {ensureAdmin, ensureLogin} = require('./middleware')
+
 module.exports = router
 
 // all routes here are mounted on /api/users
@@ -8,30 +10,38 @@ module.exports = router
 // GET all users
 // mounted on /api/users
 // TODO: limit access to admins only
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: [
-        'id',
-        'email',
-        'firstName',
-        'middleName',
-        'lastName',
-        'street1',
-        'street2',
-        'city',
-        'state',
-        'zip',
-      ],
-    })
-    res.json(users)
-  } catch (err) {
-    next(err)
+router.get(
+  '/',
+
+  // leaving ensureAdmin commented for ease of development and testing -- JC
+
+  // ensureAdmin,
+
+  async (req, res, next) => {
+    try {
+      const users = await User.findAll({
+        // explicitly select only the id and email fields - even though
+        // users' passwords are encrypted, it won't help if we just
+        // send everything to anyone who asks!
+        attributes: [
+          'id',
+          'email',
+          'firstName',
+          'middleName',
+          'lastName',
+          'street1',
+          'street2',
+          'city',
+          'state',
+          'zip',
+        ],
+      })
+      res.json(users)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 // GET single user
 // mounted on /api/users/:userId
