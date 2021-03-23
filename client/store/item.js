@@ -38,7 +38,7 @@ export const postNewItem = (item) => {
       // ^^ test ^^//
 
       //sending formData to api(express)
-      const {data} = await axios.post(`/api/users/post`, formData)
+      const {data} = await axios.post(`/api/items`, formData)
 
       dispatch(createNewItem(data))
     } catch (err) {

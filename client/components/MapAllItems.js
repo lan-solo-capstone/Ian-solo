@@ -1,55 +1,103 @@
-import React, {useState} from 'react'
-import ReactMapGL, {Marker} from 'react-map-gl'
+import React from 'react'
+import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import axios from 'axios'
+/* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
-const MapAllItems = (props) => {
-  const [viewport, setViewport] = useState({
-    latitude: props.isLoggedIn ? +props.user.latitude : 40.73061,
-    longitude: props.isLoggedIn ? +props.user.longitude : -73.935242,
-    width: props.width ? props.width : '100%',
-    height: props.height ? props.height : '100%',
-    zoom: 10,
-  })
+class MapAllItems extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      viewport: {
+        latitude: this.props.isLoggedIn ? +this.props.user.latitude : 40.73061,
+        longitude: this.props.isLoggedIn
+          ? +this.props.user.longitude
+          : -73.935242,
+        width: this.props.width ? this.props.width : '100%',
+        height: this.props.height ? this.props.height : '100%',
+        zoom: 10,
+      },
+      loading: true,
+      apiKey: '',
+      selectedItem: null,
+    }
+  }
 
-  return (
-    <ReactMapGL
-      {...viewport}
-      mapboxApiAccessToken="pk.eyJ1IjoibWVsaW5kYWFybWJydXN0ZXIiLCJhIjoiY2trZTd6cHVlMDl5YzJwcXNvMWRvOHU4ciJ9.NdVU55Xhn75BzaVNjACSKQ"
-      mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
-      onViewportChange={(viewport) => {
-        setViewport(viewport)
-      }}
-    >
-      {props.itemsArray &&
-        props.itemsArray.length > 0 &&
-        props.itemsArray.map((item) => {
-          return (
-            <Marker
-              key={item.id}
-              latitude={+item.user.latitude}
-              longitude={+item.user.longitude}
-            >
-              <strong>
-                <i className="bi bi-pin-fill text-success"></i>
-              </strong>
-            </Marker>
-          )
-        })}
+  async componentDidMount() {
+    const key = (await axios.get('/api/map/key')).data
+    console.log(this.state.loading)
+    this.setState({apiKey: key})
+    this.setState({loading: false})
+  }
 
-      {props.isLoggedIn && (
-        <Marker
-          latitude={+props.user.latitude}
-          longitude={+props.user.longitude}
-        >
-          <strong>
-            <i className="bi bi-house-door-fill text-danger"></i>
-          </strong>
-        </Marker>
-      )}
-    </ReactMapGL>
-  )
+  render() {
+    return (
+      <>
+        {this.state.loading === true ? (
+          <div>Loading...</div>
+        ) : (
+          <ReactMapGL
+            {...this.state.viewport}
+            mapboxApiAccessToken={this.state.apiKey}
+            mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
+            onViewportChange={(viewport) => {
+              this.setState({viewport: viewport})
+            }}
+          >
+            {this.props.itemsArray &&
+              this.props.itemsArray.length > 0 &&
+              this.props.itemsArray.map((item) => {
+                return (
+                  <Marker
+                    key={item.id}
+                    latitude={+item.user.latitude}
+                    longitude={+item.user.longitude}
+                  >
+                    <button
+                      onClick={(evt) => {
+                        evt.preventDefault()
+                        this.setState({selectedItem: item})
+                      }}
+                    >
+                      <strong>
+                        <i className="bi bi-pin-fill text-success"></i>
+                      </strong>
+                    </button>
+                  </Marker>
+                )
+              })}
+            {this.state.selectedItem ? (
+              <Popup
+                latitude={+this.state.selectedItem.user.latitude}
+                longitude={+this.state.selectedItem.user.longitude}
+                onClose={() => {
+                  this.setState({selectedItem: null})
+                }}
+              >
+                {/* just a test route for now */}
+                <a href="https://google.com" className="text-primary">
+                  {this.state.selectedItem.itemListName}
+                </a>
+              </Popup>
+            ) : null}
+
+            {this.props.isLoggedIn && (
+              <Marker
+                latitude={+this.props.user.latitude}
+                longitude={+this.props.user.longitude}
+              >
+                <strong>
+                  <i className="bi bi-house-door-fill text-danger"></i>
+                </strong>
+              </Marker>
+            )}
+          </ReactMapGL>
+        )}
+      </>
+    )
+  }
 }
 
 const mapState = (state) => {

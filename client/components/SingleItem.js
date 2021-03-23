@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 // Render functional
-const singleItem = (props) => (
+const SingleItem = (props) => (
   <div>
     <Link
       to={{pathname: '/singleview', item: props.item}}
@@ -47,7 +47,7 @@ const singleItem = (props) => (
   </div>
 )
 
-export default singleItem
+export default SingleItem
 
 // Render Class
 // class Placeholder extends React.Component{
@@ -70,7 +70,7 @@ export default singleItem
 
 // export default connect()()
 
-singleItem.propTypes = {
+SingleItem.propTypes = {
   itemListName: PropTypes.string,
   itemType: PropTypes.string,
 }
