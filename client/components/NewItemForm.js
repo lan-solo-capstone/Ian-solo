@@ -49,8 +49,13 @@ class NewItemForm extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-12">
-            <form role="form" id="wholeform" onSubmit={this.handleSubmit}>
+          <div className="col-md-12 p-0">
+            <form
+              role="form"
+              id="wholeform"
+              onSubmit={this.handleSubmit}
+              style={{width: '90vw'}}
+            >
               <div className="row">
                 <div>
                   <label className="mr-sm-2" htmlFor="itemType">

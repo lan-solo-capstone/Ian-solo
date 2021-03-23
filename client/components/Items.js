@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllItems} from '../store/items'
+import {updateNavbar} from '../store/navbar'
 import SingleItem from './SingleItem'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './MobileFooter'
@@ -16,7 +17,9 @@ class Items extends React.Component {
     this.props.fetchAllItems()
   }
 
-  createEventListener() {}
+  componentWillUnmount() {
+    this.props.updateNavbar(null, {})
+  }
 
   render() {
     const items = this.props.items
@@ -29,12 +32,13 @@ class Items extends React.Component {
         <span className="visually-hidden">Loading...</span>
       </div>
     ) : (
-      <div className="mb-5 container container-lg container-x">
+      <div className="mb-5 container container-lg container-xxl">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
           All Current offers
         </h3>
         {console.log(this.props.items)}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {this.props.updateNavbar('listall', items)}
           {items.map((item) => (
             <SingleItem key={item.id} item={item} />
           ))}
@@ -52,8 +56,8 @@ class Items extends React.Component {
               <p className="m-0">View on map</p>
               <i
                 className="bi bi-compass"
+                fontSize="1.4rem"
                 style={{
-                  'font-size': '1.4rem',
                   color: 'white',
                 }}
               />
@@ -70,8 +74,8 @@ class Items extends React.Component {
                 <i
                   className="bi bi-chevron-compact-up"
                   id="chevron-rotate"
+                  fontSize="2rem"
                   style={{
-                    'font-size': '2rem',
                     color: 'white',
                   }}
                 />
@@ -102,6 +106,9 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchAllItems: () => {
     dispatch(fetchAllItems())
+  },
+  updateNavbar: (page, items) => {
+    dispatch(updateNavbar(page, items))
   },
 })
 

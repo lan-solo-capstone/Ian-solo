@@ -59,7 +59,7 @@ export const auth = (
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/useraccount')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }

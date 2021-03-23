@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
         'itemListName',
         'description',
         'itemType',
+        'status',
         'dateListed',
       ],
       include: [
