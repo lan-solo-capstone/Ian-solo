@@ -14,6 +14,4 @@ firebase.initializeApp(firebaseConfig)
 
 const storage = firebase.storage()
 
-firebase.analytics()
-
 export {storage, firebase as default}
