@@ -1,8 +1,6 @@
 /* eslint-disable no-warning-comments */
 // this file contains authentication middlware to secure api routes
 
-const User = require('../db/models/user')
-
 function ensureAdmin(req, res, next) {
   console.log('hello', 'in ensureAdmin req.user', req.user)
   console.log('hello', 'hello', 'in ensureAdmin req.user.admin', req.user.admin)
