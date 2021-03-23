@@ -20,7 +20,9 @@ function ensureAdmin(req, res, next) {
 function ensureLogin(req, res, next) {
   const id = req.user.id
   const passportId = req.session.passport.user
+
   console.log('hello', 'in ensureLogin', req.user, req.session.passport)
+
   if (id && id === passportId) {
     next()
   } else {
