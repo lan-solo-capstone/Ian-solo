@@ -6,7 +6,7 @@
 export {default as MapExp} from './MapExp'
 export {default as MapAllItems} from './MapAllItems'
 export {default as MapSingleItem} from './MapSingleItem'
-export {default as Navbar} from './Nav-bar123'
+export {default as Navbar} from './Navbar'
 export {default as UserHome} from './UserHome'
 export {Login, Signup} from './AuthForm'
 export {default as Items} from './Items'
