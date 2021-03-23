@@ -3,6 +3,7 @@ import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 /* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
@@ -60,6 +61,7 @@ class MapAllItems extends React.Component {
                         evt.preventDefault()
                         this.setState({selectedItem: item})
                       }}
+                      type="button"
                     >
                       <strong>
                         <i className="bi bi-pin-fill text-success"></i>
@@ -76,10 +78,12 @@ class MapAllItems extends React.Component {
                   this.setState({selectedItem: null})
                 }}
               >
-                {/* just a test route for now */}
-                <a href="https://google.com" className="text-primary">
+                <Link
+                  to={{pathname: '/singleview', item: this.state.selectedItem}}
+                  className=""
+                >
                   {this.state.selectedItem.itemListName}
-                </a>
+                </Link>
               </Popup>
             ) : null}
 
