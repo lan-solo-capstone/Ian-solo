@@ -6,7 +6,6 @@ module.exports = router
 // mounted on /api/users/post
 
 // TODO: only users should be allowed to do this
-// TODO: add photos
 
 // TODO: look into multer:  YF 03.21.21  Currently using express-fileupload middleware
 
@@ -23,7 +22,7 @@ router.post('/', async (req, res, next) => {
       // dateListed,
     } = req.body
 
-    //create new item data in item table -- working as of 3.20.21
+    //create new item data in item table
     const newItem = await Item.create({
       itemListName,
       description,
@@ -33,7 +32,8 @@ router.post('/', async (req, res, next) => {
       userId,
     })
 
-    // imageFiles upload to DB  -- working as of 3.20.21
+    // yf 03.22.21 imageFiles upload to DB
+
     if (req.files) {
       //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
       // eslint-disable-next-line guard-for-in
@@ -42,18 +42,10 @@ router.post('/', async (req, res, next) => {
           photoTitle: req.files[key].name,
           photoFile: req.files[key].data,
         })
+        //yf 03.22.21  associating pic to newItem
         await itemPic.setItem(newItem)
       }
     }
-
-    /**  THIS STILL NEEDS TO WORK - CURRENTLY NO ITEM AND ITEMPHOTO ASSOCIATION 03/21/21 */
-    // using magic method to associate the photo with the item
-    // createItem and setItem are not valid methods
-
-    console.log(Item.prototype)
-    console.log(ItemPhoto.prototype)
-
-    //await newItem.addItemPhoto()
 
     res.status(201).send(newItem)
   } catch (err) {
