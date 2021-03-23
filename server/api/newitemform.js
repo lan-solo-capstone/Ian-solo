@@ -36,17 +36,23 @@ router.post('/', async (req, res, next) => {
     // imageFiles upload to DB  -- working as of 3.20.21
     if (req.files) {
       //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
+      // eslint-disable-next-line guard-for-in
       for (let key in req.files) {
-        await ItemPhoto.create({
+        const itemPic = await ItemPhoto.create({
           photoTitle: req.files[key].name,
           photoFile: req.files[key].data,
         })
+        await itemPic.setItem(newItem)
       }
     }
 
     /**  THIS STILL NEEDS TO WORK - CURRENTLY NO ITEM AND ITEMPHOTO ASSOCIATION 03/21/21 */
     // using magic method to associate the photo with the item
     // createItem and setItem are not valid methods
+
+    console.log(Item.prototype)
+    console.log(ItemPhoto.prototype)
+
     //await newItem.addItemPhoto()
 
     res.status(201).send(newItem)
