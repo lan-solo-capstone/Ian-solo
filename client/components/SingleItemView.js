@@ -122,8 +122,8 @@ class SingleItemView extends React.Component {
             <p className="m-0">View on map</p>
             <i
               className="bi bi-compass"
+              fontSize="1.4rem"
               style={{
-                'font-size': '1.4rem',
                 color: 'white',
               }}
             />
@@ -140,8 +140,8 @@ class SingleItemView extends React.Component {
                 <i
                   className="bi bi-chevron-compact-up"
                   id="chevron-rotate"
+                  fontSize="2rem"
                   style={{
-                    'font-size': '2rem',
                     color: 'white',
                   }}
                 />

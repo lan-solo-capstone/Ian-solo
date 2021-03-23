@@ -45,16 +45,22 @@ class UserHome extends React.Component {
           <div className="col bg-secondary rounded">
             <h4>Open Items</h4>
             <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
-              {items.map((item) => (
-                <SingleItem key={item.id} item={item} />
-              ))}
+              {items
+                .filter((item) => item.status === 'Open')
+                .map((item) => (
+                  <SingleItem key={item.id} item={item} />
+                ))}
             </div>
           </div>
           <div className="col bg-secondary rounded">
             <h4>Closed Items</h4>
             <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
               <div className="col">
-                something much longer to look at and see if it takes more space
+                {items
+                  .filter((item) => item.status === 'Fulfilled')
+                  .map((item) => (
+                    <SingleItem key={item.id} item={item} />
+                  ))}
               </div>
               <div className="col">def</div>
               <div className="col">abc</div>

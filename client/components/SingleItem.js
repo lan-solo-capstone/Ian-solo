@@ -10,7 +10,7 @@ const SingleItem = (props) => (
       to={{pathname: '/singleview', item: props.item}}
       className="text-decoration-none text-secondary"
     >
-      <div className="card mb-3" style={{'max-width': '600px'}}>
+      <div className="card mb-3" maxwidth="800px">
         <div className="row g-0">
           <div className="col-md-4 d-flex align-items-center">
             <img

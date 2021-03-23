@@ -49,6 +49,7 @@ router.get('/:userId', async (req, res, next) => {
             'itemListName',
             'description',
             'itemType',
+            'status',
             'dateListed',
           ],
         },
