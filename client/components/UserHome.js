@@ -16,13 +16,17 @@ class UserHome extends React.Component {
 
   render() {
     const {user} = this.props
-    const {items} = this.props?.useritems
+    let {items} = this.props?.useritems
+
+    // Attach the user to each item
+    items = items.map((item) => {
+      item.user = user
+      return item
+    })
 
     return (
       <div className="containter-sm container-xl mt-3 mb-4">
-        {this.props.useritems.loading
-          ? null
-          : console.log(this.props.useritems.items)}
+        {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details:
         <ul className="list-group">
@@ -41,25 +45,29 @@ class UserHome extends React.Component {
             {user.latitude}, {user.longitude}
           </li>
         </ul>
-        <div className="row gx-4 text-light mt-2">
-          <div className="col bg-secondary rounded">
-            <h4>Open Items</h4>
-            <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
-              {items
-                .filter((item) => item.status === 'Open')
-                .map((item) => (
-                  <SingleItem key={item.id} item={item} />
-                ))}
+        <div className="row gx-2 row-cols-2 text-secondary mt-3">
+          <div className="col text-light">
+            <div className="bg-secondary border rounded px-2">
+              <h4>Open Items</h4>
+              <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
+                {items
+                  .filter((item) => item.status === 'Open')
+                  .map((item) => (
+                    <SingleItem key={item.id} item={item} />
+                  ))}
+              </div>
             </div>
           </div>
-          <div className="col bg-secondary rounded">
-            <h4>Closed Items</h4>
-            <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
-              {items
-                .filter((item) => item.status === 'Closed')
-                .map((item) => (
-                  <SingleItem key={item.id} item={item} />
-                ))}
+          <div className="col text-light">
+            <div className="bg-secondary border rounded px-2">
+              <h4>Closed Items</h4>
+              <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
+                {items
+                  .filter((item) => item.status === 'Closed')
+                  .map((item) => (
+                    <SingleItem key={item.id} item={item} />
+                  ))}
+              </div>
             </div>
           </div>
         </div>

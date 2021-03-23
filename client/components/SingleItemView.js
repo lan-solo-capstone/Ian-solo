@@ -18,6 +18,8 @@ class SingleItemView extends React.Component {
   }
 
   render() {
+    let {item} = this.props.location
+
     return (
       <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
         <div
@@ -25,11 +27,9 @@ class SingleItemView extends React.Component {
           style={{height: '100%'}}
         >
           <div>
-            <h5 className="text-center mb-1">
-              {this.props.location.item.itemListName}
-            </h5>
+            <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
-              Submitted by: {this.props.location.item.user.firstName}
+              Submitted by: {item.user.firstName}
             </h6>
           </div>
 
@@ -150,11 +150,8 @@ class SingleItemView extends React.Component {
                 className="bg-secondary rounded-top"
                 style={{height: '95vh'}}
               >
-                {this.props.updateNavbar(
-                  'singleview',
-                  this.props.location.item
-                )}
-                <MapSingleItem item={this.props.location.item} />
+                {this.props.updateNavbar('singleview', item)}
+                <MapSingleItem item={item} />
               </div>
             </div>
           </div>
@@ -165,10 +162,7 @@ class SingleItemView extends React.Component {
               className="bg-secondary text-light py-3 px-4 mx-auto fs-6"
               style={{width: '80%'}}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              faucibus id dolor et posuere. Cras at egestas felis. Morbi
-              scelerisque dapibus purus at accumsan. Aliquam ligula quam,
-              consectetur sit amet tristique in, condimentum eu eros.
+              {item.description}
             </p>
           </div>
         </div>

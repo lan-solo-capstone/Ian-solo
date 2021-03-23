@@ -27,15 +27,16 @@ const SingleItem = (props) => (
               {props.item.itemType === 'Offer' ? (
                 <div>
                   <p className="card-text text-success my-1">Offer</p>
+                  <p className="card-text my-1">{props.item.status}</p>
                   <p>Location</p>
                 </div>
               ) : (
                 <div>
                   <p className="card-text text-danger my-1">Seeking</p>
+                  <p className="card-text my-1">{props.item.status}</p>
                   <p>Location</p>
                 </div>
               )}
-              {/* <p className="card-text">Location</p> */}
               <p className="card-text">
                 <small className="text-muted">An hour ago</small>
               </p>
