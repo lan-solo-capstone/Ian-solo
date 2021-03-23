@@ -34,7 +34,7 @@ class MapSingleItem extends React.Component {
     return (
       <>
         {this.state.loading === true ? (
-          <div>true</div>
+          <div>Loading...</div>
         ) : (
           <ReactMapGL
             {...this.state.viewport}
