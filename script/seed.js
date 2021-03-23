@@ -150,7 +150,7 @@ const items = [
     description: 'ISO of cute puppy - prefer a pug',
     itemType: 'Seeking',
     itemCondition: 'New',
-    status: 'Open',
+    status: 'Closed',
     userId: 4,
   },
 ]

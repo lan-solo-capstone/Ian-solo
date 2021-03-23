@@ -55,15 +55,11 @@ class UserHome extends React.Component {
           <div className="col bg-secondary rounded">
             <h4>Closed Items</h4>
             <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
-              <div className="col">
-                {items
-                  .filter((item) => item.status === 'Fulfilled')
-                  .map((item) => (
-                    <SingleItem key={item.id} item={item} />
-                  ))}
-              </div>
-              <div className="col">def</div>
-              <div className="col">abc</div>
+              {items
+                .filter((item) => item.status === 'Closed')
+                .map((item) => (
+                  <SingleItem key={item.id} item={item} />
+                ))}
             </div>
           </div>
         </div>
