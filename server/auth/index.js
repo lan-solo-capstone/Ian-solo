@@ -34,16 +34,20 @@ router.post('/signup', async (req, res, next) => {
     )
     const data = (
       await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?types=address&limit=1&access_token=${process.env.MAPBOX_PK}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?bbox=-74.25909,40.477399,-73.7008391836855,40.917577&types=address&limit=1&access_token=${process.env.MAPBOX_PK}`
       )
     ).data
-    if (data && data.features[0] && data.features[0].center) {
+
+    if (
+      data &&
+      data.features[0] &&
+      data.features[0].relevance > 0.9 &&
+      data.features[0].center
+    ) {
       formData.latitude = data.features[0].center[1]
       formData.longitude = data.features[0].center[0]
     } else {
-      console.log(
-        "ERROR: Can't resolve geoData for address, defaulting to NY area"
-      )
+      console.error("ERROR: Can't resolve address")
       formData.latitude = 40.73061
       formData.longitude = -73.935242
     }
