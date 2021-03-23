@@ -151,7 +151,7 @@ const items = [
     itemType: 'Seeking',
     itemCondition: 'New',
     status: 'Closed',
-    userId: 4,
+    userId: 1,
   },
 ]
 
