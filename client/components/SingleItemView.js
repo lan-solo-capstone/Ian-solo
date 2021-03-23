@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import MapSingleItem from './MapSingleItem'
-import MobileFooter from './mobile-footer'
+import MobileFooter from './MobileFooter'
 
 // Render functional
 const SingleItemView = (props) => {
