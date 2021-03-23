@@ -74,6 +74,7 @@ class MapAllItems extends React.Component {
               <Popup
                 latitude={+this.state.selectedItem.user.latitude}
                 longitude={+this.state.selectedItem.user.longitude}
+                closeOnClick={false}
                 onClose={() => {
                   this.setState({selectedItem: null})
                 }}
