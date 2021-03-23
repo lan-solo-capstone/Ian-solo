@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
-
+const {ensureAdmin, ensureLogin} = require('./middleware')
 module.exports = router
 
 // /api/items
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // api/items POST a new item
-router.post('/', async (req, res, next) => {
+router.post('/', ensureLogin, async (req, res, next) => {
   try {
     const {
       itemListName,

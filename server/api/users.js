@@ -1,6 +1,8 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {ensureAdmin, ensureLogin} = require('./middleware')
+
 module.exports = router
 
 // all routes here are mounted on /api/users
@@ -8,7 +10,7 @@ module.exports = router
 // GET all users
 // mounted on /api/users
 // TODO: limit access to admins only
-router.get('/', async (req, res, next) => {
+router.get('/', ensureAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
