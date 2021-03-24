@@ -39,6 +39,7 @@ class NewItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+
     this.props.addNewItem(this.state)
   }
 

@@ -11,7 +11,7 @@ import SearchBox from './SearchBox'
 const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
   <>
     {console.log(currentPage)}
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div className="container-fluid">
         <Link to="/items" className="text-decoration-none text-dark m-0">
           <span className="navbar-brand">
@@ -95,7 +95,10 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
                     ></button>
                   </div>
                   <div className="modal-body p-0">
-                    <div style={{width: '100%', height: '85vh'}}>
+                    <div
+                      id="mapContainer"
+                      style={{width: '100%', height: '85vh'}}
+                    >
                       {currentPage.page === 'listall' ? (
                         <MapAllItems itemsArray={currentPage.items} />
                       ) : null}

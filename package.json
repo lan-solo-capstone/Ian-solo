@@ -21,7 +21,7 @@
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
-    "dev": "concurrently --kill-others \"npm run build-client-watch\" \"npm run start-server\""
+    "dev": "concurrently --kill-others \"NODE_ENV='development' npm run build-client-watch\" \"NODE_ENV='development' npm run start-server\""
   },
   "husky": {
     "hooks": {
@@ -50,6 +50,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.15.1",
+    "firebase": "^8.3.1",
     "history": "^4.9.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",

@@ -14,14 +14,17 @@ class MapSingleItem extends React.Component {
         longitude: this.props.item
           ? +this.props.item.user.longitude
           : -73.935242,
-        width: this.props.width ? this.props.width : '100%',
-        height: this.props.height ? this.props.height : '100%',
+        width: '100%',
+        height: '100%',
         zoom: 10,
       },
       loading: true,
       apiKey: '',
       selectedItem: this.props.item,
     }
+    window.addEventListener('resize', (e) => {
+      this.resizer()
+    })
   }
 
   async componentDidMount() {
@@ -29,6 +32,20 @@ class MapSingleItem extends React.Component {
     console.log(this.state.loading)
     this.setState({apiKey: key})
     this.setState({loading: false})
+  }
+
+  resizer(e) {
+    const width = document.getElementById('mapContainer').offsetWidth
+    const height = document.getElementById('mapContainer').offsetHeight
+
+    this.setState({
+      ...this.state,
+      viewport: {
+        ...this.state.viewport,
+        width: `${width}px`,
+        height: `${height}px`,
+      },
+    })
   }
 
   render() {

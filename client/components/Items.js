@@ -55,9 +55,9 @@ class Items extends React.Component {
               <p className="m-0">View on map</p>
               <i
                 className="bi bi-compass"
-                fontSize="1.4rem"
                 style={{
                   color: 'white',
+                  fontSize: '1.4rem',
                 }}
               />
             </a>
@@ -73,14 +73,15 @@ class Items extends React.Component {
                 <i
                   className="bi bi-chevron-compact-up"
                   id="chevron-rotate"
-                  fontSize="2rem"
                   style={{
                     color: 'white',
+                    fontSize: '2rem',
                   }}
                 />
               </a>
               <div
                 className="bg-secondary rounded-top text-light"
+                id="mapContainer"
                 style={{height: '95vh'}}
               >
                 <MapAllItems itemsArray={items} />

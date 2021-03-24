@@ -55,9 +55,12 @@ router.post(
         itemCondition,
         deliveryOption,
         userId,
+        imageArr,
         // status,
         // dateListed,
       } = req.body
+
+      console.log('req.body.image', imageArr)
 
       //create new item data in item table -- working as of 3.20.21
       const newItem = await Item.create({
@@ -69,21 +72,19 @@ router.post(
         userId,
       })
 
-      // imageFiles upload to DB  -- working as of 3.20.21
-      if (req.files) {
-        //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
-        for (let key in req.files) {
-          await ItemPhoto.create({
-            photoTitle: req.files[key].name,
-            photoFile: req.files[key].data,
-          })
-        }
-      }
+      console.log(newItem)
 
-      /**  THIS STILL NEEDS TO WORK - CURRENTLY NO ITEM AND ITEMPHOTO ASSOCIATION 03/21/21 */
-      // using magic method to associate the photo with the item
-      // createItem and setItem are not valid methods
-      //await newItem.addItemPhoto()
+      imageArr.forEach(async (element) => {
+        console.log(element)
+
+        const itemPhotos = await ItemPhoto.create({
+          photoTitle: element.photoTitle,
+          cloudREF: element.cloudRef,
+          downloadURL: element.downloadUrl,
+        })
+
+        await itemPhotos.setItem(newItem)
+      })
 
       res.status(201).send(newItem)
     } catch (err) {
