@@ -16,7 +16,7 @@ export const postNewItem = (item) => {
       //append text data from the form
       const formData = new FormData()
 
-      const fileInfo = {
+      let fileInfo = {
         itemType: item.itemType,
         itemListName: item.itemListName,
         description: item.description,
@@ -41,7 +41,7 @@ export const postNewItem = (item) => {
           reader.onloadend = () => {
             // log to console
             // logs data:<type>;base64,wL2dvYWwgbW9yZ...
-            console.log('reader.result', reader.result)
+            // console.log('reader.result', reader.result)
 
             fileInfo.imageArr.push({
               imageName: `${item.uploadPhoto[i].name}${Math.floor(

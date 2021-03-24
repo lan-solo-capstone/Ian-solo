@@ -62,7 +62,7 @@ router.post(
       } = req.body
 
       console.log('req.body', req.body)
-      console.log('req.body.image', req.body.imageArr[0])
+      console.log('req.body.image', imageArr)
 
       //create new item data in item table -- working as of 3.20.21
       const newItem = await Item.create({
