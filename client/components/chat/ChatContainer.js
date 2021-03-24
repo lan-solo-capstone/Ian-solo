@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import Sidebar from './Sidebar'
-import Navbar from './Navbar'
 import MessageList from './MessageList'
-import {fetchMessages} from '../store'
+import {fetchMessages} from '../../store/chat'
 
 export class Main extends Component {
   componentDidMount() {
@@ -14,8 +12,6 @@ export class Main extends Component {
   render() {
     return (
       <div>
-        <Sidebar />
-        <Navbar />
         <main>
           <Switch>
             <Route path="/chat/:chatId" component={MessageList} />

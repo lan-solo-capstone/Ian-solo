@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
+import {ChatContainer} from './index'
 
 // Render functional
 // const singleView = (props) => {
@@ -119,6 +120,9 @@ class SingleItemView extends React.Component {
             id="mapCollapseButton"
             style={{width: '150px', height: '30px'}}
           >
+            <Link to="/chat" component={ChatContainer}>
+              <p>Reply to this post</p>
+            </Link>
             <p className="m-0">View on map</p>
             <i
               className="bi bi-compass"

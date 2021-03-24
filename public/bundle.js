@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _store_navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/navbar */ "./client/store/navbar.js");
 /* harmony import */ var _MapSingleItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MapSingleItem */ "./client/components/MapSingleItem.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./index */ "./client/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1816,6 +1817,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1948,7 +1950,10 @@ function (_React$Component) {
           width: '150px',
           height: '30px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: "/chat",
+        component: _index__WEBPACK_IMPORTED_MODULE_6__["ChatContainer"]
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Reply to this post")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "m-0"
       }, "View on map"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "bi bi-compass",
@@ -2314,6 +2319,86 @@ var UserView = function UserView(props) {
 
 /***/ }),
 
+/***/ "./client/components/chat/ChatContainer.js":
+/*!*************************************************!*\
+  !*** ./client/components/chat/ChatContainer.js ***!
+  \*************************************************/
+/*! exports provided: Main, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Main", function() { return Main; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _MessageList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MessageList */ "./client/components/chat/MessageList.js");
+/* harmony import */ var _store_chat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/chat */ "./client/store/chat.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var Main =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Main, _Component);
+
+  function Main() {
+    _classCallCheck(this, Main);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Main).apply(this, arguments));
+  }
+
+  _createClass(Main, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.loadMessages();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/chat/:chatId",
+        component: _MessageList__WEBPACK_IMPORTED_MODULE_3__["default"]
+      }))));
+    }
+  }]);
+
+  return Main;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    loadMessages: function loadMessages() {
+      return dispatch(Object(_store_chat__WEBPACK_IMPORTED_MODULE_4__["fetchMessages"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(Main));
+
+/***/ }),
+
 /***/ "./client/components/chat/Message.js":
 /*!*******************************************!*\
   !*** ./client/components/chat/Message.js ***!
@@ -2545,7 +2630,7 @@ function (_Component) {
 /*!************************************!*\
   !*** ./client/components/index.js ***!
   \************************************/
-/*! exports provided: MapAllItems, MapSingleItem, Navbar, UserHome, Login, Signup, Items, temp, NewItemForm, SingleItemView, AllUsers, UserView, User, EditUserForm, Message, MessageList, NewMessageEntry */
+/*! exports provided: MapAllItems, MapSingleItem, Navbar, UserHome, Login, Signup, Items, temp, NewItemForm, SingleItemView, AllUsers, UserView, User, EditUserForm, Message, MessageList, NewMessageEntry, ChatContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2600,11 +2685,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./chat/NewMessageEntry */ "./client/components/chat/NewMessageEntry.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NewMessageEntry", function() { return _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
+/* harmony import */ var _chat_ChatContainer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./chat/ChatContainer */ "./client/components/chat/ChatContainer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChatContainer", function() { return _chat_ChatContainer__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
+
 
 
 
@@ -2965,6 +3054,168 @@ socket.on('connect', function () {
   console.log('Connected!');
 });
 /* harmony default export */ __webpack_exports__["default"] = (socket);
+
+/***/ }),
+
+/***/ "./client/store/chat.js":
+/*!******************************!*\
+  !*** ./client/store/chat.js ***!
+  \******************************/
+/*! exports provided: gotNewMessage, fetchMessages, sendMessage, chatReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotNewMessage", function() { return gotNewMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendMessage", function() { return sendMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chatReducer", function() { return chatReducer; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../socket */ "./client/socket.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+ // Action Types
+
+var GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER';
+var GOT_NEW_MESSAGE = 'GOT_NEW_MESSAGE'; // const USER_SET = 'USER_SET'
+// Action Creators
+
+var gotMessagesFromServer = function gotMessagesFromServer(messages) {
+  return {
+    type: GOT_MESSAGES_FROM_SERVER,
+    messages: messages
+  };
+};
+
+var gotNewMessage = function gotNewMessage(message) {
+  return {
+    type: GOT_NEW_MESSAGE,
+    message: message
+  };
+}; // export const userSet = (userName) => ({
+//   type: USER_SET,
+//   payload: userName,
+// })
+// Thunk Creator
+
+var fetchMessages = function fetchMessages() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(dispatch) {
+        var _ref2, messages;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/messages');
+
+              case 2:
+                _ref2 = _context.sent;
+                messages = _ref2.data;
+                dispatch(gotMessagesFromServer(messages));
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+var sendMessage = function sendMessage(message) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch
+      /*getState*/
+      ) {
+        var _ref4, newMessage;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/messages', message);
+
+              case 2:
+                _ref4 = _context2.sent;
+                newMessage = _ref4.data;
+                dispatch(gotNewMessage(newMessage));
+                _socket__WEBPACK_IMPORTED_MODULE_1__["default"].emit('new-message', newMessage);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
+}; // Reducer
+
+var initialState = {
+  messages: [],
+  user: 'Cody'
+};
+var chatReducer = function chatReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  // return mapTypeToCallback[action.type](state, action)
+  switch (action.type) {
+    case GOT_MESSAGES_FROM_SERVER:
+      return _objectSpread({}, state, {
+        messages: action.messages
+      });
+
+    case GOT_NEW_MESSAGE:
+      return _objectSpread({}, state, {
+        messages: [].concat(_toConsumableArray(state.messages), [action.message]) // case USER_SET:
+        //   return {...state, user: action.payload}
+
+      });
+
+    default:
+      return state;
+  }
+};
 
 /***/ }),
 

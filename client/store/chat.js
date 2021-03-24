@@ -1,5 +1,5 @@
 import axios from 'axios'
-import socket from './socket'
+import socket from '../socket'
 
 // Action Types
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER'
