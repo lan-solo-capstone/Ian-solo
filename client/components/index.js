@@ -7,6 +7,7 @@
 export {default as MapAllItems} from './MapAllItems'
 export {default as MapSingleItem} from './MapSingleItem'
 export {default as Navbar} from './Navbar'
+export {default as SearchBox} from './SearchBox'
 export {default as UserHome} from './UserHome'
 export {Login, Signup} from './AuthForm'
 export {default as Items} from './Items'
