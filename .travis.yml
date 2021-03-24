@@ -1,7 +1,7 @@
 language: node_js
-branches:
-  only:
-    - main
+# branches:
+#   only:
+#     - main
 node_js:
   - 14
 services:
@@ -25,3 +25,5 @@ deploy:
   api-key:
     secure: KM6IWFhTvtwd/nGJHetyv/s8FE0PBU1p8QpMDXs5LJmDbKLXcIBYeTPfAtMTlclqWmQXm6Ex56hwfywLiRQ3iUYeOkR1tewKbjvXtavatdlPT8weFJKbkSXgPtYhjztO/Msju8pk8ZRJHPhQTDVydLrn7Kc1d/T0Qs+lrt/2hNwm/d9o9ZLKzpdKB5GZHR6jEK9QN0GzUUI/mzkfkNgITfx/pKmvd+eKZB49waPwWvtkUHTOye0DNrOsU01Lf1otc/ymc2F+viP2DVbnUEQBvkBzQE+I2pIr7yh4mXzlbymS+F8kIY6twVcHZhW50dc/Myup9pk42ArA7F1naZFDbe2V87uU6KhMsqT1HSCom68R2m/IGEvwFJggc9ManXzA3Qa4bGJEYP7SenWxiXV4+bXpG+XCiaZ4+sWdidktcWE+hiqt1g4JbBOc2hZ0zQW5Na0lmPCVhQseH8cz+jqYq+YaklpQQCRmpKhYtucNUxzdNRxJtSwFidWDdyqmiYYfkA7G45b4SkYzYqm6Aul+4EpbLHsxowA9PFkKfr6FXZZDmlo8+mgKTGBtxKbUQSCjK25kuOb/5RL6YK26lAYd9MoBeegRq/McQI48i9fUElMZttgpoVtWBNMp5ENKXda25lapRsmMtolwbQnElMsXmU6HyGiaQ007PqLujf7mWHA=
   app: free-share-capstone
+  on:
+    branch: main
