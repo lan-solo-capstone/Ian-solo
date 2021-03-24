@@ -20,6 +20,7 @@ class MapSingleItem extends React.Component {
       },
       loading: true,
       apiKey: '',
+      selectedItem: null,
     }
   }
 
@@ -49,9 +50,11 @@ class MapSingleItem extends React.Component {
                 latitude={+this.props.item.user.latitude}
                 longitude={+this.props.item.user.longitude}
               >
-                <strong>
-                  <i className="bi bi-pin-fill text-success"></i>
-                </strong>
+                {this.props.item.itemType === 'Offer' ? (
+                  <i className="h1 bi bi-pin-fill text-success"></i>
+                ) : (
+                  <i className="h1 bi bi-pin-fill text-danger"></i>
+                )}
               </Marker>
             )}
             {this.props.isLoggedIn && (
@@ -59,9 +62,7 @@ class MapSingleItem extends React.Component {
                 latitude={+this.props.user.latitude}
                 longitude={+this.props.user.longitude}
               >
-                <strong>
-                  <i className="bi bi-house-door-fill text-danger"></i>
-                </strong>
+                <i className="h1 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
           </ReactMapGL>
