@@ -53,8 +53,8 @@ class MapAllItems extends React.Component {
                 return (
                   <Marker
                     key={item.id}
-                    latitude={+item.user.latitude}
-                    longitude={+item.user.longitude}
+                    latitude={+item.user.latitude + Math.random() / 2500}
+                    longitude={+item.user.longitude + Math.random() / 2500}
                   >
                     <button
                       className="btn btn-link text-center text-decoration-none"
@@ -65,9 +65,9 @@ class MapAllItems extends React.Component {
                       type="button"
                     >
                       {item.itemType === 'Offer' ? (
-                        <i className="h1 bi bi-pin-fill text-success"></i>
+                        <i className="h2 bi bi-pin-fill text-success"></i>
                       ) : (
-                        <i className="h1 bi bi-pin-fill text-danger"></i>
+                        <i className="h2 bi bi-pin-fill text-danger"></i>
                       )}
                     </button>
                   </Marker>
@@ -108,7 +108,7 @@ class MapAllItems extends React.Component {
                 latitude={+this.props.user.latitude}
                 longitude={+this.props.user.longitude}
               >
-                <i className="h1 bi bi-house-door-fill text-primary"></i>
+                <i className="h2 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
           </ReactMapGL>
