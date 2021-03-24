@@ -29,8 +29,9 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
         >
           <span className="navbar-toggler-icon" />
         </button>
+
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
@@ -63,7 +64,7 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             {currentPage.page ? (
               <button
                 type="button"
-                className="btn btn-primary d-none d-md-block"
+                className="btn btn-primary d-none d-md-block "
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -107,6 +108,21 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             </div>
             {/* Ends modal */}
           </ul>
+          <form className="d-flex ">
+            <input
+              className="form-control me-1"
+              type="search"
+              placeholder="Keyword Search"
+              aria-label="Search"
+            ></input>
+            <button
+              className="btn btn-outline-primary"
+              role="button"
+              type="submit"
+            >
+              Go
+            </button>
+          </form>
         </div>
       </div>
       <div className="fixed-bottom d-md-none">
