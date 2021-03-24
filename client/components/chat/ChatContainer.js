@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import MessagesList from './MessageList'
+import MessageList from './MessageList'
 import {fetchMessages} from '../store'
 
 export class Main extends Component {
@@ -18,7 +18,7 @@ export class Main extends Component {
         <Navbar />
         <main>
           <Switch>
-            <Route path="/chat/:chatId" component={MessagesList} />
+            <Route path="/chat/:chatId" component={MessageList} />
             {/* <Redirect to="/channels/1" /> */}
           </Switch>
         </main>

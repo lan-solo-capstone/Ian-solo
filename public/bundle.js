@@ -2545,7 +2545,7 @@ function (_Component) {
 /*!************************************!*\
   !*** ./client/components/index.js ***!
   \************************************/
-/*! exports provided: MapAllItems, MapSingleItem, Navbar, UserHome, Login, Signup, Items, temp, NewItemForm, SingleItemView, AllUsers, UserView, User, EditUserForm, Message, MessagesList, NewMessageEntry */
+/*! exports provided: MapAllItems, MapSingleItem, Navbar, UserHome, Login, Signup, Items, temp, NewItemForm, SingleItemView, AllUsers, UserView, User, EditUserForm, Message, MessageList, NewMessageEntry */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2595,7 +2595,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return _chat_Message__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
 /* harmony import */ var _chat_MessageList__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./chat/MessageList */ "./client/components/chat/MessageList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MessagesList", function() { return _chat_MessageList__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MessageList", function() { return _chat_MessageList__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
 /* harmony import */ var _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./chat/NewMessageEntry */ "./client/components/chat/NewMessageEntry.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NewMessageEntry", function() { return _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__["default"]; });
