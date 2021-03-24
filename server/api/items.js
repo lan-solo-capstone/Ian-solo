@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
 const {ensureAdmin, ensureLogin} = require('./middleware')
-const {storage} = require('../../firebase/firebase')
 module.exports = router
 
 // /api/items
@@ -74,45 +73,30 @@ router.post(
         userId,
       })
 
+      // await ItemPhoto.create({
+      //   cloudRef: `/images/${fileName}`,
+      //   downloadUrl: url,
+      // })
+
       // imageFiles upload to DB  -- working as of 3.20.21
-      if (req.files) {
-        //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
 
-        for (let key in req.files) {
-          const fileName = key
+      // if (req.files) {
+      //   //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
 
-          console.log('req.files', req.files, 'filename', req.files[fileName])
-          /*
-          storage
-            .ref(`/images/${fileName}`)
-            .put(req.files[fileName])
-            .then((response) => {
-              try {
-                console.log(`Added file: ${fileName} to cloud`)
-                storage
-                  .ref(`/images/${fileName}`)
-                  .getDownloadURL()
-                  .then(
-                    async (url) => console.log(url)
-                    // await ItemPhoto.create({
-                    //   cloudRef: `/images/${fileName}`,
-                    //   downloadUrl: url,
-                    // })
-                  )
-              } catch (error) {
-                console.log('failed')
-              }
-            })
-*/
-          await ItemPhoto.create({
-            photoTitle: req.files[key].name,
-            photoFile: req.files[key].data,
-          })
+      //   for (let key in req.files) {
+      //     const fileName = key
 
-          //yf 03.22.21  associating pic to newItem
-          await itemPic.setItem(newItem)
-        }
-      }
+      //     console.log('req.files', req.files, 'filename', req.files[fileName])
+
+      //     await ItemPhoto.create({
+      //       photoTitle: req.files[key].name,
+      //       photoFile: req.files[key].data,
+      //     })
+
+      //     //yf 03.22.21  associating pic to newItem
+      //     await itemPic.setItem(newItem)
+      //   }
+      // }
 
       /**  THIS STILL NEEDS TO WORK - CURRENTLY NO ITEM AND ITEMPHOTO ASSOCIATION 03/21/21 */
       // using magic method to associate the photo with the item

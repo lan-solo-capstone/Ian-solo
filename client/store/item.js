@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {storage} from '../../firebase/firebase'
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 
@@ -14,7 +15,33 @@ export const postNewItem = (item) => {
   return async (dispatch) => {
     try {
       //append text data from the form
-      const formData = new FormData()
+      // const formData = new FormData()
+
+      // const imageArr = async (photos) => {
+      //   if (photos) {
+      //     let arr = []
+
+      //     for (let i = 0; i < photos.length; i++) {
+      //       // encode the file using the FileReader API
+      //       const reader = new FileReader()
+      //       reader.onloadend = () => {
+      //         arr.push({
+      // imageName: `${photos[i].name}${Math.floor(
+      //   Math.random() * 100000
+      // )}`,
+      //           fileData: reader.result,
+      //         })
+      //       }
+      //       reader.readAsDataURL(photos[i])
+      //     }
+      //     /* creating base64 data from uploaded file
+      //   {
+      //     formData.append(`${item.uploadPhoto[i].name}`, item.uploadPhoto[i])
+      //   }
+      //   */
+      //     return arr
+      //   }
+      // }
 
       let fileInfo = {
         itemType: item.itemType,
@@ -23,6 +50,33 @@ export const postNewItem = (item) => {
         itemCondition: item.itemCondition,
         userId: item.user.id,
         imageArr: [],
+      }
+
+      if (item.uploadPhoto) {
+        item.uploadPhoto.forEach((element) => {
+          const random = `/images/${element.name}${Math.floor(
+            Math.random() * 100000
+          )}`
+
+          storage
+            .ref(random)
+            .put(element)
+            .then((response) => {
+              try {
+                console.log(`Added file: ${element.name} to cloud`)
+                storage
+                  .ref(random)
+                  .getDownloadURL()
+                  .then((url) => {
+                    console.log(url)
+                    console.log(random)
+                    fileInfo.imageArr.push({cloudRef: random, downloadUrl: url})
+                  })
+              } catch (error) {
+                console.log('failed')
+              }
+            })
+        })
       }
 
       /*
@@ -34,30 +88,10 @@ export const postNewItem = (item) => {
       */
 
       //append file data from the form - if item.uploadPhoto IS NOT null
-      if (item.uploadPhoto) {
-        for (let i = 0; i < item.uploadPhoto.length; i++) {
-          // encode the file using the FileReader API
-          const reader = new FileReader()
-          reader.onloadend = () => {
-            // log to console
-            // logs data:<type>;base64,wL2dvYWwgbW9yZ...
-            // console.log('reader.result', reader.result)
 
-            fileInfo.imageArr.push({
-              imageName: `${item.uploadPhoto[i].name}${Math.floor(
-                Math.random() * 100000
-              )}`,
-              fileData: reader.result,
-            })
-          }
-          reader.readAsDataURL(item.uploadPhoto[i])
-        }
-        /* creating base64 data from uploaded file
-        {
-          formData.append(`${item.uploadPhoto[i].name}`, item.uploadPhoto[i])
-        }
-        */
-      }
+      // if (item.uploadPhoto) {
+
+      // }
 
       console.log('fileInfo', fileInfo)
 
