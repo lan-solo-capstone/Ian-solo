@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import MessagesList from './MessagesList'
+import MessagesList from './MessageList'
 import {fetchMessages} from '../store'
 
 export class Main extends Component {

@@ -2348,16 +2348,16 @@ function Message(props) {
 
 /***/ }),
 
-/***/ "./client/components/chat/MessagesList.js":
-/*!************************************************!*\
-  !*** ./client/components/chat/MessagesList.js ***!
-  \************************************************/
+/***/ "./client/components/chat/MessageList.js":
+/*!***********************************************!*\
+  !*** ./client/components/chat/MessageList.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MessagesList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MessageList; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Message */ "./client/components/chat/Message.js");
@@ -2391,24 +2391,24 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var MessagesList =
+var MessageList =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(MessagesList, _Component);
+  _inherits(MessageList, _Component);
 
-  function MessagesList() {
+  function MessageList() {
     var _this;
 
-    _classCallCheck(this, MessagesList);
+    _classCallCheck(this, MessageList);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MessagesList).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MessageList).call(this));
     _this.state = {
       messages: []
     };
     return _this;
   }
 
-  _createClass(MessagesList, [{
+  _createClass(MessageList, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator(
@@ -2463,7 +2463,7 @@ function (_Component) {
     }
   }]);
 
-  return MessagesList;
+  return MessageList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -2594,8 +2594,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chat_Message__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chat/Message */ "./client/components/chat/Message.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return _chat_Message__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _chat_MessagesList__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./chat/MessagesList */ "./client/components/chat/MessagesList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MessagesList", function() { return _chat_MessagesList__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _chat_MessageList__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./chat/MessageList */ "./client/components/chat/MessageList.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MessagesList", function() { return _chat_MessageList__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
 /* harmony import */ var _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./chat/NewMessageEntry */ "./client/components/chat/NewMessageEntry.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NewMessageEntry", function() { return _chat_NewMessageEntry__WEBPACK_IMPORTED_MODULE_15__["default"]; });

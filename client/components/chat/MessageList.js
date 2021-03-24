@@ -3,7 +3,7 @@ import Message from './Message'
 import NewMessageEntry from './NewMessageEntry'
 import axios from 'axios'
 
-export default class MessagesList extends Component {
+export default class MessageList extends Component {
   constructor() {
     super()
     this.state = {messages: []}
