@@ -2865,58 +2865,111 @@ var postNewItem = function postNewItem(item) {
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(dispatch) {
-        var formData, i, _ref2, data;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.prev = 0;
-                //append text data from the form
-                formData = new FormData();
-                formData.append('itemType', item.itemType);
-                formData.append('itemListName', item.itemListName);
-                formData.append('description', item.description);
-                formData.append('itemCondition', item.itemCondition);
-                formData.append('userId', item.user.id); //append file data from the form - if item.uploadPhoto IS NOT null
+                _context2.prev = 0;
+                return _context2.delegateYield(
+                /*#__PURE__*/
+                regeneratorRuntime.mark(function _callee() {
+                  var formData, fileInfo, _loop, i, _ref2, data;
 
-                if (item.uploadPhoto) {
-                  for (i = 0; i < item.uploadPhoto.length; i++) {
-                    formData.append("".concat(item.uploadPhoto[i].name), item.uploadPhoto[i]);
-                  }
-                } // vv test vv  below axios call is for testing purpose - visualize formData vv //
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          //append text data from the form
+                          formData = new FormData();
+                          fileInfo = {
+                            itemType: item.itemType,
+                            itemListName: item.itemListName,
+                            description: item.description,
+                            itemCondition: item.itemCondition,
+                            userId: item.user.id,
+                            imageArr: []
+                            /*
+                            formData.append('itemType', item.itemType)
+                            formData.append('itemListName', item.itemListName)
+                            formData.append('description', item.description)
+                            formData.append('itemCondition', item.itemCondition)
+                            formData.append('userId', item.user.id)
+                            */
+                            //append file data from the form - if item.uploadPhoto IS NOT null
 
+                          };
 
-                axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('https://httpbin.org/anything', formData).then(function (res) {
-                  console.log(res);
-                })["catch"](function (err) {
-                  return console.log(err);
-                }); // ^^ test ^^//
-                //sending formData to api(express)
+                          if (item.uploadPhoto) {
+                            _loop = function _loop(i) {
+                              // encode the file using the FileReader API
+                              var reader = new FileReader();
 
-                _context.next = 11;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/items", formData);
+                              reader.onloadend = function () {
+                                // log to console
+                                // logs data:<type>;base64,wL2dvYWwgbW9yZ...
+                                console.log('reader.result', reader.result);
+                                fileInfo.imageArr.push({
+                                  imageName: "".concat(item.uploadPhoto[i].name).concat(Math.floor(Math.random() * 100000)),
+                                  fileData: reader.result
+                                });
+                              };
 
-              case 11:
-                _ref2 = _context.sent;
-                data = _ref2.data;
-                dispatch(createNewItem(data));
-                _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/useraccount');
-                _context.next = 20;
+                              reader.readAsDataURL(item.uploadPhoto[i]);
+                            };
+
+                            for (i = 0; i < item.uploadPhoto.length; i++) {
+                              _loop(i);
+                            }
+                            /* creating base64 data from uploaded file
+                            {
+                              formData.append(`${item.uploadPhoto[i].name}`, item.uploadPhoto[i])
+                            }
+                            */
+
+                          }
+
+                          console.log('fileInfo', fileInfo); // vv test vv  below axios call is for testing purpose - visualize formData vv //
+
+                          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('https://httpbin.org/anything', fileInfo).then(function (res) {
+                            console.log(res);
+                          })["catch"](function (err) {
+                            return console.log(err);
+                          }); // ^^ test ^^//
+                          //sending formData to api(express)
+
+                          _context.next = 7;
+                          return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/items", fileInfo);
+
+                        case 7:
+                          _ref2 = _context.sent;
+                          data = _ref2.data;
+                          dispatch(createNewItem(data));
+                          _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/useraccount');
+
+                        case 11:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                })(), "t0", 2);
+
+              case 2:
+                _context2.next = 7;
                 break;
 
-              case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+              case 4:
+                _context2.prev = 4;
+                _context2.t1 = _context2["catch"](0);
+                console.error(_context2.t1);
 
-              case 20:
+              case 7:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 17]]);
+        }, _callee2, null, [[0, 4]]);
       }));
 
       return function (_x) {
@@ -62949,7 +63002,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

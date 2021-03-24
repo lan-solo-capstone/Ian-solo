@@ -56,9 +56,13 @@ router.post(
         itemCondition,
         deliveryOption,
         userId,
+        imageArr,
         // status,
         // dateListed,
       } = req.body
+
+      console.log('req.body', req.body)
+      console.log('req.body.image', req.body.imageArr[0])
 
       //create new item data in item table -- working as of 3.20.21
       const newItem = await Item.create({
@@ -73,11 +77,12 @@ router.post(
       // imageFiles upload to DB  -- working as of 3.20.21
       if (req.files) {
         //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
+
         for (let key in req.files) {
           const fileName = key
 
-          console.log(req.files, fileName, req.files[fileName])
-
+          console.log('req.files', req.files, 'filename', req.files[fileName])
+          /*
           storage
             .ref(`/images/${fileName}`)
             .put(req.files[fileName])
@@ -98,7 +103,7 @@ router.post(
                 console.log('failed')
               }
             })
-
+*/
           await ItemPhoto.create({
             photoTitle: req.files[key].name,
             photoFile: req.files[key].data,
