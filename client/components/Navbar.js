@@ -10,7 +10,7 @@ import MapSingleItem from './MapSingleItem'
 const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
   <>
     {console.log(currentPage)}
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div className="container-fluid">
         <Link to="/items" className="text-decoration-none text-dark m-0">
           <span className="navbar-brand">
