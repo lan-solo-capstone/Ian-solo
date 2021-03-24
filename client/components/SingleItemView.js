@@ -23,6 +23,9 @@ class SingleItemView extends React.Component {
 
     return (
       <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
+        <Link to="/chat" component={ChatContainer}>
+          <p>Reply to this post</p>
+        </Link>
         <div
           className="d-flex flex-column justify-content-evenly"
           style={{height: '100%'}}
@@ -120,9 +123,6 @@ class SingleItemView extends React.Component {
             id="mapCollapseButton"
             style={{width: '150px', height: '30px'}}
           >
-            <Link to="/chat" component={ChatContainer}>
-              <p>Reply to this post</p>
-            </Link>
             <p className="m-0">View on map</p>
             <i
               className="bi bi-compass"
