@@ -53,19 +53,22 @@ class MapAllItems extends React.Component {
                 return (
                   <Marker
                     key={item.id}
-                    latitude={+item.user.latitude}
-                    longitude={+item.user.longitude}
+                    latitude={+item.user.latitude + Math.random() / 2500}
+                    longitude={+item.user.longitude + Math.random() / 2500}
                   >
                     <button
+                      className="btn btn-link text-center text-decoration-none"
                       onClick={(evt) => {
                         evt.preventDefault()
                         this.setState({selectedItem: item})
                       }}
                       type="button"
                     >
-                      <strong>
-                        <i className="bi bi-pin-fill text-success"></i>
-                      </strong>
+                      {item.itemType === 'Offer' ? (
+                        <i className="h2 bi bi-pin-fill text-success"></i>
+                      ) : (
+                        <i className="h2 bi bi-pin-fill text-danger"></i>
+                      )}
                     </button>
                   </Marker>
                 )
@@ -79,12 +82,24 @@ class MapAllItems extends React.Component {
                   this.setState({selectedItem: null})
                 }}
               >
-                <Link
-                  to={{pathname: '/singleview', item: this.state.selectedItem}}
-                  className=""
+                <div
+                  className="text-center"
+                  style={{width: '150px', height: 'auto'}}
                 >
-                  {this.state.selectedItem.itemListName}
-                </Link>
+                  <div>
+                    <img width="100%" src="/images/croppedFsDefault.jpg" />
+                  </div>
+
+                  <Link
+                    className="text-center text-decoration-none text-primary m-0"
+                    to={{
+                      pathname: '/singleview',
+                      item: this.state.selectedItem,
+                    }}
+                  >
+                    {this.state.selectedItem.itemListName}
+                  </Link>
+                </div>
               </Popup>
             ) : null}
 
@@ -93,9 +108,7 @@ class MapAllItems extends React.Component {
                 latitude={+this.props.user.latitude}
                 longitude={+this.props.user.longitude}
               >
-                <strong>
-                  <i className="bi bi-house-door-fill text-danger"></i>
-                </strong>
+                <i className="h2 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
           </ReactMapGL>

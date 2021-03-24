@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactMapGL, {Marker} from 'react-map-gl'
+import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
@@ -20,6 +20,7 @@ class MapSingleItem extends React.Component {
       },
       loading: true,
       apiKey: '',
+      selectedItem: this.props.item,
     }
   }
 
@@ -49,19 +50,50 @@ class MapSingleItem extends React.Component {
                 latitude={+this.props.item.user.latitude}
                 longitude={+this.props.item.user.longitude}
               >
-                <strong>
-                  <i className="bi bi-pin-fill text-success"></i>
-                </strong>
+                <button
+                  className="btn btn-link text-center text-decoration-none"
+                  onClick={(evt) => {
+                    evt.preventDefault()
+                    this.setState({selectedItem: this.props.item})
+                  }}
+                  type="button"
+                >
+                  {this.props.item.itemType === 'Offer' ? (
+                    <i className="h1 bi bi-pin-fill text-success"></i>
+                  ) : (
+                    <i className="h1 bi bi-pin-fill text-danger"></i>
+                  )}
+                </button>
               </Marker>
             )}
+            {this.state.selectedItem ? (
+              <Popup
+                latitude={+this.state.selectedItem.user.latitude}
+                longitude={+this.state.selectedItem.user.longitude}
+                closeOnClick={false}
+                onClose={() => {
+                  this.setState({selectedItem: null})
+                }}
+              >
+                <div
+                  className="text-center"
+                  style={{width: '150px', height: 'auto'}}
+                >
+                  <div>
+                    <img width="100%" src="/images/croppedFsDefault.jpg" />
+                  </div>
+
+                  {this.state.selectedItem.itemListName}
+                </div>
+              </Popup>
+            ) : null}
+
             {this.props.isLoggedIn && (
               <Marker
                 latitude={+this.props.user.latitude}
                 longitude={+this.props.user.longitude}
               >
-                <strong>
-                  <i className="bi bi-house-door-fill text-danger"></i>
-                </strong>
+                <i className="h1 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
           </ReactMapGL>
