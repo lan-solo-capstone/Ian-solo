@@ -148,6 +148,7 @@ class SingleItemView extends React.Component {
               </a>
               <div
                 className="bg-secondary rounded-top"
+                id="mapContainer"
                 style={{height: '95vh'}}
               >
                 {this.props.updateNavbar('singleview', item)}

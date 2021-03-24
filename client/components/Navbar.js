@@ -93,7 +93,10 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
                     ></button>
                   </div>
                   <div className="modal-body p-0">
-                    <div style={{width: '100%', height: '85vh'}}>
+                    <div
+                      id="mapContainer"
+                      style={{width: '100%', height: '85vh'}}
+                    >
                       {currentPage.page === 'listall' ? (
                         <MapAllItems itemsArray={currentPage.items} />
                       ) : null}
