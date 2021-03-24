@@ -6,6 +6,7 @@ import {logout} from '../store'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './MobileFooter'
 import MapSingleItem from './MapSingleItem'
+import SearchBox from './SearchBox'
 
 const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
   <>
@@ -108,7 +109,7 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             </div>
             {/* Ends modal */}
           </ul>
-          <form className="d-flex ">
+          {/* <form className="d-flex ">
             <input
               className="form-control me-1"
               type="search"
@@ -122,7 +123,8 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             >
               Go
             </button>
-          </form>
+          </form> */}
+          <SearchBox />
         </div>
       </div>
       <div className="fixed-bottom d-md-none">

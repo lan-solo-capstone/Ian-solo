@@ -23,7 +23,6 @@ class Items extends React.Component {
 
   render() {
     const items = this.props.items
-
     return this.props.loading ? (
       <div
         className="spinner-border position-absolute top-50 start-50 translate-middle"
