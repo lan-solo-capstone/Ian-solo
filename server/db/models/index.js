@@ -23,8 +23,16 @@ ItemPhoto.belongsTo(Item)
 Item.hasMany(ItemPhoto)
 
 // tentative schema for chat -- JC 03/24/21
-User.hasMany(Message, {through: 'Channel'})
-Message.belongsTo(User, {through: 'Channel'})
+// currently this schema implies that if Abby and Babs are chatting w/ each other,
+// if Babs clicks on a second item offered by Abby and starts another chat with Abby,
+// that chat will be on the same channel as the first chat
+
+// Many-to-Many self-referencing association to create chat channel
+User.belongsTo(User, {through: 'Channel'})
+
+// One-to-many User-to-Message
+User.hasMany(Message)
+Message.belongsTo(User)
 
 module.exports = {
   User,
