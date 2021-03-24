@@ -6,7 +6,10 @@ const ItemPhoto = db.define('itemPhoto', {
   photoFile: {
     type: Sequelize.BLOB,
   },
-  photoURL: {
+  cloudREF: {
+    type: Sequelize.TEXT,
+  },
+  downloadURL: {
     type: Sequelize.TEXT,
     defaultValue: 'public/images/freeShareDefaultPic.jpeg',
   },
