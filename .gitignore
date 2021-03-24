@@ -6,3 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 ngrok
+public/bundle.js
+public/bundle.js.map
