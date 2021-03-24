@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import MessageList from './MessageList'
 import {fetchMessages} from '../../store/chat'
 
-export class Main extends Component {
+export class ChatContainer extends Component {
   componentDidMount() {
     this.props.loadMessages()
   }
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch) => ({
   loadMessages: () => dispatch(fetchMessages()),
 })
 
-export default connect(null, mapDispatchToProps)(Main)
+export default connect(null, mapDispatchToProps)(ChatContainer)
