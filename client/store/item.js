@@ -32,7 +32,9 @@ export const postNewItem = (item) => {
       // vv test vv  below axios call is for testing purpose - visualize formData vv //
       axios
         .post('https://httpbin.org/anything', formData)
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+        })
         .catch((err) => console.log(err))
 
       // ^^ test ^^//

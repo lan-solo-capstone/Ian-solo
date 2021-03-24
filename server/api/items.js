@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
 const {ensureAdmin, ensureLogin} = require('./middleware')
+const {storage} = require('../../firebase/firebase')
 module.exports = router
 
 // /api/items
@@ -73,10 +74,38 @@ router.post(
       if (req.files) {
         //** */ the yellow lines are from : eslint-disable-next-line guard-for-in >>need to discuss with team
         for (let key in req.files) {
+          const fileName = key
+
+          console.log(req.files, fileName, req.files[fileName])
+
+          storage
+            .ref(`/images/${fileName}`)
+            .put(req.files[fileName])
+            .then((response) => {
+              try {
+                console.log(`Added file: ${fileName} to cloud`)
+                storage
+                  .ref(`/images/${fileName}`)
+                  .getDownloadURL()
+                  .then(
+                    async (url) => console.log(url)
+                    // await ItemPhoto.create({
+                    //   cloudRef: `/images/${fileName}`,
+                    //   downloadUrl: url,
+                    // })
+                  )
+              } catch (error) {
+                console.log('failed')
+              }
+            })
+
           await ItemPhoto.create({
             photoTitle: req.files[key].name,
             photoFile: req.files[key].data,
           })
+
+          //yf 03.22.21  associating pic to newItem
+          await itemPic.setItem(newItem)
         }
       }
 

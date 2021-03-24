@@ -82,6 +82,7 @@ class Items extends React.Component {
               </a>
               <div
                 className="bg-secondary rounded-top text-light"
+                id="mapContainer"
                 style={{height: '95vh'}}
               >
                 <MapAllItems itemsArray={items} />
