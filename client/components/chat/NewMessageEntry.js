@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {sendMessage} from '../../store/chat'
+import {me} from '../../store/user.js'
 import {connect} from 'react-redux'
 
 export class NewMessageEntry extends Component {
@@ -20,6 +21,7 @@ export class NewMessageEntry extends Component {
   }
 
   render() {
+    console.log('in NewMessageEntry render, this.props', this.props)
     return (
       <form id="new-message-form" onSubmit={this.handleSubmit}>
         <div className="input-group input-group-lg">
@@ -40,8 +42,15 @@ export class NewMessageEntry extends Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    user: state.user,
+  }
+}
+
 const mapDispatch = (dispatch) => ({
+  fetchUser: () => dispatch(me()),
   submitMessage: (message) => dispatch(sendMessage(message)),
 })
 
-export default connect(null, mapDispatch)(NewMessageEntry)
+export default connect(mapState, mapDispatch)(NewMessageEntry)
