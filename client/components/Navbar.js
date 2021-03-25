@@ -36,10 +36,16 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
-                <Link className="nav-item nav-link mx-2" to="/useraccount">
+                <Link
+                  className="nav-item nav-link mx-2 d-none d-md-block"
+                  to="/useraccount"
+                >
                   Account
                 </Link>
-                <Link className="nav-item nav-link mx-2" to="/post">
+                <Link
+                  className="nav-item nav-link mx-2 d-none d-md-block"
+                  to="/post"
+                >
                   Post an Item
                 </Link>
                 <a
