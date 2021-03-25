@@ -33,31 +33,31 @@ class SearchBox extends Component {
   render() {
     return (
       <form className="row p-0" onSubmit={this.handleSubmit}>
-        <div className="m-0 col-6 col-md-3">
+        <div className="m-0 mb-1 col-6 col-md-3">
           <select
             name="itemType"
-            className="form-select form-control "
+            className="form-select form-control m-0"
             aria-label="Listing Type"
           >
-            <option selected>Lisitng Type</option>
+            <option defaultValue>Lisitng Type</option>
             <option value="All">All</option>
             <option value="Offer">Offer</option>
             <option value="Seeking">Seeking</option>
           </select>
         </div>
-        <div className="m-0 col-6 col-md-3">
+        <div className="m-0 mb-1 col-6 col-md-3">
           <select
             name="distance"
-            className="form-select form-control "
+            className="form-select form-control m-0"
             aria-label="Distance"
           >
-            <option selected>Distance</option>
+            <option defaultValue>Distance</option>
             <option value="1">1 mi</option>
             <option value="5">5 mi</option>
             <option value="10">> 10 mi</option>
           </select>
         </div>
-        <div className="m-0 col-9 col-md-5">
+        <div className="m-0 mb-1 col-10 col-md-5">
           <input
             className="form-control m-0"
             type="search"
@@ -68,7 +68,7 @@ class SearchBox extends Component {
             value={this.state.search}
           ></input>
         </div>
-        <div className="m-0 col-3 col-md-1">
+        <div className="m-0 mb-1 col-2 col-md-1">
           <button
             className="btn btn-outline-primary m-0 "
             role="button"
