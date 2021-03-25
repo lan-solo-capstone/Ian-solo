@@ -32,6 +32,12 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
+          <Link
+            className="nav-item nav-link mx-2 d-none d-md-block text-secondary"
+            to="/items"
+          >
+            Browse All
+          </Link>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {isLoggedIn ? (
               <>
