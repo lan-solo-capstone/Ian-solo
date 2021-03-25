@@ -32,19 +32,51 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <form className="d-flex " onSubmit={this.handleSubmit}>
-        <input
-          className="form-control me-1"
-          type="search"
-          name="search"
-          placeholder="Keyword Filter"
-          aria-label="Search"
-          onChange={this.handleChange}
-          value={this.state.search}
-        ></input>
-        <button className="btn btn-outline-primary" role="button" type="submit">
-          Go
-        </button>
+      <form className="row p-0" onSubmit={this.handleSubmit}>
+        <div className="m-0 col-6 col-md-3">
+          <select
+            name="itemType"
+            className="form-select form-control "
+            aria-label="Listing Type"
+          >
+            <option selected>Lisitng Type</option>
+            <option value="All">All</option>
+            <option value="Offer">Offer</option>
+            <option value="Seeking">Seeking</option>
+          </select>
+        </div>
+        <div className="m-0 col-6 col-md-3">
+          <select
+            name="distance"
+            className="form-select form-control "
+            aria-label="Distance"
+          >
+            <option selected>Distance</option>
+            <option value="1">1 mi</option>
+            <option value="5">5 mi</option>
+            <option value="10">> 10 mi</option>
+          </select>
+        </div>
+        <div className="m-0 col-9 col-md-5">
+          <input
+            className="form-control m-0"
+            type="search"
+            name="search"
+            placeholder="Keywords"
+            aria-label="Search"
+            onChange={this.handleChange}
+            value={this.state.search}
+          ></input>
+        </div>
+        <div className="m-0 col-3 col-md-1">
+          <button
+            className="btn btn-outline-primary m-0 "
+            role="button"
+            type="submit"
+          >
+            Go
+          </button>
+        </div>
       </form>
     )
   }
