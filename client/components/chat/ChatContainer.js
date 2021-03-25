@@ -13,12 +13,12 @@ export class ChatContainer extends Component {
     return (
       <div>
         <main>
-          <Switch>
-            {/* <Route path="/chat/:chatId" component={MessageList} /> */}
-            <Route path="/chat" component={MessageList} />
-
-            {/* <Redirect to="/channels/1" /> */}
-          </Switch>
+          {/* <Switch> */}
+          {/* <Route path="/chat/:chatId" component={MessageList} /> */}
+          {/* <Route path="/chat" component={MessageList} /> */}
+          {/* <Redirect to="/channels/1" /> */}
+          {/* </Switch> */}
+          <MessageList />
         </main>
       </div>
     )

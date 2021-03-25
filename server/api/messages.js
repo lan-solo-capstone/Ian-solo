@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Message, Author} = require('../db/models')
+const {Message, User} = require('../db/models')
 
 module.exports = router
 
@@ -16,20 +16,22 @@ router.get('/', async (req, res, next) => {
 // POST /api/messages
 router.post('/', async (req, res, next) => {
   // We don't have proper users yet (we'll get there soon, though!).
-  // Instead, we'll findOrCreate an author by name, for simplicity.
+  // Instead, we'll findOrCreate an User by name, for simplicity.
   // Of course, you wouldn't want to do this in a real chat app!
   try {
-    const [author] = await Author.findOrCreate({
-      where: {
-        name: req.body.name || 'Cody',
-      },
-    })
-    const message = Message.build(req.body)
-    message.setAuthor(author, {save: false})
-    await message.save()
-    const returnMessage = message.toJSON()
-    returnMessage.author = author
-    res.json(returnMessage)
+    // const [user] = await User.findOrCreate({
+    //   where: {
+    //     name: req.body.name || 'Cody',
+    //   },
+    // })
+
+    console.log('in POST for /api/messages req.body', req.body)
+    // const message = Message.build(req.body)
+    // message.setAuthor(user, {save: false})
+    // await message.save()
+    // const returnMessage = message.toJSON()
+    // returnMessage.user = user
+    // res.json(returnMessage)
   } catch (err) {
     next(err)
   }
