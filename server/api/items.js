@@ -19,6 +19,10 @@ router.get('/', async (req, res, next) => {
       ],
       include: [
         {model: User, attributes: ['firstName', 'latitude', 'longitude']},
+        {
+          model: ItemPhoto,
+          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+        },
       ],
     })
     res.json(allItems)
