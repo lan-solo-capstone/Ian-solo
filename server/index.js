@@ -12,6 +12,7 @@ const app = express()
 const socketio = require('socket.io')
 const fileUpload = require('express-fileupload')
 const seed = require('../script/seed')
+const status = require('../activateSeed')
 
 module.exports = app
 
@@ -111,7 +112,7 @@ const startListening = () => {
   require('./socket')(io)
 }
 
-const syncDb = () => db.sync({force: true})
+const syncDb = () => db.sync({force: status})
 
 async function bootApp() {
   await sessionStore.sync()
