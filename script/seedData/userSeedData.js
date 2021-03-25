@@ -52,7 +52,7 @@ const users = [
     firstName: `Jae`,
     middleName: ``,
     lastName: `Chung`,
-    email: `Jae@mail.com`,
+    email: `jae@mail.com`,
     admin: true,
     password: `password`,
     street1: `222 E 93rd St`,

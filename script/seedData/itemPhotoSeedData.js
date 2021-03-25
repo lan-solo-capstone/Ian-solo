@@ -4,22 +4,25 @@ const itemPhotos = [
   {
     photoTitle: 'default.jpeg',
     downloadURL:
-      'https://images-na.ssl-images-amazon.com/images/I/81vkislowDL._AC_SL1500_.jpg',
+      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
     itemId: 9,
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL:
+      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
     itemId: 8,
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL:
+      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
     itemId: 7,
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL:
+      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
     itemId: 3,
   },
   {

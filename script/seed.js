@@ -3,7 +3,7 @@
 const db = require('../server/db')
 const {User, Item, ItemPhoto} = require('../server/db/models')
 
-// YF.03.25.21  JSON seed data files
+// YF.03.25.21  seed data files
 const {items, users, itemPhotos} = require('./seedData/seedDataIndex')
 
 // seed function
