@@ -4,7 +4,7 @@ const itemPhotos = [
   {
     photoTitle: 'default.jpeg',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
+      'https://images-na.ssl-images-amazon.com/images/I/81vkislowDL._AC_SL1500_.jpg',
     itemId: 9,
   },
   {

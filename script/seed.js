@@ -1,10 +1,16 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Item, ItemPhoto} = require('../server/db/models')
+const {User, Item, ItemPhoto, Channel, Message} = require('../server/db/models')
 
 // YF.03.25.21  seed data files
-const {items, users, itemPhotos} = require('./seedData/seedDataIndex')
+const {
+  items,
+  users,
+  itemPhotos,
+  channels,
+  messages,
+} = require('./seedData/seedDataIndex')
 
 // seed function
 
@@ -32,6 +38,20 @@ async function seed() {
     })
   )
   console.log(`seeded ${items.length} items`)
+
+  await Promise.all(
+    channels.map((channel) => {
+      return Channel.create(channel)
+    })
+  )
+  console.log(`seeded ${channels.length} items`)
+
+  await Promise.all(
+    messages.map((message) => {
+      return Message.create(message)
+    })
+  )
+  console.log(`seeded ${messages.length} items`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
