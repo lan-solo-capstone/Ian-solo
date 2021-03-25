@@ -60,7 +60,7 @@ class Items extends React.Component {
       </div>
     ) : (
       <div className="mb-5 container container-lg container-xxl">
-        <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
+        <h3 className="display-6 text-center text-light bg-secondary rounded-3 p-2">
           {/* All Current offers */}
           {headline}
 
