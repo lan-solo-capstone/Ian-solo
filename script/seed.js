@@ -164,17 +164,17 @@ const itemPhotos = [
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL: null,
     itemId: 8,
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL: null,
     itemId: 7,
   },
   {
     photoTitle: 'default.jpeg',
-    downloadURL: 'public/images/freeShareDefaultPic.jpeg',
+    downloadURL: null,
     itemId: 3,
   },
   {

@@ -26,6 +26,7 @@ class Items extends React.Component {
     // const items = this.props.items
     //the following are MJA changes for the search capability:
     let items
+
     let headline = 'All Current offers'
     if (this.props.location.searchBoxParams) {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
