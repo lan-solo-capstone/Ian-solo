@@ -22,20 +22,27 @@ class SingleItemView extends React.Component {
     let {item} = this.props.location
 
     return (
-      <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
+      <div className="container-sm container-md container-xl mb-5">
         <Link to="/chat" component={ChatContainer}>
           <p>Reply to this post</p>
         </Link>
-        <div
-          className="d-flex flex-column justify-content-evenly"
-          style={{height: '100%'}}
-        >
-          <div>
+        <div className="row row-cols-1">
+          <div className="col">
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
             </h6>
           </div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+
+        <div
+          className="d-flex flex-column justify-content-evenly"
+          style={{height: '100%'}}
+        >
+          <div></div>
 
           <div
             id="itemImageIndicator"
