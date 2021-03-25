@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {ChatContainer} from './index'
@@ -22,6 +22,10 @@ class SingleItemView extends React.Component {
     let {item} = this.props.location
     console.log(item)
 
+    if (!this.props.location.item) {
+      return <Redirect to="/items" />
+    }
+
     return (
       <div className="container-sm container-md container-xl mb-5">
         <Link to="/chat" component={ChatContainer}>
@@ -29,10 +33,7 @@ class SingleItemView extends React.Component {
         </Link>
         <div className="row gy-4 row-cols-1 ">
           <div className="col">
-            <h5 className="text-center mb-1">
-              {item.itemListName}
-              Name
-            </h5>
+            <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
             </h6>
