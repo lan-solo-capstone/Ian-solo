@@ -23,13 +23,15 @@ class SingleItemView extends React.Component {
 
     return (
       <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
-        <Link to="/chat" component={ChatContainer}>
-          <p>Reply to this post</p>
-        </Link>
         <div
           className="d-flex flex-column justify-content-evenly"
           style={{height: '100%'}}
         >
+          <div className="chat">
+            <Link to="/chat" component={ChatContainer}>
+              <p>Reply to this post</p>
+            </Link>
+          </div>
           <div>
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
