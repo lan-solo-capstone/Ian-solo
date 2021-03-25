@@ -112,21 +112,6 @@ const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
             </div>
             {/* Ends modal */}
           </ul>
-          {/* <form className="d-flex ">
-            <input
-              className="form-control me-1"
-              type="search"
-              placeholder="Keyword Search"
-              aria-label="Search"
-            ></input>
-            <button
-              className="btn btn-outline-primary"
-              role="button"
-              type="submit"
-            >
-              Go
-            </button>
-          </form> */}
           <SearchBox />
         </div>
       </div>
