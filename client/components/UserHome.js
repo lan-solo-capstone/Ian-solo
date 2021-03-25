@@ -46,7 +46,7 @@ class UserHome extends React.Component {
           <div className="col text-light">
             <div className="bg-secondary border rounded">
               <a
-                class="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
+                className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
                 style={{width: '98%'}}
                 data-bs-toggle="collapse"
                 href="#multiCollapseOpen"
@@ -71,7 +71,7 @@ class UserHome extends React.Component {
           <div className="col text-light">
             <div className="bg-secondary border rounded">
               <a
-                class="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
+                className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
                 style={{width: '98%'}}
                 data-bs-toggle="collapse"
                 href="#multiCollapseClosed"
