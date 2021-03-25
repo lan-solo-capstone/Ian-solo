@@ -27,15 +27,20 @@ class SingleItemView extends React.Component {
           className="d-flex flex-column justify-content-evenly"
           style={{height: '100%'}}
         >
-          <div className="chat">
-            <Link to="/chat" component={ChatContainer}>
-              <p>Reply to this post</p>
-            </Link>
-          </div>
           <div>
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
+              <div className="chat">
+                <Link
+                  to={{
+                    pathname: '/chat',
+                    state: this.props.item,
+                  }}
+                >
+                  <div>Reply to this post</div>
+                </Link>
+              </div>
             </h6>
           </div>
 

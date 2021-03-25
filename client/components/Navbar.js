@@ -10,7 +10,7 @@ import SearchBox from './SearchBox'
 
 const Navbar = ({handleClick, isLoggedIn, currentPage}) => (
   <>
-    {console.log(currentPage)}
+    {console.log('in Navbar, currentPage', currentPage)}
     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div className="container-fluid">
         <Link to="/items" className="text-decoration-none text-dark m-0">

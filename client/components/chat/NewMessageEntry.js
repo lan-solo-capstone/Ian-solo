@@ -16,7 +16,7 @@ export class NewMessageEntry extends Component {
       content: message,
       // channelId: this.props.channelId,
       channelId: 1,
-      userId: 3,
+      userId: this.props.user.id,
     })
   }
 
@@ -45,6 +45,7 @@ export class NewMessageEntry extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
+    item: state.item,
   }
 }
 

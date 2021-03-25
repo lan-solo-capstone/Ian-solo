@@ -9,6 +9,7 @@ const SingleItem = (props) => (
     to={{pathname: '/singleview', item: props.item}}
     className="col text-decoration-none text-secondary"
   >
+    {console.log('in SingleItem props', props)}
     <div className="card mb-3" style={{maxwidth: '800px'}}>
       <div className="row g-0">
         <div className="col-md-4 d-flex align-items-center justify-content-center">
