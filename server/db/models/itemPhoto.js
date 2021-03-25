@@ -11,7 +11,7 @@ const ItemPhoto = db.define('itemPhoto', {
   },
   downloadURL: {
     type: Sequelize.TEXT,
-    defaultValue: 'public/images/freeShareDefaultPic.jpeg',
+    defaultValue: null,
   },
 })
 

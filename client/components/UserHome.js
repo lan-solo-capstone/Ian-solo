@@ -25,7 +25,7 @@ class UserHome extends React.Component {
     })
 
     return (
-      <div className="containter-sm container-xl mt-3 mb-4">
+      <div className="containter-sm container-xl mt-3 mb-5">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details:
@@ -42,11 +42,24 @@ class UserHome extends React.Component {
             {user.city}, {user.state} {user.zip}
           </li>
         </ul>
-        <div className="row gx-2 row-cols-2 text-secondary mt-3">
+        <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
-            <div className="bg-secondary border rounded px-2">
-              <h4>Open Items</h4>
-              <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
+            <div className="bg-secondary border rounded">
+              <a
+                class="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
+                style={{width: '98%'}}
+                data-bs-toggle="collapse"
+                href="#multiCollapseOpen"
+                aria-expanded="true"
+                aria-controls="multiCollapseOpen"
+                role="button"
+              >
+                <h4 className="m-0">Open Items</h4>
+              </a>
+              <div
+                className="row collapse multi-collapse gx-2 row-cols-sm-1 row-cols-md-2 p-2"
+                id="multiCollapseOpen"
+              >
                 {items
                   .filter((item) => item.status === 'Open')
                   .map((item) => (
@@ -56,9 +69,22 @@ class UserHome extends React.Component {
             </div>
           </div>
           <div className="col text-light">
-            <div className="bg-secondary border rounded px-2">
-              <h4>Closed Items</h4>
-              <div className="row gx-2 row-cols-sm-1 row-cols-md-2">
+            <div className="bg-secondary border rounded">
+              <a
+                class="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
+                style={{width: '98%'}}
+                data-bs-toggle="collapse"
+                href="#multiCollapseClosed"
+                aria-expanded="true"
+                aria-controls="multiCollapseClosed"
+                role="button"
+              >
+                <h4 className="m-0">Closed Items</h4>
+              </a>
+              <div
+                className="row collapse multi-collapse gx-2 row-cols-sm-1 row-cols-md-2 p-2"
+                id="multiCollapseClosed"
+              >
                 {items
                   .filter((item) => item.status === 'Closed')
                   .map((item) => (

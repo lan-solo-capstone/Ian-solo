@@ -1,6 +1,6 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
-const {User, Item} = require('../db/models')
+const {User, Item, ItemPhoto} = require('../db/models')
 const {ensureAdmin, ensureLogin} = require('./middleware')
 
 module.exports = router
@@ -61,6 +61,12 @@ router.get('/:userId', async (req, res, next) => {
             'itemType',
             'status',
             'dateListed',
+          ],
+          include: [
+            {
+              model: ItemPhoto,
+              attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+            },
           ],
         },
       ],
