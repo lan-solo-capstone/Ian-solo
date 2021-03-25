@@ -2,6 +2,7 @@ const User = require('./user')
 const Item = require('./item')
 const ItemPhoto = require('./itemPhoto')
 const Message = require('./message')
+const Channel = require('./channel')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -28,15 +29,25 @@ Item.hasMany(ItemPhoto)
 // that chat will be on the same channel as the first chat
 
 // Many-to-Many self-referencing association to create chat channel
-User.belongsTo(User, {through: 'Channel'})
+User.belongsToMany(User, {
+  through: Channel,
+  as: 'conversationStarter',
+  // as: 'conversations',
+  foreignKey: 'firstUser',
+  otherKey: 'secondUser',
+})
 
 // One-to-many User-to-Message
 User.hasMany(Message)
 Message.belongsTo(User)
+
+Channel.hasMany(Message)
+Message.belongsTo(Channel)
 
 module.exports = {
   User,
   Item,
   ItemPhoto,
   Message,
+  Channel,
 }
