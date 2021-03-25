@@ -97,7 +97,15 @@ class MapSingleItem extends React.Component {
                   style={{width: '150px', height: 'auto'}}
                 >
                   <div>
-                    <img width="100%" src="/images/croppedFsDefault.jpg" />
+                    {this.state.selectedItem.itemPhotos.length > 0 &&
+                    this.state.selectedItem.itemPhotos[0].downloadURL ? (
+                      <img
+                        width="100%"
+                        src={this.state.selectedItem.itemPhotos[0].downloadURL}
+                      />
+                    ) : (
+                      <img width="100%" src="/images/croppedFsDefault.jpg" />
+                    )}
                   </div>
 
                   {this.state.selectedItem.itemListName}

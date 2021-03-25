@@ -41,9 +41,6 @@ class UserHome extends React.Component {
           <li className="list-group-item">
             {user.city}, {user.state} {user.zip}
           </li>
-          <li className="list-group-item">
-            {user.latitude}, {user.longitude}
-          </li>
         </ul>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
