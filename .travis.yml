@@ -18,7 +18,7 @@ script:
   - npm test
   - npm run build-client
 before_deploy:
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup ok
 deploy:
   skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
