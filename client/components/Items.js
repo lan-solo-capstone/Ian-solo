@@ -22,7 +22,34 @@ class Items extends React.Component {
   }
 
   render() {
-    const items = this.props.items
+    //next line is Diego's original code:
+    // const items = this.props.items
+    //the following are MJA changes for the search capability:
+    let items
+    let headline = 'All Current offers'
+    if (this.props.location.searchBoxParams) {
+      const keyWords = this.props.location.searchBoxParams.searchString.split(
+        ' '
+      )
+      items = this.props.items.filter((item) => {
+        for (let i = 0; i < keyWords.length; i++) {
+          if (
+            item.itemListName
+              .toLowerCase()
+              .includes(keyWords[i].toLowerCase()) ||
+            item.description.toLowerCase().includes(keyWords[i].toLowerCase())
+          ) {
+            return item
+          }
+        }
+      })
+      headline = 'Results for: ' + keyWords.join(', ')
+    } else {
+      items = this.props.items
+    }
+
+    //end of MJA changes
+
     return this.props.loading ? (
       <div
         className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -33,7 +60,20 @@ class Items extends React.Component {
     ) : (
       <div className="mb-5 container container-lg container-xxl">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 ">
-          All Current offers
+          {/* All Current offers */}
+          {headline}
+
+          {this.props.location.searchBoxParams ? (
+            <>
+              <span> | </span>
+              <Link
+                to="/items"
+                className="text-decoration-none text-warning m-0"
+              >
+                <span>Reset</span>
+              </Link>
+            </>
+          ) : null}
         </h3>
         {console.log(this.props.items)}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

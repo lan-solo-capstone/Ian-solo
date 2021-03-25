@@ -37,7 +37,7 @@ class SearchBox extends Component {
           className="form-control me-1"
           type="search"
           name="search"
-          placeholder="Keyword Search"
+          placeholder="Keyword Filter"
           aria-label="Search"
           onChange={this.handleChange}
           value={this.state.search}
