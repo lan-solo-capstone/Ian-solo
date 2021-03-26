@@ -6,17 +6,19 @@ import {fetchMessages} from '../../store/chat'
 
 export class ChatContainer extends Component {
   componentDidMount() {
-    this.props.loadMessages()
+    // this.props.loadMessages()
   }
 
   render() {
     return (
       <div>
         <main>
-          <Switch>
-            <Route path="/chat/:chatId" component={MessageList} />
-            {/* <Redirect to="/channels/1" /> */}
-          </Switch>
+          {/* <Switch> */}
+          {/* <Route path="/chat/:chatId" component={MessageList} /> */}
+          {/* <Route path="/chat" component={MessageList} /> */}
+          {/* <Redirect to="/channels/1" /> */}
+          {/* </Switch> */}
+          <MessageList />
         </main>
       </div>
     )

@@ -13,6 +13,7 @@ import {
   SingleItemView,
   AllUsers,
   User,
+  ChatContainer,
 } from './components'
 import {me} from './store'
 
@@ -46,6 +47,7 @@ class Routes extends Component {
             <Route path="/post" component={NewItemForm} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:userId" component={User} />
+            <Route exact path="/chat" component={ChatContainer} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

@@ -2,10 +2,10 @@
 
 const itemPhotos = [
   {
-    photoTitle: 'default.jpeg',
+    photoTitle: 'ibis_bike',
     CloudREF: '',
     downloadURL:
-      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+      'https://images.craigslist.org/00y0y_k85pzQTBKgmz_09G07g_600x450.jpg',
     itemId: 1,
   },
   {
@@ -296,10 +296,17 @@ const itemPhotos = [
     itemId: 29,
   },
   {
-    photoTitle: 'default.jpeg',
+    photoTitle: 'freeTree',
     CloudREF: '',
     downloadURL:
-      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+      'https://images.craigslist.org/00000_du2vYCxHm7mz_0lM0t2_600x450.jpg',
+    itemId: 30,
+  },
+  {
+    photoTitle: 'freeTree2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00u0u_VSo0d5bRPqz_0lM0t2_600x450.jpg',
     itemId: 30,
   },
   {
@@ -416,7 +423,7 @@ const itemPhotos = [
     photoTitle: 'popcornCart',
     CloudREF: '',
     downloadURL:
-      'https://images.craigslist.org/00A0A_8V02mjNJ1VG_0dm0sU_600x450.jpg',
+      'https://images.craigslist.org/00r0r_kl7E5VpMdqNz_04M07g_600x450.jpg',
     itemId: 41,
   },
   {
