@@ -24,9 +24,9 @@ class SingleItemView extends React.Component {
   }
 
   render() {
-    console.log('in SingleItemView, this.props')
+    console.log('in SingleItemView, this.props', this.props)
     let {item} = this.props.location
-    console.log(item)
+    console.log('item!!!!', item)
 
     if (!this.props.location.item) {
       return <Redirect to="/items" />
@@ -58,11 +58,14 @@ class SingleItemView extends React.Component {
                   </Link>
                 </div>
               }
-              <div className="closeItem">
-                <button type="button" className="btn btn-warning">
-                  Mark this item as closed
-                </button>
-              </div>
+              {console.log('this.props.status!!!!', this.props.status)}
+              {this.props.status === 'Open' ? (
+                <div className="closeItem">
+                  <button type="button" className="btn btn-warning">
+                    Mark this item as closed
+                  </button>
+                </div>
+              ) : null}
             </h6>
           </div>
           <div className="col">
