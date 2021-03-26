@@ -4,10 +4,8 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
-import {me} from '../store/user.js'
-import {ChatContainer} from './index'
 import {closeItem} from '../store/item'
-import {ToastContainer, toast} from 'react-toastify'
+import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 // Render functional
