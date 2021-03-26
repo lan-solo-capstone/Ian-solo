@@ -37,21 +37,21 @@ async function seed() {
       return ItemPhoto.create(photo)
     })
   )
-  console.log(`seeded ${items.length} items`)
+  console.log(`seeded ${items.length} itemPhotos`)
 
   await Promise.all(
     channels.map((channel) => {
       return Channel.create(channel)
     })
   )
-  console.log(`seeded ${channels.length} items`)
+  console.log(`seeded ${channels.length} channels`)
 
   await Promise.all(
     messages.map((message) => {
       return Message.create(message)
     })
   )
-  console.log(`seeded ${messages.length} items`)
+  console.log(`seeded ${messages.length} messages`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
