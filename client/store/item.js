@@ -77,10 +77,11 @@ export const postNewItem = (item) => {
 export const closeItem = (itemId) => {
   return async (dispatch) => {
     try {
-      const closedItem = await axios.put(`/api/items/${itemId}`, {
-        status: 'Closed',
-      }).data
-      console.log('in closeItem thunk, closedItem', closedItem)
+      const closedItem = (
+        await axios.put(`/api/items/${itemId}`, {
+          status: 'Closed',
+        })
+      ).data
       dispatch(markItemClosed(closedItem))
     } catch (err) {
       console.error(err)

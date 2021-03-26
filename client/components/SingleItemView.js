@@ -25,10 +25,10 @@ class SingleItemView extends React.Component {
   handleClose(evt) {
     evt.preventDefault()
     const itemId = String(this.props.location.item.id)
-    console.log('in handleClose, itemId', typeof itemId)
+    console.log('in handleClose, itemId', itemId)
     this.props.closeItem(itemId)
   }
-
+  componentDidUpdate(prevProps) {}
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
@@ -69,7 +69,7 @@ class SingleItemView extends React.Component {
                   </Link>
                 </div>
               ) : null}
-              {/* check if the user has the right to close the button */}
+              {/* check if the user has the right to close the item */}
               {item.status === 'Open' && this.props.user.id === item.user.id ? (
                 <div className="closeItem">
                   <button
