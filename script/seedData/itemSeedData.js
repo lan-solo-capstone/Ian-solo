@@ -12,6 +12,7 @@ const items = [
     status: 'Closed',
     deliveryOption: 'Pickup_Only',
     userId: 1,
+    createdAt: '',
   },
   {
     itemListName: 'Stove and pan',
@@ -21,7 +22,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 1,
+    userId: 2,
+    createdAt: '',
   },
   {
     itemListName: 'Queen bed frame and duvet',
@@ -32,26 +34,28 @@ const items = [
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     userId: 3,
+    createdAt: '',
   },
   {
-    itemListName: 'Gucci Gold Sandals',
+    itemListName: 'Fancy watch',
     description:
-      'Gold Sandals in good condition. It comes with the box and a dust bag. Worn once. Size 38.',
+      'Fancy Watcg in good condition. It comes with the box and a dust bag. Worn once.',
     itemType: 'Offer',
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 2,
+    userId: 4,
+    createdAt: '',
   },
   {
-    itemListName: 'Gucci Boots',
-    description:
-      'ISO of Gucci Boots since I gave away my pair of Gucci sandals. Size 38.',
+    itemListName: 'HikingBoots',
+    description: 'ISO of Hiking Boots for my summer vacation!. Size 38.',
     itemType: 'Seeking',
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 2,
+    userId: 5,
+    createdAt: '',
   },
   {
     itemListName: 'FREE 87 REGAL AFT CABIN-NEEDS MOTOR',
@@ -61,7 +65,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Will_Deliver',
-    userId: 4,
+    userId: 6,
+    createdAt: '',
   },
   {
     itemListName: 'Bike',
@@ -70,7 +75,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 1,
+    userId: 7,
+    createdAt: '',
   },
   {
     itemListName: 'Bike Helmet',
@@ -79,7 +85,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 1,
+    userId: 8,
+    createdAt: '',
   },
   {
     itemListName: 'A puppy',
@@ -88,7 +95,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 4,
+    userId: 9,
+    createdAt: '',
   },
   {
     itemListName: 'Baby swing ',
@@ -97,7 +105,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 5,
+    userId: 10,
+    createdAt: '',
   },
   {
     itemListName: "Baldwin 5'1 BG Piano",
@@ -107,7 +116,8 @@ const items = [
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 5,
+    userId: 11,
+    createdAt: '',
   },
   {
     itemListName: 'Free tile',
@@ -117,7 +127,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 6,
+    userId: 12,
+    createdAt: '',
   },
   {
     itemListName: 'Brown microfiber chair',
@@ -127,7 +138,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 7,
+    userId: 13,
+    createdAt: '',
   },
   {
     itemListName: 'World War II and Aviation History magazines',
@@ -137,7 +149,8 @@ const items = [
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'Will_Deliver',
-    userId: 8,
+    userId: 14,
+    createdAt: '',
   },
   {
     itemListName: "35'' SANYO TV",
@@ -147,7 +160,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Will_Deliver',
-    userId: 9,
+    userId: 15,
+    createdAt: '',
   },
   {
     itemListName: 'Bifold Closet Door',
@@ -157,7 +171,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Will_Deliver',
-    userId: 6,
+    userId: 16,
+    createdAt: '',
   },
   {
     itemListName: 'Free ikea ektorp black sofa ',
@@ -167,7 +182,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 6,
+    userId: 17,
+    createdAt: '',
   },
   {
     itemListName: "7' custom sofa",
@@ -176,7 +192,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 5,
+    userId: 18,
+    createdAt: '',
   },
   {
     itemListName: '8 saucers & 2 small glass pitchers',
@@ -185,7 +202,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 4,
+    userId: 19,
+    createdAt: '',
   },
   {
     itemListName: 'Free Pine Armoire',
@@ -195,7 +213,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 3,
+    userId: 20,
+    createdAt: '',
   },
   {
     itemListName: 'Free Wooden Picture window ',
@@ -205,7 +224,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 8,
+    userId: 21,
+    createdAt: '',
   },
   {
     itemListName: 'China cabinet',
@@ -215,7 +235,8 @@ const items = [
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 7,
+    userId: 22,
+    createdAt: '',
   },
   {
     itemListName: 'T8 Energy Efficient fluorescent light bulbs',
@@ -225,7 +246,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 7,
+    userId: 23,
+    createdAt: '',
   },
   {
     itemListName: 'Free bales of hay',
@@ -235,7 +257,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 9,
+    userId: 24,
+    createdAt: '',
   },
   {
     itemListName:
@@ -246,7 +269,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 1,
+    userId: 25,
+    createdAt: '',
   },
   {
     itemListName: 'Moving Boxes - Free - Pickup in Round Lake Beach',
@@ -256,7 +280,8 @@ const items = [
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 2,
+    userId: 26,
+    createdAt: '',
   },
   {
     itemListName: 'Free woodchip dumpsite',
@@ -266,7 +291,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
-    userId: 5,
+    userId: 27,
+    createdAt: '',
   },
   {
     itemListName: 'Sofa Bed',
@@ -276,7 +302,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 8,
+    userId: 28,
+    createdAt: '',
   },
   {
     itemListName: 'print\nFree Rolling Pins',
@@ -286,7 +313,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 8,
+    userId: 29,
+    createdAt: '',
   },
   {
     itemListName: 'Free Three year old tree',
@@ -296,7 +324,8 @@ const items = [
     itemCondition: 'New',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 7,
+    userId: 30,
+    createdAt: '',
   },
   {
     itemListName: 'Sling for Rotator Cuff Surgery Large',
@@ -306,7 +335,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 6,
+    userId: 31,
+    createdAt: '',
   },
   {
     itemListName: 'plywood free',
@@ -316,7 +346,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 9,
+    userId: 32,
+    createdAt: '',
   },
   {
     itemListName:
@@ -326,7 +357,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 2,
+    userId: 33,
+    createdAt: '',
   },
   {
     itemListName: 'fancy champagne boxes',
@@ -335,7 +367,8 @@ const items = [
     itemCondition: 'Gently_Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 3,
+    userId: 34,
+    createdAt: '',
   },
   {
     itemListName: 'misc stone, ceramic & porcelain tiles',
@@ -345,7 +378,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 6,
+    userId: 35,
+    createdAt: '',
   },
   {
     itemListName: 'Large Heavy Safe-Cabinet',
@@ -355,7 +389,8 @@ const items = [
     itemCondition: 'Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
-    userId: 3,
+    userId: 36,
+    createdAt: '',
   },
 ]
 module.exports = items
