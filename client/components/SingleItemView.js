@@ -29,6 +29,7 @@ class SingleItemView extends React.Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
+  // if user clicks Close button, trigger toast notification
   handleClose(evt) {
     evt.preventDefault()
     const itemId = String(this.props.location.item.id)
@@ -82,7 +83,7 @@ class SingleItemView extends React.Component {
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
               {/* only render chat button if item does not belong to user */}
-              {this.props.user.id !== item.user.id ? (
+              {this.props.user.id !== item.user.id && (
                 <div className="chat">
                   <Link
                     to={{
@@ -97,21 +98,21 @@ class SingleItemView extends React.Component {
                     </div>
                   </Link>
                 </div>
-              ) : null}
+              )}
               {/* check if the user has the right to close the item */}
               {this.state.justClosed === false &&
-              item.status === 'Open' &&
-              this.props.user.id === item.user.id ? (
-                <div className="closeItem">
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.handleClose}
-                  >
-                    Mark this item as closed
-                  </button>
-                </div>
-              ) : null}
+                item.status === 'Open' &&
+                this.props.user.id === item.user.id && (
+                  <div className="closeItem">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={this.handleClose}
+                    >
+                      Mark this item as closed
+                    </button>
+                  </div>
+                )}
             </h6>
           </div>
           <div className="col">
