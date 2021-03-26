@@ -169,8 +169,6 @@ class Navbar extends React.Component {
                     }}
                   />
                 </a>
-
-                <MobileFooter />
                 <div className="collapse" id="mapCollapse">
                   <a
                     className="btn btn-secondary m-auto rounded-0 d-flex justify-content-center align-items-center"
@@ -189,13 +187,14 @@ class Navbar extends React.Component {
                   <div
                     className="bg-secondary rounded-top text-light"
                     id="mapContainer"
-                    style={{height: '95vh'}}
+                    style={{height: '89vh'}}
                   >
                     <MapAllItems itemsArray={this.props.currentPage.items} />
                   </div>
                 </div>
               </div>
             ) : null}
+            <MobileFooter />
           </div>
         </nav>
       </>
