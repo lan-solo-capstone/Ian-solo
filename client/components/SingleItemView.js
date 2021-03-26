@@ -6,6 +6,7 @@ import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {me} from '../store/user.js'
 import {ChatContainer} from './index'
+import {closeItem} from '../store/item'
 
 // Render functional
 // const singleView = (props) => {
@@ -15,9 +16,18 @@ import {ChatContainer} from './index'
 
 // Render Class
 class SingleItemView extends React.Component {
-  // componentDidMount() {
-  //   this.props.fetchUser()
-  // }
+  constructor(props) {
+    super(props)
+
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose(evt) {
+    evt.preventDefault()
+    const itemId = String(this.props.location.item.id)
+    console.log('in handleClose, itemId', typeof itemId)
+    this.props.closeItem(itemId)
+  }
 
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
@@ -42,7 +52,8 @@ class SingleItemView extends React.Component {
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
-              {
+              {/* only render chat button if item does not belong to user */}
+              {this.props.user.id !== item.user.id ? (
                 <div className="chat">
                   <Link
                     to={{
@@ -57,10 +68,15 @@ class SingleItemView extends React.Component {
                     </div>
                   </Link>
                 </div>
-              }
+              ) : null}
+              {/* check if the user has the right to close the button */}
               {item.status === 'Open' && this.props.user.id === item.user.id ? (
                 <div className="closeItem">
-                  <button type="button" className="btn btn-warning">
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.handleClose}
+                  >
                     Mark this item as closed
                   </button>
                 </div>
@@ -219,7 +235,7 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  // fetchUser: () => dispatch(me()),
+  closeItem: (itemId) => dispatch(closeItem(itemId)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)
