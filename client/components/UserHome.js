@@ -25,7 +25,7 @@ class UserHome extends React.Component {
     })
 
     return (
-      <div className="containter-sm container-xl mt-3 mb-5">
+      <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details:
@@ -63,7 +63,7 @@ class UserHome extends React.Component {
                 />
               </a>
               <div className="collapse multi-collapse" id="multiCollapseOpen">
-                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Open')
                     .map((item) => (
@@ -93,7 +93,7 @@ class UserHome extends React.Component {
                 />
               </a>
               <div className="collapse multi-collapse" id="multiCollapseClosed">
-                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Closed')
                     .map((item) => (

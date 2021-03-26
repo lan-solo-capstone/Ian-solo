@@ -104,7 +104,7 @@ class Items extends React.Component {
         <span className="visually-hidden">Loading...</span>
       </div>
     ) : (
-      <div className="mb-5 container container-lg container-xxl">
+      <div className="container container-lg container-xxl footerSpacing mt-2">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 p-2">
           {headline}
         </h3>

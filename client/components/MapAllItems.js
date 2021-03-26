@@ -25,7 +25,9 @@ class MapAllItems extends React.Component {
       selectedItem: null,
     }
     window.addEventListener('resize', (e) => {
-      this.resizer()
+      if (!this.unload) {
+        this.resizer()
+      }
     })
   }
 
@@ -41,9 +43,9 @@ class MapAllItems extends React.Component {
   }
 
   resizer(e) {
-    if (!this.unload && this.props?.prevRef && this.props.prevRef !== 0) {
-      const width = this.props.prevRef.current?.offsetWidth
-      const height = this.props.prevRef.current?.offsetHeight
+    if (this.props?.prevRef?.current?.offsetHeight !== 0) {
+      const width = this.props.prevRef?.current?.offsetWidth
+      const height = this.props.prevRef?.current?.offsetHeight
 
       this.setState({
         ...this.state,
@@ -51,6 +53,15 @@ class MapAllItems extends React.Component {
           ...this.state.viewport,
           width: `${width}px`,
           height: `${height}px`,
+        },
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        viewport: {
+          ...this.state.viewport,
+          width: `100%`,
+          height: `100%`,
         },
       })
     }

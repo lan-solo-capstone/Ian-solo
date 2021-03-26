@@ -67,7 +67,7 @@ class Navbar extends React.Component {
                       ref={this.inputRef}
                       style={{width: '100%', height: '85vh'}}
                     >
-                      {this.props.currentPage.page === 'listall' ? (
+                      {this.props.currentPage.page === 'listall' && (
                         <>
                           {console.log(this.props.currentPage.page)}
                           <MapAllItems
@@ -75,8 +75,8 @@ class Navbar extends React.Component {
                             prevRef={this.inputRef}
                           />
                         </>
-                      ) : null}
-                      {this.props.currentPage.page === 'singleview' ? (
+                      )}
+                      {this.props.currentPage.page === 'singleview' && (
                         <>
                           {console.log(this.props.currentPage.page)}
                           <MapSingleItem
@@ -84,7 +84,7 @@ class Navbar extends React.Component {
                             prevRef={this.inputRef}
                           />
                         </>
-                      ) : null}
+                      )}
                     </div>
                   </div>
                 </div>
@@ -169,8 +169,6 @@ class Navbar extends React.Component {
                     }}
                   />
                 </a>
-
-                <MobileFooter />
                 <div className="collapse" id="mapCollapse">
                   <a
                     className="btn btn-secondary m-auto rounded-0 d-flex justify-content-center align-items-center"
@@ -189,13 +187,14 @@ class Navbar extends React.Component {
                   <div
                     className="bg-secondary rounded-top text-light"
                     id="mapContainer"
-                    style={{height: '95vh'}}
+                    style={{height: '89vh'}}
                   >
                     <MapAllItems itemsArray={this.props.currentPage.items} />
                   </div>
                 </div>
               </div>
             ) : null}
+            <MobileFooter />
           </div>
         </nav>
       </>
