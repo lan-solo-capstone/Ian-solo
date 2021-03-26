@@ -34,10 +34,14 @@ class MapSingleItem extends React.Component {
     this.setState({loading: false})
   }
 
+  componentWillUnmount() {
+    this.unload = true
+  }
+
   resizer(e) {
-    if (this.props?.prevRef && this.props.prevRef !== 0) {
-      const width = this.props.prevRef.current.offsetWidth
-      const height = this.props.prevRef.current.offsetHeight
+    if (!this.unload && this.props?.prevRef && this.props.prevRef !== 0) {
+      const width = this.props.prevRef.current?.offsetWidth
+      const height = this.props.prevRef.current?.offsetHeight
 
       this.setState({
         ...this.state,

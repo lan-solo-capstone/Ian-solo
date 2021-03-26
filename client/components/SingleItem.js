@@ -18,7 +18,6 @@ const SingleItem = (props) => {
       <div className="card mb-3" style={{maxwidth: '800px'}}>
         <div className="row g-0">
           <div className="col-md-4 d-flex align-items-center justify-content-center">
-            {console.log(item.itemPhotos)}
             <img
               className="img-fluid"
               src={
