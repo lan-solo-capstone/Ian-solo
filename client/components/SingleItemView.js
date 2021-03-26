@@ -18,7 +18,9 @@ import {closeItem} from '../store/item'
 class SingleItemView extends React.Component {
   constructor(props) {
     super(props)
-
+    this.state = {
+      justClosed: false,
+    }
     this.handleClose = this.handleClose.bind(this)
   }
 
@@ -28,13 +30,25 @@ class SingleItemView extends React.Component {
     console.log('in handleClose, itemId', itemId)
     this.props.closeItem(itemId)
   }
-  componentDidUpdate(prevProps) {}
+  componentDidUpdate(prevProps) {
+    // check if the item ID is the same,
+    // and check if the status has changed from Open to Closed,
+    // then make the "Close" button disappear and ideally toast notification
+    if (
+      prevProps.location.item.id === this.props.item.id &&
+      prevProps.location.item.status !== this.props.item.status &&
+      this.state.justClosed === false
+    ) {
+      console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
+      this.setState({justClosed: true})
+    }
+  }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
 
   render() {
-    console.log('in SingleItemView, this.props', this.props)
+    console.log('in SingleItemView render, this.props', this.props)
     let {item} = this.props.location
     console.log('item!!!!', item)
 
@@ -70,7 +84,9 @@ class SingleItemView extends React.Component {
                 </div>
               ) : null}
               {/* check if the user has the right to close the item */}
-              {item.status === 'Open' && this.props.user.id === item.user.id ? (
+              {this.state.justClosed === false &&
+              item.status === 'Open' &&
+              this.props.user.id === item.user.id ? (
                 <div className="closeItem">
                   <button
                     type="button"
