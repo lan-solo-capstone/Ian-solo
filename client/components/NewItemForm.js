@@ -75,7 +75,7 @@ class NewItemForm extends Component {
                     <option value="chooseOne">Choose...</option>
                     <option value="Offer">It&apos;s an OFFER of an item</option>
                     <option value="Seeking">
-                      It&apos;s a request for a WANTED item
+                      It&apos;s a request for a SEEKING item
                     </option>
                   </select>
                 </div>
@@ -125,7 +125,7 @@ class NewItemForm extends Component {
               </div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="uploadPhoto">Upload a Photo</label>
+                  <label htmlFor="uploadPhoto">Upload Photos :</label>
                   <input
                     type="file"
                     multiple
