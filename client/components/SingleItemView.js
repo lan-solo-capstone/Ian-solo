@@ -4,7 +4,9 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
-import {ChatContainer} from './index'
+import {closeItem} from '../store/item'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // Render functional
 // const singleView = (props) => {
@@ -14,28 +16,102 @@ import {ChatContainer} from './index'
 
 // Render Class
 class SingleItemView extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // justClosed is to mark whether the current item's status
+    // has just changed from Open to Closed
+    this.state = {
+      justClosed: false,
+    }
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  // if user clicks Close button, trigger toast notification
+  handleClose(evt) {
+    evt.preventDefault()
+    const itemId = String(this.props.location.item.id)
+    console.log('in handleClose, itemId', itemId)
+    this.props.closeItem(itemId)
+    toast.success('Successfully marked as Closed!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
+  }
+
+  // check if the item ID matches,
+  // and if the status has changed from Open to Closed,
+  // and if status has just changed locally on this component
+  // then make the "Close" button disappear
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.location.item.id === this.props.item.id &&
+      prevProps.location.item.status !== this.props.item.status &&
+      this.state.justClosed === false
+    ) {
+      console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
+      this.setState({justClosed: true})
+    }
+  }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
 
   render() {
+    console.log('in SingleItemView render, this.props', this.props)
     let {item} = this.props.location
-    console.log(item)
+    console.log('item!!!!', item)
 
     if (!this.props.location.item) {
       return <Redirect to="/items" />
     }
 
     return (
-      <div className="container-sm container-md container-xl mb-5">
-        <Link to="/chat" component={ChatContainer}>
-          <p>Reply to this post</p>
-        </Link>
-        <div className="row gy-4 row-cols-1 ">
-          <div className="col">
+      <div className="container-fluid mb-4 p-0" style={{height: '90vh'}}>
+        <div
+          className="d-flex flex-column justify-content-evenly"
+          style={{height: '100%'}}
+        >
+          <div>
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
+              {/* only render chat button if item does not belong to user */}
+              {this.props.user.id !== item.user.id && (
+                <div className="chat">
+                  <Link
+                    to={{
+                      pathname: '/chat',
+                      state: this.props.item,
+                    }}
+                  >
+                    <div>
+                      <button type="button" className="btn btn-success">
+                        Reply to this post
+                      </button>
+                    </div>
+                  </Link>
+                </div>
+              )}
+              {/* check if the user has the right to close the item */}
+              {this.state.justClosed === false &&
+                item.status === 'Open' &&
+                this.props.user.id === item.user.id && (
+                  <div className="closeItem">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={this.handleClose}
+                    >
+                      Mark this item as closed
+                    </button>
+                  </div>
+                )}
             </h6>
           </div>
           <div className="col">
@@ -180,10 +256,18 @@ class SingleItemView extends React.Component {
 //   placeholder: state.placeholder,
 // })
 
+const mapState = (state) => {
+  return {
+    user: state.user,
+    item: state.item,
+  }
+}
+
 const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
+  closeItem: (itemId) => dispatch(closeItem(itemId)),
 })
 
-export default connect(null, mapDispatch)(SingleItemView)
+export default connect(mapState, mapDispatch)(SingleItemView)
