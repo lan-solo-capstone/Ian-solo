@@ -23,7 +23,9 @@ class MapSingleItem extends React.Component {
       selectedItem: this.props.item,
     }
     window.addEventListener('resize', (e) => {
-      this.resizer()
+      if (!this.unload) {
+        this.resizer()
+      }
     })
   }
 
@@ -39,7 +41,7 @@ class MapSingleItem extends React.Component {
   }
 
   resizer(e) {
-    if (!this.unload && this.props?.prevRef && this.props.prevRef !== 0) {
+    if (this.props?.prevRef && this.props.prevRef !== 0) {
       const width = this.props.prevRef.current?.offsetWidth
       const height = this.props.prevRef.current?.offsetHeight
 

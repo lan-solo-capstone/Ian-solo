@@ -67,7 +67,7 @@ class Navbar extends React.Component {
                       ref={this.inputRef}
                       style={{width: '100%', height: '85vh'}}
                     >
-                      {this.props.currentPage.page === 'listall' ? (
+                      {this.props.currentPage.page === 'listall' && (
                         <>
                           {console.log(this.props.currentPage.page)}
                           <MapAllItems
@@ -75,8 +75,8 @@ class Navbar extends React.Component {
                             prevRef={this.inputRef}
                           />
                         </>
-                      ) : null}
-                      {this.props.currentPage.page === 'singleview' ? (
+                      )}
+                      {this.props.currentPage.page === 'singleview' && (
                         <>
                           {console.log(this.props.currentPage.page)}
                           <MapSingleItem
@@ -84,7 +84,7 @@ class Navbar extends React.Component {
                             prevRef={this.inputRef}
                           />
                         </>
-                      ) : null}
+                      )}
                     </div>
                   </div>
                 </div>

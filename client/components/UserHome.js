@@ -63,7 +63,7 @@ class UserHome extends React.Component {
                 />
               </a>
               <div className="collapse multi-collapse" id="multiCollapseOpen">
-                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Open')
                     .map((item) => (
@@ -93,7 +93,7 @@ class UserHome extends React.Component {
                 />
               </a>
               <div className="collapse multi-collapse" id="multiCollapseClosed">
-                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Closed')
                     .map((item) => (
