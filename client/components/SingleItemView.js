@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
+import {me} from '../store/user.js'
 import {ChatContainer} from './index'
 
 // Render functional
@@ -14,11 +15,16 @@ import {ChatContainer} from './index'
 
 // Render Class
 class SingleItemView extends React.Component {
+  // componentDidMount() {
+  //   this.props.fetchUser()
+  // }
+
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
 
   render() {
+    console.log('in SingleItemView, this.props')
     let {item} = this.props.location
     console.log(item)
 
@@ -36,15 +42,26 @@ class SingleItemView extends React.Component {
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
-              <div className="chat">
-                <Link
-                  to={{
-                    pathname: '/chat',
-                    state: this.props.item,
-                  }}
-                >
-                  <div>Reply to this post</div>
-                </Link>
+              {
+                <div className="chat">
+                  <Link
+                    to={{
+                      pathname: '/chat',
+                      state: this.props.item,
+                    }}
+                  >
+                    <div>
+                      <button type="button" className="btn btn-success">
+                        Reply to this post
+                      </button>
+                    </div>
+                  </Link>
+                </div>
+              }
+              <div className="closeItem">
+                <button type="button" className="btn btn-warning">
+                  Mark this item as closed
+                </button>
               </div>
             </h6>
           </div>
@@ -194,6 +211,7 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
+  fetchUser: () => dispatch(me()),
 })
 
 export default connect(null, mapDispatch)(SingleItemView)
