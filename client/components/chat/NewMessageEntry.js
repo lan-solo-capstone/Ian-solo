@@ -1,9 +1,29 @@
 import React, {Component} from 'react'
+import {sendMessage} from '../../store/chat'
+import {me} from '../../store/user.js'
+import {connect} from 'react-redux'
 
-export default class NewMessageEntry extends Component {
+export class NewMessageEntry extends Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const message = event.target.content.value
+    this.props.submitMessage({
+      content: message,
+      // channelId: this.props.channelId,
+      channelId: 1,
+      userId: this.props.user.id,
+    })
+  }
+
   render() {
+    console.log('in NewMessageEntry render, this.props', this.props)
     return (
-      <form id="new-message-form">
+      <form id="new-message-form" onSubmit={this.handleSubmit}>
         <div className="input-group input-group-lg">
           <input
             className="form-control"
@@ -21,3 +41,17 @@ export default class NewMessageEntry extends Component {
     )
   }
 }
+
+const mapState = (state) => {
+  return {
+    user: state.user,
+    item: state.item,
+  }
+}
+
+const mapDispatch = (dispatch) => ({
+  fetchUser: () => dispatch(me()),
+  submitMessage: (message) => dispatch(sendMessage(message)),
+})
+
+export default connect(mapState, mapDispatch)(NewMessageEntry)
