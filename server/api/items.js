@@ -97,12 +97,17 @@ router.post(
   }
 )
 
+// PUT route for /api/items/:itemId
+// for now, this is only to mark items as closed -- JC
+// can be expanded later to allow users to modify their posts -- JC 03.26.21
+
 router.put('/:itemId', async (req, res, next) => {
   try {
     const {itemId} = req.params
     const status = req.body.status
     const item = await Item.findByPk(itemId)
 
+    console.log('in PUT route for /item/:itemId', 'hello', item)
     if (!item) {
       res.sendStatus(404)
       return
