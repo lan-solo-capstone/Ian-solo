@@ -2,16 +2,23 @@ import React, {Component} from 'react'
 import history from '../history'
 import {connect} from 'react-redux'
 
+const initialState = {
+  search: '',
+  itemType: 'All',
+  distance: 'Anywhere',
+}
+
 class SearchBox extends Component {
   constructor() {
     super()
     this.state = {
       search: '',
       itemType: 'All',
-      distance: 'All',
+      distance: 'Anywhere',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleReset = this.handleReset.bind(this)
   }
 
   handleChange(evt) {
@@ -35,8 +42,14 @@ class SearchBox extends Component {
         searchDistance: searchDistance,
       },
     })
+  }
 
-    // this.setState({search: ''})
+  handleReset(evt) {
+    evt.preventDefault()
+    this.setState(initialState)
+    history.push({
+      pathname: '/items',
+    })
   }
 
   render() {
@@ -73,15 +86,18 @@ class SearchBox extends Component {
               onChange={this.handleChange}
               value={this.state.distance}
             >
-              <option value="Any">Anywhere</option>
+              <option value="Anywhere">Anywhere</option>
               <option value="1">Within 1 mi</option>
               <option value="2">Within 2 mi</option>
               <option value="5">Within 5 mi</option>
+              <option value="10">Within 10 mi</option>
+              <option value="20">Within 20 mi</option>
+              <option value="50">Within 50 mi</option>
             </select>
           </div>
         ) : null}
 
-        <div className="m-0 mb-1 col-10 col-md-5">
+        <div className="m-0 mb-1 col-6 col-md-4">
           <input
             className="form-control m-0"
             type="search"
@@ -92,13 +108,22 @@ class SearchBox extends Component {
             value={this.state.search}
           ></input>
         </div>
-        <div className="m-0 mb-1 col-2 col-md-1">
+        <div className="m-0 mb-1 col-3 col-md-1">
           <button
             className="btn btn-outline-primary m-0 "
             role="button"
             type="submit"
           >
             Go
+          </button>
+        </div>
+        <div className="m-0 mb-1 col-3 col-md-1">
+          <button
+            className="btn btn-outline-primary m-0 "
+            role="button"
+            onClick={this.handleReset}
+          >
+            Reset
           </button>
         </div>
       </form>

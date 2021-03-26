@@ -27,11 +27,23 @@ class Items extends React.Component {
     //the following are MJA changes for the search capability:
     let items
 
-    let headline = 'All Current offers'
+    let headline = `All Current Offers`
     if (this.props.location.searchBoxParams) {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
         ' '
       )
+      //Calc distance between two coords using Haversine Formula
+      const calcMiles = (lat1, lon1, lat2, lon2) => {
+        lat1 *= Math.PI / 180
+        lat2 *= Math.PI / 180
+        const latDif = lat2 - lat1
+        const lonDif = ((lon2 - lon1) * Math.PI) / 180
+        const h =
+          Math.sin(latDif / 2) ** 2 +
+          Math.cos(lat1) * Math.cos(lat2) * Math.sin(lonDif / 2) ** 2
+        return 2 * 3958.75 * Math.asin(Math.sqrt(h))
+      }
+
       items = this.props.items
         .filter((item) => {
           if (this.props.location.searchBoxParams.searchItemType === 'All') {
@@ -49,6 +61,22 @@ class Items extends React.Component {
           }
         })
         .filter((item) => {
+          if (
+            this.props.location.searchBoxParams.searchDistance === 'Anywhere'
+          ) {
+            return item
+          } else if (
+            calcMiles(
+              +this.props.user.latitude,
+              +this.props.user.longitude,
+              +item.user.latitude,
+              +item.user.longitude
+            ) <= +this.props.location.searchBoxParams.searchDistance
+          ) {
+            return item
+          }
+        })
+        .filter((item) => {
           for (let i = 0; i < keyWords.length; i++) {
             if (
               item.itemListName
@@ -60,7 +88,8 @@ class Items extends React.Component {
             }
           }
         })
-      headline = 'Results for: ' + keyWords.join(', ')
+      headline =
+        items.length > 0 ? `Matches Found: ${items.length}` : 'No Matches Found'
     } else {
       items = this.props.items
     }
@@ -77,20 +106,7 @@ class Items extends React.Component {
     ) : (
       <div className="mb-5 container container-lg container-xxl">
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 p-2">
-          {/* All Current offers */}
           {headline}
-
-          {this.props.location.searchBoxParams ? (
-            <>
-              <span> | </span>
-              <Link
-                to="/items"
-                className="text-decoration-none text-warning m-0"
-              >
-                <span>Reset</span>
-              </Link>
-            </>
-          ) : null}
         </h3>
         {console.log(this.props.items)}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -158,6 +174,7 @@ class Items extends React.Component {
 const mapState = (state) => ({
   items: state.items.items,
   loading: state.items.loading,
+  user: state.user,
 })
 
 const mapDispatch = (dispatch) => ({
