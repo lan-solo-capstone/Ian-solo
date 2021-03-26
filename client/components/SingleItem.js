@@ -7,8 +7,8 @@ import timeAgo from 'node-time-ago'
 // Render functional
 const SingleItem = (props) => {
   const {item} = props
-
-  const {createdAt, city, state} = item.user
+  const createdAt = item.createdAt
+  const {city, state} = item.user
 
   return (
     <Link
