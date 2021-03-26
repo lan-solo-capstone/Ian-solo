@@ -8,7 +8,6 @@ import {
   UserHome,
   MapAllItems,
   MapSingleItem,
-  temp,
   NewItemForm,
   Items,
   SingleItemView,
@@ -35,7 +34,6 @@ class Routes extends Component {
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
         <Route path="/singleview" component={SingleItemView} />
-        <Route path="/temp" component={temp} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
