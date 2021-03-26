@@ -11,44 +11,48 @@ const SingleItem = (props) => {
   const {createdAt, city, state} = item.user
 
   return (
-    <Link
-      to={{pathname: '/singleview', item: item}}
-      className="col text-decoration-none text-secondary "
-    >
+    <div className="col">
       <div className="card mb-3" style={{maxwidth: '800px'}}>
-        <div className="row g-0">
-          <div className="col-md-4 d-flex align-items-center justify-content-center">
-            <img
-              className="img-fluid"
-              src={
-                item.itemPhotos[0]?.downloadURL
-                  ? item.itemPhotos[0].downloadURL
-                  : `../images/notFound.png`
-              }
-            />
-          </div>
-          <div className="col-md-8">
-            <div className="card-body py-1" id="removeLink">
-              <h5 className="card-title text-truncate">{item.itemListName}</h5>
-              <div>
-                {item.itemType === 'Offer' ? (
-                  <p className="card-text text-success my-1">Offer</p>
-                ) : (
-                  <p className="card-text text-danger my-1">Seeking</p>
-                )}
-                <p className="card-text my-1">{item.status}</p>
-                <p>
-                  {city}, {state}
+        <Link
+          to={{pathname: '/singleview', item: item}}
+          className="text-decoration-none text-secondary "
+        >
+          <div className="row g-0">
+            <div className="col-md-4 d-flex align-items-center justify-content-center">
+              <img
+                className="img-fluid"
+                src={
+                  item.itemPhotos[0]?.downloadURL
+                    ? item.itemPhotos[0].downloadURL
+                    : `../images/notFound.png`
+                }
+              />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body py-1" id="removeLink">
+                <h5 className="card-title text-truncate">
+                  {item.itemListName}
+                </h5>
+                <div>
+                  {item.itemType === 'Offer' ? (
+                    <p className="card-text text-success my-1">Offer</p>
+                  ) : (
+                    <p className="card-text text-danger my-1">Seeking</p>
+                  )}
+                  <p className="card-text my-1">{item.status}</p>
+                  <p>
+                    {city}, {state}
+                  </p>
+                </div>
+                <p className="card-text">
+                  <small className="text-muted">{timeAgo(createdAt)}</small>
                 </p>
               </div>
-              <p className="card-text">
-                <small className="text-muted">{timeAgo(createdAt)}</small>
-              </p>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   )
 }
 
