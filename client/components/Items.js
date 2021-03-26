@@ -32,18 +32,34 @@ class Items extends React.Component {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
         ' '
       )
-      items = this.props.items.filter((item) => {
-        for (let i = 0; i < keyWords.length; i++) {
-          if (
-            item.itemListName
-              .toLowerCase()
-              .includes(keyWords[i].toLowerCase()) ||
-            item.description.toLowerCase().includes(keyWords[i].toLowerCase())
+      items = this.props.items
+        .filter((item) => {
+          if (this.props.location.searchBoxParams.searchItemType === 'All') {
+            return item
+          } else if (
+            this.props.location.searchBoxParams.searchItemType === 'Offer' &&
+            item.itemType === 'Offer'
+          ) {
+            return item
+          } else if (
+            this.props.location.searchBoxParams.searchItemType === 'Seeking' &&
+            item.itemType === 'Seeking'
           ) {
             return item
           }
-        }
-      })
+        })
+        .filter((item) => {
+          for (let i = 0; i < keyWords.length; i++) {
+            if (
+              item.itemListName
+                .toLowerCase()
+                .includes(keyWords[i].toLowerCase()) ||
+              item.description.toLowerCase().includes(keyWords[i].toLowerCase())
+            ) {
+              return item
+            }
+          }
+        })
       headline = 'Results for: ' + keyWords.join(', ')
     } else {
       items = this.props.items

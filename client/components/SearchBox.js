@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 import history from '../history'
+import {connect} from 'react-redux'
 
 class SearchBox extends Component {
   constructor() {
     super()
     this.state = {
       search: '',
+      itemType: 'All',
+      distance: 'All',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,43 +23,64 @@ class SearchBox extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
     const searchString = this.state.search
-    if (searchString) {
-      //where we redirect w/ props
-      history.push({
-        pathname: '/items',
-        searchBoxParams: {searchString: searchString},
-      })
-    }
-    this.setState({search: ''})
+    const searchItemType = this.state.itemType
+    const searchDistance = this.state.distance
+
+    //where we redirect w/ props
+    history.push({
+      pathname: '/items',
+      searchBoxParams: {
+        searchString: searchString,
+        searchItemType: searchItemType,
+        searchDistance: searchDistance,
+      },
+    })
+
+    // this.setState({search: ''})
   }
 
   render() {
     return (
       <form className="row p-0" onSubmit={this.handleSubmit}>
-        <div className="m-0 mb-1 col-6 col-md-3">
+        {/* <div className="m-0 mb-1 col-6 col-md-3"> */}
+        {/* {this.props.isLoggedIn ? <div className="m-0 mb-1 col-6 col-md-3"> : <div className="m-0 mb-1 col-12 col-md-6">} */}
+        <div
+          className={
+            this.props.isLoggedIn
+              ? 'm-0 mb-1 col-6 col-md-3'
+              : 'm-0 mb-1 col-12 col-md-6'
+          }
+        >
           <select
             name="itemType"
             className="form-select form-control m-0"
             aria-label="Listing Type"
+            onChange={this.handleChange}
+            value={this.state.itemType}
           >
-            <option defaultValue>Lisitng Type</option>
-            <option value="All">All</option>
-            <option value="Offer">Offer</option>
-            <option value="Seeking">Seeking</option>
+            <option value="All">All Items</option>
+            <option value="Offer">Offers Only</option>
+            <option value="Seeking">Seeking Only</option>
           </select>
         </div>
-        <div className="m-0 mb-1 col-6 col-md-3">
-          <select
-            name="distance"
-            className="form-select form-control m-0"
-            aria-label="Distance"
-          >
-            <option defaultValue>Distance</option>
-            <option value="1">1 mi</option>
-            <option value="5">5 mi</option>
-            <option value="10">> 10 mi</option>
-          </select>
-        </div>
+
+        {this.props.isLoggedIn ? (
+          <div className="m-0 mb-1 col-6 col-md-3">
+            <select
+              name="distance"
+              className="form-select form-control m-0"
+              aria-label="Distance"
+              onChange={this.handleChange}
+              value={this.state.distance}
+            >
+              <option value="Any">Anywhere</option>
+              <option value="1">Within 1 mi</option>
+              <option value="2">Within 2 mi</option>
+              <option value="5">Within 5 mi</option>
+            </select>
+          </div>
+        ) : null}
+
         <div className="m-0 mb-1 col-10 col-md-5">
           <input
             className="form-control m-0"
@@ -82,4 +106,10 @@ class SearchBox extends Component {
   }
 }
 
-export default SearchBox
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+  }
+}
+export default connect(mapStateToProps, null)(SearchBox)
