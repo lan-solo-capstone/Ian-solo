@@ -101,12 +101,14 @@ class SingleItemView extends React.Component {
                     className={idx === 0 ? 'active' : ''}
                     aria-current={idx === 0 ? 'true' : ''}
                     aria-label={`Slide ${idx + 1}`}
+                    key={idx}
                   />
                 ))}
               </div>
               <div className="carousel-inner">
                 {item.itemPhotos.map((photo, idx) => (
                   <div
+                    key={idx}
                     className={
                       idx === 0 ? 'carousel-item active' : 'carousel-item'
                     }
@@ -174,10 +176,8 @@ class SingleItemView extends React.Component {
                   style={{width: '100vw', height: '5vh'}}
                 >
                   <i
-                    className="bi bi-chevron-compact-up"
-                    id="chevron-rotate"
+                    className="bi bi-chevron-compact-down text-light"
                     style={{
-                      color: 'white',
                       fontSize: '2rem',
                     }}
                   />

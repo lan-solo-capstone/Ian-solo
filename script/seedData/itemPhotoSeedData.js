@@ -5,21 +5,21 @@ const itemPhotos = [
     photoTitle: 'default.jpeg',
     CloudREF: '',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
     itemId: 1,
   },
   {
     photoTitle: 'pan',
     CloudREF: '/images/pan.jfif',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fpan.jfif?alt=media&token=75c2ea85-57ac-48c2-af08-69f83b9f9f0b',
+      ' https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fpan.jfif?alt=media&token=75c2ea85-57ac-48c2-af08-69f83b9f9f0b,',
     itemId: 2,
   },
   {
     photoTitle: 'stove',
     CloudREF: '/images/stove.jpg',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fpan.jfif?alt=media&token=75c2ea85-57ac-48c2-af08-69f83b9f9f0b',
+      ' https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fpan.jfif?alt=media&token=75c2ea85-57ac-48c2-af08-69f83b9f9f0b,',
     itemId: 2,
   },
   {
@@ -40,7 +40,7 @@ const itemPhotos = [
     photoTitle: 'boots',
     CloudREF: '/images/boots.webp',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fboots.webp?alt=media&token=4cc149ba-2e57-4397-8a89-3d5c79a07c99',
+      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2Fboots.webp?alt=media&token=4cc149ba-2e57-4397-8a89-3d5c79a07c99,',
     itemId: 5,
   },
   {
@@ -54,14 +54,14 @@ const itemPhotos = [
     photoTitle: 'default.jpeg',
     CloudREF: '',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
     itemId: 7,
   },
   {
     photoTitle: 'default.jpeg',
     CloudREF: '',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
     itemId: 8,
   },
   {
@@ -278,7 +278,7 @@ const itemPhotos = [
     photoTitle: 'default.jpeg',
     CloudREF: '',
     downloadURL:
-      'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
     itemId: 27,
   },
   {
@@ -372,6 +372,129 @@ const itemPhotos = [
       'https://images.craigslist.org/00W0W_lgdYrdaLMNuz_0CI0q8_600x450.jpg',
     itemId: 36,
   },
+  {
+    photoTitle: 'default.jpeg',
+    CloudREF: '',
+    downloadURL:
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+    itemId: 37,
+  },
+  {
+    photoTitle: 'christmas1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00K0K_b9ZvkarpIvN_0iu0as_600x450.jpg',
+    itemId: 38,
+  },
+  {
+    photoTitle: 'christmas2',
+    CloudREF: '',
+    downloadURL: 'https://images.craigslist.org/00N0N_8mRxAFHxzvi_600x450.jpg',
+    itemId: 38,
+  },
+  {
+    photoTitle: 'christmas3',
+    CloudREF: '',
+    downloadURL: 'https://images.craigslist.org/00Q0Q_cIxfY4F7GPI_600x450.jpg',
+    itemId: 38,
+  },
+  {
+    photoTitle: 'tractor_wheel',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00m0m_1vonsG3xj9tz_0t20CI_600x450.jpg',
+    itemId: 39,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    CloudREF: '',
+    downloadURL:
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+    itemId: 40,
+  },
+  {
+    photoTitle: 'popcornCart',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00A0A_8V02mjNJ1VG_0dm0sU_600x450.jpg',
+    itemId: 41,
+  },
+  {
+    photoTitle: 'oil_sign',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00H0H_h0srSr7184Z_0hq0hq_600x450.jpg',
+    itemId: 42,
+  },
+  {
+    photoTitle: 'oil_sign',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00404_bkvYTysoooy_0hq0hq_600x450.jpg',
+    itemId: 42,
+  },
+  {
+    photoTitle: 'oil_sign',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00v0v_htuENLweWgX_0hq0hq_600x450.jpg',
+    itemId: 42,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    CloudREF: '',
+    downloadURL:
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+    itemId: 43,
+  },
+  {
+    photoTitle: 'restorationhardwareTable',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00J0J_dp52nNf2U2Xz_0dR08O_600x450.jpg',
+    itemId: 44,
+  },
+  {
+    photoTitle: 'desk',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00p0p_a9NFBUxSOK9z_0i90iH_600x450.jpg',
+    itemId: 45,
+  },
+  {
+    photoTitle: 'deskChair',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00n0n_4gk3bkHHcHAz_0i90hZ_600x450.jpg',
+    itemId: 46,
+  },
+  {
+    photoTitle: 'IKEA_dresser',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00H0H_gy84YdgKSWSz_0CI0xj_600x450.jpg',
+    itemId: 47,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    CloudREF: '',
+    downloadURL:
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+    itemId: 48,
+  },
+  {
+    photoTitle: 'cameraAccessories',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00r0r_3c91Tf8iDV0z_0t20CI_600x450.jpg',
+    itemId: 49,
+  },
+  {
+    photoTitle: 'default.jpeg',
+    CloudREF: '',
+    downloadURL:
+      "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
+    itemId: 50,
+  },
 ]
-
 module.exports = itemPhotos
