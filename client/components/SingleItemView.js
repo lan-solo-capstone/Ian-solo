@@ -7,6 +7,8 @@ import MapSingleItem from './MapSingleItem'
 import {me} from '../store/user.js'
 import {ChatContainer} from './index'
 import {closeItem} from '../store/item'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // Render functional
 // const singleView = (props) => {
@@ -18,6 +20,9 @@ import {closeItem} from '../store/item'
 class SingleItemView extends React.Component {
   constructor(props) {
     super(props)
+
+    // justClosed is to mark whether the current item's status
+    // has just changed from Open to Closed
     this.state = {
       justClosed: false,
     }
@@ -29,10 +34,20 @@ class SingleItemView extends React.Component {
     const itemId = String(this.props.location.item.id)
     console.log('in handleClose, itemId', itemId)
     this.props.closeItem(itemId)
+    toast.success('Successfully marked as Closed!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
   componentDidUpdate(prevProps) {
     // check if the item ID is the same,
     // and check if the status has changed from Open to Closed,
+    // and if status has just changed locally on this component
     // then make the "Close" button disappear and ideally toast notification
     if (
       prevProps.location.item.id === this.props.item.id &&
