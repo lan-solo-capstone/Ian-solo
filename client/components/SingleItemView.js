@@ -58,8 +58,7 @@ class SingleItemView extends React.Component {
                   </Link>
                 </div>
               }
-              {console.log('this.props.status!!!!', this.props.status)}
-              {this.props.status === 'Open' ? (
+              {item.status === 'Open' && this.props.user.id === item.user.id ? (
                 <div className="closeItem">
                   <button type="button" className="btn btn-warning">
                     Mark this item as closed
@@ -210,11 +209,17 @@ class SingleItemView extends React.Component {
 //   placeholder: state.placeholder,
 // })
 
+const mapState = (state) => {
+  return {
+    user: state.user,
+  }
+}
+
 const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  fetchUser: () => dispatch(me()),
+  // fetchUser: () => dispatch(me()),
 })
 
-export default connect(null, mapDispatch)(SingleItemView)
+export default connect(mapState, mapDispatch)(SingleItemView)
