@@ -54,17 +54,22 @@ class UserHome extends React.Component {
                 aria-controls="multiCollapseOpen"
                 role="button"
               >
-                <h4 className="m-0">Open Items</h4>
+                <h4 className="m-0">Open Items </h4>
+                <i
+                  className="bi bi-chevron-compact-down text-secondary"
+                  style={{
+                    fontSize: '2rem',
+                  }}
+                />
               </a>
-              <div
-                className="row collapse multi-collapse gx-2 row-cols-sm-1 row-cols-md-2 p-2"
-                id="multiCollapseOpen"
-              >
-                {items
-                  .filter((item) => item.status === 'Open')
-                  .map((item) => (
-                    <SingleItem key={item.id} item={item} />
-                  ))}
+              <div className="collapse multi-collapse" id="multiCollapseOpen">
+                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                  {items
+                    .filter((item) => item.status === 'Open')
+                    .map((item) => (
+                      <SingleItem key={item.id} item={item} />
+                    ))}
+                </div>
               </div>
             </div>
           </div>
@@ -79,17 +84,22 @@ class UserHome extends React.Component {
                 aria-controls="multiCollapseClosed"
                 role="button"
               >
-                <h4 className="m-0">Closed Items</h4>
+                <h4 className="m-0">Closed Items </h4>
+                <i
+                  className="bi bi-chevron-compact-down text-secondary"
+                  style={{
+                    fontSize: '2rem',
+                  }}
+                />
               </a>
-              <div
-                className="row collapse multi-collapse gx-2 row-cols-sm-1 row-cols-md-2 p-2"
-                id="multiCollapseClosed"
-              >
-                {items
-                  .filter((item) => item.status === 'Closed')
-                  .map((item) => (
-                    <SingleItem key={item.id} item={item} />
-                  ))}
+              <div className="collapse multi-collapse" id="multiCollapseClosed">
+                <div className="row gx-2 p-2 row-cols-sm-1 row-cols-md-2">
+                  {items
+                    .filter((item) => item.status === 'Closed')
+                    .map((item) => (
+                      <SingleItem key={item.id} item={item} />
+                    ))}
+                </div>
               </div>
             </div>
           </div>

@@ -36,18 +36,24 @@ class MapAllItems extends React.Component {
     this.setState({loading: false})
   }
 
-  resizer(e) {
-    const width = document.getElementById('mapContainer').offsetWidth
-    const height = document.getElementById('mapContainer').offsetHeight
+  componentWillUnmount() {
+    this.unload = true
+  }
 
-    this.setState({
-      ...this.state,
-      viewport: {
-        ...this.state.viewport,
-        width: `${width}px`,
-        height: `${height}px`,
-      },
-    })
+  resizer(e) {
+    if (!this.unload && this.props?.prevRef && this.props.prevRef !== 0) {
+      const width = this.props.prevRef.current?.offsetWidth
+      const height = this.props.prevRef.current?.offsetHeight
+
+      this.setState({
+        ...this.state,
+        viewport: {
+          ...this.state.viewport,
+          width: `${width}px`,
+          height: `${height}px`,
+        },
+      })
+    }
   }
 
   render() {

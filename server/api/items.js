@@ -18,7 +18,17 @@ router.get('/', async (req, res, next) => {
         'dateListed',
       ],
       include: [
-        {model: User, attributes: ['firstName', 'latitude', 'longitude']},
+        {
+          model: User,
+          attributes: [
+            'firstName',
+            'latitude',
+            'longitude',
+            'state',
+            'city',
+            'createdAt',
+          ],
+        },
         {
           model: ItemPhoto,
           attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
