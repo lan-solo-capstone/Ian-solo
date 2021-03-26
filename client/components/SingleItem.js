@@ -2,53 +2,56 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import timeAgo from 'node-time-ago'
 
 // Render functional
-const SingleItem = (props) => (
-  <Link
-    to={{pathname: '/singleview', item: props.item}}
-    className="col text-decoration-none text-secondary"
-  >
-    <div className="card mb-3" style={{maxwidth: '800px'}}>
-      <div className="row g-0">
-        <div className="col-md-4 d-flex align-items-center justify-content-center">
-          {console.log(props.item.itemPhotos)}
-          <img
-            className="img-fluid"
-            src={
-              props.item.itemPhotos[0]?.downloadURL
-                ? props.item.itemPhotos[0].downloadURL
-                : `../images/notFound.png`
-            }
-          />
-        </div>
-        <div className="col-md-8">
-          <div className="card-body py-1" id="removeLink">
-            <h5 className="card-title text-truncate">
-              {props.item.itemListName}
-            </h5>
-            {props.item.itemType === 'Offer' ? (
+const SingleItem = (props) => {
+  const {item} = props
+
+  const {createdAt, city, state} = item.user
+
+  return (
+    <Link
+      to={{pathname: '/singleview', item: item}}
+      className="col text-decoration-none text-secondary"
+    >
+      <div className="card mb-3" style={{maxwidth: '800px'}}>
+        <div className="row g-0">
+          <div className="col-md-4 d-flex align-items-center justify-content-center">
+            {console.log(item.itemPhotos)}
+            <img
+              className="img-fluid"
+              src={
+                item.itemPhotos[0]?.downloadURL
+                  ? item.itemPhotos[0].downloadURL
+                  : `../images/notFound.png`
+              }
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="card-body py-1" id="removeLink">
+              <h5 className="card-title text-truncate">{item.itemListName}</h5>
               <div>
-                <p className="card-text text-success my-1">Offer</p>
-                <p className="card-text my-1">{props.item.status}</p>
-                <p>Location</p>
+                {item.itemType === 'Offer' ? (
+                  <p className="card-text text-success my-1">Offer</p>
+                ) : (
+                  <p className="card-text text-danger my-1">Seeking</p>
+                )}
+                <p className="card-text my-1">{item.status}</p>
+                <p>
+                  {city}, {state}
+                </p>
               </div>
-            ) : (
-              <div>
-                <p className="card-text text-danger my-1">Seeking</p>
-                <p className="card-text my-1">{props.item.status}</p>
-                <p>Location</p>
-              </div>
-            )}
-            <p className="card-text">
-              <small className="text-muted">An hour ago</small>
-            </p>
+              <p className="card-text">
+                <small className="text-muted">{timeAgo(createdAt)}</small>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </Link>
-)
+    </Link>
+  )
+}
 
 export default SingleItem
 

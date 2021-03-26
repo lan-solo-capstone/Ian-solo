@@ -40,6 +40,8 @@ class MapAllItems extends React.Component {
     const width = document.getElementById('mapContainer').offsetWidth
     const height = document.getElementById('mapContainer').offsetHeight
 
+    console.log('running', e)
+
     this.setState({
       ...this.state,
       viewport: {

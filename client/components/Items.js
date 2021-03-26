@@ -83,53 +83,13 @@ class Items extends React.Component {
             <SingleItem key={item.id} item={item} />
           ))}
         </div>
-        <div className="fixed-bottom d-md-none">
+        {/* <div className="fixed-bottom d-md-none">
           <div>
-            <a
-              className="btn btn-secondary mx-auto mb-3 rounded-pill d-flex justify-content-evenly align-items-center"
-              data-bs-toggle="collapse"
-              href="#mapCollapse"
-              role="button"
-              id="collapseButton"
-              style={{width: '150px', height: '30px'}}
-            >
-              <p className="m-0">View on map</p>
-              <i
-                className="bi bi-compass"
-                style={{
-                  color: 'white',
-                  fontSize: '1.4rem',
-                }}
-              />
-            </a>
+
             <MobileFooter />
-            <div className="collapse" id="mapCollapse">
-              <a
-                className="btn btn-secondary m-auto rounded-0 d-flex justify-content-center align-items-center"
-                data-bs-toggle="collapse"
-                href="#mapCollapse"
-                role="button"
-                style={{width: '100vw', height: '5vh'}}
-              >
-                <i
-                  className="bi bi-chevron-compact-up"
-                  id="chevron-rotate"
-                  style={{
-                    color: 'white',
-                    fontSize: '2rem',
-                  }}
-                />
-              </a>
-              <div
-                className="bg-secondary rounded-top text-light"
-                id="mapContainer"
-                style={{height: '95vh'}}
-              >
-                <MapAllItems itemsArray={items} />
-              </div>
-            </div>
+
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }
