@@ -25,7 +25,7 @@ class UserHome extends React.Component {
     })
 
     return (
-      <div className="containter-sm container-xl mt-3 mb-5">
+      <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details:

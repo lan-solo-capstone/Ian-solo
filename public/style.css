@@ -20,10 +20,6 @@ form div {
   display: inline-block;
 }
 
-#chevron-rotate {
-  transform: rotate(180deg);
-}
-
 #collapseButton {
   opacity: 100%;
   transition: opacity 1s;
@@ -34,17 +30,16 @@ form div {
   transition: opacity 0.1s;
 }
 
-.singleViewFix {
-  height: 100% !important;
-  width: 100% !important;
-}
-
 .imgSliders {
   width: 50vw;
   height: 50vw;
   max-width: 450px;
   max-height: 450px;
   margin: auto;
+}
+
+.footerSpacing {
+  margin-bottom: 85px !important;
 }
 
 /*
