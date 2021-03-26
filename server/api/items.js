@@ -96,3 +96,21 @@ router.post(
     }
   }
 )
+
+router.put('/:itemId', async (req, res, next) => {
+  try {
+    const {itemId} = req.params
+    const status = req.body.status
+    const item = await Item.findByPk(itemId)
+
+    if (!item) {
+      res.sendStatus(404)
+      return
+    }
+
+    await item.update({status: status})
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
