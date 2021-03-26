@@ -94,7 +94,7 @@ class Navbar extends React.Component {
 
             <div className="collapse navbar-collapse" id="navbarNav">
               <Link
-                className="nav-item nav-link mx-2 d-none d-md-block text-secondary"
+                className="nav-item nav-link mx-2 px-0 d-none d-md-block text-secondary"
                 to="/items"
               >
                 Browse All
@@ -180,10 +180,8 @@ class Navbar extends React.Component {
                     style={{width: '100vw', height: '5vh'}}
                   >
                     <i
-                      className="bi bi-chevron-compact-up"
-                      id="chevron-rotate"
+                      className="bi bi-chevron-compact-down text-light"
                       style={{
-                        color: 'white',
                         fontSize: '2rem',
                       }}
                     />

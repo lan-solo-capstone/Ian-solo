@@ -131,10 +131,8 @@ class SingleItemView extends React.Component {
                   style={{width: '100vw', height: '5vh'}}
                 >
                   <i
-                    className="bi bi-chevron-compact-up"
-                    id="chevron-rotate"
+                    className="bi bi-chevron-compact-down text-light"
                     style={{
-                      color: 'white',
                       fontSize: '2rem',
                     }}
                   />
