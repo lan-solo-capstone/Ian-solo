@@ -74,6 +74,7 @@ export const postNewItem = (item) => {
   }
 }
 
+// this can be renamed to editItem and rewritten to edit any part of the item -- JC 03.26.21
 export const closeItem = (itemId) => {
   return async (dispatch) => {
     try {

@@ -45,11 +45,12 @@ class SingleItemView extends React.Component {
       progress: undefined,
     })
   }
+
+  // check if the item ID matches,
+  // and if the status has changed from Open to Closed,
+  // and if status has just changed locally on this component
+  // then make the "Close" button disappear
   componentDidUpdate(prevProps) {
-    // check if the item ID is the same,
-    // and check if the status has changed from Open to Closed,
-    // and if status has just changed locally on this component
-    // then make the "Close" button disappear and ideally toast notification
     if (
       prevProps.location.item.id === this.props.item.id &&
       prevProps.location.item.status !== this.props.item.status &&
