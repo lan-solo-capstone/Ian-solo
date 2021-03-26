@@ -35,6 +35,7 @@ form div {
   height: 50vw;
   max-width: 450px;
   max-height: 450px;
+  object-fit: contain;
   margin: auto;
 }
 

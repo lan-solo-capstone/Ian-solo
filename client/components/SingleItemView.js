@@ -27,7 +27,7 @@ class SingleItemView extends React.Component {
     }
 
     return (
-      <div className="container-sm container-md container-xl footerSpacing">
+      <div className="container-sm container-md container-xl footerSpacing mt-2">
         <Link to="/chat" component={ChatContainer}>
           <p>Reply to this post</p>
         </Link>
