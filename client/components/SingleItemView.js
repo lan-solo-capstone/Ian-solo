@@ -228,6 +228,7 @@ class SingleItemView extends React.Component {
 const mapState = (state) => {
   return {
     user: state.user,
+    item: state.item,
   }
 }
 
