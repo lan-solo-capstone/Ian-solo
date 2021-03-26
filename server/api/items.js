@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
         'itemType',
         'status',
         'dateListed',
+        'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
       ],
       include: [
         {
