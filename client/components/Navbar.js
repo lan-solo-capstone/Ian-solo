@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-0">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-0 p-1">
           <div className="container-fluid">
             <Link to="/items" className="text-decoration-none text-dark m-0">
               <span className="navbar-brand">
@@ -92,7 +92,7 @@ class Navbar extends React.Component {
             </div>
             {/* Ends modal */}
 
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="collapse navbar-collapse p-0" id="navbarNav">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <Link
                   className="nav-item nav-link mx-1 px-0 d-none d-md-block text-secondary"
@@ -158,7 +158,10 @@ class Navbar extends React.Component {
                 ) : (
                   <>
                     {/* The navbar will show these links before you log in */}
-                    <Link className="nav-item nav-link mx-1" to="/login">
+                    <Link
+                      className="nav-item nav-link mx-1 d-none d-md-block"
+                      to="/login"
+                    >
                       Login
                     </Link>
                   </>
@@ -167,7 +170,7 @@ class Navbar extends React.Component {
                 {this.props.currentPage.page ? (
                   <button
                     type="button"
-                    className="btn btn-primary d-none d-md-block "
+                    className="btn btn-primary d-none d-md-block m-0 ms-2 me-1"
                     data-bs-toggle="modal"
                     data-bs-target="#mapModal"
                   >

@@ -43,35 +43,6 @@ form div {
   margin-bottom: 85px !important;
 }
 
-/*
-.carousel-item {
-  height: 32rem;
-  background: #000;
-  color: white;
-  position: relative;
-}
-
-.carousel-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: 50px;
-  padding-left: 50px;
-}
-
-.carousel-overlay-image {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.5;
-}
-*/
-
 .login-form-container {
   background: #fff;
   padding: 0;
