@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import _ from 'lodash'
 /* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
@@ -23,6 +24,7 @@ class MapAllItems extends React.Component {
       loading: true,
       apiKey: '',
       selectedItem: null,
+      items: [],
     }
     window.addEventListener('resize', (e) => {
       if (!this.unload) {
@@ -32,10 +34,36 @@ class MapAllItems extends React.Component {
   }
 
   async componentDidMount() {
+    if (this.props.itemsArray && this.props.itemsArray.length > 0) {
+      this.setState({
+        items: [
+          ...this.props.itemsArray.map((item) => {
+            item.user.latitude = +item.user.latitude + Math.random() / 2500
+            item.user.longitude = +item.user.longitude + Math.random() / 2500
+            return item
+          }),
+        ],
+      })
+    }
+
     const key = (await axios.get('/api/map/key')).data
     console.log(this.state.loading)
     this.setState({apiKey: key})
     this.setState({loading: false})
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!_.isEqual(prevProps.itemsArray, this.props.itemsArray)) {
+      this.setState({
+        items: [
+          ...this.props.itemsArray.map((item) => {
+            item.user.latitude = +item.user.latitude + Math.random() / 2500
+            item.user.longitude = +item.user.longitude + Math.random() / 2500
+            return item
+          }),
+        ],
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -81,14 +109,14 @@ class MapAllItems extends React.Component {
               this.setState({viewport: viewport})
             }}
           >
-            {this.props.itemsArray &&
-              this.props.itemsArray.length > 0 &&
-              this.props.itemsArray.map((item) => {
+            {this.state.items &&
+              this.state.items.length > 0 &&
+              this.state.items.map((item) => {
                 return (
                   <Marker
                     key={item.id}
-                    latitude={+item.user.latitude + Math.random() / 2500}
-                    longitude={+item.user.longitude + Math.random() / 2500}
+                    latitude={+item.user.latitude}
+                    longitude={+item.user.longitude}
                   >
                     <button
                       className="btn btn-link text-center text-decoration-none"
