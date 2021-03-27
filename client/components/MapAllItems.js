@@ -33,6 +33,14 @@ class MapAllItems extends React.Component {
     })
   }
 
+  initialViewport = {
+    latitude: this.props.isLoggedIn ? +this.props.user.latitude : 40.73061,
+    longitude: this.props.isLoggedIn ? +this.props.user.longitude : -73.935242,
+    width: `100%`,
+    height: `100%`,
+    zoom: 10,
+  }
+
   async componentDidMount() {
     if (this.props.itemsArray && this.props.itemsArray.length > 0) {
       this.setState({
@@ -63,6 +71,10 @@ class MapAllItems extends React.Component {
           }),
         ],
       })
+      this.setState({
+        viewport: {...this.initialViewport},
+      })
+      this.setState({selectedItem: null})
     }
   }
 
@@ -109,6 +121,14 @@ class MapAllItems extends React.Component {
               this.setState({viewport: viewport})
             }}
           >
+            {this.props.isLoggedIn && (
+              <Marker
+                latitude={+this.props.user.latitude}
+                longitude={+this.props.user.longitude}
+              >
+                <i className="h2 bi bi-house-door-fill text-primary"></i>
+              </Marker>
+            )}
             {this.state.items &&
               this.state.items.length > 0 &&
               this.state.items.map((item) => {
@@ -172,15 +192,6 @@ class MapAllItems extends React.Component {
                 </div>
               </Popup>
             ) : null}
-
-            {this.props.isLoggedIn && (
-              <Marker
-                latitude={+this.props.user.latitude}
-                longitude={+this.props.user.longitude}
-              >
-                <i className="h2 bi bi-house-door-fill text-primary"></i>
-              </Marker>
-            )}
           </ReactMapGL>
         )}
       </>
