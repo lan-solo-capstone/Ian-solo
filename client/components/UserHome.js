@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchUserItems} from '../store/useritems'
 import SingleItem from './SingleItem'
+import {logout} from '../store'
 
 /**
  * COMPONENT
@@ -28,7 +29,14 @@ class UserHome extends React.Component {
       <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
-        Account Details:
+        Account Details |{' '}
+        <a
+          className="text-decoration-none"
+          href="#"
+          onClick={this.props.handleClick}
+        >
+          Logout
+        </a>
         <ul className="list-group">
           <li className="list-group-item">
             {user.firstName} {user.lastName}
@@ -112,9 +120,13 @@ class UserHome extends React.Component {
 /**
  * CONTAINER
  */
+
 const mapDispatch = (dispatch) => ({
   fetchUserItems: (page, items) => {
     dispatch(fetchUserItems(page, items))
+  },
+  handleClick: () => {
+    dispatch(logout())
   },
 })
 
