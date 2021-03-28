@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Talk from 'talkjs'
 
-class InboxComponent extends Component {
+class InboxOnly extends Component {
   componentDidMount() {
     const currentUser = this.props.user
     console.log(currentUser)
@@ -21,27 +21,18 @@ class InboxComponent extends Component {
           })
         }
 
-        const recipient = this.props.location.item.user
-        const other = new Talk.User({
-          id: recipient.id,
-          name: recipient.firstName,
-          welcomeMessage: 'Hey there! Love to chat :-)',
-        })
+        // // You control the ID of a conversation. oneOnOneId is a helper method that generates
+        // // a unique conversation ID for a given pair of users.
+        // const conversationId = Talk.oneOnOneId(me, other)
 
-        // You control the ID of a conversation. oneOnOneId is a helper method that generates
-        // a unique conversation ID for a given pair of users.
-        const conversationId = Talk.oneOnOneId(me, other)
+        // const conversation = window.talkSession.getOrCreateConversation(
+        //   conversationId
+        // )
+        // conversation.setParticipant(me)
+        // conversation.setParticipant(other)
 
-        const conversation = window.talkSession.getOrCreateConversation(
-          conversationId
-        )
-        conversation.setParticipant(me)
-        conversation.setParticipant(other)
-
-        this.inbox = window.talkSession.createInbox({
-          selected: conversation,
-        })
-        this.inbox.mount(this.container)
+        const inbox = window.talkSession.createInbox()
+        inbox.mount(document.getElementById('inbox-container'))
       })
       .catch((e) => console.error(e))
   }
@@ -70,4 +61,4 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState, null)(InboxComponent)
+export default connect(mapState, null)(InboxOnly)

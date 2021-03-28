@@ -80,10 +80,10 @@ class SingleItemView extends React.Component {
               Submitted by: {item.user.firstName}
               {/* only render chat button if item does not belong to user */}
               {this.props.user.id !== item.user.id && (
-                <div className="chat">
+                <div className="messages">
                   <Link
                     to={{
-                      pathname: '/chat',
+                      pathname: '/messages',
                       item,
                     }}
                   >
