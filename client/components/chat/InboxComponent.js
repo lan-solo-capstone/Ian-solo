@@ -17,14 +17,14 @@ class InboxComponent extends Component {
   //   return <div>TEST InboxComponent</div>
   // }
   componentDidMount() {
+    const currentUser = this.props.location.item.user
+    console.log(currentUser)
     // Promise can be `then`ed multiple times
     Talk.ready
       .then(() => {
         const me = new Talk.User({
-          id: '12345231',
-          name: 'George Looney',
-          email: 'george@looney.net',
-          photoUrl: 'https://talkjs.com/docs/img/george.jpg',
+          id: currentUser.id,
+          name: currentUser.firstName,
           welcomeMessage: 'Hey there! How are you? :-)',
         })
 
@@ -68,7 +68,7 @@ class InboxComponent extends Component {
   }
 
   render() {
-    console.log('in InboxContainer, props', this.props)
+    console.log('in InboxContainer render, props', this.props)
     return (
       <span>
         <div style={{height: '500px'}} ref={(c) => (this.container = c)}>
