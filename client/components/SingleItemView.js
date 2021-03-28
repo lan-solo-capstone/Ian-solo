@@ -84,7 +84,7 @@ class SingleItemView extends React.Component {
                   <Link
                     to={{
                       pathname: '/chat',
-                      state: this.props.item,
+                      item,
                     }}
                   >
                     <div>
