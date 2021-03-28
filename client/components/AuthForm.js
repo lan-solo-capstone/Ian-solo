@@ -16,14 +16,14 @@ const AuthForm = (props) => {
         <div className="row justify-content-center">
           <div className="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3">
             <form
-              className="login-form-container"
+              className="login-form-container p-3"
               onSubmit={handleSubmit}
               name={name}
             >
-              <div className="text-center mb-1">
+              <div className="text-center mb-0">
                 <h3>Freeshare {displayName}</h3>
               </div>
-              <div className="mb-1">
+              <div>
                 <input
                   name="email"
                   type="email"
@@ -110,8 +110,8 @@ const AuthForm = (props) => {
                 />
               </div>
 
-              <div className="d-grid gap-2 px-5">
-                <button type="submit" className="btn btn-primary mb-3">
+              <div className="d-grid gap-2">
+                <button type="submit" className="btn btn-primary my-1 mx-5">
                   {displayName}
                 </button>
               </div>
@@ -131,14 +131,20 @@ const AuthForm = (props) => {
                 </div>
               )}
               {/* <a href="/auth/google">{displayName} with Google</a> */}
-              <div className="mt-3">
+              <div className="mt-1">
                 {displayName === 'Login' ? (
                   <span>
-                    Not registered? <Link to="/signup">Sign Up</Link>
+                    Not registered?{' '}
+                    <Link className="text-decoration-none" to="/signup">
+                      Sign Up
+                    </Link>
                   </span>
                 ) : (
                   <span>
-                    Already registered? <Link to="/login">Login</Link>
+                    Already registered?{' '}
+                    <Link className="text-decoration-none" to="/login">
+                      Login
+                    </Link>
                   </span>
                 )}
               </div>

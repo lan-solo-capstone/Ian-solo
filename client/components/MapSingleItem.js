@@ -79,6 +79,14 @@ class MapSingleItem extends React.Component {
               this.setState({viewport: viewport})
             }}
           >
+            {this.props.isLoggedIn && (
+              <Marker
+                latitude={+this.props.user.latitude}
+                longitude={+this.props.user.longitude}
+              >
+                <i className="h1 bi bi-house-door-fill text-primary"></i>
+              </Marker>
+            )}
             {this.props.item && (
               <Marker
                 latitude={+this.props.item.user.latitude}
@@ -129,15 +137,6 @@ class MapSingleItem extends React.Component {
                 </div>
               </Popup>
             ) : null}
-
-            {this.props.isLoggedIn && (
-              <Marker
-                latitude={+this.props.user.latitude}
-                longitude={+this.props.user.longitude}
-              >
-                <i className="h1 bi bi-house-door-fill text-primary"></i>
-              </Marker>
-            )}
           </ReactMapGL>
         )}
       </>

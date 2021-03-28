@@ -22,9 +22,7 @@ class Items extends React.Component {
   }
 
   render() {
-    //next line is Diego's original code:
-    // const items = this.props.items
-    //the following are MJA changes for the search capability:
+    //Begin search and filter code:
     let items
 
     let headline = `All Current Offers`
@@ -94,7 +92,7 @@ class Items extends React.Component {
       items = this.props.items
     }
 
-    //end of MJA changes
+    //end search and filter code
 
     return this.props.loading ? (
       <div

@@ -54,17 +54,20 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <form className="row p-0 mx-md-3" onSubmit={this.handleSubmit}>
+      <form className="row p-0 g-1 m-0 mx-md-1" onSubmit={this.handleSubmit}>
+        {this.props.isLoggedIn ? null : (
+          <div className="m-0  col-6 col-md-3"></div>
+        )}
         <div
           className={
             this.props.isLoggedIn
-              ? 'm-0 mb-1 col-6 col-md-3'
-              : 'm-0 mb-1 col-12 col-md-6'
+              ? 'm-0  col-6 col-md-3'
+              : 'm-0  col-12 col-md-3'
           }
         >
           <select
             name="itemType"
-            className="form-select form-control m-0"
+            className="form-select  m-0 mb-1 mb-md-0"
             aria-label="Listing Type"
             onChange={this.handleChange}
             value={this.state.itemType}
@@ -76,10 +79,10 @@ class SearchBox extends Component {
         </div>
 
         {this.props.isLoggedIn ? (
-          <div className="m-0 mb-1 col-6 col-md-3">
+          <div className="m-0  col-6 col-md-3">
             <select
               name="distance"
-              className="form-select form-control m-0"
+              className="form-select  m-0 mb-1 mb-md-0"
               aria-label="Distance"
               onChange={this.handleChange}
               value={this.state.distance}
@@ -93,7 +96,7 @@ class SearchBox extends Component {
           </div>
         ) : null}
 
-        <div className="m-0 mb-1 col-6 col-md-4">
+        <div className="m-0  col-6 col-md-3">
           <input
             className="form-control m-0"
             type="search"
@@ -104,18 +107,18 @@ class SearchBox extends Component {
             value={this.state.search}
           ></input>
         </div>
-        <div className="m-0 mb-1 col-3 col-md-1">
+        <div className="m-0  col-3 col-md-1">
           <button
-            className="btn btn-outline-primary m-0 "
+            className="btn btn-outline-primary m-0 form-control"
             role="button"
             type="submit"
           >
             Go
           </button>
         </div>
-        <div className="m-0 mb-1 col-3 col-md-1">
+        <div className="m-0  col-3 col-md-2">
           <button
-            className="btn btn-outline-primary m-0 "
+            className="btn btn-outline-primary m-0 form-control"
             role="button"
             type="button"
             onClick={this.handleReset}
