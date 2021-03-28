@@ -54,9 +54,7 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <form className="row p-0" onSubmit={this.handleSubmit}>
-        {/* <div className="m-0 mb-1 col-6 col-md-3"> */}
-        {/* {this.props.isLoggedIn ? <div className="m-0 mb-1 col-6 col-md-3"> : <div className="m-0 mb-1 col-12 col-md-6">} */}
+      <form className="row p-0 mx-md-3" onSubmit={this.handleSubmit}>
         <div
           className={
             this.props.isLoggedIn
@@ -88,11 +86,9 @@ class SearchBox extends Component {
             >
               <option value="Anywhere">Anywhere</option>
               <option value="1">Within 1 mi</option>
-              <option value="2">Within 2 mi</option>
               <option value="5">Within 5 mi</option>
               <option value="10">Within 10 mi</option>
               <option value="20">Within 20 mi</option>
-              <option value="50">Within 50 mi</option>
             </select>
           </div>
         ) : null}
@@ -121,6 +117,7 @@ class SearchBox extends Component {
           <button
             className="btn btn-outline-primary m-0 "
             role="button"
+            type="button"
             onClick={this.handleReset}
           >
             Reset

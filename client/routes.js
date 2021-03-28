@@ -8,12 +8,12 @@ import {
   UserHome,
   MapAllItems,
   MapSingleItem,
-  temp,
   NewItemForm,
   Items,
   SingleItemView,
   AllUsers,
   User,
+  ChatContainer,
 } from './components'
 import {me} from './store'
 
@@ -35,7 +35,6 @@ class Routes extends Component {
         <Route path="/mapallitems" component={MapAllItems} />
         <Route path="/mapsingleitem" component={MapSingleItem} />
         <Route path="/singleview" component={SingleItemView} />
-        <Route path="/temp" component={temp} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
@@ -48,6 +47,7 @@ class Routes extends Component {
             <Route path="/post" component={NewItemForm} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:userId" component={User} />
+            <Route exact path="/chat" component={ChatContainer} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

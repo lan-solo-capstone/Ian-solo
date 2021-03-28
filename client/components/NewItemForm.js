@@ -48,7 +48,7 @@ class NewItemForm extends Component {
     //console.log('in NewFormItem render, this.state', this.state)
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid footerSpacing">
         <div className="row">
           <div className="col-md-12 p-0">
             <form

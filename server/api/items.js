@@ -22,6 +22,7 @@ router.get('/', async (req, res, next) => {
         {
           model: User,
           attributes: [
+            'id',
             'firstName',
             'latitude',
             'longitude',
@@ -107,3 +108,31 @@ router.post(
     }
   }
 )
+
+// PUT route for /api/items/:itemId
+// for now, this is only to mark items as closed -- JC
+// can be expanded later to allow users to modify their posts -- JC 03.26.21
+
+router.put('/:itemId', async (req, res, next) => {
+  try {
+    const {itemId} = req.params
+    const status = req.body.status
+    const item = await Item.findByPk(itemId)
+
+    if (!item) {
+      res.sendStatus(404)
+      return
+    }
+
+    await item.update({status: status})
+    console.log(
+      'in PUT route for /item/:itemId after await item.update',
+      'hello',
+      'item:',
+      item
+    )
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
