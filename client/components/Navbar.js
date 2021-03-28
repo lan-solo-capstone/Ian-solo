@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-0 p-1">
           <div className="container-fluid">
             <Link to="/items" className="text-decoration-none text-dark m-0">
               <span className="navbar-brand">
@@ -92,45 +92,77 @@ class Navbar extends React.Component {
             </div>
             {/* Ends modal */}
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <Link
-                className="nav-item nav-link mx-2 px-0 d-none d-md-block text-secondary"
-                to="/items"
-              >
-                Browse All
-              </Link>
+            <div className="collapse navbar-collapse p-0" id="navbarNav">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <Link
+                  className="nav-item nav-link mx-1 px-0 d-none d-md-block text-secondary"
+                  to="/items"
+                >
+                  Browse
+                </Link>
+
                 {this.props.isLoggedIn ? (
                   <>
                     {/* The navbar will show these links after you log in */}
+
                     <Link
-                      className="nav-item nav-link mx-2 d-none d-md-block"
+                      className="nav-item nav-link mx-1 d-none d-md-block"
+                      to="/post"
+                    >
+                      Post
+                    </Link>
+                    {/* <Link
+                      className="nav-item nav-link mx-1 d-none d-md-block"
                       to="/useraccount"
                     >
                       Account
                     </Link>
-                    <Link
-                      className="nav-item nav-link mx-2 d-none d-md-block"
-                      to="/post"
-                    >
-                      Post an Item
-                    </Link>
                     <a
-                      className="nav-item nav-link mx-2"
+                      className="nav-item nav-link mx-1"
                       href="#"
                       onClick={this.props.handleClick}
                     >
                       Logout
-                    </a>
+                    </a> */}
+                    <div className="nav-item dropdown d-none d-md-block">
+                      <a
+                        className="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarScrollingDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Account
+                      </a>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="navbarScrollingDropdown"
+                      >
+                        <Link
+                          className="nav-item nav-link dropdown-item mx-1"
+                          to="/useraccount"
+                        >
+                          Profile
+                        </Link>
+                        <a
+                          className="nav-item dropdown-item nav-link mx-1"
+                          href="#"
+                          onClick={this.props.handleClick}
+                        >
+                          Logout
+                        </a>
+                      </ul>
+                    </div>
                   </>
                 ) : (
                   <>
                     {/* The navbar will show these links before you log in */}
-                    <Link className="nav-item nav-link mx-2" to="/login">
+                    <Link
+                      className="nav-item nav-link mx-1 d-none d-md-block"
+                      to="/login"
+                    >
                       Login
-                    </Link>
-                    <Link className="nav-item nav-link mx-2" to="/signup">
-                      Sign Up
                     </Link>
                   </>
                 )}
@@ -138,11 +170,11 @@ class Navbar extends React.Component {
                 {this.props.currentPage.page ? (
                   <button
                     type="button"
-                    className="btn btn-primary d-none d-md-block "
+                    className="btn btn-primary d-none d-md-block m-0 ms-2 me-1"
                     data-bs-toggle="modal"
                     data-bs-target="#mapModal"
                   >
-                    View Map
+                    Map
                   </button>
                 ) : null}
               </ul>
