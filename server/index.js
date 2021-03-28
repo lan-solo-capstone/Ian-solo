@@ -111,12 +111,14 @@ const startListening = () => {
   require('./socket')(io)
 }
 
-const syncDb = () => db.sync({force: true})
+// yf 03.27.21  Disabled db.sync and seed().  Manually trigger the db update by running "npm run seed" in terminal
+
+//const syncDb = () => db.sync({force: false})
 
 async function bootApp() {
   await sessionStore.sync()
-  await syncDb()
-  await seed()
+  //await syncDb()
+  // await seed()
   await createApp()
   await startListening()
 }

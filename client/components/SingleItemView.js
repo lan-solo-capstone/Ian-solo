@@ -75,7 +75,6 @@ class SingleItemView extends React.Component {
       <div className="container-sm container-md container-xl footerSpacing mt-2">
         <div className="row gy-4 row-cols-1 ">
           <div className="col">
-
             <h5 className="text-center mb-1">{item.itemListName}</h5>
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
