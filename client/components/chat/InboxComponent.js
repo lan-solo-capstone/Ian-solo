@@ -1,23 +1,10 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Talk from 'talkjs'
 
 class InboxComponent extends Component {
-  // componentDidMount() {
-  //   const currentUser = this.props.location.user.item
-
-  //   Talk.ready.then(() => {
-  //     var me = new Talk.User({
-  //       id: currentUser.id,
-  //       firstName: currentUser.firstNname,
-  //       welcomeMessage: 'Hey there! How are you? :-)',
-  //     })
-  //   })
-  // }
-  // render() {
-  //   return <div>TEST InboxComponent</div>
-  // }
   componentDidMount() {
-    const currentUser = this.props.location.item.user
+    const currentUser = this.props.user
     console.log(currentUser)
     // Promise can be `then`ed multiple times
     Talk.ready
@@ -35,11 +22,10 @@ class InboxComponent extends Component {
           })
         }
 
+        const recipient = this.props.location.item.user
         const other = new Talk.User({
-          id: '54321',
-          name: 'Ronald Raygun',
-          email: 'ronald@teflon.com',
-          photoUrl: 'https://talkjs.com/docs/img/ronald.jpg',
+          id: recipient.id,
+          name: recipient.firstName,
           welcomeMessage: 'Hey there! Love to chat :-)',
         })
 
@@ -79,4 +65,10 @@ class InboxComponent extends Component {
   }
 }
 
-export default InboxComponent
+const mapState = (state) => {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapState, null)(InboxComponent)
