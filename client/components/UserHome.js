@@ -34,7 +34,6 @@ class UserHome extends React.Component {
         {this.props.user.admin ? (
           <a
             className="text-decoration-none"
-            href="#"
             onClick={() => history.push('/users')}
           >
             {' '}
