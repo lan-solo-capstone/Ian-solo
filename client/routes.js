@@ -49,7 +49,6 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:userId" component={User} />
             <Route exact path="/chat" component={ChatContainer} />
-            <Route exact path="/adminButton" component={adminButton} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
