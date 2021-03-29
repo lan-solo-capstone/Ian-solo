@@ -47,7 +47,7 @@ class EditItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.modifyItem(this.props.item.id, this.state)
+    this.props.modifyItem(this.props.location.item.id, this.state)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
     toast.success('Changes saved!', {
@@ -62,20 +62,28 @@ class EditItemForm extends Component {
   }
 
   render() {
-    // const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
-    // const {pathname} = this.props.location
+    const {
+      handleSubmit,
+      handleChange,
+      // handleFileSelect,
+      // fileInput
+    } = this
+    const {pathname} = this.props.location
     // this log makes sure that state changes when user types on form
     console.log('in EditItemForm render, this.props', this.props)
 
     return (
-      <ItemForm
-      // {...this.state}
-      // handleSubmit={handleSubmit}
-      // handleChange={handleChange}
-      // handleFileSelect={handleFileSelect}
-      // fileInput={fileInput}
-      // pathname={pathname}
-      />
+      <div>
+        <p>If you'd like to edit your posted item, you can do so here:</p>
+        <ItemForm
+          {...this.state}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          // handleFileSelect={handleFileSelect}
+          // fileInput={fileInput}
+          pathname={pathname}
+        />
+      </div>
     )
   }
 }

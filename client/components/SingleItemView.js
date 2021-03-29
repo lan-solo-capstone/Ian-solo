@@ -260,7 +260,7 @@ class SingleItemView extends React.Component {
             </div>
           </div>
         </div>
-        <EditItemForm />
+        {itemMatchesUser && <EditItemForm location={this.props.location} />}
       </div>
     )
   }
