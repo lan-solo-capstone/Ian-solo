@@ -70,8 +70,8 @@ class NewItemForm extends Component {
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
         handleFileSelect={this.handleFileSelect}
-        {...this.state}
         fileInput={this.fileInput}
+        {...this.state}
       />
     )
   }

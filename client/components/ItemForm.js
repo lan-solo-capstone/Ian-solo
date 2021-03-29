@@ -6,15 +6,14 @@ const ItemForm = (props) => {
   const {
     handleChange,
     handleSubmit,
+    handleFileSelect,
     itemType,
     itemListName,
     description,
     itemCondition,
-    uploadPhoto,
-    user,
     fileInput,
-    handleFileSelect,
   } = props
+
   return (
     <div className="container-fluid footerSpacing">
       <div className="row">
@@ -72,25 +71,27 @@ const ItemForm = (props) => {
                 />
               </div>
             </div>
-            <div className="row">
-              <div>
-                <label className="mr-sm-2" htmlFor="itemCondition">
-                  Condition of your item
-                </label>
-                <select
-                  className="custom-select mr-sm-2"
-                  name="itemCondition"
-                  value={itemCondition}
-                  onChange={handleChange}
-                >
-                  {/* TODO: need to make this appear conditionally if user selects OFFER */}
-                  <option value="chooseOne">Choose...</option>
-                  <option value="New">Like New</option>
-                  <option value="Gently_Used">Gently Used</option>
-                  <option value="Used">Used</option>
-                </select>
+            {itemType === 'Offer' && (
+              <div className="row">
+                <div>
+                  <label className="mr-sm-2" htmlFor="itemCondition">
+                    Condition of your item
+                  </label>
+
+                  <select
+                    className="custom-select mr-sm-2"
+                    name="itemCondition"
+                    value={itemCondition}
+                    onChange={handleChange}
+                  >
+                    <option value="chooseOne">Choose...</option>
+                    <option value="New">Like New</option>
+                    <option value="Gently_Used">Gently Used</option>
+                    <option value="Used">Used</option>
+                  </select>
+                </div>
               </div>
-            </div>
+            )}
             <div className="row">
               <div className="form-group">
                 <label htmlFor="uploadPhoto">Upload Photos :</label>
