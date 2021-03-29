@@ -12,15 +12,15 @@ const SingleItem = (props) => {
 
   return (
     <div className="col">
-      <div className="card mb-3" style={{maxwidth: '800px'}}>
+      <div className="card mb-3">
         <Link
           to={{pathname: '/singleview', item: item}}
           className="text-decoration-none text-secondary "
         >
           <div className="row g-0">
-            <div className="col-md-4 d-flex align-items-center justify-content-center">
+            <div className="col-md-4 p-2 d-flex align-items-center justify-content-center viewallMax">
               <img
-                className="img-fluid"
+                className="img-fluid contain h-100"
                 src={
                   item.itemPhotos[0]?.downloadURL
                     ? item.itemPhotos[0].downloadURL
