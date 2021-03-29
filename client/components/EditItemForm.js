@@ -21,7 +21,7 @@ class EditItemForm extends Component {
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleFileSelect = this.handleFileSelect.bind(this)
+    // this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
 
@@ -35,15 +35,10 @@ class EditItemForm extends Component {
     this.setState({
       [evt.target.name]: evt.target.value,
     })
+    if (this.state.itemType === 'Seeking') {
+      this.setState({itemCondition: null})
+    }
   }
-
-  handleFileSelect(evt) {
-    // yf 03/21/21  below line works for both single and multiple file uploads
-    const photoFiles = Array.from(evt.target.files)
-    this.setState({uploadPhoto: photoFiles})
-  }
-
-  // yf 03.21.21  Buggy submit button was fixed.  Cause -timing of updating state.user
 
   // TODO: add logic to set itemCondition to '' if user changes itemType to Seeking
   handleSubmit(evt) {
