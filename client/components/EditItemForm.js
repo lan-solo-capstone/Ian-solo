@@ -45,6 +45,7 @@ class EditItemForm extends Component {
 
   // yf 03.21.21  Buggy submit button was fixed.  Cause -timing of updating state.user
 
+  // TODO: add logic to set itemCondition to '' if user changes itemType to Seeking
   handleSubmit(evt) {
     evt.preventDefault()
     this.props.modifyItem(this.props.location.item.id, this.state)
@@ -90,6 +91,7 @@ class EditItemForm extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  item: state.item,
 })
 
 const mapDispatchToProps = (dispatch) => {

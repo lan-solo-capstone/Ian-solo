@@ -59,6 +59,10 @@ class SingleItemView extends React.Component {
       console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
       this.setState({justClosed: true})
     }
+
+    if (prevProps.location.item.itemListName !== this.props.item.itemListName) {
+      console.log('the name of the item has changed!!!!!')
+    }
   }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})

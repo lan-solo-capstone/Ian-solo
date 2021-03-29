@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import axios from 'axios'
 import history from '../history'
 import {storage} from '../../firebase/firebase'
@@ -78,10 +79,14 @@ export const postNewItem = (item) => {
 export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
     try {
-      const closedItem = (
+      const modifiedItem = (
         await axios.put(`/api/items/${itemId}`, modifications)
       ).data
-      dispatch(editItem(closedItem))
+      dispatch(editItem(modifiedItem))
+
+      // TODO: redirect to /singleview and pass props
+      // history.push /singleview {props}
+      history.push('/singleview', {modifiedItem})
     } catch (err) {
       console.error(err)
     }
