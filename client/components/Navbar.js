@@ -145,6 +145,12 @@ class Navbar extends React.Component {
                         >
                           Profile
                         </Link>
+                        <Link
+                          className="nav-item nav-link dropdown-item mx-1"
+                          to="/messages/all"
+                        >
+                          Messages
+                        </Link>
                         <a
                           className="nav-item dropdown-item nav-link mx-1"
                           href="#"
