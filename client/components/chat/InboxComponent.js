@@ -6,7 +6,6 @@ class InboxComponent extends Component {
   componentDidMount() {
     const currentUser = this.props.user
     console.log(currentUser)
-    // Promise can be `then`ed multiple times
     Talk.ready
       .then(() => {
         const me = new Talk.User({

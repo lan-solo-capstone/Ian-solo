@@ -6,7 +6,6 @@ class InboxOnly extends Component {
   componentDidMount() {
     const currentUser = this.props.user
     console.log(currentUser)
-    // Promise can be `then`ed multiple times
     Talk.ready
       .then(() => {
         const me = new Talk.User({
@@ -14,13 +13,12 @@ class InboxOnly extends Component {
           name: currentUser.firstName,
         })
 
-        if (!window.talkSession) {
-          window.talkSession = new Talk.Session({
-            appId: 't2PbbseX',
-            me: me,
-          })
-        }
+        window.talkSession = new Talk.Session({
+          appId: 't2PbbseX',
+          me: me,
+        })
 
+        // create just the inbox
         const inbox = window.talkSession.createInbox()
         inbox.mount(this.container)
       })
