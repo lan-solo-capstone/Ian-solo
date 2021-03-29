@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-0 p-1">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
           <div className="container-fluid">
             <Link to="/items" className="text-decoration-none text-dark m-0">
               <span className="navbar-brand">

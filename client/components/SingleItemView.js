@@ -123,69 +123,76 @@ class SingleItemView extends React.Component {
             </h6>
           </div>
           <div className="col">
-            <div
-              id="itemImageIndicator"
-              className="carousel slide mx-auto"
-              data-bs-ride="carousel"
-            >
+            {item.itemPhotos.length < 2 ? (
+              <img
+                src={item.itemPhotos[0].downloadURL}
+                className="d-block w-80 imgSliders"
+              />
+            ) : (
               <div
-                className="carousel-indicators"
-                style={{filter: 'invert(1)'}}
+                id="itemImageIndicator"
+                className="carousel slide mx-auto"
+                data-bs-ride="carousel"
               >
-                {item.itemPhotos.map((element, idx) => (
-                  <button
-                    type="button"
-                    data-bs-target="#itemImageIndicator"
-                    data-bs-slide-to={idx}
-                    className={idx === 0 ? 'active' : ''}
-                    aria-current={idx === 0 ? 'true' : ''}
-                    aria-label={`Slide ${idx + 1}`}
-                    key={idx}
-                  />
-                ))}
-              </div>
-              <div className="carousel-inner">
-                {item.itemPhotos.map((photo, idx) => (
-                  <div
-                    key={idx}
-                    className={
-                      idx === 0 ? 'carousel-item active' : 'carousel-item'
-                    }
-                  >
-                    <img
-                      src={photo.downloadURL}
-                      className="d-block w-80 imgSliders"
+                <div
+                  className="carousel-indicators"
+                  style={{filter: 'invert(1)'}}
+                >
+                  {item.itemPhotos.map((element, idx) => (
+                    <button
+                      type="button"
+                      data-bs-target="#itemImageIndicator"
+                      data-bs-slide-to={idx}
+                      className={idx === 0 ? 'active' : ''}
+                      aria-current={idx === 0 ? 'true' : ''}
+                      aria-label={`Slide ${idx + 1}`}
+                      key={idx}
                     />
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {item.itemPhotos.map((photo, idx) => (
+                    <div
+                      key={idx}
+                      className={
+                        idx === 0 ? 'carousel-item active' : 'carousel-item'
+                      }
+                    >
+                      <img
+                        src={photo.downloadURL}
+                        className="d-block w-80 imgSliders"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#itemImageIndicator"
+                  data-bs-slide="prev"
+                  style={{filter: 'invert(1)'}}
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#itemImageIndicator"
+                  data-bs-slide="next"
+                  style={{filter: 'invert(1)'}}
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
               </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#itemImageIndicator"
-                data-bs-slide="prev"
-                style={{filter: 'invert(1)'}}
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#itemImageIndicator"
-                data-bs-slide="next"
-                style={{filter: 'invert(1)'}}
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
+            )}
           </div>
           <div className="col m-sm-auto m-md-0">
             <a

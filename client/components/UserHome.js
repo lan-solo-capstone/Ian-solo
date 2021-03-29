@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchUserItems} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
@@ -30,24 +31,29 @@ class UserHome extends React.Component {
       <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
-        Account Details |{' '}
-        {this.props.user.admin ? (
-          <a
-            className="text-decoration-none"
-            onClick={() => history.push('/users')}
-          >
-            {' '}
-            * Admin Home *{' '}
-          </a>
-        ) : null}
-        {this.props.user.admin ? <a> | </a> : null}
-        <a
-          className="text-decoration-none"
-          href="#"
-          onClick={this.props.handleClick}
-        >
-          Logout
-        </a>
+
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item" aria-current="page">
+            Account Details
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {this.props.user.admin ? (
+              <Link to="/users" className="text-decoration-none">
+                Admin Home
+              </Link>
+            ) : null}
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <a
+              className="text-decoration-none"
+              href="#"
+              onClick={this.props.handleClick}
+            >
+              Logout
+            </a>
+          </li>
+        </ol>
+
         <ul className="list-group">
           <li className="list-group-item">
             {user.firstName} {user.lastName}
