@@ -109,8 +109,8 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
-              {/* {this.props.user.id === item.user.id && (
-                <div className="closeItem">
+              {this.props.user.id === item.user.id && !this.state.justClosed && (
+                <div className="editItem">
                   <button
                     type="button"
                     className="btn btn-warning"
@@ -119,7 +119,7 @@ class SingleItemView extends React.Component {
                     Edit item
                   </button>
                 </div>
-              )} */}
+              )}
             </h6>
           </div>
           <div className="col">
