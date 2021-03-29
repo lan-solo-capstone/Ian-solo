@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -109,17 +110,19 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
-              {this.props.user.id === item.user.id && !this.state.justClosed && (
-                <div className="editItem">
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.handleEdit}
-                  >
-                    Edit item
-                  </button>
-                </div>
-              )}
+              {/* render the Edit button if the user owns the item and it is not closed */}
+              {this.props.user.id === item.user.id &&
+                (!this.state.justClosed || item.status === 'Closed') && (
+                  <div className="editItem">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={this.handleEdit}
+                    >
+                      Edit item
+                    </button>
+                  </div>
+                )}
             </h6>
           </div>
           <div className="col">
