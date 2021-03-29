@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
-import {closeItem} from '../store/item'
+import {modifyItem} from '../store/item'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -33,7 +33,7 @@ class SingleItemView extends React.Component {
     evt.preventDefault()
     const itemId = String(this.props.location.item.id)
     console.log('in handleClose, itemId', itemId)
-    this.props.closeItem(itemId)
+    this.props.modifyItem(itemId, {status: 'Closed'})
     toast.success('Successfully marked as Closed!', {
       position: 'top-right',
       autoClose: 5001,
@@ -278,7 +278,8 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  closeItem: (itemId) => dispatch(closeItem(itemId)),
+  modifyItem: (itemId, modifications) =>
+    dispatch(modifyItem(itemId, modifications)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)

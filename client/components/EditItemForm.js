@@ -47,7 +47,6 @@ class EditItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
     this.props.addNewItem(this.state)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
