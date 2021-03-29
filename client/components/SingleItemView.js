@@ -109,6 +109,17 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
+              {/* {this.props.user.id === item.user.id && (
+                <div className="closeItem">
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.handleEdit}
+                  >
+                    Edit item
+                  </button>
+                </div>
+              )} */}
             </h6>
           </div>
           <div className="col">
