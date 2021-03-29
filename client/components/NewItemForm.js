@@ -64,15 +64,17 @@ class NewItemForm extends Component {
   render() {
     // this log makes sure that state changes when user types on form
     console.log('in NewFormItem render, this.props', this.props)
+    const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
+    const {pathname} = this.props.location
 
     return (
       <ItemForm
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        handleFileSelect={this.handleFileSelect}
-        fileInput={this.fileInput}
         {...this.state}
-        pathname={this.props.location.pathname}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleFileSelect={handleFileSelect}
+        fileInput={fileInput}
+        pathname={pathname}
       />
     )
   }
