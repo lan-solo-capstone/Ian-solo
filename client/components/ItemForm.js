@@ -94,7 +94,12 @@ const ItemForm = (props) => {
             )}
             <div className="row">
               <div className="form-group">
-                <label htmlFor="uploadPhoto">Upload Photos :</label>
+                <label htmlFor="uploadPhoto">Upload Photos</label>
+                <p>
+                  Photos are optional, but they tend to increase the chances
+                  that someone will contact you (especially for offers). You can
+                  upload up to 5 photos.
+                </p>
                 <input
                   type="file"
                   multiple
