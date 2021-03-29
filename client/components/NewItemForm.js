@@ -7,10 +7,10 @@ import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const initialState = {
-  itemType: 'chooseOne',
+  itemType: '',
   itemListName: '',
   description: '',
-  itemCondition: 'chooseOne',
+  itemCondition: 'New',
   uploadPhoto: null,
   user: null,
 }
