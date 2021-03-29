@@ -36,7 +36,7 @@ class SingleItemView extends React.Component {
     toast.success('Successfully marked as Closed!', {
       position: 'top-right',
       autoClose: 5001,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,

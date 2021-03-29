@@ -50,7 +50,7 @@ class NewItemForm extends Component {
       {
         position: 'top-right',
         autoClose: 5001,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
