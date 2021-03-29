@@ -5,7 +5,7 @@ import Talk from 'talkjs'
 class InboxOnly extends Component {
   componentDidMount() {
     const currentUser = this.props.user
-    console.log(currentUser)
+    console.log('in InboxOnly componentDidMount, currentUser', currentUser)
     Talk.ready
       .then(() => {
         const me = new Talk.User({
@@ -18,7 +18,7 @@ class InboxOnly extends Component {
           me: me,
         })
 
-        // create just the inbox
+        // create the inbox of all messages received/sent previously
         const inbox = window.talkSession.createInbox()
         inbox.mount(this.container)
       })
