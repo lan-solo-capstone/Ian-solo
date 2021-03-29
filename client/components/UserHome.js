@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchUserItems} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
+import history from './../history'
 
 /**
  * COMPONENT
@@ -30,6 +31,16 @@ class UserHome extends React.Component {
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details |{' '}
+        {this.props.user.admin ? (
+          <a
+            className="text-decoration-none"
+            onClick={() => history.push('/users')}
+          >
+            {' '}
+            * Admin Home *{' '}
+          </a>
+        ) : null}
+        {this.props.user.admin ? <a> | </a> : null}
         <a
           className="text-decoration-none"
           href="#"

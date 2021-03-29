@@ -14,6 +14,7 @@ import {
   AllUsers,
   User,
   ChatContainer,
+  adminButton,
 } from './components'
 import {me} from './store'
 
