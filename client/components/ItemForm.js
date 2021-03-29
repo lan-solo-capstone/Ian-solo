@@ -12,6 +12,7 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
+    pathname,
   } = props
 
   return (
@@ -92,27 +93,29 @@ const ItemForm = (props) => {
                 </div>
               </div>
             )}
-            <div className="row">
-              <div className="form-group">
-                <label htmlFor="uploadPhoto">Upload Photos</label>
-                <p>
-                  Photos are optional, but they tend to increase the chances
-                  that someone will contact you (especially for offers). You can
-                  upload up to 5 photos.
-                </p>
-                <input
-                  type="file"
-                  multiple
-                  // TODO: need to add other file types to support
-                  // TODO: need to validate file size and maybe number?
-                  accept="image/x-png,image/jpeg,image/gif"
-                  className="form-control-file"
-                  name="uploadPhoto"
-                  ref={fileInput}
-                  onChange={handleFileSelect}
-                />
+            {pathname === '/post' && (
+              <div className="row">
+                <div className="form-group">
+                  <label htmlFor="uploadPhoto">Upload Photos</label>
+                  <p>
+                    Photos are optional, but they tend to increase the chances
+                    that someone will contact you (especially for offers). You
+                    can upload up to 5 photos.
+                  </p>
+                  <input
+                    type="file"
+                    multiple
+                    // TODO: need to add other file types to support
+                    // TODO: need to validate file size and maybe number?
+                    accept="image/x-png,image/jpeg,image/gif"
+                    className="form-control-file"
+                    name="uploadPhoto"
+                    ref={fileInput}
+                    onChange={handleFileSelect}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <div>
               <button type="submit" className="btn btn-primary">
                 Submit

@@ -65,6 +65,8 @@ class SingleItemView extends React.Component {
 
   render() {
     console.log('in SingleItemView render, this.props', this.props)
+    console.log('in SingleItemView render, this.state', this.state)
+
     let {item} = this.props.location
     console.log('item!!!!', item)
 
@@ -112,7 +114,8 @@ class SingleItemView extends React.Component {
                 )}
               {/* render the Edit button if the user owns the item and it is not closed */}
               {this.props.user.id === item.user.id &&
-                (!this.state.justClosed || item.status === 'Closed') && (
+                !this.state.justClosed &&
+                item.status === 'Open' && (
                   <div className="editItem">
                     <button
                       type="button"

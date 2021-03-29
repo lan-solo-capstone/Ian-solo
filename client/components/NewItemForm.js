@@ -72,6 +72,7 @@ class NewItemForm extends Component {
         handleFileSelect={this.handleFileSelect}
         fileInput={this.fileInput}
         {...this.state}
+        pathname={this.props.location.pathname}
       />
     )
   }
