@@ -1,7 +1,7 @@
 /* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {postNewItem} from '../store/item.js'
+import {modifyItem} from '../store/item.js'
 import {ItemForm} from './index'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -47,7 +47,7 @@ class EditItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewItem(this.state)
+    this.props.modifyItem(this.props.item.id, this.state)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
     toast.success('Changes saved!', {
@@ -62,16 +62,19 @@ class EditItemForm extends Component {
   }
 
   render() {
+    const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
+    const {pathname} = this.props.location
     // this log makes sure that state changes when user types on form
     console.log('in EditItemForm render, this.props', this.props)
 
     return (
       <ItemForm
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        handleFileSelect={this.handleFileSelect}
-        fileInput={this.fileInput}
         {...this.state}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleFileSelect={handleFileSelect}
+        fileInput={fileInput}
+        pathname={pathname}
       />
     )
   }
@@ -83,7 +86,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewItem: (item) => dispatch(postNewItem(item)),
+    modifyItem: (itemId, modifications) =>
+      dispatch(modifyItem(itemId, modifications)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditItemForm)
