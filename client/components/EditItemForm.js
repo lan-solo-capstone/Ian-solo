@@ -62,19 +62,19 @@ class EditItemForm extends Component {
   }
 
   render() {
-    const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
-    const {pathname} = this.props.location
+    // const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
+    // const {pathname} = this.props.location
     // this log makes sure that state changes when user types on form
     console.log('in EditItemForm render, this.props', this.props)
 
     return (
       <ItemForm
-        {...this.state}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        handleFileSelect={handleFileSelect}
-        fileInput={fileInput}
-        pathname={pathname}
+      // {...this.state}
+      // handleSubmit={handleSubmit}
+      // handleChange={handleChange}
+      // handleFileSelect={handleFileSelect}
+      // fileInput={fileInput}
+      // pathname={pathname}
       />
     )
   }

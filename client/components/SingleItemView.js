@@ -7,6 +7,7 @@ import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {modifyItem} from '../store/item'
 import {toast} from 'react-toastify'
+import {EditItemForm} from './index'
 import 'react-toastify/dist/ReactToastify.css'
 
 // Render functional
@@ -74,6 +75,8 @@ class SingleItemView extends React.Component {
       return <Redirect to="/items" />
     }
 
+    const itemMatchesUser = this.props.user.id === item.user.id
+
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-2">
         <div className="row gy-4 row-cols-1 ">
@@ -82,7 +85,7 @@ class SingleItemView extends React.Component {
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
               {/* only render chat button if item does not belong to user */}
-              {this.props.user.id !== item.user.id && (
+              {!itemMatchesUser && (
                 <div className="messages">
                   <Link
                     to={{
@@ -101,7 +104,7 @@ class SingleItemView extends React.Component {
               {/* check if the user has the right to close the item */}
               {this.state.justClosed === false &&
                 item.status === 'Open' &&
-                this.props.user.id === item.user.id && (
+                itemMatchesUser && (
                   <div className="closeItem">
                     <button
                       type="button"
@@ -113,7 +116,7 @@ class SingleItemView extends React.Component {
                   </div>
                 )}
               {/* render the Edit button if the user owns the item and it is not closed */}
-              {this.props.user.id === item.user.id &&
+              {/* {this.props.user.id === item.user.id &&
                 !this.state.justClosed &&
                 item.status === 'Open' && (
                   <div className="editItem">
@@ -125,7 +128,7 @@ class SingleItemView extends React.Component {
                       Edit item
                     </button>
                   </div>
-                )}
+                )} */}
             </h6>
           </div>
           <div className="col">
@@ -257,6 +260,7 @@ class SingleItemView extends React.Component {
             </div>
           </div>
         </div>
+        <EditItemForm />
       </div>
     )
   }
