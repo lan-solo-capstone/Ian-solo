@@ -15,7 +15,7 @@ const initialState = {
   user: null,
 }
 
-class NewItemForm extends Component {
+class EditItemForm extends Component {
   constructor() {
     super()
     this.state = initialState
@@ -24,6 +24,10 @@ class NewItemForm extends Component {
     this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps)
+  // }
 
   handleChange(evt) {
     // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
@@ -47,23 +51,20 @@ class NewItemForm extends Component {
     this.props.addNewItem(this.state)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
-    toast.success(
-      'Your item was successfully created! Check it out on this page under Open Items =)',
-      {
-        position: 'top-right',
-        autoClose: 5001,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      }
-    )
+    toast.success('Changes saved!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   render() {
     // this log makes sure that state changes when user types on form
-    console.log('in NewFormItem render, this.props', this.props)
+    console.log('in EditItemForm render, this.props', this.props)
 
     return (
       <ItemForm
@@ -77,7 +78,6 @@ class NewItemForm extends Component {
   }
 }
 
-// yf 03.21.21  added state - need user info to associate with the created item.
 const mapStateToProps = (state) => ({
   user: state.user,
 })
@@ -87,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
     addNewItem: (item) => dispatch(postNewItem(item)),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditItemForm)
