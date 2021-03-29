@@ -73,15 +73,17 @@ class SingleItemView extends React.Component {
     }
 
     return (
-      <div className="container-sm container-md container-xl footerSpacing mt-2">
-        <div className="row gy-4 row-cols-1 ">
-          <div className="col">
-            <h5 className="text-center mb-1">{item.itemListName}</h5>
-            <h6 className="text-center text-secondary">
+      <div className="container-sm container-md container-xl footerSpacing mt-4">
+        <div className="row gy-4 row-cols-1 justify-content-center">
+          <div className="col row row-cols-1 gy-2">
+            <h5 className="col text-center ">{item.itemListName}</h5>
+            <h6 className="col text-center text-secondary">
               Submitted by: {item.user.firstName}
+            </h6>
+            <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
               {this.props.user.id !== item.user.id && (
-                <div className="messages">
+                <div className="col-auto text-center messages">
                   <Link
                     to={{
                       pathname: '/messages',
@@ -100,7 +102,7 @@ class SingleItemView extends React.Component {
               {this.state.justClosed === false &&
                 item.status === 'Open' &&
                 this.props.user.id === item.user.id && (
-                  <div className="closeItem">
+                  <div className="col-auto closeItem">
                     <button
                       type="button"
                       className="btn btn-warning"
@@ -113,7 +115,7 @@ class SingleItemView extends React.Component {
               {/* render the Edit button if the user owns the item and it is not closed */}
               {this.props.user.id === item.user.id &&
                 (!this.state.justClosed || item.status === 'Closed') && (
-                  <div className="editItem">
+                  <div className="col-auto editItem">
                     <button
                       type="button"
                       className="btn btn-warning"
@@ -123,7 +125,7 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
-            </h6>
+            </div>
           </div>
           <div className="col">
             {item.itemPhotos.length < 2 ? (
