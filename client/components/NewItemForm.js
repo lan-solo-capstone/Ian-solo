@@ -2,6 +2,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // TODO: need to flesh out initialState?
 const initialState = {
@@ -41,11 +43,25 @@ class NewItemForm extends Component {
     evt.preventDefault()
 
     this.props.addNewItem(this.state)
+
+    // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
+    toast.success(
+      'Your item was successfully created! Check it out on this page under Open Items =)',
+      {
+        position: 'top-right',
+        autoClose: 5001,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      }
+    )
   }
 
   render() {
     // this log makes sure that state changes when user types on form
-    //console.log('in NewFormItem render, this.state', this.state)
+    console.log('in NewFormItem render, this.props', this.props)
 
     return (
       <div className="container-fluid footerSpacing">
