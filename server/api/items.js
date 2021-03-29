@@ -116,7 +116,13 @@ router.post(
 router.put('/:itemId', async (req, res, next) => {
   try {
     const {itemId} = req.params
-    const status = req.body.status
+    const {
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    } = req.body
     const item = await Item.findByPk(itemId)
 
     if (!item) {
@@ -124,7 +130,13 @@ router.put('/:itemId', async (req, res, next) => {
       return
     }
 
-    await item.update({status: status})
+    await item.update({
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    })
     console.log(
       'in PUT route for /item/:itemId after await item.update',
       'hello',

@@ -1,10 +1,11 @@
+/* eslint-disable complexity */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
-import {closeItem} from '../store/item'
+import {modifyItem} from '../store/item'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -32,11 +33,11 @@ class SingleItemView extends React.Component {
     evt.preventDefault()
     const itemId = String(this.props.location.item.id)
     console.log('in handleClose, itemId', itemId)
-    this.props.closeItem(itemId)
+    this.props.modifyItem(itemId, {status: 'Closed'})
     toast.success('Successfully marked as Closed!', {
       position: 'top-right',
       autoClose: 5001,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
@@ -109,17 +110,19 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
-              {/* {this.props.user.id === item.user.id && (
-                <div className="closeItem">
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.handleEdit}
-                  >
-                    Edit item
-                  </button>
-                </div>
-              )} */}
+              {/* render the Edit button if the user owns the item and it is not closed */}
+              {this.props.user.id === item.user.id &&
+                (!this.state.justClosed || item.status === 'Closed') && (
+                  <div className="editItem">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={this.handleEdit}
+                    >
+                      Edit item
+                    </button>
+                  </div>
+                )}
             </h6>
           </div>
           <div className="col">
@@ -282,7 +285,8 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  closeItem: (itemId) => dispatch(closeItem(itemId)),
+  modifyItem: (itemId, modifications) =>
+    dispatch(modifyItem(itemId, modifications)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)

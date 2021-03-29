@@ -3,7 +3,7 @@ import history from '../history'
 import {storage} from '../../firebase/firebase'
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
-const MARK_ITEM_CLOSED = 'MARK_ITEM_CLOSED'
+const EDIT_ITEM = 'EDIT_ITEM'
 
 export const createNewItem = (item) => {
   return {
@@ -12,9 +12,9 @@ export const createNewItem = (item) => {
   }
 }
 
-const markItemClosed = (item) => {
+const editItem = (item) => {
   return {
-    type: MARK_ITEM_CLOSED,
+    type: EDIT_ITEM,
     item,
   }
 }
@@ -75,15 +75,13 @@ export const postNewItem = (item) => {
 }
 
 // this can be renamed to editItem and rewritten to edit any part of the item -- JC 03.26.21
-export const closeItem = (itemId) => {
+export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
     try {
       const closedItem = (
-        await axios.put(`/api/items/${itemId}`, {
-          status: 'Closed',
-        })
+        await axios.put(`/api/items/${itemId}`, modifications)
       ).data
-      dispatch(markItemClosed(closedItem))
+      dispatch(editItem(closedItem))
     } catch (err) {
       console.error(err)
     }
@@ -95,7 +93,7 @@ export default function itemReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_NEW_ITEM:
       return action.item
-    case MARK_ITEM_CLOSED:
+    case EDIT_ITEM:
       return action.item
     default:
       return state
