@@ -62,13 +62,12 @@ class SingleItemView extends React.Component {
   render() {
     console.log('in SingleItemView render, this.props', this.props)
     console.log('in SingleItemView render, this.state', this.state)
+    if (!this.props.location.state) {
+      return <Redirect to="/items" />
+    }
 
     let {item} = this.props.location.state
     console.log('SingleItemView item!!!!', item)
-
-    if (!this.props.location.state.item) {
-      return <Redirect to="/items" />
-    }
 
     // TODO: try this loading instead of the one above
     // this.props.loading ? (
