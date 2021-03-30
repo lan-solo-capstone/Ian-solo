@@ -119,9 +119,6 @@ router.post(
 )
 
 // PUT route for /api/items/:itemId
-// for now, this is only to mark items as closed -- JC
-// can be expanded later to allow users to modify their posts -- JC 03.26.21
-
 router.put('/:itemId', async (req, res, next) => {
   try {
     const {itemId} = req.params
@@ -132,6 +129,9 @@ router.put('/:itemId', async (req, res, next) => {
       itemCondition,
       status,
     } = req.body
+
+    // eager load User and ItemPhoto to match GET route for /items
+    // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
     const item = await Item.findByPk(itemId, {
       attributes: [
         'id',
@@ -141,7 +141,7 @@ router.put('/:itemId', async (req, res, next) => {
         'status',
         'dateListed',
         'itemCondition',
-        'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
+        'createdAt',
       ],
       include: [
         {
