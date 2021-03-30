@@ -12,11 +12,13 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
+
     uploadPhoto,
+
     pathname,
   } = props
 
-  const alertRefrence = new React.createRef()
+  const alertReference = new React.createRef()
 
   return (
     <div
@@ -120,6 +122,10 @@ const ItemForm = (props) => {
             />
           </div>
         </div>
+
+    {/* Only display the photo upload section for new posts */}
+        {pathname === '/post' && (
+          <div>
         <div className="col px-4">
           <div className="mb-3">
             <label htmlFor="uploadPhoto" className="form-label">
@@ -172,10 +178,14 @@ const ItemForm = (props) => {
             <div ref={alertRefrence} hidden={true} className="mt-2">
               <div className="alert alert-danger" role="alert">
                 Max of 5 files allowed.
+
               </div>
             </div>
           </div>
-        </div>
+      </div>
+          </div>
+        )}
+
         <button
           type="submit"
           className="btn btn-primary"
