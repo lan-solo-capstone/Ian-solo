@@ -50,12 +50,13 @@ class EditUserForm extends Component {
     }
   }
 
+  // prepopulate form if the user is checking their own profile
   componentDidMount() {
     this.prepopulateForm()
   }
-  // The parent component will fetch the user we are editing.
-  // If that user changes, componentDidUpdate will grab the new user's info
-  // to pre-populate the edit form. JC
+
+  // The parent component may fetch the user we are editing (if an admin is editing another user).
+  // If that user changes, componentDidUpdate will grab the new user's info to pre-populate the form. JC
   componentDidUpdate(prevProps) {
     if (prevProps.singleUser.id !== this.props.singleUser.id) {
       this.prepopulateForm()
