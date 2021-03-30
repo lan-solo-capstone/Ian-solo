@@ -15,7 +15,7 @@ const ItemForm = (props) => {
     pathname,
   } = props
 
-  const alertRefrence = new React.createRef()
+  const alertReference = new React.createRef()
 
   return (
     <div className="container-sm container-md footerSpacing mt-2 justify-content-center py-3">
@@ -126,6 +126,7 @@ const ItemForm = (props) => {
           </div>
         </div>
 
+        {/* Only display the photo upload section for new posts */}
         {pathname === '/post' && (
           <div>
             <div className="col">
@@ -142,14 +143,14 @@ const ItemForm = (props) => {
                   ref={fileInput}
                   onChange={(e) => {
                     if (e.target.files.length > 5) {
-                      alertRefrence.current.hidden = false
+                      alertReference.current.hidden = false
                       return
                     }
-                    alertRefrence.current.hidden = true
+                    alertReference.current.hidden = true
                     handleFileSelect(e)
                   }}
                 />
-                <div ref={alertRefrence} hidden={true} className="mt-2">
+                <div ref={alertReference} hidden={true} className="mt-2">
                   <div className="alert alert-danger" role="alert">
                     Max of 5 files allowed.
                   </div>
@@ -158,6 +159,7 @@ const ItemForm = (props) => {
             </div>
           </div>
         )}
+
         <button
           type="submit"
           className="btn btn-primary"
