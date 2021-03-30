@@ -11,26 +11,17 @@ import {toast} from 'react-toastify'
 import {EditItemForm} from './index'
 import 'react-toastify/dist/ReactToastify.css'
 
-// Render functional
-// const singleView = (props) => {
-//   console.log(props)
-
-// }
-
 // Render Class
 class SingleItemView extends React.Component {
   constructor(props) {
     super(props)
 
-    // justClosed is to mark whether the current item's status
-    // has just changed from Open to Closed
-    this.state = {
-      justClosed: false,
-      justOpened: false,
-    }
     this.handleClose = this.handleClose.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
   }
+
+  //  TODO: move toast notifications to componentDidUpdate?
+  // that way they only fire if component was updated successfully -- JC 3.29.21
 
   handleOpen(evt) {
     evt.preventDefault()
@@ -64,23 +55,6 @@ class SingleItemView extends React.Component {
     })
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // check if the item ID matches,
-  //   // and if the status has changed from Open to Closed,
-  //   // and if status has just changed locally on this component
-  //   // then make the "Close" button disappear
-  //   if (
-  //     prevProps.location.state.item.id === this.props.item.id &&
-  //     prevProps.location.state.item.status !== this.props.item.status
-  //   ) {
-  //     if (this.state.justClosed === false) {
-  //       console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
-  //       this.setState({justClosed: true})
-  //     } else if (this.state.justOpened === false) {
-  //       this.setState({justOpened: true})
-  //     }
-  //   }
-  // }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
@@ -90,19 +64,13 @@ class SingleItemView extends React.Component {
     console.log('in SingleItemView render, this.state', this.state)
 
     let {item} = this.props.location.state
-    console.log('item!!!!', item)
+    console.log('SingleItemView item!!!!', item)
 
-    // commenting this out to test
     if (!this.props.location.state.item) {
-      // return <Redirect to="/items" />
-      return <div>Loading for now!!!!</div>
+      return <Redirect to="/items" />
     }
 
-    // TODO: figure out why after update, item.user object disappears and is replaced with item.userId. Has to do with the way the request is processed at PUT route on back end
-
-    const itemMatchesUser = this.props.user.id === item.user.id
-
-    // TODO: try this loading
+    // TODO: try this loading instead of the one above
     // this.props.loading ? (
     //   <div
     //     className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -111,6 +79,9 @@ class SingleItemView extends React.Component {
     //     <span className="visually-hidden">Loading...</span>
     //   </div>
     // ) :
+    // -- JC 3.29.21
+
+    const itemMatchesUser = this.props.user.id === item.user.id
 
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-2">
@@ -163,20 +134,6 @@ class SingleItemView extends React.Component {
                   </button>
                 </div>
               )}
-              {/* render the Edit button if the user owns the item and it is not closed */}
-              {/* {this.props.user.id === item.user.id &&
-                !this.state.justClosed &&
-                item.status === 'Open' && (
-                  <div className="editItem">
-                    <button
-                      type="button"
-                      className="btn btn-warning"
-                      onClick={this.handleEdit}
-                    >
-                      Edit item
-                    </button>
-                  </div>
-                )} */}
             </h6>
           </div>
           <div className="col">
@@ -317,10 +274,6 @@ class SingleItemView extends React.Component {
 /**
  * CONTAINER
  */
-
-// const mapState = (state) => ({
-//   placeholder: state.placeholder,
-// })
 
 const mapState = (state) => {
   return {
