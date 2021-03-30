@@ -1,4 +1,3 @@
-
 /* eslint-disable no-warning-comments */
 /* eslint-disable complexity */
 import React from 'react'
@@ -114,8 +113,7 @@ class SingleItemView extends React.Component {
               {
                 // this.state.justClosed === false &&
                 item.status === 'Open' && itemMatchesUser && (
-                                    <div className="col-auto closeItem">
-
+                  <div className="col-auto closeItem">
                     <button
                       type="button"
                       className="btn btn-warning"
@@ -124,23 +122,24 @@ class SingleItemView extends React.Component {
                       Mark this item as closed
                     </button>
                   </div>
-                )}
+                )
+              }
               {/* render the Edit button if the user owns the item and it is not closed */}
-//               {this.props.user.id === item.user.id &&
-//                 (!this.state.justClosed || item.status === 'Closed') && (
-//                   <div className="col-auto editItem">
-//                     <button
-//                       type="button"
-//                       className="btn btn-warning"
-//                       onClick={this.handleEdit}
-//                     >
-//                       Edit item
-//                     </button>
-//                   </div>
-//                 )}
-//             </div>
-//                 )
-//               }
+              {/* {this.props.user.id === item.user.id &&
+                (!this.state.justClosed || item.status === 'Closed') && (
+                   <div className="col-auto editItem">
+                     <button
+                       type="button"
+                       className="btn btn-warning"
+                       onClick={this.handleEdit}
+                     >
+                       Edit item
+                     </button>
+                   </div>
+                 )}
+             </div>
+                 )
+               } */}
               {/* Allow user to re-open item that has been closed accidentally or prematurely */}
               {item.status === 'Closed' && itemMatchesUser && (
                 <div className="col-auto closeItem">
