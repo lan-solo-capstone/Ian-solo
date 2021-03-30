@@ -140,11 +140,11 @@ const ItemForm = (props) => {
                   ref={fileInput}
                   onChange={(e) => {
                     if (e.target.files.length > 5) {
-                      alertRefrence.current.hidden = false
+                      alertReference.current.hidden = false
                       handleFileSelect()
                       return
                     }
-                    alertRefrence.current.hidden = true
+                    alertReference.current.hidden = true
                     handleFileSelect(e)
                   }}
                 />
@@ -178,7 +178,7 @@ const ItemForm = (props) => {
                       )
                     })}
                 </div>
-                <div ref={alertRefrence} hidden={true} className="mt-2">
+                <div ref={alertReference} hidden={true} className="mt-2">
                   <div className="alert alert-danger" role="alert">
                     Max of 5 files allowed.
                   </div>
