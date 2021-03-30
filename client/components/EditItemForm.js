@@ -25,22 +25,19 @@ class EditItemForm extends Component {
     this.fileInput = React.createRef()
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps)
-  // }
-
   handleChange(evt) {
     // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
     this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
     this.setState({
       [evt.target.name]: evt.target.value,
     })
+
+    // make sure itemCondition gets cleared out if itemType changes
     if (this.state.itemType === 'Seeking') {
       this.setState({itemCondition: null})
     }
   }
 
-  // TODO: add logic to set itemCondition to '' if user changes itemType to Seeking
   handleSubmit(evt) {
     evt.preventDefault()
     this.props.modifyItem(this.props.location.state.item.id, this.state)
@@ -61,6 +58,8 @@ class EditItemForm extends Component {
     const {
       handleSubmit,
       handleChange,
+
+      // disabling updates of photos for now -- JC 3.29.21
       // handleFileSelect,
       // fileInput
     } = this
