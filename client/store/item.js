@@ -91,6 +91,7 @@ export const modifyItem = (itemId, modifications) => {
   }
 }
 
+// TODO: add loading: true to initialState and loading: false to returns -- JC 3.29.21
 const initialState = {}
 export default function itemReducer(state = initialState, action) {
   switch (action.type) {
