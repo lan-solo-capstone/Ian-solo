@@ -7,12 +7,12 @@ import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const initialState = {
-  itemType: 'chooseOne',
+  itemType: null,
   itemListName: '',
   description: '',
-  itemCondition: 'chooseOne',
+  itemCondition: null,
   uploadPhoto: null,
-  user: null,
+  // user: null,
 }
 
 class EditItemForm extends Component {
@@ -21,9 +21,11 @@ class EditItemForm extends Component {
     this.state = initialState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
+
+  componentDidUpdate() {}
+
   handleChange(evt) {
     // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
     this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
@@ -54,7 +56,6 @@ class EditItemForm extends Component {
   }
 
   render() {
-
     const {
       handleSubmit,
       handleChange,
