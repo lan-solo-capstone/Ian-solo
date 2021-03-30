@@ -12,6 +12,7 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
+    uploadPhoto,
     pathname,
   } = props
 
@@ -19,7 +20,7 @@ const ItemForm = (props) => {
 
   return (
     <div
-      className="container mt-3 justify-content-center py-3"
+      className="container mt-3 mb-5 justify-content-center py-3"
       style={{maxWidth: '800px'}}
     >
       <form
@@ -122,7 +123,7 @@ const ItemForm = (props) => {
         <div className="col px-4">
           <div className="mb-3">
             <label htmlFor="uploadPhoto" className="form-label">
-              Upload Photos
+              <h5>Upload Photos</h5>
             </label>
             <input
               className="form-control"
@@ -141,6 +142,33 @@ const ItemForm = (props) => {
                 handleFileSelect(e)
               }}
             />
+            {console.log(props.uploadPhoto, 'props')}
+            <div
+              className="row mt-3 justify-content-center"
+              hidden={!uploadPhoto}
+            >
+              <label htmlFor="uploadPhoto" className="form-label text-center">
+                <h5>File Preview</h5>
+              </label>
+              {uploadPhoto &&
+                uploadPhoto.map((elm) => {
+                  return (
+                    <div
+                      key={elm.name + elm.lastModified + elm.size}
+                      className="col-auto p-1 m-1 border rounded"
+                    >
+                      <img
+                        src={URL.createObjectURL(elm)}
+                        style={{
+                          width: '90px',
+                          height: '90px',
+                          objectFit: 'contain',
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+            </div>
             <div ref={alertRefrence} hidden={true} className="mt-2">
               <div className="alert alert-danger" role="alert">
                 Max of 5 files allowed.
