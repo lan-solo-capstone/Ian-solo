@@ -1,3 +1,5 @@
+
+/* eslint-disable no-warning-comments */
 /* eslint-disable complexity */
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -7,31 +9,40 @@ import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {modifyItem} from '../store/item'
 import {toast} from 'react-toastify'
+import {EditItemForm} from './index'
 import 'react-toastify/dist/ReactToastify.css'
-
-// Render functional
-// const singleView = (props) => {
-//   console.log(props)
-
-// }
 
 // Render Class
 class SingleItemView extends React.Component {
   constructor(props) {
     super(props)
 
-    // justClosed is to mark whether the current item's status
-    // has just changed from Open to Closed
-    this.state = {
-      justClosed: false,
-    }
     this.handleClose = this.handleClose.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+  }
+
+  //  TODO: move toast notifications to componentDidUpdate?
+  // that way they only fire if component was updated successfully -- JC 3.29.21
+
+  handleOpen(evt) {
+    evt.preventDefault()
+    const itemId = String(this.props.location.state.item.id)
+    this.props.modifyItem(itemId, {status: 'Open'})
+    toast.success('Successfully marked as Open!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   // if user clicks Close button, trigger toast notification
   handleClose(evt) {
     evt.preventDefault()
-    const itemId = String(this.props.location.item.id)
+    const itemId = String(this.props.location.state.item.id)
     console.log('in handleClose, itemId', itemId)
     this.props.modifyItem(itemId, {status: 'Closed'})
     toast.success('Successfully marked as Closed!', {
@@ -45,32 +56,32 @@ class SingleItemView extends React.Component {
     })
   }
 
-  // check if the item ID matches,
-  // and if the status has changed from Open to Closed,
-  // and if status has just changed locally on this component
-  // then make the "Close" button disappear
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.location.item.id === this.props.item.id &&
-      prevProps.location.item.status !== this.props.item.status &&
-      this.state.justClosed === false
-    ) {
-      console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
-      this.setState({justClosed: true})
-    }
-  }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
 
   render() {
     console.log('in SingleItemView render, this.props', this.props)
-    let {item} = this.props.location
-    console.log('item!!!!', item)
-
-    if (!this.props.location.item) {
+    console.log('in SingleItemView render, this.state', this.state)
+    if (!this.props.location.state) {
       return <Redirect to="/items" />
     }
+
+    let {item} = this.props.location.state
+    console.log('SingleItemView item!!!!', item)
+
+    // TODO: try this loading instead of the one above
+    // this.props.loading ? (
+    //   <div
+    //     className="spinner-border position-absolute top-50 start-50 translate-middle"
+    //     role="status"
+    //   >
+    //     <span className="visually-hidden">Loading...</span>
+    //   </div>
+    // ) :
+    // -- JC 3.29.21
+
+    const itemMatchesUser = this.props.user.id === item.user.id
 
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-4">
@@ -82,7 +93,7 @@ class SingleItemView extends React.Component {
             </h6>
             <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
-              {this.props.user.id !== item.user.id && (
+              {!itemMatchesUser && (
                 <div className="col-auto text-center messages">
                   <Link
                     to={{
@@ -99,10 +110,12 @@ class SingleItemView extends React.Component {
                 </div>
               )}
               {/* check if the user has the right to close the item */}
-              {this.state.justClosed === false &&
-                item.status === 'Open' &&
-                this.props.user.id === item.user.id && (
-                  <div className="col-auto closeItem">
+
+              {
+                // this.state.justClosed === false &&
+                item.status === 'Open' && itemMatchesUser && (
+                                    <div className="col-auto closeItem">
+
                     <button
                       type="button"
                       className="btn btn-warning"
@@ -113,18 +126,33 @@ class SingleItemView extends React.Component {
                   </div>
                 )}
               {/* render the Edit button if the user owns the item and it is not closed */}
-              {this.props.user.id === item.user.id &&
-                (!this.state.justClosed || item.status === 'Closed') && (
-                  <div className="col-auto editItem">
-                    <button
-                      type="button"
-                      className="btn btn-warning"
-                      onClick={this.handleEdit}
-                    >
-                      Edit item
-                    </button>
-                  </div>
-                )}
+//               {this.props.user.id === item.user.id &&
+//                 (!this.state.justClosed || item.status === 'Closed') && (
+//                   <div className="col-auto editItem">
+//                     <button
+//                       type="button"
+//                       className="btn btn-warning"
+//                       onClick={this.handleEdit}
+//                     >
+//                       Edit item
+//                     </button>
+//                   </div>
+//                 )}
+//             </div>
+//                 )
+//               }
+              {/* Allow user to re-open item that has been closed accidentally or prematurely */}
+              {item.status === 'Closed' && itemMatchesUser && (
+                <div className="col-auto closeItem">
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.handleOpen}
+                  >
+                    Re-open item
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="col">
@@ -263,6 +291,7 @@ class SingleItemView extends React.Component {
             </div>
           </div>
         </div>
+        {itemMatchesUser && <EditItemForm location={this.props.location} />}
       </div>
     )
   }
@@ -271,10 +300,6 @@ class SingleItemView extends React.Component {
 /**
  * CONTAINER
  */
-
-// const mapState = (state) => ({
-//   placeholder: state.placeholder,
-// })
 
 const mapState = (state) => {
   return {

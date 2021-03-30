@@ -24,13 +24,7 @@ router.post('/signup', async (req, res, next) => {
   try {
     const formData = req.body
     const address = encodeURIComponent(
-      formData.street1 +
-        ',' +
-        formData.street2 +
-        ',' +
-        formData.city +
-        ',' +
-        formData.zip
+      formData.street1 + ',' + formData.city + ',' + formData.zip
     )
     const data = (
       await axios.get(

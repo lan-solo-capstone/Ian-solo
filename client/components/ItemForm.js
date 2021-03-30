@@ -12,6 +12,7 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
+     pathname,
   } = props
 
   const alertRefrence = new React.createRef()

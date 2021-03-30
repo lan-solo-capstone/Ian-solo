@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import axios from 'axios'
 import history from '../history'
 import {storage} from '../../firebase/firebase'
@@ -74,20 +75,24 @@ export const postNewItem = (item) => {
   }
 }
 
-// this can be renamed to editItem and rewritten to edit any part of the item -- JC 03.26.21
+
 export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
     try {
-      const closedItem = (
+      const modifiedItem = (
         await axios.put(`/api/items/${itemId}`, modifications)
       ).data
-      dispatch(editItem(closedItem))
+      dispatch(editItem(modifiedItem))
+
+      // this is necessary? or a kludgy way to pass the modified item via location props to match the location props passed to /singleview from /items -- JC 3.29.21
+      history.push('/singleview', {item: modifiedItem})
     } catch (err) {
       console.error(err)
     }
   }
 }
 
+// TODO: add loading: true to initialState and loading: false to returns -- JC 3.29.21
 const initialState = {}
 export default function itemReducer(state = initialState, action) {
   switch (action.type) {

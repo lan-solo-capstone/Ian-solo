@@ -72,13 +72,17 @@ const User = db.define('user', {
 
   zip: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
+
   latitude: {
     type: Sequelize.DECIMAL(8, 6),
+    defaultValue: 40.73061,
   },
+
   longitude: {
     type: Sequelize.DECIMAL(9, 6),
+    defaultValue: -73.935242,
   },
 })
 

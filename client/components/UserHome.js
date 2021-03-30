@@ -31,11 +31,19 @@ class UserHome extends React.Component {
       <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
-
         <ol className="breadcrumb">
           <li className="breadcrumb-item" aria-current="page">
             Account Details
           </li>
+<li className="breadcrumb-item active" aria-current="page">        
+<a
+          className="text-decoration-none"
+          onClick={() => history.push('/users/' + user.id)}
+        >
+          
+          Edit Profile
+        </a>
+</li>
           <li className="breadcrumb-item active" aria-current="page">
             {this.props.user.admin ? (
               <Link to="/users" className="text-decoration-none">
@@ -53,18 +61,25 @@ class UserHome extends React.Component {
             </a>
           </li>
         </ol>
-
         <ul className="list-group">
           <li className="list-group-item">
             {user.firstName} {user.lastName}
           </li>
           <li className="list-group-item">{user.email}</li>
-          <li className="list-group-item">{user.street1}</li>
+          {user.street1 ? (
+            <li className="list-group-item">{user.street1}</li>
+          ) : (
+            <li className="list-group-item text-danger">
+              Please edit your profile to complete address!
+            </li>
+          )}
           {user.street2 ? (
             <li className="list-group-item">{user.street2}</li>
           ) : null}
           <li className="list-group-item">
-            {user.city}, {user.state} {user.zip}
+            {user.city}
+            {user.city ? ', ' : null}
+            {user.state} {user.zip}
           </li>
         </ul>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">

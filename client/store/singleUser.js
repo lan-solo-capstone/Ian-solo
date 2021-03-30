@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {me} from './user'
 
 // I think we need to separate this subreducer from the user subreducer
 // the user subreducer will be for validating logins
@@ -35,6 +36,7 @@ export const modifyExistingUser = (userId, modifications) => {
     try {
       const {data} = await axios.put(`/api/users/${userId}`, modifications)
       dispatch(editExistingUser(data))
+      dispatch(me())
     } catch (err) {
       console.error(err)
     }
