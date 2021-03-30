@@ -40,13 +40,22 @@ async function seed() {
 
   console.log(`seeded ${items.length} itemPhotos`)
 
+  console.log('associating item to photos, then item to users')
+
+  // function to generate randome UserId
+  function getRandomUserId(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min) + min)
+  }
+
   // associating items to photos
   // find out the row counts of item table
 
   const {count} = await Item.findAndCountAll()
   const itemRowCount = count
 
-  // loop through each item and associate photos to each item
+  // yf 03.31.21 loop through each item and associate photos to each item, then associate item to random users
 
   for (let i = 1; i <= itemRowCount; i++) {
     const item = await Item.findAll({where: {itemIdTEMP: i}})
@@ -58,9 +67,12 @@ async function seed() {
         return photoObj.setItem(item[0])
       })
     )
+
+    const user = await User.findByPk(getRandomUserId(1, 6))
+
+    await item[0].setUser(user)
   }
 
-  //completed seeding
   console.log('done seeding')
 }
 // We've separated the `seed` function from the `runSeed` function.
