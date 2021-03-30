@@ -75,7 +75,6 @@ export const postNewItem = (item) => {
   }
 }
 
-// this can be renamed to editItem and rewritten to edit any part of the item -- JC 03.26.21
 export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
     try {
@@ -84,8 +83,7 @@ export const modifyItem = (itemId, modifications) => {
       ).data
       dispatch(editItem(modifiedItem))
 
-      // TODO: redirect to /singleview and pass props
-      // history.push /singleview {props}
+      // this is necessary? or a kludgy way to pass the modified item via location props to match the location props passed to /singleview from /items -- JC 3.29.21
       history.push('/singleview', {item: modifiedItem})
     } catch (err) {
       console.error(err)
