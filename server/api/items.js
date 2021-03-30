@@ -56,12 +56,17 @@ router.get('/:itemId', async (req, res, next) => {
   }
 })
 
-// api/items POST a new item
+// api/items
+// POST a new item
+
 router.post(
   '/',
 
   // commenting out authentication for ease of development and testing -- JC
+
   // ensureLogin,
+
+  // yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
 
   async (req, res, next) => {
     try {
@@ -73,13 +78,9 @@ router.post(
         deliveryOption,
         userId,
         imageArr,
-        // status,
         // dateListed,
       } = req.body
 
-      console.log('req.body.image', imageArr)
-
-      //create new item data in item table -- working as of 3.20.21
       const newItem = await Item.create({
         itemListName,
         description,
@@ -89,20 +90,27 @@ router.post(
         userId,
       })
 
-      console.log(newItem)
+      // yf 3.29.21  if not image, assign default image.  Else update itemPhoto table with firebase storage info.
 
-      imageArr.forEach(async (element) => {
-        console.log(element)
-
+      if (imageArr.length === 0) {
         const itemPhotos = await ItemPhoto.create({
-          photoTitle: element.photoTitle,
-          cloudREF: element.cloudRef,
-          downloadURL: element.downloadUrl,
+          photoTitle: 'default.jpg',
         })
 
         await itemPhotos.setItem(newItem)
-      })
+      } else {
+        imageArr.forEach(async (element) => {
+          console.log(element)
 
+          const itemPhotos = await ItemPhoto.create({
+            photoTitle: element.photoTitle,
+            cloudREF: element.cloudRef,
+            downloadURL: element.downloadUrl,
+          })
+
+          await itemPhotos.setItem(newItem)
+        })
+      }
       res.status(201).send(newItem)
     } catch (err) {
       next(err)
