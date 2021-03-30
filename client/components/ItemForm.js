@@ -18,14 +18,17 @@ const ItemForm = (props) => {
   const alertRefrence = new React.createRef()
 
   return (
-    <div className="container-sm container-md footerSpacing mt-2 justify-content-center py-3">
+    <div
+      className="container mt-3 justify-content-center py-3"
+      style={{maxWidth: '800px'}}
+    >
       <form
         className="row row-cols-1 gy-3 justify-content-center needs-validation"
         role="form"
         id="wholeform"
         onSubmit={handleSubmit}
       >
-        <div className="col-auto row row-cols-1 row-cols-md-2">
+        <div className="col-12 row row-cols-1 row-cols-md-2">
           <div className="col">
             <label className="form-label">
               <h5>What kind of post is this?</h5>
@@ -85,7 +88,7 @@ const ItemForm = (props) => {
           </div>
         </div>
         <div className="col row">
-          <div className="col-6">
+          <div className="col">
             <label htmlFor="itemListName" className="form-label">
               <h5>Item Name</h5>
             </label>
@@ -116,7 +119,7 @@ const ItemForm = (props) => {
             />
           </div>
         </div>
-        <div className="col">
+        <div className="col px-4">
           <div className="mb-3">
             <label htmlFor="uploadPhoto" className="form-label">
               Upload Photos
@@ -148,7 +151,7 @@ const ItemForm = (props) => {
         <button
           type="submit"
           className="btn btn-primary"
-          style={{maxWidth: '80%'}}
+          style={{maxWidth: '50%'}}
         >
           Submit
         </button>
