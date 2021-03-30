@@ -6,11 +6,16 @@ const ItemForm = (props) => {
   const {
     handleChange,
     handleSubmit,
+    handleFileSelect,
     itemType,
     itemListName,
     description,
     itemCondition,
+    fileInput,
+    pathname,
   } = props
+
+  const alertRefrence = new React.createRef()
 
   return (
     <div className="container-sm container-md footerSpacing mt-2 justify-content-center py-3">
@@ -25,6 +30,20 @@ const ItemForm = (props) => {
             <label className="form-label">
               <h5>What kind of post is this?</h5>
             </label>
+            <>
+              {/* <select
+            className="form-select itemType"
+            name="itemType"
+            value={itemType}
+            onChange={handleChange}
+          >
+            <option value="chooseOne">Choose...</option>
+            <option value="Offer">It&apos;s an OFFER of an item</option>
+            <option value="Seeking">
+              It&apos;s a request for a SEEKING item
+            </option>
+          </select> */}
+            </>
 
             <div
               className="form-check"
@@ -106,6 +125,46 @@ const ItemForm = (props) => {
             />
           </div>
         </div>
+
+        {pathname === '/post' && (
+          <div>
+            <div className="col">
+              <div className="mb-3">
+                <label htmlFor="uploadPhoto" className="form-label">
+                  Upload Photos
+                </label>
+                <input
+                  className="form-control"
+                  type="file"
+                  accept="image/x-png,image/jpeg,image/gif"
+                  multiple
+                  name="uploadPhoto"
+                  ref={fileInput}
+                  onChange={(e) => {
+                    if (e.target.files.length > 5) {
+                      alertRefrence.current.hidden = false
+                      return
+                    }
+                    alertRefrence.current.hidden = true
+                    handleFileSelect(e)
+                  }}
+                />
+                <div ref={alertRefrence} hidden={true} className="mt-2">
+                  <div className="alert alert-danger" role="alert">
+                    Max of 5 files allowed.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{maxWidth: '80%'}}
+        >
+          Submit
+        </button>
       </form>
     </div>
   )

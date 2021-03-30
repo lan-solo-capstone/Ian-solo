@@ -11,8 +11,6 @@ const initialState = {
   itemListName: '',
   description: '',
   itemCondition: null,
-  uploadPhoto: null,
-  // user: null,
 }
 
 class EditItemForm extends Component {
@@ -22,6 +20,24 @@ class EditItemForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fileInput = React.createRef()
+  }
+  componentDidMount() {
+    console.log(
+      'in EditItemForm componentDidMount, this.props, this.state',
+      this.props,
+      this.state
+    )
+
+    if (this.props.location.state.item) {
+      const {
+        itemType,
+        itemListName,
+        description,
+        itemCondition,
+      } = this.props.location.state.item
+
+      this.setState({itemType, itemListName, description, itemCondition})
+    }
   }
 
   componentDidUpdate() {}
