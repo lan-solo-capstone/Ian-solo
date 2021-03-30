@@ -39,6 +39,28 @@ async function seed() {
   )
 
   console.log(`seeded ${items.length} itemPhotos`)
+
+  // associating items to photos
+  // find out the row counts of item table
+
+  const {count} = await Item.findAndCountAll()
+  const itemRowCount = count
+
+  // loop through each item and associate photos to each item
+
+  for (let i = 1; i <= itemRowCount; i++) {
+    const item = await Item.findAll({where: {itemIdTEMP: i}})
+
+    const photos = await ItemPhoto.findAll({where: {itemIdTEMP: i}})
+
+    await Promise.all(
+      photos.map((photoObj) => {
+        return photoObj.setItem(item[0])
+      })
+    )
+  }
+
+  //completed seeding
   console.log('done seeding')
 }
 // We've separated the `seed` function from the `runSeed` function.
