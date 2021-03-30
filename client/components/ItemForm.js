@@ -12,7 +12,7 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
-     pathname,
+    pathname,
   } = props
 
   const alertRefrence = new React.createRef()
@@ -139,8 +139,10 @@ const ItemForm = (props) => {
               name="uploadPhoto"
               ref={fileInput}
               onChange={(e) => {
+                console.log(alertRefrence)
                 if (e.target.files.length > 5) {
                   alertRefrence.current.hidden = false
+                  handleFileSelect()
                   return
                 }
                 alertRefrence.current.hidden = true
