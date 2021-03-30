@@ -13,8 +13,8 @@ const AuthForm = (props) => {
   return (
     <>
       <div className="container-fluid login-bg text-center">
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3">
+        <div className="row h-100 justify-content-center">
+          <div className="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 my-md-auto my-5">
             <form
               className="login-form-container p-3"
               onSubmit={handleSubmit}
@@ -110,8 +110,8 @@ const AuthForm = (props) => {
                 />
               </div>
 
-              <div className="d-grid gap-2">
-                <button type="submit" className="btn btn-primary my-1 mx-5">
+              <div className="d-grid ">
+                <button type="submit" className="btn btn-primary my-3">
                   {displayName}
                 </button>
               </div>
