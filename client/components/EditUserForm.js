@@ -21,6 +21,7 @@ class EditUserForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   componentDidMount() {
     if (this.props.singleUser.id) {
       const {
