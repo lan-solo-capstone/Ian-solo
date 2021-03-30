@@ -130,7 +130,7 @@ const AuthForm = (props) => {
                   />{' '}
                 </div>
               )}
-              {/* <a href="/auth/google">{displayName} with Google</a> */}
+              <a href="/auth/google">{displayName} with Google</a>
               <div className="mt-1">
                 {displayName === 'Login' ? (
                   <span>
