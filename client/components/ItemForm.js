@@ -20,7 +20,7 @@ const ItemForm = (props) => {
   return (
     <div className="container-sm container-md footerSpacing mt-2 justify-content-center py-3">
       <form
-        className="row row-cols-1 gy-3 justify-content-center"
+        className="row row-cols-1 gy-3 justify-content-center needs-validation"
         role="form"
         id="wholeform"
         onSubmit={handleSubmit}
@@ -30,20 +30,6 @@ const ItemForm = (props) => {
             <label className="form-label">
               <h5>What kind of post is this?</h5>
             </label>
-            <>
-              {/* <select
-            className="form-select itemType"
-            name="itemType"
-            value={itemType}
-            onChange={handleChange}
-          >
-            <option value="chooseOne">Choose...</option>
-            <option value="Offer">It&apos;s an OFFER of an item</option>
-            <option value="Seeking">
-              It&apos;s a request for a SEEKING item
-            </option>
-          </select> */}
-            </>
 
             <div
               className="form-check"
@@ -56,6 +42,7 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Offer"
+                required
               />
               <label className="form-check-label">
                 It&apos;s an <b>OFFER</b> of an item
@@ -72,6 +59,7 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Seeking"
+                required
               />
               <label className="form-check-label">
                 It&apos;s a request for <b>SEEKING</b> an item
@@ -96,7 +84,6 @@ const ItemForm = (props) => {
             </select>
           </div>
         </div>
-
         <div className="col row">
           <div className="col-6">
             <label htmlFor="itemListName" className="form-label">
@@ -105,11 +92,14 @@ const ItemForm = (props) => {
             <input
               type="text"
               className="form-control"
+              id="itemListName"
               name="itemListName"
               value={itemListName}
               onChange={handleChange}
               placeholder="Example Name..."
+              required
             />
+            <div className="invalid-feedback">Please provide a name.</div>
           </div>
           <div className="col-12">
             <label htmlFor="description">
@@ -122,10 +112,10 @@ const ItemForm = (props) => {
               value={description}
               onChange={handleChange}
               placeholder="Example description... Ipsum loram"
+              required
             />
           </div>
         </div>
-
         <div className="col">
           <div className="mb-3">
             <label htmlFor="uploadPhoto" className="form-label">
@@ -139,7 +129,6 @@ const ItemForm = (props) => {
               name="uploadPhoto"
               ref={fileInput}
               onChange={(e) => {
-                console.log(alertRefrence)
                 if (e.target.files.length > 5) {
                   alertRefrence.current.hidden = false
                   handleFileSelect()
