@@ -86,7 +86,7 @@ export const modifyItem = (itemId, modifications) => {
 
       // TODO: redirect to /singleview and pass props
       // history.push /singleview {props}
-      history.push('/singleview', [modifiedItem])
+      history.push('/singleview', {item: modifiedItem})
     } catch (err) {
       console.error(err)
     }

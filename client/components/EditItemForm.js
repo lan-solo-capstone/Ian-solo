@@ -43,7 +43,7 @@ class EditItemForm extends Component {
   // TODO: add logic to set itemCondition to '' if user changes itemType to Seeking
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.modifyItem(this.props.location.item.id, this.state)
+    this.props.modifyItem(this.props.location.state.item.id, this.state)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
     toast.success('Changes saved!', {

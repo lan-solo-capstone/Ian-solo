@@ -132,7 +132,36 @@ router.put('/:itemId', async (req, res, next) => {
       itemCondition,
       status,
     } = req.body
-    const item = await Item.findByPk(itemId)
+    const item = await Item.findByPk(itemId, {
+      attributes: [
+        'id',
+        'itemListName',
+        'description',
+        'itemType',
+        'status',
+        'dateListed',
+        'itemCondition',
+        'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            'id',
+            'firstName',
+            'latitude',
+            'longitude',
+            'state',
+            'city',
+            'createdAt',
+          ],
+        },
+        {
+          model: ItemPhoto,
+          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+        },
+      ],
+    })
 
     if (!item) {
       res.sendStatus(404)

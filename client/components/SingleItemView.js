@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 /* eslint-disable complexity */
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -27,12 +28,28 @@ class SingleItemView extends React.Component {
       justClosed: false,
     }
     this.handleClose = this.handleClose.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+  }
+
+  handleOpen(evt) {
+    evt.preventDefault()
+    const itemId = String(this.props.location.state.item.id)
+    this.props.modifyItem(itemId, {status: 'Open'})
+    toast.success('Successfully marked as Open!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
 
   // if user clicks Close button, trigger toast notification
   handleClose(evt) {
     evt.preventDefault()
-    const itemId = String(this.props.location.item.id)
+    const itemId = String(this.props.location.state.item.id)
     console.log('in handleClose, itemId', itemId)
     this.props.modifyItem(itemId, {status: 'Closed'})
     toast.success('Successfully marked as Closed!', {
@@ -52,15 +69,18 @@ class SingleItemView extends React.Component {
   // then make the "Close" button disappear
   componentDidUpdate(prevProps) {
     if (
-      prevProps.location.item.id === this.props.item.id &&
-      prevProps.location.item.status !== this.props.item.status &&
+      prevProps.location.state.item.id === this.props.item.id &&
+      prevProps.location.state.item.status !== this.props.item.status &&
       this.state.justClosed === false
     ) {
       console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
       this.setState({justClosed: true})
     }
 
-    if (prevProps.location.item.itemListName !== this.props.item.itemListName) {
+    if (
+      prevProps.location.state.item.itemListName !==
+      this.props.item.itemListName
+    ) {
       console.log('the name of the item has changed!!!!!')
     }
   }
@@ -72,14 +92,28 @@ class SingleItemView extends React.Component {
     console.log('in SingleItemView render, this.props', this.props)
     console.log('in SingleItemView render, this.state', this.state)
 
-    let {item} = this.props.location
+    let {item} = this.props.location.state
     console.log('item!!!!', item)
 
-    if (!this.props.location.item) {
-      return <Redirect to="/items" />
+    // commenting this out to test
+    if (!this.props.location.state.item) {
+      // return <Redirect to="/items" />
+      return <div>Loading for now!!!!</div>
     }
 
+    // TODO: figure out why after update, item.user object disappears and is replaced with item.userId. Has to do with the way the request is processed at PUT route on back end
+
     const itemMatchesUser = this.props.user.id === item.user.id
+
+    // TODO: try this loading
+    // this.props.loading ? (
+    //   <div
+    //     className="spinner-border position-absolute top-50 start-50 translate-middle"
+    //     role="status"
+    //   >
+    //     <span className="visually-hidden">Loading...</span>
+    //   </div>
+    // ) :
 
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-2">
@@ -119,6 +153,18 @@ class SingleItemView extends React.Component {
                     </button>
                   </div>
                 )}
+              {/* Allow user to re-open item that has been closed accidentally or prematurely */}
+              {item.status === 'Closed' && itemMatchesUser && (
+                <div className="closeItem">
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.handleOpen}
+                  >
+                    Re-open item
+                  </button>
+                </div>
+              )}
               {/* render the Edit button if the user owns the item and it is not closed */}
               {/* {this.props.user.id === item.user.id &&
                 !this.state.justClosed &&
