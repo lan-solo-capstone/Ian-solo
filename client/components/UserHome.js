@@ -15,6 +15,10 @@ import history from './../history'
 class UserHome extends React.Component {
   componentDidMount() {
     this.props.fetchUserItems(this.props.user.id)
+    console.log(
+      'in UserHome componentDidMount ------------, this.props',
+      this.props
+    )
   }
 
   render() {
@@ -26,7 +30,7 @@ class UserHome extends React.Component {
       item.user = user
       return item
     })
-
+    console.log('in UserHome render, this.props', this.props)
     return (
       <div className="containter-sm container-xl mt-3 footerSpacing">
         {this.props.useritems.loading ? null : console.log(items)}
@@ -35,15 +39,14 @@ class UserHome extends React.Component {
           <li className="breadcrumb-item" aria-current="page">
             Account Details
           </li>
-<li className="breadcrumb-item active" aria-current="page">        
-<a
-          className="text-decoration-none"
-          onClick={() => history.push('/users/' + user.id)}
-        >
-          
-          Edit Profile
-        </a>
-</li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <a
+              className="text-decoration-none"
+              onClick={() => history.push('/users/' + user.id)}
+            >
+              Edit Profile
+            </a>
+          </li>
           <li className="breadcrumb-item active" aria-current="page">
             {this.props.user.admin ? (
               <Link to="/users" className="text-decoration-none">
