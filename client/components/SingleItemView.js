@@ -26,6 +26,7 @@ class SingleItemView extends React.Component {
     // has just changed from Open to Closed
     this.state = {
       justClosed: false,
+      justOpened: false,
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
@@ -63,27 +64,23 @@ class SingleItemView extends React.Component {
     })
   }
 
-  // check if the item ID matches,
-  // and if the status has changed from Open to Closed,
-  // and if status has just changed locally on this component
-  // then make the "Close" button disappear
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.location.state.item.id === this.props.item.id &&
-      prevProps.location.state.item.status !== this.props.item.status &&
-      this.state.justClosed === false
-    ) {
-      console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
-      this.setState({justClosed: true})
-    }
-
-    if (
-      prevProps.location.state.item.itemListName !==
-      this.props.item.itemListName
-    ) {
-      console.log('the name of the item has changed!!!!!')
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   // check if the item ID matches,
+  //   // and if the status has changed from Open to Closed,
+  //   // and if status has just changed locally on this component
+  //   // then make the "Close" button disappear
+  //   if (
+  //     prevProps.location.state.item.id === this.props.item.id &&
+  //     prevProps.location.state.item.status !== this.props.item.status
+  //   ) {
+  //     if (this.state.justClosed === false) {
+  //       console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
+  //       this.setState({justClosed: true})
+  //     } else if (this.state.justOpened === false) {
+  //       this.setState({justOpened: true})
+  //     }
+  //   }
+  // }
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
@@ -140,9 +137,9 @@ class SingleItemView extends React.Component {
                 </div>
               )}
               {/* check if the user has the right to close the item */}
-              {this.state.justClosed === false &&
-                item.status === 'Open' &&
-                itemMatchesUser && (
+              {
+                // this.state.justClosed === false &&
+                item.status === 'Open' && itemMatchesUser && (
                   <div className="closeItem">
                     <button
                       type="button"
@@ -152,7 +149,8 @@ class SingleItemView extends React.Component {
                       Mark this item as closed
                     </button>
                   </div>
-                )}
+                )
+              }
               {/* Allow user to re-open item that has been closed accidentally or prematurely */}
               {item.status === 'Closed' && itemMatchesUser && (
                 <div className="closeItem">
