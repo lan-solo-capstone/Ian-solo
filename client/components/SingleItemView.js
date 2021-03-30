@@ -1,42 +1,36 @@
+/* eslint-disable no-warning-comments */
+/* eslint-disable complexity */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
-import {closeItem} from '../store/item'
+import {modifyItem} from '../store/item'
 import {toast} from 'react-toastify'
+import {EditItemForm} from './index'
 import 'react-toastify/dist/ReactToastify.css'
-
-// Render functional
-// const singleView = (props) => {
-//   console.log(props)
-
-// }
 
 // Render Class
 class SingleItemView extends React.Component {
   constructor(props) {
     super(props)
 
-    // justClosed is to mark whether the current item's status
-    // has just changed from Open to Closed
-    this.state = {
-      justClosed: false,
-    }
     this.handleClose = this.handleClose.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
   }
 
-  // if user clicks Close button, trigger toast notification
-  handleClose(evt) {
+  //  TODO: move toast notifications to componentDidUpdate?
+  // that way they only fire if component was updated successfully -- JC 3.29.21
+
+  handleOpen(evt) {
     evt.preventDefault()
-    const itemId = String(this.props.location.item.id)
-    console.log('in handleClose, itemId', itemId)
-    this.props.closeItem(itemId)
-    toast.success('Successfully marked as Closed!', {
+    const itemId = String(this.props.location.state.item.id)
+    this.props.modifyItem(itemId, {status: 'Open'})
+    toast.success('Successfully marked as Open!', {
       position: 'top-right',
       autoClose: 5001,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
@@ -44,32 +38,49 @@ class SingleItemView extends React.Component {
     })
   }
 
-  // check if the item ID matches,
-  // and if the status has changed from Open to Closed,
-  // and if status has just changed locally on this component
-  // then make the "Close" button disappear
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.location.item.id === this.props.item.id &&
-      prevProps.location.item.status !== this.props.item.status &&
-      this.state.justClosed === false
-    ) {
-      console.log('the status of the item has changed!!!!!!!!!!!!!!!!')
-      this.setState({justClosed: true})
-    }
+  // if user clicks Close button, trigger toast notification
+  handleClose(evt) {
+    evt.preventDefault()
+    const itemId = String(this.props.location.state.item.id)
+    console.log('in handleClose, itemId', itemId)
+    this.props.modifyItem(itemId, {status: 'Closed'})
+    toast.success('Successfully marked as Closed!', {
+      position: 'top-right',
+      autoClose: 5001,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    })
   }
+
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
   }
 
   render() {
     console.log('in SingleItemView render, this.props', this.props)
-    let {item} = this.props.location
-    console.log('item!!!!', item)
-
-    if (!this.props.location.item) {
+    console.log('in SingleItemView render, this.state', this.state)
+    if (!this.props.location.state) {
       return <Redirect to="/items" />
     }
+
+    let {item} = this.props.location.state
+    console.log('SingleItemView item!!!!', item)
+
+    // TODO: try this loading instead of the one above
+    // this.props.loading ? (
+    //   <div
+    //     className="spinner-border position-absolute top-50 start-50 translate-middle"
+    //     role="status"
+    //   >
+    //     <span className="visually-hidden">Loading...</span>
+    //   </div>
+    // ) :
+    // -- JC 3.29.21
+
+    const itemMatchesUser = this.props.user.id === item.user.id
 
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-2">
@@ -79,7 +90,7 @@ class SingleItemView extends React.Component {
             <h6 className="text-center text-secondary">
               Submitted by: {item.user.firstName}
               {/* only render chat button if item does not belong to user */}
-              {this.props.user.id !== item.user.id && (
+              {!itemMatchesUser && (
                 <div className="messages">
                   <Link
                     to={{
@@ -96,9 +107,9 @@ class SingleItemView extends React.Component {
                 </div>
               )}
               {/* check if the user has the right to close the item */}
-              {this.state.justClosed === false &&
-                item.status === 'Open' &&
-                this.props.user.id === item.user.id && (
+              {
+                // this.state.justClosed === false &&
+                item.status === 'Open' && itemMatchesUser && (
                   <div className="closeItem">
                     <button
                       type="button"
@@ -108,18 +119,20 @@ class SingleItemView extends React.Component {
                       Mark this item as closed
                     </button>
                   </div>
-                )}
-              {/* {this.props.user.id === item.user.id && (
+                )
+              }
+              {/* Allow user to re-open item that has been closed accidentally or prematurely */}
+              {item.status === 'Closed' && itemMatchesUser && (
                 <div className="closeItem">
                   <button
                     type="button"
                     className="btn btn-warning"
-                    onClick={this.handleEdit}
+                    onClick={this.handleOpen}
                   >
-                    Edit item
+                    Re-open item
                   </button>
                 </div>
-              )} */}
+              )}
             </h6>
           </div>
           <div className="col">
@@ -251,6 +264,7 @@ class SingleItemView extends React.Component {
             </div>
           </div>
         </div>
+        {itemMatchesUser && <EditItemForm location={this.props.location} />}
       </div>
     )
   }
@@ -259,10 +273,6 @@ class SingleItemView extends React.Component {
 /**
  * CONTAINER
  */
-
-// const mapState = (state) => ({
-//   placeholder: state.placeholder,
-// })
 
 const mapState = (state) => {
   return {
@@ -275,7 +285,8 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  closeItem: (itemId) => dispatch(closeItem(itemId)),
+  modifyItem: (itemId, modifications) =>
+    dispatch(modifyItem(itemId, modifications)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)

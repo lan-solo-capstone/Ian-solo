@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
         'itemType',
         'status',
         'dateListed',
+        'itemCondition',
         'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
       ],
       include: [
@@ -118,21 +119,62 @@ router.post(
 )
 
 // PUT route for /api/items/:itemId
-// for now, this is only to mark items as closed -- JC
-// can be expanded later to allow users to modify their posts -- JC 03.26.21
-
 router.put('/:itemId', async (req, res, next) => {
   try {
     const {itemId} = req.params
-    const status = req.body.status
-    const item = await Item.findByPk(itemId)
+    const {
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    } = req.body
+
+    // eager load User and ItemPhoto to match GET route for /items
+    // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
+    const item = await Item.findByPk(itemId, {
+      attributes: [
+        'id',
+        'itemListName',
+        'description',
+        'itemType',
+        'status',
+        'dateListed',
+        'itemCondition',
+        'createdAt',
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            'id',
+            'firstName',
+            'latitude',
+            'longitude',
+            'state',
+            'city',
+            'createdAt',
+          ],
+        },
+        {
+          model: ItemPhoto,
+          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+        },
+      ],
+    })
 
     if (!item) {
       res.sendStatus(404)
       return
     }
 
-    await item.update({status: status})
+    await item.update({
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    })
     console.log(
       'in PUT route for /item/:itemId after await item.update',
       'hello',
