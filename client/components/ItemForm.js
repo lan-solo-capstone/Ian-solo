@@ -123,66 +123,68 @@ const ItemForm = (props) => {
           </div>
         </div>
 
-    {/* Only display the photo upload section for new posts */}
+        {/* Only display the photo upload section for new posts */}
         {pathname === '/post' && (
           <div>
-        <div className="col px-4">
-          <div className="mb-3">
-            <label htmlFor="uploadPhoto" className="form-label">
-              <h5>Upload Photos</h5>
-            </label>
-            <input
-              className="form-control"
-              type="file"
-              accept="image/x-png,image/jpeg,image/gif"
-              multiple
-              name="uploadPhoto"
-              ref={fileInput}
-              onChange={(e) => {
-                if (e.target.files.length > 5) {
-                  alertRefrence.current.hidden = false
-                  handleFileSelect()
-                  return
-                }
-                alertRefrence.current.hidden = true
-                handleFileSelect(e)
-              }}
-            />
-            {console.log(props.uploadPhoto, 'props')}
-            <div
-              className="row mt-3 justify-content-center"
-              hidden={!uploadPhoto}
-            >
-              <label htmlFor="uploadPhoto" className="form-label text-center">
-                <h5>File Preview</h5>
-              </label>
-              {uploadPhoto &&
-                uploadPhoto.map((elm) => {
-                  return (
-                    <div
-                      key={elm.name + elm.lastModified + elm.size}
-                      className="col-auto p-1 m-1 border rounded"
-                    >
-                      <img
-                        src={URL.createObjectURL(elm)}
-                        style={{
-                          width: '90px',
-                          height: '90px',
-                          objectFit: 'contain',
-                        }}
-                      />
-                    </div>
-                  )
-                })}
-            </div>
-            <div ref={alertRefrence} hidden={true} className="mt-2">
-              <div className="alert alert-danger" role="alert">
-                Max of 5 files allowed.
-
+            <div className="col px-4">
+              <div className="mb-3">
+                <label htmlFor="uploadPhoto" className="form-label">
+                  <h5>Upload Photos</h5>
+                </label>
+                <input
+                  className="form-control"
+                  type="file"
+                  accept="image/x-png,image/jpeg,image/gif"
+                  multiple
+                  name="uploadPhoto"
+                  ref={fileInput}
+                  onChange={(e) => {
+                    if (e.target.files.length > 5) {
+                      alertReference.current.hidden = false
+                      handleFileSelect()
+                      return
+                    }
+                    alertReference.current.hidden = true
+                    handleFileSelect(e)
+                  }}
+                />
+                {console.log(props.uploadPhoto, 'props')}
+                <div
+                  className="row mt-3 justify-content-center"
+                  hidden={!uploadPhoto}
+                >
+                  <label
+                    htmlFor="uploadPhoto"
+                    className="form-label text-center"
+                  >
+                    <h5>File Preview</h5>
+                  </label>
+                  {uploadPhoto &&
+                    uploadPhoto.map((elm) => {
+                      return (
+                        <div
+                          key={elm.name + elm.lastModified + elm.size}
+                          className="col-auto p-1 m-1 border rounded"
+                        >
+                          <img
+                            src={URL.createObjectURL(elm)}
+                            style={{
+                              width: '90px',
+                              height: '90px',
+                              objectFit: 'contain',
+                            }}
+                          />
+                        </div>
+                      )
+                    })}
+                </div>
+                <div ref={alertReference} hidden={true} className="mt-2">
+                  <div className="alert alert-danger" role="alert">
+                    Max of 5 files allowed.
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-      </div>
           </div>
         )}
 
