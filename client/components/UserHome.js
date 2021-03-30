@@ -31,6 +31,14 @@ class UserHome extends React.Component {
         {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         Account Details |{' '}
+        <a
+          className="text-decoration-none"
+          onClick={() => history.push('/users/' + user.id)}
+        >
+          {' '}
+          Edit Profile{' '}
+        </a>{' '}
+        |{' '}
         {this.props.user.admin ? (
           <a
             className="text-decoration-none"
@@ -53,12 +61,20 @@ class UserHome extends React.Component {
             {user.firstName} {user.lastName}
           </li>
           <li className="list-group-item">{user.email}</li>
-          <li className="list-group-item">{user.street1}</li>
+          {user.street1 ? (
+            <li className="list-group-item">{user.street1}</li>
+          ) : (
+            <li className="list-group-item text-danger">
+              Please edit your profile to complete address!
+            </li>
+          )}
           {user.street2 ? (
             <li className="list-group-item">{user.street2}</li>
           ) : null}
           <li className="list-group-item">
-            {user.city}, {user.state} {user.zip}
+            {user.city}
+            {user.city ? ', ' : null}
+            {user.state} {user.zip}
           </li>
         </ul>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">

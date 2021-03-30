@@ -2,6 +2,7 @@
 const router = require('express').Router()
 const {User, Item, ItemPhoto} = require('../db/models')
 const {ensureAdmin, ensureLogin} = require('./middleware')
+const axios = require('axios')
 
 module.exports = router
 
@@ -81,6 +82,43 @@ router.get('/:userId', async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to admins only
 router.put('/:userId', async (req, res, next) => {
+  //resolve lat & lon
+  let latitude, longitude
+
+  try {
+    const address = encodeURIComponent(
+      req.body.street1 + ',' + req.body.city + ',' + req.body.zip
+    )
+    console.log('resolving: ', address)
+    const data = (
+      await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?bbox=-74.25909,40.477399,-73.7008391836855,40.917577&types=address&limit=1&access_token=${process.env.MAPBOX_PK}`
+      )
+    ).data
+    console.log(data)
+
+    if (
+      data &&
+      data.features[0] &&
+      data.features[0].relevance > 0.9 &&
+      data.features[0].center
+    ) {
+      latitude = data.features[0].center[1]
+      longitude = data.features[0].center[0]
+    } else {
+      console.error("ERROR: Can't resolve address")
+      latitude = 40.73061
+      longitude = -73.935242
+    }
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+  }
+  //end resolve lat & lon
+
   try {
     const {userId} = req.params
     const {
@@ -106,6 +144,9 @@ router.put('/:userId', async (req, res, next) => {
       state,
       zip,
       email,
+      //add calculated changes to lat & lon
+      latitude: latitude,
+      longitude: longitude,
     })
 
     res.json(user)
