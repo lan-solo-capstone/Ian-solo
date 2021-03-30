@@ -24,7 +24,6 @@ class EditItemForm extends Component {
     // this.handleFileSelect = this.handleFileSelect.bind(this)
     this.fileInput = React.createRef()
   }
-
   handleChange(evt) {
     // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
     this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
@@ -55,6 +54,7 @@ class EditItemForm extends Component {
   }
 
   render() {
+
     const {
       handleSubmit,
       handleChange,

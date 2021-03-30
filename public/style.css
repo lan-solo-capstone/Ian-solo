@@ -1,24 +1,6 @@
 /* body {
   font-family: sans-serif;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-} */
-
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
+}*/
 
 #collapseButton {
   opacity: 100%;
@@ -39,10 +21,6 @@ form div {
   margin: auto;
 }
 
-.footerSpacing {
-  margin-bottom: 85px !important;
-}
-
 .login-form-container {
   background: #fff;
   padding: 0;
@@ -58,4 +36,22 @@ form div {
   background-attachment: fixed;
   background-size: cover;
   height: 100vh;
+}
+
+.viewallMax {
+  max-height: 350px;
+}
+
+@media (min-width: 768px) {
+  .viewallMax {
+    max-height: 160px;
+  }
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.footerSpacing {
+  margin-bottom: 85px !important;
 }

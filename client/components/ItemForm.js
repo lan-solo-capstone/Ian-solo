@@ -12,118 +12,156 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
-    pathname,
+     pathname,
   } = props
 
+  const alertRefrence = new React.createRef()
+
   return (
-    <div className="container-fluid footerSpacing">
-      <div className="row">
-        <div className="col-md-12 p-0">
-          <form
-            role="form"
-            id="wholeform"
-            onSubmit={handleSubmit}
-            style={{width: '90vw'}}
+    <div className="container-sm container-md footerSpacing mt-2 justify-content-center py-3">
+      <form
+        className="row row-cols-1 gy-3 justify-content-center"
+        role="form"
+        id="wholeform"
+        onSubmit={handleSubmit}
+      >
+        <div className="col-auto row row-cols-1 row-cols-md-2">
+          <div className="col">
+            <label className="form-label">
+              <h5>What kind of post is this?</h5>
+            </label>
+            <>
+              {/* <select
+            className="form-select itemType"
+            name="itemType"
+            value={itemType}
+            onChange={handleChange}
           >
-            <div className="row">
-              <div>
-                <label className="mr-sm-2" htmlFor="itemType">
-                  What type of post is this?
-                </label>
-                <select
-                  className="custom-select mr-sm-2"
-                  name="itemType"
-                  value={itemType}
-                  onChange={handleChange}
-                >
-                  {/* TODO: maybe change these to React Bootstrap buttons
-                    https://react-bootstrap.github.io/getting-started/introduction/
-                    */}
+            <option value="chooseOne">Choose...</option>
+            <option value="Offer">It&apos;s an OFFER of an item</option>
+            <option value="Seeking">
+              It&apos;s a request for a SEEKING item
+            </option>
+          </select> */}
+            </>
 
-                  <option value="chooseOne">Choose...</option>
-                  <option value="Offer">It&apos;s an OFFER of an item</option>
-                  <option value="Seeking">
-                    It&apos;s a request for a SEEKING item
-                  </option>
-                </select>
-              </div>
+            <div
+              className="form-check"
+              name="itemType"
+              value={itemType}
+              onChange={handleChange}
+            >
+              <input
+                className="form-check-input"
+                type="radio"
+                name="itemType"
+                value="Offer"
+              />
+              <label className="form-check-label">
+                It&apos;s an <b>OFFER</b> of an item
+              </label>
             </div>
-            <div className="row">
-              <div className="form-group">
-                <label htmlFor="itemListName">Item Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="itemListName"
-                  value={itemListName}
-                  onChange={handleChange}
-                />
-              </div>
+            <div
+              className="form-check"
+              name="itemType"
+              value={itemType}
+              onChange={handleChange}
+            >
+              <input
+                className="form-check-input"
+                type="radio"
+                name="itemType"
+                value="Seeking"
+              />
+              <label className="form-check-label">
+                It&apos;s a request for <b>SEEKING</b> an item
+              </label>
             </div>
-            <div className="row">
-              <div className="form-group">
-                <label htmlFor="description">Item Description</label>
-                <textarea
-                  className="form-control"
-                  rows="5"
-                  name="description"
-                  value={description}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            {itemType === 'Offer' && (
-              <div className="row">
-                <div>
-                  <label className="mr-sm-2" htmlFor="itemCondition">
-                    Condition of your item
-                  </label>
+          </div>
 
-                  <select
-                    className="custom-select mr-sm-2"
-                    name="itemCondition"
-                    value={itemCondition}
-                    onChange={handleChange}
-                  >
-                    <option value="chooseOne">Choose...</option>
-                    <option value="New">Like New</option>
-                    <option value="Gently_Used">Gently Used</option>
-                    <option value="Used">Used</option>
-                  </select>
-                </div>
-              </div>
-            )}
-            {pathname === '/post' && (
-              <div className="row">
-                <div className="form-group">
-                  <label htmlFor="uploadPhoto">Upload Photos</label>
-                  <p>
-                    Photos are optional, but they tend to increase the chances
-                    that someone will contact you (especially for offers). You
-                    can upload up to 5 photos.
-                  </p>
-                  <input
-                    type="file"
-                    multiple
-                    // TODO: need to add other file types to support
-                    // TODO: need to validate file size and maybe number?
-                    accept="image/x-png,image/jpeg,image/gif"
-                    className="form-control-file"
-                    name="uploadPhoto"
-                    ref={fileInput}
-                    onChange={handleFileSelect}
-                  />
-                </div>
-              </div>
-            )}
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </form>
+          <div className="col">
+            <label className="form-label">
+              <h5>Condition of your item</h5>
+            </label>
+            <select
+              className="form-select itemType"
+              name="itemCondition"
+              value={itemCondition || 'New'}
+              onChange={handleChange}
+              disabled={itemType !== 'Offer'}
+            >
+              <option value="New">Like New</option>
+              <option value="Gently_Used">Gently Used</option>
+              <option value="Used">Used</option>
+            </select>
+          </div>
         </div>
-      </div>
+
+        <div className="col row">
+          <div className="col-6">
+            <label htmlFor="itemListName" className="form-label">
+              <h5>Item Name</h5>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="itemListName"
+              value={itemListName}
+              onChange={handleChange}
+              placeholder="Example Name..."
+            />
+          </div>
+          <div className="col-12">
+            <label htmlFor="description">
+              <h5>Item Description</h5>
+            </label>
+            <textarea
+              className="form-control"
+              rows="5"
+              name="description"
+              value={description}
+              onChange={handleChange}
+              placeholder="Example description... Ipsum loram"
+            />
+          </div>
+        </div>
+
+        <div className="col">
+          <div className="mb-3">
+            <label htmlFor="uploadPhoto" className="form-label">
+              Upload Photos
+            </label>
+            <input
+              className="form-control"
+              type="file"
+              accept="image/x-png,image/jpeg,image/gif"
+              multiple
+              name="uploadPhoto"
+              ref={fileInput}
+              onChange={(e) => {
+                if (e.target.files.length > 5) {
+                  alertRefrence.current.hidden = false
+                  return
+                }
+                alertRefrence.current.hidden = true
+                handleFileSelect(e)
+              }}
+            />
+            <div ref={alertRefrence} hidden={true} className="mt-2">
+              <div className="alert alert-danger" role="alert">
+                Max of 5 files allowed.
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{maxWidth: '80%'}}
+        >
+          Submit
+        </button>
+      </form>
     </div>
   )
 }

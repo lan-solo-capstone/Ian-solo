@@ -1,3 +1,4 @@
+
 /* eslint-disable no-warning-comments */
 /* eslint-disable complexity */
 import React from 'react'
@@ -83,15 +84,17 @@ class SingleItemView extends React.Component {
     const itemMatchesUser = this.props.user.id === item.user.id
 
     return (
-      <div className="container-sm container-md container-xl footerSpacing mt-2">
-        <div className="row gy-4 row-cols-1 ">
-          <div className="col">
-            <h5 className="text-center mb-1">{item.itemListName}</h5>
-            <h6 className="text-center text-secondary">
+      <div className="container-sm container-md container-xl footerSpacing mt-4">
+        <div className="row gy-4 row-cols-1 justify-content-center">
+          <div className="col row row-cols-1 gy-2">
+            <h5 className="col text-center ">{item.itemListName}</h5>
+            <h6 className="col text-center text-secondary">
               Submitted by: {item.user.firstName}
+            </h6>
+            <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
               {!itemMatchesUser && (
-                <div className="messages">
+                <div className="col-auto text-center messages">
                   <Link
                     to={{
                       pathname: '/messages',
@@ -107,10 +110,12 @@ class SingleItemView extends React.Component {
                 </div>
               )}
               {/* check if the user has the right to close the item */}
+
               {
                 // this.state.justClosed === false &&
                 item.status === 'Open' && itemMatchesUser && (
-                  <div className="closeItem">
+                                    <div className="col-auto closeItem">
+
                     <button
                       type="button"
                       className="btn btn-warning"
@@ -119,11 +124,26 @@ class SingleItemView extends React.Component {
                       Mark this item as closed
                     </button>
                   </div>
-                )
-              }
+                )}
+              {/* render the Edit button if the user owns the item and it is not closed */}
+//               {this.props.user.id === item.user.id &&
+//                 (!this.state.justClosed || item.status === 'Closed') && (
+//                   <div className="col-auto editItem">
+//                     <button
+//                       type="button"
+//                       className="btn btn-warning"
+//                       onClick={this.handleEdit}
+//                     >
+//                       Edit item
+//                     </button>
+//                   </div>
+//                 )}
+//             </div>
+//                 )
+//               }
               {/* Allow user to re-open item that has been closed accidentally or prematurely */}
               {item.status === 'Closed' && itemMatchesUser && (
-                <div className="closeItem">
+                <div className="col-auto closeItem">
                   <button
                     type="button"
                     className="btn btn-warning"
@@ -133,72 +153,79 @@ class SingleItemView extends React.Component {
                   </button>
                 </div>
               )}
-            </h6>
+            </div>
           </div>
           <div className="col">
-            <div
-              id="itemImageIndicator"
-              className="carousel slide mx-auto"
-              data-bs-ride="carousel"
-            >
+            {item.itemPhotos.length < 2 ? (
+              <img
+                src={item.itemPhotos[0].downloadURL}
+                className="d-block w-80 imgSliders"
+              />
+            ) : (
               <div
-                className="carousel-indicators"
-                style={{filter: 'invert(1)'}}
+                id="itemImageIndicator"
+                className="carousel slide mx-auto"
+                data-bs-ride="carousel"
               >
-                {item.itemPhotos.map((element, idx) => (
-                  <button
-                    type="button"
-                    data-bs-target="#itemImageIndicator"
-                    data-bs-slide-to={idx}
-                    className={idx === 0 ? 'active' : ''}
-                    aria-current={idx === 0 ? 'true' : ''}
-                    aria-label={`Slide ${idx + 1}`}
-                    key={idx}
-                  />
-                ))}
-              </div>
-              <div className="carousel-inner">
-                {item.itemPhotos.map((photo, idx) => (
-                  <div
-                    key={idx}
-                    className={
-                      idx === 0 ? 'carousel-item active' : 'carousel-item'
-                    }
-                  >
-                    <img
-                      src={photo.downloadURL}
-                      className="d-block w-80 imgSliders"
+                <div
+                  className="carousel-indicators"
+                  style={{filter: 'invert(1)'}}
+                >
+                  {item.itemPhotos.map((element, idx) => (
+                    <button
+                      type="button"
+                      data-bs-target="#itemImageIndicator"
+                      data-bs-slide-to={idx}
+                      className={idx === 0 ? 'active' : ''}
+                      aria-current={idx === 0 ? 'true' : ''}
+                      aria-label={`Slide ${idx + 1}`}
+                      key={idx}
                     />
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {item.itemPhotos.map((photo, idx) => (
+                    <div
+                      key={idx}
+                      className={
+                        idx === 0 ? 'carousel-item active' : 'carousel-item'
+                      }
+                    >
+                      <img
+                        src={photo.downloadURL}
+                        className="d-block w-80 imgSliders"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#itemImageIndicator"
+                  data-bs-slide="prev"
+                  style={{filter: 'invert(1)'}}
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#itemImageIndicator"
+                  data-bs-slide="next"
+                  style={{filter: 'invert(1)'}}
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
               </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#itemImageIndicator"
-                data-bs-slide="prev"
-                style={{filter: 'invert(1)'}}
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#itemImageIndicator"
-                data-bs-slide="next"
-                style={{filter: 'invert(1)'}}
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
+            )}
           </div>
           <div className="col m-sm-auto m-md-0">
             <a
