@@ -184,7 +184,7 @@ class MapAllItems extends React.Component {
                     className="text-center text-decoration-none text-primary m-0"
                     to={{
                       pathname: '/singleview',
-                      item: this.state.selectedItem,
+                      state: {item: this.state.selectedItem},
                     }}
                   >
                     {this.state.selectedItem.itemListName}
