@@ -14,6 +14,9 @@ const ItemPhoto = db.define('itemPhoto', {
     defaultValue:
       'https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c',
   },
+  itemIdTEMP: {
+    type: Sequelize.INTEGER,
+  },
 })
 
 module.exports = ItemPhoto

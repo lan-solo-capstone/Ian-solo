@@ -48,6 +48,12 @@ const Item = db.define('item', {
   dateOnHold: {
     type: Sequelize.DATE,
   },
+  itemIdTEMP: {
+    type: Sequelize.INTEGER,
+  },
+  userIdTEMP: {
+    type: Sequelize.INTEGER,
+  },
 })
 
 module.exports = Item

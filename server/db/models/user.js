@@ -84,6 +84,9 @@ const User = db.define('user', {
     type: Sequelize.DECIMAL(9, 6),
     defaultValue: -73.935242,
   },
+  userIdTEMP: {
+    type: Sequelize.INTEGER,
+  },
 })
 
 module.exports = User
