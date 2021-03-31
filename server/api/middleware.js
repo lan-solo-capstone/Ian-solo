@@ -24,9 +24,10 @@ function ensureAdmin(req, res, next) {
   }
 }
 
+// check to see if the user is logged in at all
 function ensureAnyLogin(req, res, next) {
   try {
-    if (!req.user.id) {
+    if (!req.user) {
       console.log('in ensureAnyLogin. You are not logged in!')
       res.status(401).send('You must be logged in to perform this action.')
     } else {
