@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
-const {ensureAdmin, ensureLogin} = require('./middleware')
+const {ensureAdmin, ensureAnyLogin, ensureLogin} = require('./middleware')
 module.exports = router
 
 // /api/items
@@ -59,7 +59,7 @@ router.get('/:itemId', async (req, res, next) => {
 // api/items
 // POST a new item
 // yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
-router.post('/', ensureLogin, async (req, res, next) => {
+router.post('/', ensureAnyLogin, async (req, res, next) => {
   try {
     const {
       itemListName,
@@ -71,7 +71,7 @@ router.post('/', ensureLogin, async (req, res, next) => {
       imageArr,
       // dateListed,
     } = req.body
-
+    console.log('hello', 'in post req.body', req.body)
     const newItem = await Item.create({
       itemListName,
       description,
@@ -107,7 +107,7 @@ router.post('/', ensureLogin, async (req, res, next) => {
     next(err)
   }
 })
-
+// /api/users/:userId/items/:itemId
 // PUT route for /api/items/:itemId
 router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {

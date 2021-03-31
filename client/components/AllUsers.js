@@ -25,6 +25,7 @@ class AllUsers extends Component {
   }
 
   render() {
+    // if not an admin, display this
     if (!this.props.user.admin) {
       return <div>Sorry, you must be an admin to view this page.</div>
     }

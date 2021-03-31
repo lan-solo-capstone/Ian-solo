@@ -39,7 +39,7 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to this route to admins only
 // or a user can access their own profile, even if they're not admin
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
     if (req.user.admin || String(req.user.id) === req.params.userId) {
       // if (req.params.userId)
