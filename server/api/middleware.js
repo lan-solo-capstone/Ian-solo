@@ -1,6 +1,7 @@
 /* eslint-disable no-warning-comments */
 // this file contains authentication middlware to secure api routes
 
+// check to see if admin
 function ensureAdmin(req, res, next) {
   console.log('hello', 'in ensureAdmin req.user', req.user)
   console.log('hello', 'hello', 'in ensureAdmin req.user.admin', req.user.admin)
@@ -15,6 +16,7 @@ function ensureAdmin(req, res, next) {
   }
 }
 
+// check to see if user or admin
 function ensureLogin(req, res, next) {
   const id = req.user.id
   const passportId = req.session.passport.user
@@ -22,7 +24,7 @@ function ensureLogin(req, res, next) {
   console.log('hello', 'in ensureLogin', req.user, req.session.passport)
 
   // TODO: ask team if this is how they authenticated in previous projects -- JC
-  if (id && id === passportId) {
+  if ((id && id === passportId) || req.user.admin) {
     next()
   } else {
     res.sendStatus(401)
