@@ -20,7 +20,7 @@ const editItem = (item) => {
   }
 }
 
-export const postNewItem = (item) => {
+export const postNewItem = (item, id) => {
   return async (dispatch) => {
     try {
       let fileInfo = {
@@ -28,7 +28,7 @@ export const postNewItem = (item) => {
         itemListName: item.itemListName,
         description: item.description,
         itemCondition: item.itemCondition,
-        userId: item.user.id,
+        userId: id,
         imageArr: [],
       }
 
@@ -74,7 +74,6 @@ export const postNewItem = (item) => {
     }
   }
 }
-
 
 export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
