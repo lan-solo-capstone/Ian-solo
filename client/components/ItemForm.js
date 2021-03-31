@@ -115,6 +115,7 @@ const ItemForm = (props) => {
               className="form-control"
               rows="5"
               name="description"
+              id="description"
               value={description}
               onChange={handleChange}
               placeholder="Example description... Ipsum loram"
@@ -137,6 +138,7 @@ const ItemForm = (props) => {
                   accept="image/x-png,image/jpeg,image/gif"
                   multiple
                   name="uploadPhoto"
+                  id="uploadPhoto"
                   ref={fileInput}
                   onChange={(e) => {
                     if (e.target.files.length > 5) {
