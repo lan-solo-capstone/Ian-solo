@@ -1,5 +1,5 @@
 'use strict'
-
+const sequelize = require('sequelize')
 const db = require('../server/db')
 const {User, Item, ItemPhoto} = require('../server/db/models')
 
@@ -35,20 +35,12 @@ async function seed() {
   )
   console.log(`seeded ${items.length} itemPhotos`)
 
-  console.log('associating item to photos, then to a user')
-
-  // function to generate randome UserId
-  function getRandomUserId(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min) + min)
-  }
+  console.log('associating item to photos')
 
   // associating items to photos
   // find out the row counts of item table
 
-  const {count} = await Item.findAndCountAll()
-  const itemRowCount = count
+  const itemRowCount = await Item.count()
 
   // yf 03.31.21 loop through each item and associate photos to each item, then associate item to random users
 
@@ -62,14 +54,26 @@ async function seed() {
         return photoObj.setItem(item[0])
       })
     )
+  }
+  console.log('associating user to items')
+  // associating user to items
+  // find out the row counts of user table
+  const userRowCount = await User.count()
 
-    // YF 03.30.21  We are randomly assigning users to our items
-    const user = await User.findByPk(getRandomUserId(1, 36))
+  // for each user, associate all the items belong to the user
+  for (let i = 1; i <= userRowCount; i++) {
+    const user = await User.findAll({where: {userIdTEMP: i}})
 
-    await item[0].setUser(user)
+    const userItems = await Item.findAll({where: {userIdTEMP: i}})
+
+    await Promise.all(
+      userItems.map((itemObj) => {
+        return itemObj.setUser(user[0])
+      })
+    )
   }
 
-  console.log('done seeding')
+  // end of seeding code
 }
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
