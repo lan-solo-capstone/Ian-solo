@@ -25,6 +25,9 @@ class AllUsers extends Component {
   }
 
   render() {
+    if (!this.props.user.admin) {
+      return <div>Sorry, you must be an admin to view this page.</div>
+    }
     console.log('in render this.props', this.props)
     if (this.props.users.length === 0) {
       return <div>Loading, or we have no users =(</div>
