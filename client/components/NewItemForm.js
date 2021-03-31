@@ -26,8 +26,6 @@ class NewItemForm extends Component {
   }
 
   handleChange(evt) {
-    // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
-    this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
     this.setState({
       [evt.target.name]: evt.target.value,
     })
@@ -39,12 +37,10 @@ class NewItemForm extends Component {
     this.setState({uploadPhoto: photoFiles})
   }
 
-  // yf 03.21.21  Buggy submit button was fixed.  Cause -timing of updating state.user
-
   handleSubmit(evt) {
     evt.preventDefault()
-
-    this.props.addNewItem(this.state)
+    console.log('**** userid from formsubmit', this.props.user.id)
+    this.props.addNewItem(this.state, this.props.user.id)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
     toast.success(
@@ -87,7 +83,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewItem: (item) => dispatch(postNewItem(item)),
+    addNewItem: (item, userId) => dispatch(postNewItem(item, userId)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm)

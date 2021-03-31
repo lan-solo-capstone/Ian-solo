@@ -20,18 +20,19 @@ const editItem = (item) => {
   }
 }
 
-export const postNewItem = (item) => {
+export const postNewItem = (item, userId) => {
   return async (dispatch) => {
     try {
+      console.log('==== userId', userId)
       let fileInfo = {
         itemType: item.itemType,
         itemListName: item.itemListName,
         description: item.description,
         itemCondition: item.itemCondition,
-        userId: item.user.id,
+        userId: userId,
         imageArr: [],
       }
-
+      console.log('fileInfo', fileInfo)
       if (item.uploadPhoto) {
         const imageInfo = await Promise.all(
           item.uploadPhoto.map(async (element) => {
@@ -74,7 +75,6 @@ export const postNewItem = (item) => {
     }
   }
 }
-
 
 export const modifyItem = (itemId, modifications) => {
   return async (dispatch) => {
