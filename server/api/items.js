@@ -59,6 +59,7 @@ router.get('/:itemId', async (req, res, next) => {
 // api/items
 // POST a new item
 // yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
+// authenticated so any logged-in user can post an item -- JC 3.31.21
 router.post('/', ensureAnyLogin, async (req, res, next) => {
   try {
     const {
