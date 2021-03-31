@@ -58,68 +58,58 @@ router.get('/:itemId', async (req, res, next) => {
 
 // api/items
 // POST a new item
+// yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
+router.post('/', ensureLogin, async (req, res, next) => {
+  try {
+    const {
+      itemListName,
+      description,
+      itemType,
+      itemCondition,
+      deliveryOption,
+      userId,
+      imageArr,
+      // dateListed,
+    } = req.body
 
-router.post(
-  '/',
+    const newItem = await Item.create({
+      itemListName,
+      description,
+      itemType,
+      itemCondition,
+      deliveryOption,
+      userId,
+    })
 
-  // commenting out authentication for ease of development and testing -- JC
+    // yf 3.29.21  if not image, assign default image.  Else update itemPhoto table with firebase storage info.
 
-  // ensureLogin,
-
-  // yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
-
-  async (req, res, next) => {
-    try {
-      const {
-        itemListName,
-        description,
-        itemType,
-        itemCondition,
-        deliveryOption,
-        userId,
-        imageArr,
-        // dateListed,
-      } = req.body
-
-      const newItem = await Item.create({
-        itemListName,
-        description,
-        itemType,
-        itemCondition,
-        deliveryOption,
-        userId,
+    if (imageArr.length === 0) {
+      const itemPhotos = await ItemPhoto.create({
+        photoTitle: 'default.jpg',
       })
 
-      // yf 3.29.21  if not image, assign default image.  Else update itemPhoto table with firebase storage info.
+      await itemPhotos.setItem(newItem)
+    } else {
+      imageArr.forEach(async (element) => {
+        console.log(element)
 
-      if (imageArr.length === 0) {
         const itemPhotos = await ItemPhoto.create({
-          photoTitle: 'default.jpg',
+          photoTitle: element.photoTitle,
+          cloudREF: element.cloudRef,
+          downloadURL: element.downloadUrl,
         })
 
         await itemPhotos.setItem(newItem)
-      } else {
-        imageArr.forEach(async (element) => {
-          console.log(element)
-
-          const itemPhotos = await ItemPhoto.create({
-            photoTitle: element.photoTitle,
-            cloudREF: element.cloudRef,
-            downloadURL: element.downloadUrl,
-          })
-
-          await itemPhotos.setItem(newItem)
-        })
-      }
-      res.status(201).send(newItem)
-    } catch (err) {
-      next(err)
+      })
     }
+    res.status(201).send(newItem)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // PUT route for /api/items/:itemId
-router.put('/:itemId', async (req, res, next) => {
+router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
     const {itemId} = req.params
     const {
