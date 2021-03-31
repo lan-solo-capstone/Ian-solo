@@ -48,6 +48,13 @@ const Item = db.define('item', {
   dateOnHold: {
     type: Sequelize.DATE,
   },
+  itemIdTEMP: {
+    type: Sequelize.INTEGER,
+  },
+  // yf 03.30.21 -- keeping this for now.  May not need this field
+  // userIdTEMP: {
+  //   type: Sequelize.INTEGER,
+  // },
 })
 
 module.exports = Item
