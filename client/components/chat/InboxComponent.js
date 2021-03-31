@@ -24,7 +24,6 @@ class InboxComponent extends Component {
         const other = new Talk.User({
           id: recipient.id,
           name: recipient.firstName,
-          welcomeMessage: 'Hey there! Love to chat :-)',
         })
 
         // You control the ID of a conversation. oneOnOneId is a helper method that generates
