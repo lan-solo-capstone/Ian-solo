@@ -40,13 +40,9 @@ class UserHome extends React.Component {
             Account Details
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            <a
-              className="text-decoration-none"
-              href=""
-              onClick={() => history.push('/users/' + user.id)}
-            >
+            <Link to={`/users/${user.id}`} className="text-decoration-none">
               Edit Profile
-            </a>
+            </Link>
           </li>
           {this.props.user.admin && (
             <li className="breadcrumb-item active" aria-current="page">
