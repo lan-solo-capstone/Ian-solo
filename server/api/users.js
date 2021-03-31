@@ -9,46 +9,37 @@ module.exports = router
 // all routes here are mounted on /api/users
 
 // GET all users
-// mounted on /api/users
-// TODO: limit access to admins only
-router.get(
-  '/',
-
-  // leaving ensureAdmin commented for ease of development and testing -- JC
-
-  // ensureAdmin,
-
-  async (req, res, next) => {
-    try {
-      const users = await User.findAll({
-        // explicitly select only the id and email fields - even though
-        // users' passwords are encrypted, it won't help if we just
-        // send everything to anyone who asks!
-        attributes: [
-          'id',
-          'email',
-          'firstName',
-          'middleName',
-          'lastName',
-          'street1',
-          'street2',
-          'city',
-          'state',
-          'zip',
-        ],
-      })
-      res.json(users)
-    } catch (err) {
-      next(err)
-    }
+// mounted on /api/users and access limited to admins
+router.get('/', ensureAdmin, async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: [
+        'id',
+        'email',
+        'firstName',
+        'middleName',
+        'lastName',
+        'street1',
+        'street2',
+        'city',
+        'state',
+        'zip',
+      ],
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // GET single user
 // mounted on /api/users/:userId
 // TODO: limit access to this route to admins only
 // or a user can access their own profile, even if they're not admin
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
     const {userId} = req.params
     console.log('hello', 'typeof userId', typeof userId)
