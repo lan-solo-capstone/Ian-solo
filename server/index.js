@@ -43,6 +43,7 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
+// this redirects http to https in production to comply with PWA requirements -- JC 3.30.31
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
     if (req.header('x-forwarded-proto') !== 'https')

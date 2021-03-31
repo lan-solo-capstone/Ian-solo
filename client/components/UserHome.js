@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import {fetchUserItems} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
-import history from './../history'
 
 /**
  * COMPONENT
@@ -40,19 +39,21 @@ class UserHome extends React.Component {
             Account Details
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            <a
-              className="text-decoration-none"
-              onClick={() => history.push('/users/' + user.id)}
-            >
+            <Link to={`/users/${user.id}`} className="text-decoration-none">
               Edit Profile
-            </a>
+            </Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {this.props.user.admin ? (
+          {this.props.user.admin && (
+            <li className="breadcrumb-item active" aria-current="page">
               <Link to="/users" className="text-decoration-none">
                 Admin Home
               </Link>
-            ) : null}
+            </li>
+          )}
+          <li className="breadcrumb-item active" aria-current="page">
+            <Link to="/messages" className="text-decoration-none">
+              Messages
+            </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             <a

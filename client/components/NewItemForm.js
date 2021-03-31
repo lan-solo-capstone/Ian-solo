@@ -25,8 +25,6 @@ class NewItemForm extends Component {
     this.fileInput = React.createRef()
   }
 
-  componentDidUpdate(prevProps) {}
-
   handleChange(evt) {
     // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
     this.setState({user: this.props.user}) // yf 03.21.21  added userInfo

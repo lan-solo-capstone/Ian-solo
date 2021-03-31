@@ -12,9 +12,7 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
-
     uploadPhoto,
-
     pathname,
   } = props
 
@@ -48,9 +46,10 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Offer"
+                id="itemTypeOffer"
                 required
               />
-              <label className="form-check-label">
+              <label className="form-check-label" htmlFor="itemTypeOffer">
                 It&apos;s an <b>OFFER</b> of an item
               </label>
             </div>
@@ -65,9 +64,10 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Seeking"
+                id="itemTypeSeeking"
                 required
               />
-              <label className="form-check-label">
+              <label className="form-check-label" htmlFor="itemTypeSeeking">
                 It&apos;s a request for <b>SEEKING</b> an item
               </label>
             </div>
@@ -115,6 +115,7 @@ const ItemForm = (props) => {
               className="form-control"
               rows="5"
               name="description"
+              id="description"
               value={description}
               onChange={handleChange}
               placeholder="Example description... Ipsum loram"
@@ -137,6 +138,7 @@ const ItemForm = (props) => {
                   accept="image/x-png,image/jpeg,image/gif"
                   multiple
                   name="uploadPhoto"
+                  id="uploadPhoto"
                   ref={fileInput}
                   onChange={(e) => {
                     if (e.target.files.length > 5) {
