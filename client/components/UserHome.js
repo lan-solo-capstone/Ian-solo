@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import {fetchUserItems} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
-import history from './../history'
 
 /**
  * COMPONENT
