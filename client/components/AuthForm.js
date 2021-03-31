@@ -31,6 +31,7 @@ const AuthForm = (props) => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Email"
+                  required
                 />
                 {displayName === 'Sign Up' ? (
                   <>
@@ -41,6 +42,7 @@ const AuthForm = (props) => {
                       id="exampleInputFirstName"
                       aria-describedby="emailHelp"
                       placeholder="First Name"
+                      required
                     />
 
                     <input
@@ -50,6 +52,7 @@ const AuthForm = (props) => {
                       id="exampleInputLastName"
                       aria-describedby="emailHelp"
                       placeholder="Last Name"
+                      required
                     />
 
                     <input
@@ -59,6 +62,7 @@ const AuthForm = (props) => {
                       id="exampleInputStreet1"
                       aria-describedby="emailHelp"
                       placeholder="Street Address Line 1"
+                      required
                     />
 
                     <input
@@ -85,16 +89,23 @@ const AuthForm = (props) => {
                       className="form-control mb-1"
                       id="exampleInputState"
                       aria-describedby="emailHelp"
-                      placeholder="State"
+                      placeholder="NY"
+                      pattern="NY"
+                      required
                     />
 
                     <input
                       name="zip"
-                      type="text"
+                      type="number"
                       className="form-control mb-1"
                       id="exampleInputZip"
                       aria-describedby="emailHelp"
                       placeholder="Zip"
+                      min="10001"
+                      max="11104"
+                      minLength="5"
+                      maxLength="5"
+                      required
                     />
                   </>
                 ) : (
@@ -107,6 +118,7 @@ const AuthForm = (props) => {
                   className="form-control mb-1"
                   id="exampleInputPassword1"
                   placeholder="Password"
+                  required
                 />
               </div>
 

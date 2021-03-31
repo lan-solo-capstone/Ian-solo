@@ -503,6 +503,103 @@ const itemPhotos = [
       "https://firebasestorage.googleapis.com/v0/b/freeshare-7b345.appspot.com/o/images%2FfreeShareDefaultPic.jpeg?alt=media&token=5f6c8b0b-da4e-4138-b4fb-5c4fb4a4319c'",
     itemIdTEMP: 50,
   },
+  {
+    photoTitle: 'couch_astoria_1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00v0v_73aC0DYLeitz_1320MM_600x450.jpg',
+    itemIdTEMP: 51,
+  },
+  {
+    photoTitle: 'couch_astoria_2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00p0p_abyiZtVwotyz_1320MM_600x450.jpg',
+    itemIdTEMP: 51,
+  },
+  {
+    photoTitle: 'loveseat1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00Y0Y_gPE8eeE0BHVz_0CI0t2_600x450.jpg',
+    itemIdTEMP: 52,
+  },
+  {
+    photoTitle: 'loveseat2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00I0I_4rA3BM7GfChz_0CI0t2_600x450.jpg',
+    itemIdTEMP: 52,
+  },
+  {
+    photoTitle: 'grayCouch1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00F0F_5BWxJx2oCNTz_0gg0cc_600x450.jpg',
+    itemIdTEMP: 53,
+  },
+  {
+    photoTitle: 'grayCouch2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00t0t_gouIKhL0asez_0gg0cc_600x450.jpg',
+    itemIdTEMP: 53,
+  },
+  {
+    photoTitle: 'redCouch',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00808_4gBfYllto3oz_0t20CI_600x450.jpg',
+    itemIdTEMP: 54,
+  },
+  {
+    photoTitle: 'redCouch2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00c0c_61MW1zCBexFz_0t20CI_600x450.jpg',
+    itemIdTEMP: 54,
+  },
+  {
+    photoTitle: 'Klik-Klak1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00303_8Dip4FRD8Mfz_0CI0t2_600x450.jpg',
+    itemIdTEMP: 55,
+  },
+  {
+    photoTitle: 'Klik-Klak2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00505_55hvUkOkOOCz_0CI0t2_600x450.jpg',
+    itemIdTEMP: 55,
+  },
+  {
+    photoTitle: 'corner_couch1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00G0G_4t8QV1p4tR6z_0t20CI_600x450.jpg',
+    itemIdTEMP: 56,
+  },
+  {
+    photoTitle: 'corner_couch2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00J0J_lNnkOgrtPetz_0t20CI_600x450.jpg',
+    itemIdTEMP: 56,
+  },
+  {
+    photoTitle: 'sleeperSofa1',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00J0J_bXi9emxM3Zjz_0cU0cU_600x450.jpg',
+    itemIdTEMP: 57,
+  },
+  {
+    photoTitle: 'sleeperSofa2',
+    CloudREF: '',
+    downloadURL:
+      'https://images.craigslist.org/00Q0Q_cvzVslJmKuzz_1320MM_600x450.jpg',
+    itemIdTEMP: 57,
+  },
 ]
-
 module.exports = itemPhotos
