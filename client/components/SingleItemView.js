@@ -23,6 +23,10 @@ class SingleItemView extends React.Component {
   //  TODO: move toast notifications to componentDidUpdate?
   // that way they only fire if component was updated successfully -- JC 3.29.21
 
+  componentDidMount() {
+    this.props.updateNavbar('singleview', this.props.location.state.item)
+  }
+
   handleOpen(evt) {
     evt.preventDefault()
     const itemId = String(this.props.location.state.item.id)
@@ -265,7 +269,6 @@ class SingleItemView extends React.Component {
                   id="mapContainer"
                   style={{height: '89vh'}}
                 >
-                  {this.props.updateNavbar('singleview', item)}
                   <MapSingleItem item={item} />
                 </div>
               </div>
