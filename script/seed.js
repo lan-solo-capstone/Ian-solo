@@ -17,6 +17,7 @@ async function seed() {
       return User.create(user)
     })
   )
+
   console.log(`seeded ${users.length} users`)
 
   await Promise.all(
@@ -24,6 +25,7 @@ async function seed() {
       return Item.create(item)
     })
   )
+
   console.log(`seeded ${items.length} items`)
 
   await Promise.all(
@@ -32,8 +34,43 @@ async function seed() {
     })
   )
   console.log(`seeded ${items.length} itemPhotos`)
-}
 
+  console.log('associating item to photos, then to a user')
+
+  // function to generate randome UserId
+  function getRandomUserId(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min) + min)
+  }
+
+  // associating items to photos
+  // find out the row counts of item table
+
+  const {count} = await Item.findAndCountAll()
+  const itemRowCount = count
+
+  // yf 03.31.21 loop through each item and associate photos to each item, then associate item to random users
+
+  for (let i = 1; i <= itemRowCount; i++) {
+    const item = await Item.findAll({where: {itemIdTEMP: i}})
+
+    const photos = await ItemPhoto.findAll({where: {itemIdTEMP: i}})
+
+    await Promise.all(
+      photos.map((photoObj) => {
+        return photoObj.setItem(item[0])
+      })
+    )
+
+    // YF 03.30.21  We are randomly assigning users to our items
+    const user = await User.findByPk(getRandomUserId(1, 36))
+
+    await item[0].setUser(user)
+  }
+
+  console.log('done seeding')
+}
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
