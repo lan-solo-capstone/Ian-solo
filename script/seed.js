@@ -12,8 +12,6 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  console.log('starting user')
-
   await Promise.all(
     users.map((user) => {
       return User.create(user)
@@ -21,7 +19,6 @@ async function seed() {
   )
 
   console.log(`seeded ${users.length} users`)
-  console.log('starting item')
 
   await Promise.all(
     items.map((item) => {
@@ -30,17 +27,15 @@ async function seed() {
   )
 
   console.log(`seeded ${items.length} items`)
-  console.log('starting itemPhoto')
 
   await Promise.all(
     itemPhotos.map((photo) => {
       return ItemPhoto.create(photo)
     })
   )
-
   console.log(`seeded ${items.length} itemPhotos`)
 
-  console.log('associating item to photos, then item to users')
+  console.log('associating item to photos, then to a user')
 
   // function to generate randome UserId
   function getRandomUserId(min, max) {
@@ -68,7 +63,8 @@ async function seed() {
       })
     )
 
-    const user = await User.findByPk(getRandomUserId(1, 6))
+    // YF 03.30.21  We are randomly assigning users to our items
+    const user = await User.findByPk(getRandomUserId(1, 36))
 
     await item[0].setUser(user)
   }
