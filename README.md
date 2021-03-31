@@ -28,4 +28,4 @@ See Freeshare deployed on Heroku at [Freeshare](https://free-share-capstone.hero
 
 ## Tech
 
-PWA, Firebase, Mapbox, Talk.js, Google OAuth, JavaScript, React, Redux, Postgres, Node, Bootstrap
+PWA, Firebase, Mapbox, TalkJS, Google OAuth, JavaScript, React, Redux, Postgres, Node, Bootstrap

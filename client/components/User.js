@@ -23,7 +23,7 @@ class User extends Component {
   render() {
     console.log('in User render, this.props', this.props)
     return (
-      <div>
+      <div className="container">
         <UserView user={this.props.singleUser} />
         <EditUserForm />
       </div>

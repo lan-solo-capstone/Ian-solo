@@ -78,109 +78,113 @@ class EditUserForm extends Component {
   }
 
   render() {
-    console.log('in EditUserForm render, this.props', this.props)
-    console.log('in EditUserForm render this.state', this.state)
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-12">
-            <form role="form" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="firstName">First name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="firstName"
-                  value={this.state.firstName}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="middleName">Middle name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="middleName"
-                  value={this.state.middleName}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName">Last name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="lastName"
-                  value={this.state.lastName}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="street1">Address 1</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="street1"
-                  value={this.state.street1}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="street2">Address 2</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="street2"
-                  value={this.state.street2}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="city">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="city"
-                  value={this.state.city}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="state">State</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="state"
-                  value={this.state.state}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="zip">Zip</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="zip"
-                  value={this.state.zip}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+      <div className="container" style={{maxWidth: '800px'}}>
+        <form role="form" onSubmit={this.handleSubmit}>
+          <div className="row">
+            <div className="col-md-6 m-0">
+              <label htmlFor="firstName">
+                <b>First name</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="col-md-6 m-0">
+              <label htmlFor="lastName">
+                <b>Last name</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
+          <div className="form-group">
+            <label htmlFor="email">
+              <b>Email</b>
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="street1">
+              <b>Address 1</b>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="street1"
+              value={this.state.street1}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="street2">
+              <b>Address 2</b>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="street2"
+              value={this.state.street2}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="row">
+            <div className="col-md-6 m-0">
+              <label htmlFor="city">
+                <b>City</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="city"
+                value={this.state.city}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="col-md-3 m-0">
+              <label htmlFor="state">
+                <b>State</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="state"
+                value={this.state.state}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="col-md-3 m-0">
+              <label htmlFor="zip">
+                <b>Zip</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="zip"
+                value={this.state.zip}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <button type="submit" className="btn btn-primary mt-2 mb-5">
+            Submit
+          </button>
+        </form>
       </div>
     )
   }
