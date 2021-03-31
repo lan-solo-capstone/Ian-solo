@@ -50,11 +50,11 @@ class UserHome extends React.Component {
               </Link>
             </li>
           )}
-          {/* <li className="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             <Link to="/messages" className="text-decoration-none">
               Messages
             </Link>
-          </li> */}
+          </li>
           <li className="breadcrumb-item active" aria-current="page">
             <a
               className="text-decoration-none"
