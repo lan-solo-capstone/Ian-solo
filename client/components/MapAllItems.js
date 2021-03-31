@@ -187,7 +187,7 @@ class MapAllItems extends React.Component {
                       state: {item: this.state.selectedItem},
                     }}
                     onClick={() => {
-                      this.props.unloadModal()
+                      this.props.unloadModal('unload')
                     }}
                   >
                     {this.state.selectedItem.itemListName}
