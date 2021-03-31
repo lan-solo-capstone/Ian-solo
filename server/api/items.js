@@ -111,6 +111,12 @@ router.post('/', ensureLogin, async (req, res, next) => {
 // PUT route for /api/items/:itemId
 router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
+    console.log(
+      'in put route for single item req.params',
+      req.params,
+      'req.body',
+      req.body
+    )
     const {itemId} = req.params
     const {
       itemType,
@@ -152,6 +158,8 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
       ],
     })
 
+    // if item.user.id !== req.user.id
+
     if (!item) {
       res.sendStatus(404)
       return
@@ -164,12 +172,12 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
       itemCondition,
       status,
     })
-    console.log(
-      'in PUT route for /item/:itemId after await item.update',
-      'hello',
-      'item:',
-      item
-    )
+    // console.log(
+    //   'in PUT route for /item/:itemId after await item.update',
+    //   'hello',
+    //   'item:',
+    //   item
+    // )
     res.json(item)
   } catch (err) {
     next(err)

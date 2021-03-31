@@ -21,6 +21,12 @@ class User extends Component {
   }
 
   render() {
+    // only render user info if current user has the right to view it
+    // must be an admin or viewing user's own profile
+    const {admin, id} = this.props.user
+    if (!admin && this.props.singleUser.id !== id) {
+      return <div>Sorry, you are not authorized to view this page. </div>
+    }
     console.log('in User render, this.props', this.props)
     return (
       <div>

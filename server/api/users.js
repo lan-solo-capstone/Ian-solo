@@ -39,32 +39,48 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to this route to admins only
 // or a user can access their own profile, even if they're not admin
-router.get('/:userId', ensureLogin, async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
-    const {userId} = req.params
-    console.log('hello', 'typeof userId', typeof userId)
-    const user = await User.findByPk(userId, {
-      include: [
-        {
-          model: Item,
-          attributes: [
-            'id',
-            'itemListName',
-            'description',
-            'itemType',
-            'status',
-            'dateListed',
-          ],
-          include: [
-            {
-              model: ItemPhoto,
-              attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
-            },
-          ],
-        },
-      ],
-    })
-    res.json(user)
+    if (req.user.admin || String(req.user.id) === req.params.userId) {
+      // if (req.params.userId)
+      //   console.log(
+      //     'in GET route for /:userId req.body',
+      //     'hello',
+      //     req.body,
+      //     'hello',
+      //     'req.params',
+      //     req.params,
+      //     'hello',
+      //     'req.user',
+      //     req.user
+      //   )
+      const {userId} = req.params
+      console.log('hello', 'typeof userId', typeof userId)
+      const user = await User.findByPk(userId, {
+        include: [
+          {
+            model: Item,
+            attributes: [
+              'id',
+              'itemListName',
+              'description',
+              'itemType',
+              'status',
+              'dateListed',
+            ],
+            include: [
+              {
+                model: ItemPhoto,
+                attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+              },
+            ],
+          },
+        ],
+      })
+      res.json(user)
+    } else {
+      res.send('you are not authorized to view this user profile')
+    }
   } catch (err) {
     next(err)
   }
