@@ -33,7 +33,7 @@ async function seed() {
       return ItemPhoto.create(photo)
     })
   )
-  console.log(`seeded ${items.length} itemPhotos`)
+  console.log(`seeded ${itemPhotos.length} itemPhotos`)
 
   console.log('associating item to photos')
 
