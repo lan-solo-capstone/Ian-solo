@@ -118,7 +118,32 @@ export const modifyItem = (itemId, modifications) => {
       dispatch(editItem(modifiedItem))
 
       // this is necessary? or a kludgy way to pass the modified item via location props to match the location props passed to /singleview from /items -- JC 3.29.21
-      history.push('/singleview', {item: modifiedItem})
+
+      if (modifiedItem.updatedAt) {
+        console.log(
+          'in modifyItem thunk, success, toast happening now --------'
+        )
+        toast.success('Changes saved!', {
+          position: 'top-right',
+          autoClose: 5001,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        })
+        history.push('/singleview', {item: modifiedItem})
+      } else {
+        toast.warning('Something went wrong, sorry!', {
+          position: 'top-right',
+          autoClose: 5001,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        })
+      }
     } catch (err) {
       console.error(err)
     }

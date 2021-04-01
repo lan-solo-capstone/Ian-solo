@@ -70,16 +70,6 @@ class EditItemForm extends Component {
       this.props.location.state.item.id,
       this.state
     )
-    // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
-    toast.success('Changes saved!', {
-      position: 'top-right',
-      autoClose: 5001,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    })
   }
 
   render() {
