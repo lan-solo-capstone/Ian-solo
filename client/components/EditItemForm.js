@@ -58,13 +58,17 @@ class EditItemForm extends Component {
     const itemId = this.props.location.state.item.id
     const {itemType, itemListName, description, itemCondition} = this.state
     const userId = this.props.location.state.item.user.id
-    this.props.modifyItem(itemId, {
-      itemType,
-      itemListName,
-      description,
-      itemCondition,
-      user: {id: userId},
-    })
+    this.props.modifyItem(
+      itemId,
+      {
+        itemType,
+        itemListName,
+        description,
+        itemCondition,
+        user: {id: userId},
+      },
+      'Changes saved!'
+    )
     console.log(
       'in handle Submit for edit item, this.props.location.state.item.id, state',
       this.props.location.state.item.id,
@@ -108,8 +112,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    modifyItem: (itemId, modifications) =>
-      dispatch(modifyItem(itemId, modifications)),
+    modifyItem: (itemId, modifications, toastMessage) =>
+      dispatch(modifyItem(itemId, modifications, toastMessage)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditItemForm)

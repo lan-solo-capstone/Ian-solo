@@ -5,6 +5,16 @@ import {storage} from '../../firebase/firebase'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+const toastSettings = {
+  position: 'top-right',
+  autoClose: 5001,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+}
+
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 const EDIT_ITEM = 'EDIT_ITEM'
 
@@ -77,15 +87,7 @@ export const postNewItem = (item, userId) => {
       if (data.createdAt) {
         toast.success(
           'Your item was successfully created! Check it out on this page under Open Items =)',
-          {
-            position: 'top-right',
-            autoClose: 5001,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
+          toastSettings
         )
         history.push('/useraccount')
       } else {
@@ -109,7 +111,7 @@ export const postNewItem = (item, userId) => {
   }
 }
 
-export const modifyItem = (itemId, modifications) => {
+export const modifyItem = (itemId, modifications, toastMessage) => {
   return async (dispatch) => {
     try {
       const modifiedItem = (
@@ -117,32 +119,14 @@ export const modifyItem = (itemId, modifications) => {
       ).data
       dispatch(editItem(modifiedItem))
 
-      // this is necessary? or a kludgy way to pass the modified item via location props to match the location props passed to /singleview from /items -- JC 3.29.21
-
       if (modifiedItem.updatedAt) {
         console.log(
-          'in modifyItem thunk, success, toast happening now --------'
+          'in modifyItem thunk, success, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
         )
-        toast.success('Changes saved!', {
-          position: 'top-right',
-          autoClose: 5001,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        })
+        toast.success(toastMessage, toastSettings)
         history.push('/singleview', {item: modifiedItem})
       } else {
-        toast.warning('Something went wrong, sorry!', {
-          position: 'top-right',
-          autoClose: 5001,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        })
+        toast.warning('Something went wrong, sorry!', toastSettings)
       }
     } catch (err) {
       console.error(err)
