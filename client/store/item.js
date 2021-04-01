@@ -17,6 +17,7 @@ const toastSettings = {
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 const EDIT_ITEM = 'EDIT_ITEM'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 export const createNewItem = (item) => {
   return {
@@ -28,6 +29,13 @@ export const createNewItem = (item) => {
 const editItem = (item) => {
   return {
     type: EDIT_ITEM,
+    item,
+  }
+}
+
+const deleteItem = (item) => {
+  return {
+    type: DELETE_ITEM,
     item,
   }
 }
@@ -134,6 +142,18 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
   }
 }
 
+export const removeItem = (itemId) => {
+  return async (dispatch) => {
+    try {
+      const deletedItem = await axios.delete(`/api/items/${itemId}`).data
+      dispatch(deleteItem(deletedItem))
+      // toast.success('The item was successfully deleted!', toastSettings)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 // TODO: add loading: true to initialState and loading: false to returns -- JC 3.29.21
 const initialState = {}
 export default function itemReducer(state = initialState, action) {
@@ -141,6 +161,8 @@ export default function itemReducer(state = initialState, action) {
     case CREATE_NEW_ITEM:
       return action.item
     case EDIT_ITEM:
+      return action.item
+    case DELETE_ITEM:
       return action.item
     default:
       return state
