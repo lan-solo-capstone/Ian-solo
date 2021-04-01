@@ -25,7 +25,7 @@ class Items extends React.Component {
     //Begin search and filter code:
     let items
 
-    let headline = `All Current Offers`
+    let headline = `All Current Listings`
     if (this.props.location.searchBoxParams) {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
         ' '

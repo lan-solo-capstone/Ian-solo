@@ -124,19 +124,19 @@ const Navbar = (props) => {
                       aria-labelledby="navbarScrollingDropdown"
                     >
                       <Link
-                        className="nav-item nav-link dropdown-item mx-1"
+                        className="nav-item nav-link dropdown-item"
                         to="/useraccount"
                       >
                         Profile
                       </Link>
                       <Link
-                        className="nav-item nav-link dropdown-item mx-1"
+                        className="nav-item nav-link dropdown-item"
                         to="/messages/all"
                       >
                         Messages
                       </Link>
                       <a
-                        className="nav-item dropdown-item nav-link mx-1"
+                        className="nav-item dropdown-item nav-link"
                         href="#"
                         onClick={props.handleClick}
                       >
