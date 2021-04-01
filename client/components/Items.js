@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchAllItems} from '../store/items'
+import {fetchAllItems, allItemsUnload} from '../store/items'
 import {updateNavbar} from '../store/navbar'
 import SingleItem from './SingleItem'
 import MapAllItems from './MapAllItems'
@@ -16,6 +16,9 @@ class Items extends React.Component {
 
   componentWillUnmount() {
     this.props.updateNavbar(null, {})
+
+    // reset loading status = true
+    this.props.allItemsUnload()
   }
 
   render() {
@@ -131,6 +134,10 @@ const mapDispatch = (dispatch) => ({
   },
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
+  },
+  //4.1.21 this resets loading status = true in unmount
+  allItemsUnload: () => {
+    dispatch(allItemsUnload())
   },
 })
 
