@@ -3,8 +3,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
 import {ItemForm} from './index'
-import {toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 const initialState = {
   itemType: '',

@@ -25,6 +25,7 @@ const editItem = (item) => {
 export const postNewItem = (item, userId) => {
   return async (dispatch) => {
     try {
+      console.log('hello', 'in new item thunk, try block')
       let fileInfo = {
         itemType: item.itemType,
         itemListName: item.itemListName,
@@ -53,6 +54,7 @@ export const postNewItem = (item, userId) => {
           })
         )
         fileInfo.imageArr = imageInfo
+        console.log('hello', 'in new item thunk, imageInfo,', imageInfo)
       }
 
       // vv test vv  below axios call is for testing purpose - visualize formData vv //
@@ -70,21 +72,38 @@ export const postNewItem = (item, userId) => {
       const {data} = await axios.post(`/api/items`, fileInfo)
 
       dispatch(createNewItem(data))
+      console.log('in new item thunk, data', data)
 
-      toast.success(
-        'Your item was successfully created! Check it out on this page under Open Items =)',
-        {
-          position: 'top-right',
-          autoClose: 5001,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        }
-      )
-      history.push('/useraccount')
+      if (data.createdAt) {
+        toast.success(
+          'Your item was successfully created! Check it out on this page under Open Items =)',
+          {
+            position: 'top-right',
+            autoClose: 5001,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        )
+        history.push('/useraccount')
+      } else {
+        toast.warning(
+          'Sorry, something went wrong. =( Maybe try again, or contact an admin to report a problem with submitting a new item.',
+          {
+            position: 'top-right',
+            autoClose: 5001,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        )
+      }
     } catch (err) {
+      console.log('hello', 'in new item thunk error ----------!')
       console.error(err)
     }
   }
