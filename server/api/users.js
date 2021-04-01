@@ -6,16 +6,13 @@ const axios = require('axios')
 
 module.exports = router
 
-// all routes here are mounted on /api/users
+// -------- all routes here are mounted on /api/users -------- /
 
 // GET all users
 // mounted on /api/users and access limited to admins
 router.get('/', ensureAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: [
         'id',
         'email',
@@ -37,53 +34,49 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 
 // GET single user
 // mounted on /api/users/:userId
-// TODO: limit access to this route to admins only
-// or a user can access their own profile, even if they're not admin
-router.get(
-  '/:userId',
-  [ensureAnyLogin, ensureLogin],
-  async (req, res, next) => {
-    try {
-      console.log('hello', 'hello in start of GET route for /:userId')
-      const {userId} = req.params
-      const user = await User.findByPk(userId, {
-        include: [
-          {
-            model: Item,
-            attributes: [
-              'id',
-              'itemListName',
-              'description',
-              'itemType',
-              'status',
-              'dateListed',
-            ],
-            include: [
-              {
-                model: ItemPhoto,
-                attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
-              },
-            ],
-          },
-        ],
-      })
+// any admins can access this route
+// users can also access their own profile, even if they're not admin
+router.get('/:userId', ensureLogin, async (req, res, next) => {
+  try {
+    console.log('hello', 'hello in start of GET route for /:userId')
+    const {userId} = req.params
+    const user = await User.findByPk(userId, {
+      include: [
+        {
+          model: Item,
+          attributes: [
+            'id',
+            'itemListName',
+            'description',
+            'itemType',
+            'status',
+            'dateListed',
+          ],
+          include: [
+            {
+              model: ItemPhoto,
+              attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+            },
+          ],
+        },
+      ],
+    })
 
-      if (!user) {
-        res.status(404).send('This user does not exist in our DB apparently!')
-        return
-      }
-      console.log('hello', 'in end of GET route, user', user)
-      res.json(user)
-    } catch (err) {
-      next(err)
+    if (!user) {
+      res.status(404).send('This user does not exist in our DB apparently!')
+      return
     }
+    console.log('hello', 'in end of GET route, user', user)
+    res.json(user)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // PUT single user
 // mounted on /api/users/:userId
 // TODO: limit access to admins only
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId', ensureAdmin, async (req, res, next) => {
   //resolve lat & lon
   let latitude, longitude
 
@@ -161,23 +154,19 @@ router.put('/:userId', async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to admins only
 
-router.delete(
-  '/:userId',
-  [ensureAnyLogin, ensureAdmin],
-  async (req, res, next) => {
-    try {
-      const {userId} = req.params
-      const deletedUser = await User.findByPk(userId)
+router.delete('/:userId', ensureAdmin, async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const deletedUser = await User.findByPk(userId)
 
-      if (!deletedUser) {
-        res.status(404).send('No such user exists in our DB apparently!')
-        return
-      }
-
-      await deletedUser.destroy()
-      res.json(deletedUser)
-    } catch (err) {
-      next(err)
+    if (!deletedUser) {
+      res.status(404).send('No such user exists in our DB apparently!')
+      return
     }
+
+    await deletedUser.destroy()
+    res.json(deletedUser)
+  } catch (err) {
+    next(err)
   }
-)
+})
