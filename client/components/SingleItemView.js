@@ -87,7 +87,12 @@ class SingleItemView extends React.Component {
           <div className="col row row-cols-1 gy-2">
             <h5 className="col text-center ">{item.itemListName}</h5>
             <h6 className="col text-center text-secondary">
-              Submitted by: {item.user.firstName}
+              Submitted by: {item.user.firstName} as
+              {` ${
+                this.props.location.state.item.itemType === 'Offer'
+                  ? this.props.location.state.item.itemType + 'ing'
+                  : this.props.location.state.item.itemType
+              }`}
             </h6>
             <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
@@ -112,15 +117,72 @@ class SingleItemView extends React.Component {
               {
                 // this.state.justClosed === false &&
                 item.status === 'Open' && itemMatchesUser && (
-                  <div className="col-auto closeItem">
-                    <button
-                      type="button"
-                      className="btn btn-warning"
-                      onClick={this.handleClose}
-                    >
-                      Mark this item as closed
-                    </button>
-                  </div>
+                  <>
+                    <div className="col-auto closeItem">
+                      <button
+                        type="button"
+                        className="btn btn-warning"
+                        onClick={this.handleClose}
+                      >
+                        Mark this item as closed
+                      </button>
+                    </div>
+                    <div className="col-auto">
+                      <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        type="button"
+                        className="btn btn-warning"
+                        onClick={() => {
+                          console.log('hello')
+                        }}
+                      >
+                        Edit Item
+                      </button>
+                      {/*Start Modal*/}
+                      <div
+                        className="modal fade"
+                        id="staticBackdrop"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5
+                                className="modal-title"
+                                id="staticBackdropLabel"
+                              >
+                                Edit Post
+                              </h5>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div className="modal-body">
+                              <EditItemForm location={this.props.location} />
+                            </div>
+                            <div className="modal-footer justify-content-center">
+                              <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/*End Modal*/}
+                    </div>
+                  </>
                 )
               }
               {/* render the Edit button if the user owns the item and it is not closed */}
@@ -288,7 +350,6 @@ class SingleItemView extends React.Component {
             </div>
           </div>
         </div>
-        {itemMatchesUser && <EditItemForm location={this.props.location} />}
       </div>
     )
   }
