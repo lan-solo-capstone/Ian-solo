@@ -43,8 +43,6 @@ class EditItemForm extends Component {
   componentDidUpdate() {}
 
   handleChange(evt) {
-    // TODO: Is it a bad idea to load state with props? -- JC 3.29.21
-    this.setState({user: this.props.user}) // yf 03.21.21  added userInfo
     this.setState({
       [evt.target.name]: evt.target.value,
     })
@@ -57,8 +55,21 @@ class EditItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.modifyItem(this.props.location.state.item.id, this.state)
-
+    const itemId = this.props.location.state.item.id
+    const {itemType, itemListName, description, itemCondition} = this.state
+    const userId = this.props.location.state.item.user.id
+    this.props.modifyItem(itemId, {
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      user: {id: userId},
+    })
+    console.log(
+      'in handle Submit for edit item, this.props.location.state.item.id, state',
+      this.props.location.state.item.id,
+      this.state
+    )
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
     toast.success('Changes saved!', {
       position: 'top-right',

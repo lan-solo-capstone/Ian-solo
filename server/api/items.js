@@ -114,6 +114,7 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
 // PUT route for /api/items/:itemId
 router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
+    console.log('in PUT route for item, req.body', req.body)
     const {itemId} = req.params
     const {
       itemType,
