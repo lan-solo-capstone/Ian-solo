@@ -35,10 +35,24 @@ class AllUsers extends Component {
     }
 
     const {users} = this.props || []
+
+    // sort fetched users by lastName
+    const sortedUsers = users.sort((a, b) => {
+      const nameA = a.lastName.toUpperCase()
+      const nameB = b.lastName.toUpperCase()
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+      return 0
+    })
+
     return (
       <div className="container mt-4">
         <div className="row">
-          {users.map((user) => {
+          {sortedUsers.map((user) => {
             return (
               <div key={user.id}>
                 <div className="col-md-4 mb-4">
@@ -46,13 +60,15 @@ class AllUsers extends Component {
                     <Link to={`/users/${user.id}`}>
                       <UserView user={user} />
                     </Link>
-                    <button
-                      type="button"
-                      onClick={() => this.props.removeExistingUser(user.id)}
-                      className="btn btn-danger"
-                    >
-                      Delete User
-                    </button>
+                    {this.props.user.id !== user.id ? (
+                      <button
+                        type="button"
+                        onClick={() => this.props.removeExistingUser(user.id)}
+                        className="btn btn-danger"
+                      >
+                        Delete User
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               </div>

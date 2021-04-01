@@ -158,10 +158,35 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
     const {userId} = req.params
     const deletedUser = await User.findByPk(userId)
 
+    const associatedItems = await Item.findAll({where: {userId: userId}})
+
+    // console.log('associatedItems', associatedItems)
+
+    // console.log('User_Proto', User.prototype)
+    // console.log('Item_proto', Item.prototype)
+
     if (!deletedUser) {
       res.status(404).send('No such user exists in our DB apparently!')
       return
     }
+
+    // delete associated items and itemphotos first.
+
+    await Promise.all(
+      associatedItems.map(async (itemObj) => {
+        let photos = await itemObj.getItemPhotos()
+
+        await itemObj.removeItemPhotos(photos)
+      })
+    )
+
+    let userItems = await deletedUser.getItems()
+
+    await Promise.all(
+      userItems.map(async (itemObj) => {
+        await itemObj.destroy()
+      })
+    )
 
     await deletedUser.destroy()
     res.json(deletedUser)

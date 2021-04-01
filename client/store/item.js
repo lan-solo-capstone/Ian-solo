@@ -2,6 +2,18 @@
 import axios from 'axios'
 import history from '../history'
 import {storage} from '../../firebase/firebase'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const toastSettings = {
+  position: 'top-right',
+  autoClose: 5001,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+}
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 const EDIT_ITEM = 'EDIT_ITEM'
@@ -23,6 +35,7 @@ const editItem = (item) => {
 export const postNewItem = (item, userId) => {
   return async (dispatch) => {
     try {
+      console.log('hello', 'in new item thunk, try block')
       let fileInfo = {
         itemType: item.itemType,
         itemListName: item.itemListName,
@@ -51,6 +64,7 @@ export const postNewItem = (item, userId) => {
           })
         )
         fileInfo.imageArr = imageInfo
+        console.log('hello', 'in new item thunk, imageInfo,', imageInfo)
       }
 
       // vv test vv  below axios call is for testing purpose - visualize formData vv //
@@ -68,14 +82,36 @@ export const postNewItem = (item, userId) => {
       const {data} = await axios.post(`/api/items`, fileInfo)
 
       dispatch(createNewItem(data))
-      history.push('/useraccount')
+      console.log('in new item thunk, data', data)
+
+      if (data.createdAt) {
+        toast.success(
+          'Your item was successfully created! Check it out on this page under Open Items =)',
+          toastSettings
+        )
+        history.push('/useraccount')
+      } else {
+        toast.warning(
+          'Sorry, something went wrong. =( Maybe try again, or contact an admin to report a problem with submitting a new item.',
+          {
+            position: 'top-right',
+            autoClose: 5001,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        )
+      }
     } catch (err) {
+      console.log('hello', 'in new item thunk error ----------!')
       console.error(err)
     }
   }
 }
 
-export const modifyItem = (itemId, modifications) => {
+export const modifyItem = (itemId, modifications, toastMessage) => {
   return async (dispatch) => {
     try {
       const modifiedItem = (
@@ -83,8 +119,15 @@ export const modifyItem = (itemId, modifications) => {
       ).data
       dispatch(editItem(modifiedItem))
 
-      // this is necessary? or a kludgy way to pass the modified item via location props to match the location props passed to /singleview from /items -- JC 3.29.21
-      history.push('/singleview', {item: modifiedItem})
+      if (modifiedItem.updatedAt) {
+        console.log(
+          '########### in modifyItem thunk, success, refactored for close/open, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
+        )
+        toast.success(toastMessage, toastSettings)
+        history.push('/singleview', {item: modifiedItem})
+      } else {
+        toast.warning('Something went wrong, sorry!', toastSettings)
+      }
     } catch (err) {
       console.error(err)
     }
