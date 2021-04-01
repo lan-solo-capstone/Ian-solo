@@ -52,6 +52,9 @@ export const modifyExistingUser = (userId, modifications) => {
       const {data} = await axios.put(`/api/users/${userId}`, modifications)
       dispatch(editExistingUser(data))
       dispatch(me())
+
+      // if user profile was updated successfully, toast notification and
+      // scroll smoothly to top -- JC 4.1.21
       if (data.updatedAt) {
         window.scrollTo({top: 0, behavior: 'smooth'})
         toast.success('Your changes have been saved!', toastSettings)
