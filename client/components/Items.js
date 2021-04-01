@@ -45,9 +45,6 @@ class Items extends React.Component {
       }
 
       items = this.props.items
-        .sort(function (a, b) {
-          return Date(a.createdAt) - Date(b.createdAt)
-        })
         .filter((item) => item.status === 'Open')
         .filter((item) => {
           if (this.props.location.searchBoxParams.searchItemType === 'All') {
@@ -91,6 +88,9 @@ class Items extends React.Component {
               return item
             }
           }
+        })
+        .sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt)
         })
       headline =
         items.length > 0 ? `Matches Found: ${items.length}` : 'No Matches Found'
