@@ -42,20 +42,7 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
     if (req.user.admin || String(req.user.id) === req.params.userId) {
-      // if (req.params.userId)
-      //   console.log(
-      //     'in GET route for /:userId req.body',
-      //     'hello',
-      //     req.body,
-      //     'hello',
-      //     'req.params',
-      //     req.params,
-      //     'hello',
-      //     'req.user',
-      //     req.user
-      //   )
       const {userId} = req.params
-      console.log('hello', 'typeof userId', typeof userId)
       const user = await User.findByPk(userId, {
         include: [
           {
