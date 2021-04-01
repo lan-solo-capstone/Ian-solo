@@ -2,6 +2,8 @@
 import axios from 'axios'
 import history from '../history'
 import {storage} from '../../firebase/firebase'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const CREATE_NEW_ITEM = 'CREATE_NEW_ITEM'
 const EDIT_ITEM = 'EDIT_ITEM'
@@ -68,6 +70,19 @@ export const postNewItem = (item, userId) => {
       const {data} = await axios.post(`/api/items`, fileInfo)
 
       dispatch(createNewItem(data))
+
+      toast.success(
+        'Your item was successfully created! Check it out on this page under Open Items =)',
+        {
+          position: 'top-right',
+          autoClose: 5001,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        }
+      )
       history.push('/useraccount')
     } catch (err) {
       console.error(err)

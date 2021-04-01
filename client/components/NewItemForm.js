@@ -43,18 +43,6 @@ class NewItemForm extends Component {
     this.props.addNewItem(this.state, this.props.user.id)
 
     // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
-    toast.success(
-      'Your item was successfully created! Check it out on this page under Open Items =)',
-      {
-        position: 'top-right',
-        autoClose: 5001,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      }
-    )
   }
 
   render() {
