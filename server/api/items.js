@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
-const {ensureAdmin, ensureLogin} = require('./middleware')
+const {ensureAnyLogin, ensureLogin} = require('./middleware')
 module.exports = router
 
 // /api/items
@@ -38,12 +38,14 @@ router.get('/', async (req, res, next) => {
         },
       ],
     })
+
     res.json(allItems)
   } catch (err) {
     next(err)
   }
 })
 
+// prob can delete this as it doesn't seem to be getting used -- JC 3.31.21
 // GET single item
 // this may be necessary to re-route the user after they create a new post
 router.get('/:itemId', async (req, res, next) => {
@@ -58,68 +60,59 @@ router.get('/:itemId', async (req, res, next) => {
 
 // api/items
 // POST a new item
+// yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
+// authenticated so any logged-in user can post an item -- JC 3.31.21
+router.post('/', ensureAnyLogin, async (req, res, next) => {
+  try {
+    const {
+      itemListName,
+      description,
+      itemType,
+      itemCondition,
+      deliveryOption,
+      userId,
+      imageArr,
+      // dateListed,
+    } = req.body
+    console.log('hello', 'in post req.body', req.body)
+    const newItem = await Item.create({
+      itemListName,
+      description,
+      itemType,
+      itemCondition,
+      deliveryOption,
+      userId,
+    })
 
-router.post(
-  '/',
+    // yf 3.29.21  if not image, assign default image.  Else update itemPhoto table with firebase storage info.
 
-  // commenting out authentication for ease of development and testing -- JC
-
-  // ensureLogin,
-
-  // yf 3.29.21  new item form upload.  Populate item in the item table first, then save its associated photos in itemPhoto table.
-
-  async (req, res, next) => {
-    try {
-      const {
-        itemListName,
-        description,
-        itemType,
-        itemCondition,
-        deliveryOption,
-        userId,
-        imageArr,
-        // dateListed,
-      } = req.body
-
-      const newItem = await Item.create({
-        itemListName,
-        description,
-        itemType,
-        itemCondition,
-        deliveryOption,
-        userId,
+    if (imageArr.length === 0) {
+      const itemPhotos = await ItemPhoto.create({
+        photoTitle: 'default.jpg',
       })
 
-      // yf 3.29.21  if not image, assign default image.  Else update itemPhoto table with firebase storage info.
+      await itemPhotos.setItem(newItem)
+    } else {
+      imageArr.forEach(async (element) => {
+        console.log(element)
 
-      if (imageArr.length === 0) {
         const itemPhotos = await ItemPhoto.create({
-          photoTitle: 'default.jpg',
+          photoTitle: element.photoTitle,
+          cloudREF: element.cloudRef,
+          downloadURL: element.downloadUrl,
         })
 
         await itemPhotos.setItem(newItem)
-      } else {
-        imageArr.forEach(async (element) => {
-          console.log(element)
-
-          const itemPhotos = await ItemPhoto.create({
-            photoTitle: element.photoTitle,
-            cloudREF: element.cloudRef,
-            downloadURL: element.downloadUrl,
-          })
-
-          await itemPhotos.setItem(newItem)
-        })
-      }
-      res.status(201).send(newItem)
-    } catch (err) {
-      next(err)
+      })
     }
+    res.status(201).send(newItem)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // PUT route for /api/items/:itemId
-router.put('/:itemId', async (req, res, next) => {
+router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
     const {itemId} = req.params
     const {
@@ -129,9 +122,14 @@ router.put('/:itemId', async (req, res, next) => {
       itemCondition,
       status,
     } = req.body
+    const userId = req.body.user.id
     // eager load User and ItemPhoto to match GET route for /items
     // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
-    const item = await Item.findByPk(itemId, {
+
+    const updatedItem = await Item.findOne({
+      // necessary to find by userId as well as itemId to secure API route -- JC 3.31.21
+      // we compare the userId of the item to req.body.user.id to authenticate user
+      where: {id: itemId, userId},
       attributes: [
         'id',
         'itemListName',
@@ -162,25 +160,20 @@ router.put('/:itemId', async (req, res, next) => {
       ],
     })
 
-    if (!item) {
+    if (!updatedItem) {
       res.sendStatus(404)
       return
     }
 
-    await item.update({
+    await updatedItem.update({
       itemType,
       itemListName,
       description,
       itemCondition,
       status,
     })
-    console.log(
-      'in PUT route for /item/:itemId after await item.update',
-      'hello',
-      'item:',
-      item
-    )
-    res.json(item)
+
+    res.json(updatedItem)
   } catch (err) {
     next(err)
   }

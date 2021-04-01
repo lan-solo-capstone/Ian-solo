@@ -54,7 +54,7 @@ class InboxComponent extends Component {
     console.log('in InboxContainer render, props', this.props)
     return (
       <span>
-        <div style={{height: '500px'}} ref={(c) => (this.container = c)}>
+        <div style={{height: '65vh'}} ref={(c) => (this.container = c)}>
           Loading...
         </div>
       </span>
