@@ -46,12 +46,12 @@ export const fetchAllItems = () => async (dispatch) => {
 export const removeItem = (itemId) => {
   return async (dispatch) => {
     try {
-      const deletedItem = await axios.delete(`/api/items/${itemId}`).data
-      dispatch(deleteItem(deletedItem))
+      const {data} = await axios.delete(`/api/items/${itemId}`)
+      dispatch(deleteItem(data))
       // toast.success('The item was successfully deleted!', toastSettings)
       console.log(
         'in removeItem thunk, about to delete item, here is the deleted item',
-        deletedItem
+        data
       )
       history.push('/')
     } catch (err) {
@@ -71,9 +71,16 @@ export default (state = intialState, action) => {
     case ALL_ITEMS_UNLOAD:
       return {...state, loading: true}
     case DELETE_ITEM: {
+      console.log(
+        'laskjflaskfjasdlk in delete item case, action.item',
+        action.item
+      )
       const copyOfState = {...state}
+      console.log('HEEEEEEY, in delete item case, copyOfState', copyOfState)
       const {items} = copyOfState
+      console.log('in delete item case, items array', items)
       const filteredItems = items.filter((item) => item.id !== action.item.id)
+
       return {...state, items: filteredItems, loading: false}
     }
     default:
