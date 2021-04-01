@@ -24,10 +24,16 @@ class SingleItemView extends React.Component {
 
   handleOpen(evt) {
     evt.preventDefault()
+    const userIsAdmin = this.props.user.admin
 
-    const userId = this.props.user.id
+    let userId = this.props.user.id
     const itemId = String(this.props.location.state.item.id)
 
+    if (!userIsAdmin) {
+      userId = this.props.user.id
+    } else {
+      userId = this.props.location.state.item.user.id
+    }
     this.props.modifyItem(
       itemId,
       {
@@ -41,7 +47,16 @@ class SingleItemView extends React.Component {
   handleClose(evt) {
     evt.preventDefault()
 
-    const userId = this.props.user.id
+    const userIsAdmin = this.props.user.admin
+
+    let userId
+
+    if (!userIsAdmin) {
+      userId = this.props.user.id
+    } else {
+      userId = this.props.location.state.item.user.id
+    }
+
     const itemId = String(this.props.location.state.item.id)
 
     this.props.modifyItem(
@@ -80,6 +95,7 @@ class SingleItemView extends React.Component {
     // -- JC 3.29.21
 
     const itemMatchesUser = this.props.user.id === item.user.id
+    const isAdmin = this.props.user.admin
 
     return (
       <div className="container-sm container-md container-xl footerSpacing mt-4">
@@ -114,77 +130,74 @@ class SingleItemView extends React.Component {
               )}
               {/* check if the user has the right to close the item */}
 
-              {
-                // this.state.justClosed === false &&
-                item.status === 'Open' && itemMatchesUser && (
-                  <>
-                    <div className="col-auto closeItem">
-                      <button
-                        type="button"
-                        className="btn btn-warning"
-                        onClick={this.handleClose}
-                      >
-                        Mark this item as closed
-                      </button>
-                    </div>
-                    <div className="col-auto">
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
-                        type="button"
-                        className="btn btn-warning"
-                        onClick={() => {
-                          console.log('hello')
-                        }}
-                      >
-                        Edit Item
-                      </button>
-                      {/*Start Modal*/}
-                      <div
-                        className="modal fade"
-                        id="staticBackdrop"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                        tabIndex="-1"
-                        aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true"
-                      >
-                        <div className="modal-dialog">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h5
-                                className="modal-title"
-                                id="staticBackdropLabel"
-                              >
-                                Edit Post
-                              </h5>
-                              <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div className="modal-body">
-                              <EditItemForm location={this.props.location} />
-                            </div>
-                            <div className="modal-footer justify-content-center">
-                              <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                              >
-                                Cancel
-                              </button>
-                            </div>
+              {item.status === 'Open' && (itemMatchesUser || isAdmin) && (
+                <>
+                  <div className="col-auto closeItem">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={this.handleClose}
+                    >
+                      Mark this item as closed
+                    </button>
+                  </div>
+                  <div className="col-auto">
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={() => {
+                        console.log('hello')
+                      }}
+                    >
+                      Edit Item
+                    </button>
+                    {/*Start Modal*/}
+                    <div
+                      className="modal fade"
+                      id="staticBackdrop"
+                      data-bs-backdrop="static"
+                      data-bs-keyboard="false"
+                      tabIndex="-1"
+                      aria-labelledby="staticBackdropLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5
+                              className="modal-title"
+                              id="staticBackdropLabel"
+                            >
+                              Edit Post
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div className="modal-body">
+                            <EditItemForm location={this.props.location} />
+                          </div>
+                          <div className="modal-footer justify-content-center">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Cancel
+                            </button>
                           </div>
                         </div>
                       </div>
-                      {/*End Modal*/}
                     </div>
-                  </>
-                )
-              }
+                    {/*End Modal*/}
+                  </div>
+                </>
+              )}
               {/* render the Edit button if the user owns the item and it is not closed */}
               {/* {this.props.user.id === item.user.id &&
                 (!this.state.justClosed || item.status === 'Closed') && (
@@ -202,7 +215,7 @@ class SingleItemView extends React.Component {
                  )
                } */}
               {/* Allow user to re-open item that has been closed accidentally or prematurely */}
-              {item.status === 'Closed' && itemMatchesUser && (
+              {item.status === 'Closed' && (itemMatchesUser || isAdmin) && (
                 <div className="col-auto closeItem">
                   <button
                     type="button"
