@@ -8,9 +8,6 @@ import SingleItem from './SingleItem'
 import MapAllItems from './MapAllItems'
 import MobileFooter from './MobileFooter'
 
-// Render functional
-// const Placeholder = (props) => <div></div>
-
 // Render Class
 class Items extends React.Component {
   componentDidMount() {
@@ -25,7 +22,7 @@ class Items extends React.Component {
     //Begin search and filter code:
     let items
 
-    let headline = `All Current Offers`
+    let headline = `All Current Posts`
     if (this.props.location.searchBoxParams) {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
         ' '
@@ -43,6 +40,7 @@ class Items extends React.Component {
       }
 
       items = this.props.items
+        .filter((item) => item.status === 'Open')
         .filter((item) => {
           if (this.props.location.searchBoxParams.searchItemType === 'All') {
             return item
@@ -89,9 +87,8 @@ class Items extends React.Component {
       headline =
         items.length > 0 ? `Matches Found: ${items.length}` : 'No Matches Found'
     } else {
-      items = this.props.items
+      items = this.props.items.filter((item) => item.status === 'Open')
     }
-
     //end search and filter code
 
     return this.props.loading ? (
@@ -113,13 +110,6 @@ class Items extends React.Component {
             <SingleItem key={item.id} item={item} />
           ))}
         </div>
-        {/* <div className="fixed-bottom d-md-none">
-          <div>
-
-            <MobileFooter />
-
-          </div>
-        </div> */}
       </div>
     )
   }
