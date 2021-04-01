@@ -10,7 +10,6 @@ const initialState = {
   description: '',
   itemCondition: 'New',
   uploadPhoto: null,
-  user: null,
 }
 
 class NewItemForm extends Component {
@@ -37,10 +36,7 @@ class NewItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
     this.props.addNewItem(this.state, this.props.user.id)
-
-    // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
   }
 
   render() {
