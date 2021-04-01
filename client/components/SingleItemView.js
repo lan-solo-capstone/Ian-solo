@@ -198,23 +198,8 @@ class SingleItemView extends React.Component {
                   </div>
                 </>
               )}
-              {/* render the Edit button if the user owns the item and it is not closed */}
-              {/* {this.props.user.id === item.user.id &&
-                (!this.state.justClosed || item.status === 'Closed') && (
-                   <div className="col-auto editItem">
-                     <button
-                       type="button"
-                       className="btn btn-warning"
-                       onClick={this.handleEdit}
-                     >
-                       Edit item
-                     </button>
-                   </div>
-                 )}
-             </div>
-                 )
-               } */}
-              {/* Allow user to re-open item that has been closed accidentally or prematurely */}
+
+              {/* Allow user or admin to re-open item that has been closed accidentally or prematurely */}
               {item.status === 'Closed' && (itemMatchesUser || isAdmin) && (
                 <div className="col-auto closeItem">
                   <button
