@@ -211,6 +211,9 @@ class SingleItemView extends React.Component {
                   </button>
                 </div>
               )}
+
+              {/* Allow admin to delete an item */}
+              {/*  TODO: put delete button here */}
             </div>
           </div>
           <div className="col">
