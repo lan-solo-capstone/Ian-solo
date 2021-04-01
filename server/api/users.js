@@ -192,6 +192,15 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
 
     await deletedUser.removeItems(userItems)
 
+    await Promise.all(
+      userItems.map(async (itemObj) => {
+        await itemObj.destroy()
+      })
+    )
+
+    //checking on deleted items
+    console.log('userItem after delete', userItems)
+
     console.log('deleting users')
     await deletedUser.destroy()
     res.json(deletedUser)
