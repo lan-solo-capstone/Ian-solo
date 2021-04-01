@@ -186,6 +186,9 @@ class MapAllItems extends React.Component {
                       pathname: '/singleview',
                       state: {item: this.state.selectedItem},
                     }}
+                    onClick={() => {
+                      this.props.unloadModal()
+                    }}
                   >
                     {this.state.selectedItem.itemListName}
                   </Link>
