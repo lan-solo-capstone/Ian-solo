@@ -75,7 +75,7 @@ router.get('/:userId', ensureLogin, async (req, res, next) => {
 
 // PUT single user
 // mounted on /api/users/:userId
-// TODO: limit access to admins only
+// admins only
 router.put('/:userId', ensureAdmin, async (req, res, next) => {
   //resolve lat & lon
   let latitude, longitude
@@ -152,8 +152,7 @@ router.put('/:userId', ensureAdmin, async (req, res, next) => {
 
 // DELETE a single user
 // mounted on /api/users/:userId
-// TODO: limit access to admins only
-
+// admins only
 router.delete('/:userId', ensureAdmin, async (req, res, next) => {
   try {
     const {userId} = req.params
