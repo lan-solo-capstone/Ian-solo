@@ -110,77 +110,78 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
 })
 // /api/users/:userId/items/:itemId
 // PUT route for /api/items/:itemId
-router.put('/:itemId', ensureLogin, async (req, res, next) => {
-  try {
-    console.log(
-      'in put route for single item req.params',
-      req.params,
-      'req.body',
-      req.body
-    )
-    const {itemId} = req.params
-    const {
-      itemType,
-      itemListName,
-      description,
-      itemCondition,
-      status,
-    } = req.body
-    // eager load User and ItemPhoto to match GET route for /items
-    // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
-    const item = await Item.findByPk(itemId, {
-      attributes: [
-        'id',
-        'itemListName',
-        'description',
-        'itemType',
-        'status',
-        'dateListed',
-        'itemCondition',
-        'createdAt',
-      ],
-      include: [
-        {
-          model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'latitude',
-            'longitude',
-            'state',
-            'city',
-            'createdAt',
-          ],
-        },
-        {
-          model: ItemPhoto,
-          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
-        },
-      ],
-    })
+router.put(
+  '/:itemId',
+  [ensureAnyLogin, ensureLogin],
+  async (req, res, next) => {
+    try {
+      console.log(
+        'in put route for single item req.params',
+        req.params,
+        'req.body',
+        req.body
+      )
+      const {itemId} = req.params
+      const {
+        itemType,
+        itemListName,
+        description,
+        itemCondition,
+        status,
+      } = req.body
+      const userId = req.body.user.id
+      // eager load User and ItemPhoto to match GET route for /items
+      // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
 
-    // if item.user.id !== req.user.id
+      const updatedItem = await Item.findOne({
+        where: {id: itemId, userId},
+        attributes: [
+          'id',
+          'itemListName',
+          'description',
+          'itemType',
+          'status',
+          'dateListed',
+          'itemCondition',
+          'createdAt',
+        ],
+        include: [
+          {
+            model: User,
+            attributes: [
+              'id',
+              'firstName',
+              'latitude',
+              'longitude',
+              'state',
+              'city',
+              'createdAt',
+            ],
+          },
+          {
+            model: ItemPhoto,
+            attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+          },
+        ],
+      })
+      console.log('in items PUT, updatedItem', updatedItem)
 
-    if (!item) {
-      res.sendStatus(404)
-      return
+      if (!updatedItem) {
+        res.sendStatus(404)
+        return
+      }
+
+      await updatedItem.update({
+        itemType,
+        itemListName,
+        description,
+        itemCondition,
+        status,
+      })
+
+      res.json(updatedItem)
+    } catch (err) {
+      next(err)
     }
-
-    await item.update({
-      itemType,
-      itemListName,
-      description,
-      itemCondition,
-      status,
-    })
-    // console.log(
-    //   'in PUT route for /item/:itemId after await item.update',
-    //   'hello',
-    //   'item:',
-    //   item
-    // )
-    res.json(item)
-  } catch (err) {
-    next(err)
   }
-})
+)
