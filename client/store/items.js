@@ -1,5 +1,17 @@
 import axios from 'axios'
 import history from '../history'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const toastSettings = {
+  position: 'top-right',
+  autoClose: 5001,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+}
 
 /**
  * ACTION TYPES
@@ -48,11 +60,16 @@ export const removeItem = (itemId) => {
     try {
       const {data} = await axios.delete(`/api/items/${itemId}`)
       dispatch(deleteItem(data))
-      // toast.success('The item was successfully deleted!', toastSettings)
+      toast.success('The item was successfully deleted!', toastSettings)
       console.log(
         'in removeItem thunk, about to delete item, here is the deleted item',
         data
       )
+
+      if (data.updatedAt) {
+        console.log('successfully deleted!!!!! ------!!!!!!!!!')
+      }
+
       history.push('/')
     } catch (err) {
       console.error(err)
