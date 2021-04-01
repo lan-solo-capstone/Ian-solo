@@ -76,7 +76,7 @@ router.get('/:userId', ensureLogin, async (req, res, next) => {
 // PUT single user
 // mounted on /api/users/:userId
 // admins only
-router.put('/:userId', ensureAdmin, async (req, res, next) => {
+router.put('/:userId', ensureLogin, async (req, res, next) => {
   //resolve lat & lon
   let latitude, longitude
 

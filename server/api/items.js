@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const {Item, User} = require('../db/models')
-const ItemPhoto = require('../db/models/itemPhoto')
-const {ensureAnyLogin, ensureLogin} = require('./middleware')
+const {Item, User, ItemPhoto} = require('../db/models')
+// const ItemPhoto = require('../db/models/itemPhoto')
+const {ensureAnyLogin, ensureLogin, ensureAdmin} = require('./middleware')
 module.exports = router
 
 // /api/items
@@ -175,6 +175,28 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
     })
 
     res.json(updatedItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// DELETE route for /api/items/:itemId
+router.delete('/:itemId', ensureAdmin, async (req, res, next) => {
+  try {
+    console.log('in DELETE route hello for /:itemId')
+
+    const {itemId} = req.params
+
+    const deletedItem = await Item.findByPk(itemId)
+
+    // disassociate all photos from the item
+    const photos = await deletedItem.getItemPhotos()
+    console.log('photos are coming hello', photos)
+
+    await deletedItem.removeItemPhotos(photos)
+    await deletedItem.destroy()
+
+    res.json(deletedItem)
   } catch (err) {
     next(err)
   }
