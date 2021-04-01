@@ -52,6 +52,7 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Offer"
+                checked={itemType === 'Offer'}
                 id="itemTypeOffer"
                 required
               />
@@ -71,6 +72,7 @@ const ItemForm = (props) => {
                 name="itemType"
                 value="Seeking"
                 id="itemTypeSeeking"
+                checked={itemType === 'Seeking'}
                 required
               />
               <label className="form-check-label" htmlFor="itemTypeSeeking">
