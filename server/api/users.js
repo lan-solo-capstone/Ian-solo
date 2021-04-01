@@ -67,6 +67,11 @@ router.get(
           },
         ],
       })
+
+      if (!user) {
+        res.status(404).send('This user does not exist in our DB apparently!')
+        return
+      }
       console.log('hello', 'in end of GET route, user', user)
       res.json(user)
     } catch (err) {
@@ -156,13 +161,23 @@ router.put('/:userId', async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to admins only
 
-router.delete('/:userId', async (req, res, next) => {
-  try {
-    const {userId} = req.params
-    const deletedUser = await User.findByPk(userId)
-    await deletedUser.destroy()
-    res.json(deletedUser)
-  } catch (err) {
-    next(err)
+router.delete(
+  '/:userId',
+  [ensureAnyLogin, ensureAdmin],
+  async (req, res, next) => {
+    try {
+      const {userId} = req.params
+      const deletedUser = await User.findByPk(userId)
+
+      if (!deletedUser) {
+        res.status(404).send('No such user exists in our DB apparently!')
+        return
+      }
+
+      await deletedUser.destroy()
+      res.json(deletedUser)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
