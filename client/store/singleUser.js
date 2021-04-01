@@ -1,5 +1,10 @@
+/* eslint-disable no-warning-comments */
 import axios from 'axios'
 import {me} from './user'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+// TODO: rename this file and subreducer to indicate why it is separate from user. It's because user is for logging in. Not sure if we can combine them -- JC 4.1.21
 
 // I think we need to separate this subreducer from the user subreducer
 // the user subreducer will be for validating logins
