@@ -17,7 +17,7 @@ const ItemForm = (props) => {
   } = props
 
   const alertReference = React.useRef(null)
-  console.log(fileInput)
+  console.log('in ItemForm, fileInput', fileInput)
   // if (fileInput.current?.files) {
   //   console.log(fileInput.current)
   //   delete fileInput.current.files[2]
