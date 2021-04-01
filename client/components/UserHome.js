@@ -88,7 +88,7 @@ class UserHome extends React.Component {
         </ul>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
-            <div className="bg-secondary border rounded">
+            <div className="bg-secondary border rounded d-flex justify-content-center">
               <a
                 className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
                 style={{width: '98%'}}
@@ -118,7 +118,7 @@ class UserHome extends React.Component {
             </div>
           </div>
           <div className="col text-light">
-            <div className="bg-secondary border rounded">
+            <div className="bg-secondary border rounded d-flex justify-content-center">
               <a
                 className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
                 style={{width: '98%'}}
