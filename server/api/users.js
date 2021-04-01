@@ -158,8 +158,6 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
     const {userId} = req.params
     const deletedUser = await User.findByPk(userId)
 
-    console.log('deletedUsed', deletedUser)
-
     const associatedItems = await Item.findAll({where: {userId: userId}})
 
     // console.log('associatedItems', associatedItems)
@@ -174,23 +172,15 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
 
     // delete associated items and itemphotos first.
 
-    console.log('removing itemPhotos')
-
     await Promise.all(
       associatedItems.map(async (itemObj) => {
         let photos = await itemObj.getItemPhotos()
-        console.log('photos', photos)
+
         await itemObj.removeItemPhotos(photos)
       })
     )
 
-    console.log('removing associated items')
-
     let userItems = await deletedUser.getItems()
-
-    console.log('items', userItems)
-
-    await deletedUser.removeItems(userItems)
 
     await Promise.all(
       userItems.map(async (itemObj) => {
@@ -198,10 +188,6 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
       })
     )
 
-    //checking on deleted items
-    console.log('userItem after delete', userItems)
-
-    console.log('deleting users')
     await deletedUser.destroy()
     res.json(deletedUser)
   } catch (err) {
