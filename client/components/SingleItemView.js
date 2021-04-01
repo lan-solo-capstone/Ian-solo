@@ -7,9 +7,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {modifyItem} from '../store/item'
-import {toast} from 'react-toastify'
 import {EditItemForm} from './index'
-import 'react-toastify/dist/ReactToastify.css'
 
 // Render Class
 class SingleItemView extends React.Component {
@@ -19,12 +17,6 @@ class SingleItemView extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
   }
-
-  //  TODO: move toast notifications to componentDidUpdate?
-  // that way they only fire if component was updated successfully -- JC 3.29.21
-  // don't think that will work due to redirect but we can figure something else out
-
-  // TODO: make handleOpen and handleClosed more DRY by abstracting and toggling -- JC 3.31.21
 
   componentDidMount() {
     this.props.updateNavbar('singleview', this.props.location.state.item)
@@ -46,7 +38,6 @@ class SingleItemView extends React.Component {
     )
   }
 
-  // if user clicks Close button, trigger toast notification
   handleClose(evt) {
     evt.preventDefault()
 
