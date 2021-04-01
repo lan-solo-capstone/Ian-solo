@@ -22,11 +22,20 @@ class SingleItemView extends React.Component {
 
   //  TODO: move toast notifications to componentDidUpdate?
   // that way they only fire if component was updated successfully -- JC 3.29.21
+  // don't think that will work due to redirect but we can figure something else out
 
+  // TODO: make handleOpen and handleClosed more DRY by abstracting and toggling -- JC 3.31.21
   handleOpen(evt) {
     evt.preventDefault()
+
+    const userId = this.props.user.id
     const itemId = String(this.props.location.state.item.id)
-    this.props.modifyItem(itemId, {status: 'Open'})
+
+    this.props.modifyItem(itemId, {
+      user: {id: userId},
+      status: 'Open',
+    })
+
     toast.success('Successfully marked as Open!', {
       position: 'top-right',
       autoClose: 5001,
@@ -41,9 +50,15 @@ class SingleItemView extends React.Component {
   // if user clicks Close button, trigger toast notification
   handleClose(evt) {
     evt.preventDefault()
+
+    const userId = this.props.user.id
     const itemId = String(this.props.location.state.item.id)
-    console.log('in handleClose, itemId', itemId)
-    this.props.modifyItem(itemId, {status: 'Closed'})
+
+    this.props.modifyItem(itemId, {
+      user: {id: userId},
+      status: 'Closed',
+    })
+
     toast.success('Successfully marked as Closed!', {
       position: 'top-right',
       autoClose: 5001,
