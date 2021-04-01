@@ -1,7 +1,7 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
 const {User, Item, ItemPhoto} = require('../db/models')
-const {ensureAdmin, ensureLogin} = require('./middleware')
+const {ensureAdmin, ensureAnyLogin, ensureLogin} = require('./middleware')
 const axios = require('axios')
 
 module.exports = router
@@ -39,9 +39,11 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 // mounted on /api/users/:userId
 // TODO: limit access to this route to admins only
 // or a user can access their own profile, even if they're not admin
-router.get('/:userId', ensureLogin, async (req, res, next) => {
-  try {
-    if (req.user.admin || String(req.user.id) === req.params.userId) {
+router.get(
+  '/:userId',
+  [ensureAnyLogin, ensureLogin],
+  async (req, res, next) => {
+    try {
       const {userId} = req.params
       const user = await User.findByPk(userId, {
         include: [
@@ -65,13 +67,11 @@ router.get('/:userId', ensureLogin, async (req, res, next) => {
         ],
       })
       res.json(user)
-    } else {
-      res.send('you are not authorized to view this user profile')
+    } catch (err) {
+      next(err)
     }
-  } catch (err) {
-    next(err)
   }
-})
+)
 
 // PUT single user
 // mounted on /api/users/:userId
