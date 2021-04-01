@@ -121,7 +121,7 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
 
       if (modifiedItem.updatedAt) {
         console.log(
-          'in modifyItem thunk, success, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
+          '########### in modifyItem thunk, success, refactored for close/open, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
         )
         toast.success(toastMessage, toastSettings)
         history.push('/singleview', {item: modifiedItem})

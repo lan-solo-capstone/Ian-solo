@@ -36,20 +36,14 @@ class SingleItemView extends React.Component {
     const userId = this.props.user.id
     const itemId = String(this.props.location.state.item.id)
 
-    this.props.modifyItem(itemId, {
-      user: {id: userId},
-      status: 'Open',
-    })
-
-    toast.success('Successfully marked as Open!', {
-      position: 'top-right',
-      autoClose: 5001,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    })
+    this.props.modifyItem(
+      itemId,
+      {
+        user: {id: userId},
+        status: 'Open',
+      },
+      'Successfully marked as Open!'
+    )
   }
 
   // if user clicks Close button, trigger toast notification
@@ -59,20 +53,14 @@ class SingleItemView extends React.Component {
     const userId = this.props.user.id
     const itemId = String(this.props.location.state.item.id)
 
-    this.props.modifyItem(itemId, {
-      user: {id: userId},
-      status: 'Closed',
-    })
-
-    toast.success('Successfully marked as Closed!', {
-      position: 'top-right',
-      autoClose: 5001,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    })
+    this.props.modifyItem(
+      itemId,
+      {
+        user: {id: userId},
+        status: 'Closed',
+      },
+      'Successfully marked as Closed!'
+    )
   }
 
   componentWillUnmount() {
@@ -330,8 +318,8 @@ const mapDispatch = (dispatch) => ({
   updateNavbar: (page, items) => {
     dispatch(updateNavbar(page, items))
   },
-  modifyItem: (itemId, modifications) =>
-    dispatch(modifyItem(itemId, modifications)),
+  modifyItem: (itemId, modifications, toastMessage) =>
+    dispatch(modifyItem(itemId, modifications, toastMessage)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)
