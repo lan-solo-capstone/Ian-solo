@@ -60,13 +60,15 @@ class AllUsers extends Component {
                     <Link to={`/users/${user.id}`}>
                       <UserView user={user} />
                     </Link>
-                    <button
-                      type="button"
-                      onClick={() => this.props.removeExistingUser(user.id)}
-                      className="btn btn-danger"
-                    >
-                      Delete User
-                    </button>
+                    {this.props.user.id !== user.id ? (
+                      <button
+                        type="button"
+                        onClick={() => this.props.removeExistingUser(user.id)}
+                        className="btn btn-danger"
+                      >
+                        Delete User
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               </div>
