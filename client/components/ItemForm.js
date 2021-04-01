@@ -17,7 +17,7 @@ const ItemForm = (props) => {
   } = props
 
   const alertReference = React.useRef(null)
-  console.log(fileInput)
+  console.log('in ItemForm, fileInput', fileInput)
   // if (fileInput.current?.files) {
   //   console.log(fileInput.current)
   //   delete fileInput.current.files[2]
@@ -52,6 +52,7 @@ const ItemForm = (props) => {
                 type="radio"
                 name="itemType"
                 value="Offer"
+                checked={itemType === 'Offer'}
                 id="itemTypeOffer"
                 required
               />
@@ -71,6 +72,7 @@ const ItemForm = (props) => {
                 name="itemType"
                 value="Seeking"
                 id="itemTypeSeeking"
+                checked={itemType === 'Seeking'}
                 required
               />
               <label className="form-check-label" htmlFor="itemTypeSeeking">

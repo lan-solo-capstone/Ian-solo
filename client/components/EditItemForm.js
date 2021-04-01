@@ -38,17 +38,10 @@ class EditItemForm extends Component {
     }
   }
 
-  componentDidUpdate() {}
-
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
     })
-
-    // make sure itemCondition gets cleared out if itemType changes
-    if (this.state.itemType === 'Seeking') {
-      this.setState({itemCondition: null})
-    }
   }
 
   handleSubmit(evt) {
