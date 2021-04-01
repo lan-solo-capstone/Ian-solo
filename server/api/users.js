@@ -44,6 +44,7 @@ router.get(
   [ensureAnyLogin, ensureLogin],
   async (req, res, next) => {
     try {
+      console.log('hello', 'hello in start of GET route for /:userId')
       const {userId} = req.params
       const user = await User.findByPk(userId, {
         include: [
@@ -66,6 +67,7 @@ router.get(
           },
         ],
       })
+      console.log('hello', 'in end of GET route, user', user)
       res.json(user)
     } catch (err) {
       next(err)

@@ -45,6 +45,9 @@ function ensureLogin(req, res, next) {
     if (req.user.admin) {
       console.log('hello', 'hello', 'admin, let them go!!!')
       next()
+
+      // code breaks if this return is not here. Not sure why. -- JC 3.31.21
+      return
     }
     // if they're a logged in user,
     // check if req.params.userId exists.

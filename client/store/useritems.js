@@ -24,6 +24,11 @@ export const fetchUserItems = (id) => async (dispatch) => {
     const res = await axios.get(`api/users/${id}`)
     dispatch(userItems(res.data.items))
   } catch (err) {
+    console.log(
+      'hello',
+      'hello in fetchUserItems thunk, i think this is the problem',
+      'hello'
+    )
     console.error(err)
   }
 }
