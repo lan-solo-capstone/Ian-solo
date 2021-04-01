@@ -16,7 +16,13 @@ const ItemForm = (props) => {
     pathname,
   } = props
 
-  const alertReference = new React.createRef()
+  const alertReference = React.useRef(null)
+  console.log(fileInput)
+  // if (fileInput.current?.files) {
+  //   console.log(fileInput.current)
+  //   delete fileInput.current.files[2]
+  // }
+  const [photos, photoHandle] = React.useState([])
 
   return (
     <div
@@ -118,6 +124,7 @@ const ItemForm = (props) => {
               id="description"
               value={description}
               onChange={handleChange}
+              minLength="100"
               placeholder="Example description... Ipsum loram"
               required
             />
@@ -132,6 +139,7 @@ const ItemForm = (props) => {
                 <label htmlFor="uploadPhoto" className="form-label">
                   <h5>Upload Photos</h5>
                 </label>
+
                 <input
                   className="form-control"
                   type="file"
@@ -143,39 +151,74 @@ const ItemForm = (props) => {
                   onChange={(e) => {
                     if (e.target.files.length > 5) {
                       alertReference.current.hidden = false
-                      handleFileSelect()
+                      photoHandle([])
+                      handleFileSelect(e)
                       return
                     }
                     alertReference.current.hidden = true
+                    photoHandle(Array.from(e.target.files))
                     handleFileSelect(e)
                   }}
                 />
                 {console.log(props.uploadPhoto, 'props')}
                 <div
                   className="row mt-3 justify-content-center"
-                  hidden={!uploadPhoto}
+                  hidden={!photos}
                 >
                   <label
                     htmlFor="uploadPhoto"
                     className="form-label text-center"
                   >
                     <h5>File Preview</h5>
+                    <h6>
+                      Currently uploading:
+                      {photos.length
+                        ? ` ${photos.length} photos`
+                        : ' No photos'}
+                    </h6>
                   </label>
-                  {uploadPhoto &&
-                    uploadPhoto.map((elm) => {
+                  {Boolean(photos.length) &&
+                    photos.map((elm, idx) => {
                       return (
                         <div
+                          className="col-auto p-0"
                           key={elm.name + elm.lastModified + elm.size}
-                          className="col-auto p-1 m-1 border rounded"
                         >
-                          <img
-                            src={URL.createObjectURL(elm)}
-                            style={{
-                              width: '90px',
-                              height: '90px',
-                              objectFit: 'contain',
+                          <a
+                            className="photoRemoveButton text-secondary"
+                            onClick={() => {
+                              console.log('awa')
+                              const filtered = {
+                                target: {
+                                  files: photos.filter(
+                                    (el, idxFilter) => idxFilter !== idx
+                                  ),
+                                },
+                              }
+                              photoHandle(filtered.target.files)
+                              handleFileSelect(filtered)
                             }}
-                          />
+                          >
+                            <i
+                              className="bi bi-x-circle-fill"
+                              style={{
+                                position: 'relative',
+                                right: '-95px',
+                                top: '15px',
+                              }}
+                            />
+                          </a>
+
+                          <div className="p-1 m-1 border rounded">
+                            <img
+                              src={URL.createObjectURL(elm)}
+                              style={{
+                                width: '90px',
+                                height: '90px',
+                                objectFit: 'contain',
+                              }}
+                            />
+                          </div>
                         </div>
                       )
                     })}

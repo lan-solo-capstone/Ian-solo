@@ -1,57 +1,45 @@
 /* eslint-disable no-warning-comments */
 const router = require('express').Router()
 const {User, Item, ItemPhoto} = require('../db/models')
-const {ensureAdmin, ensureLogin} = require('./middleware')
+const {ensureAdmin, ensureAnyLogin, ensureLogin} = require('./middleware')
 const axios = require('axios')
 
 module.exports = router
 
-// all routes here are mounted on /api/users
+// -------- all routes here are mounted on /api/users -------- /
 
 // GET all users
-// mounted on /api/users
-// TODO: limit access to admins only
-router.get(
-  '/',
-
-  // leaving ensureAdmin commented for ease of development and testing -- JC
-
-  // ensureAdmin,
-
-  async (req, res, next) => {
-    try {
-      const users = await User.findAll({
-        // explicitly select only the id and email fields - even though
-        // users' passwords are encrypted, it won't help if we just
-        // send everything to anyone who asks!
-        attributes: [
-          'id',
-          'email',
-          'firstName',
-          'middleName',
-          'lastName',
-          'street1',
-          'street2',
-          'city',
-          'state',
-          'zip',
-        ],
-      })
-      res.json(users)
-    } catch (err) {
-      next(err)
-    }
+// mounted on /api/users and access limited to admins
+router.get('/', ensureAdmin, async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      attributes: [
+        'id',
+        'email',
+        'firstName',
+        'middleName',
+        'lastName',
+        'street1',
+        'street2',
+        'city',
+        'state',
+        'zip',
+      ],
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
 // GET single user
 // mounted on /api/users/:userId
-// TODO: limit access to this route to admins only
-// or a user can access their own profile, even if they're not admin
-router.get('/:userId', async (req, res, next) => {
+// any admins can access this route
+// users can also access their own profile, even if they're not admin
+router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
+    console.log('hello', 'hello in start of GET route for /:userId')
     const {userId} = req.params
-    console.log('hello', 'typeof userId', typeof userId)
     const user = await User.findByPk(userId, {
       include: [
         {
@@ -73,6 +61,12 @@ router.get('/:userId', async (req, res, next) => {
         },
       ],
     })
+
+    if (!user) {
+      res.status(404).send('This user does not exist in our DB apparently!')
+      return
+    }
+    console.log('hello', 'in end of GET route, user', user)
     res.json(user)
   } catch (err) {
     next(err)
@@ -81,8 +75,8 @@ router.get('/:userId', async (req, res, next) => {
 
 // PUT single user
 // mounted on /api/users/:userId
-// TODO: limit access to admins only
-router.put('/:userId', async (req, res, next) => {
+// admins only
+router.put('/:userId', ensureAdmin, async (req, res, next) => {
   //resolve lat & lon
   let latitude, longitude
 
@@ -158,12 +152,17 @@ router.put('/:userId', async (req, res, next) => {
 
 // DELETE a single user
 // mounted on /api/users/:userId
-// TODO: limit access to admins only
-
-router.delete('/:userId', async (req, res, next) => {
+// admins only
+router.delete('/:userId', ensureAdmin, async (req, res, next) => {
   try {
     const {userId} = req.params
     const deletedUser = await User.findByPk(userId)
+
+    if (!deletedUser) {
+      res.status(404).send('No such user exists in our DB apparently!')
+      return
+    }
+
     await deletedUser.destroy()
     res.json(deletedUser)
   } catch (err) {
