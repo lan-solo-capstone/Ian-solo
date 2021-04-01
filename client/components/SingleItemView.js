@@ -7,6 +7,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
 import MapSingleItem from './MapSingleItem'
 import {modifyItem} from '../store/item'
+import {removeItem} from '../store/items'
 import {EditItemForm} from './index'
 
 // Render Class
@@ -16,10 +17,20 @@ class SingleItemView extends React.Component {
 
     this.handleClose = this.handleClose.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
     this.props.updateNavbar('singleview', this.props.location.state.item)
+  }
+
+  handleDelete(evt) {
+    evt.preventDefault()
+
+    const itemId = String(this.props.location.state.item.id)
+
+    console.log('in handleDelete, about to delete item with id:', itemId)
+    this.props.removeItem(itemId)
   }
 
   handleOpen(evt) {
@@ -214,6 +225,17 @@ class SingleItemView extends React.Component {
 
               {/* Allow admin to delete an item */}
               {/*  TODO: put delete button here */}
+              {isAdmin && (
+                <div className="col-auto closeItem">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={this.handleDelete}
+                  >
+                    Delete item
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="col">
@@ -373,6 +395,7 @@ const mapDispatch = (dispatch) => ({
   },
   modifyItem: (itemId, modifications, toastMessage) =>
     dispatch(modifyItem(itemId, modifications, toastMessage)),
+  removeItem: (itemId) => dispatch(removeItem(itemId)),
 })
 
 export default connect(mapState, mapDispatch)(SingleItemView)

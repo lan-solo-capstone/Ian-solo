@@ -49,6 +49,11 @@ export const removeItem = (itemId) => {
       const deletedItem = await axios.delete(`/api/items/${itemId}`).data
       dispatch(deleteItem(deletedItem))
       // toast.success('The item was successfully deleted!', toastSettings)
+      console.log(
+        'in removeItem thunk, about to delete item, here is the deleted item',
+        deletedItem
+      )
+      history.push('/')
     } catch (err) {
       console.error(err)
     }
