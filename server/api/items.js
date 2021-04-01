@@ -115,12 +115,12 @@ router.put(
   [ensureAnyLogin, ensureLogin],
   async (req, res, next) => {
     try {
-      console.log(
-        'in put route for single item req.params',
-        req.params,
-        'req.body',
-        req.body
-      )
+      // console.log(
+      //   'in put route for single item req.params',
+      //   req.params,
+      //   'req.body',
+      //   req.body
+      // )
       const {itemId} = req.params
       const {
         itemType,
@@ -164,7 +164,7 @@ router.put(
           },
         ],
       })
-      console.log('in items PUT, updatedItem', updatedItem)
+      // console.log('in items PUT, updatedItem', updatedItem)
 
       if (!updatedItem) {
         res.sendStatus(404)
