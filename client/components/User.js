@@ -29,7 +29,7 @@ class User extends Component {
     }
     console.log('in User render, this.props', this.props)
     return (
-      <div className="container">
+      <div className="container mt-3" style={{maxWidth: '800px'}}>
         <UserView user={this.props.singleUser} />
         <EditUserForm />
       </div>
