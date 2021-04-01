@@ -3,8 +3,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
 import {ItemForm} from './index'
-import {toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 const initialState = {
   itemType: '',
@@ -12,7 +10,6 @@ const initialState = {
   description: '',
   itemCondition: 'New',
   uploadPhoto: null,
-  user: null,
 }
 
 class NewItemForm extends Component {
@@ -39,22 +36,7 @@ class NewItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
     this.props.addNewItem(this.state, this.props.user.id)
-
-    // TODO: toast notifications are cool but we need to validate the form first, so the toast doesn't trigger prematurely
-    toast.success(
-      'Your item was successfully created! Check it out on this page under Open Items =)',
-      {
-        position: 'top-right',
-        autoClose: 5001,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      }
-    )
   }
 
   render() {
