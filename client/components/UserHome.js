@@ -51,7 +51,7 @@ class UserHome extends React.Component {
             </li>
           )}
           <li className="breadcrumb-item active" aria-current="page">
-            <Link to="/messages" className="text-decoration-none">
+            <Link to="/messages/all" className="text-decoration-none">
               Messages
             </Link>
           </li>
