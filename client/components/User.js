@@ -25,7 +25,15 @@ class User extends Component {
     // must be an admin or viewing user's own profile
     const {admin, id} = this.props.user
     if (!admin && this.props.singleUser.id !== id) {
-      return <div>Sorry, you are not authorized to view this page. </div>
+      return (
+        <>
+          <div className="container-sm d-flex justify-content-center align-items-center flex-column my-4">
+            <h5>403</h5>
+            <h4>Page is forbidden</h4>
+            <img src="https://http.cat/403" className="w-100" />
+          </div>
+        </>
+      )
     }
     console.log('in User render, this.props', this.props)
     return (

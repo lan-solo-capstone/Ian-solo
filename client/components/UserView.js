@@ -23,7 +23,7 @@ const UserView = (props) => {
       <h5 className="card-header">
         {firstName} {middleName} {lastName}
       </h5>
-      <div className="card-body">
+      <div className="card-body text-secondary">
         <p className="card-text">E: {email}</p>
         <p>
           {street1} {street2}
