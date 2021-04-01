@@ -25,6 +25,11 @@ class SingleItemView extends React.Component {
   // don't think that will work due to redirect but we can figure something else out
 
   // TODO: make handleOpen and handleClosed more DRY by abstracting and toggling -- JC 3.31.21
+
+  componentDidMount() {
+    this.props.updateNavbar('singleview', this.props.location.state.item)
+  }
+
   handleOpen(evt) {
     evt.preventDefault()
 
@@ -280,7 +285,6 @@ class SingleItemView extends React.Component {
                   id="mapContainer"
                   style={{height: '89vh'}}
                 >
-                  {this.props.updateNavbar('singleview', item)}
                   <MapSingleItem item={item} />
                 </div>
               </div>
