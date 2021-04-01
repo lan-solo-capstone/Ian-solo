@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Item, User} = require('../db/models')
 const ItemPhoto = require('../db/models/itemPhoto')
-const {ensureAdmin, ensureAnyLogin, ensureLogin} = require('./middleware')
+const {ensureAnyLogin, ensureLogin} = require('./middleware')
 module.exports = router
 
 // /api/items
@@ -38,12 +38,14 @@ router.get('/', async (req, res, next) => {
         },
       ],
     })
+
     res.json(allItems)
   } catch (err) {
     next(err)
   }
 })
 
+// prob can delete this as it doesn't seem to be getting used -- JC 3.31.21
 // GET single item
 // this may be necessary to re-route the user after they create a new post
 router.get('/:itemId', async (req, res, next) => {
@@ -108,80 +110,71 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
     next(err)
   }
 })
-// /api/users/:userId/items/:itemId
+
 // PUT route for /api/items/:itemId
-router.put(
-  '/:itemId',
-  [ensureAnyLogin, ensureLogin],
-  async (req, res, next) => {
-    try {
-      // console.log(
-      //   'in put route for single item req.params',
-      //   req.params,
-      //   'req.body',
-      //   req.body
-      // )
-      const {itemId} = req.params
-      const {
-        itemType,
-        itemListName,
-        description,
-        itemCondition,
-        status,
-      } = req.body
-      const userId = req.body.user.id
-      // eager load User and ItemPhoto to match GET route for /items
-      // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
+router.put('/:itemId', ensureLogin, async (req, res, next) => {
+  try {
+    const {itemId} = req.params
+    const {
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    } = req.body
+    const userId = req.body.user.id
+    // eager load User and ItemPhoto to match GET route for /items
+    // otherwise difficult to get editing to work without convoluted logic or refresh -- JC 3.29.21
 
-      const updatedItem = await Item.findOne({
-        where: {id: itemId, userId},
-        attributes: [
-          'id',
-          'itemListName',
-          'description',
-          'itemType',
-          'status',
-          'dateListed',
-          'itemCondition',
-          'createdAt',
-        ],
-        include: [
-          {
-            model: User,
-            attributes: [
-              'id',
-              'firstName',
-              'latitude',
-              'longitude',
-              'state',
-              'city',
-              'createdAt',
-            ],
-          },
-          {
-            model: ItemPhoto,
-            attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
-          },
-        ],
-      })
-      // console.log('in items PUT, updatedItem', updatedItem)
+    const updatedItem = await Item.findOne({
+      // necessary to find by userId as well as itemId to secure API route -- JC 3.31.21
+      // we compare the userId of the item to req.body.user.id to authenticate user
+      where: {id: itemId, userId},
+      attributes: [
+        'id',
+        'itemListName',
+        'description',
+        'itemType',
+        'status',
+        'dateListed',
+        'itemCondition',
+        'createdAt',
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            'id',
+            'firstName',
+            'latitude',
+            'longitude',
+            'state',
+            'city',
+            'createdAt',
+          ],
+        },
+        {
+          model: ItemPhoto,
+          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+        },
+      ],
+    })
 
-      if (!updatedItem) {
-        res.sendStatus(404)
-        return
-      }
-
-      await updatedItem.update({
-        itemType,
-        itemListName,
-        description,
-        itemCondition,
-        status,
-      })
-
-      res.json(updatedItem)
-    } catch (err) {
-      next(err)
+    if (!updatedItem) {
+      res.sendStatus(404)
+      return
     }
+
+    await updatedItem.update({
+      itemType,
+      itemListName,
+      description,
+      itemCondition,
+      status,
+    })
+
+    res.json(updatedItem)
+  } catch (err) {
+    next(err)
   }
-)
+})
