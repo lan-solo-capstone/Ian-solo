@@ -228,7 +228,7 @@ class SingleItemView extends React.Component {
               {/* Allow admin to delete an item */}
               {/*  TODO: put delete button here */}
               {isAdmin && (
-                <div className="col-auto closeItem">
+                <div className="col-auto closeItem mt-2 mt-md-0">
                   <button
                     type="button"
                     className="btn btn-danger"
