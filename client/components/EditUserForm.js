@@ -12,6 +12,7 @@ const initialState = {
   city: '',
   state: '',
   zip: '',
+  buttonDisabled: false,
 }
 
 class EditUserForm extends Component {
@@ -75,9 +76,11 @@ class EditUserForm extends Component {
     evt.preventDefault()
     const userId = this.props.singleUser.id
     this.props.modifyExistingUser(userId, this.state)
+    this.setState({buttonDisabled: true})
   }
 
   render() {
+    console.log('in EditUserForm render, this.props', this.props)
     return (
       // <div className="container" style={{maxWidth: '800px'}}>
       <form role="form" onSubmit={this.handleSubmit}>
@@ -181,7 +184,11 @@ class EditUserForm extends Component {
             />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-2 mb-5">
+        <button
+          type="submit"
+          className="btn btn-primary mt-2 mb-5"
+          disabled={this.state.buttonDisabled}
+        >
           Submit
         </button>
       </form>
