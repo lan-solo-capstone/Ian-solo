@@ -2,7 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchUserItems} from '../store/useritems'
+import {
+  fetchUserItems,
+  deleteSingleItemRoute,
+  modifyItem,
+} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
 
@@ -114,7 +118,25 @@ class UserHome extends React.Component {
                   {items
                     .filter((item) => item.status === 'Open')
                     .map((item) => (
-                      <SingleItem key={item.id} item={item} />
+                      <div key={item.id} className="mb-3">
+                        <SingleItem item={item} />
+                        <button
+                          type="button"
+                          className="btn btn-warning rounded-0 mt-1 mb-3"
+                          onClick={() => {
+                            this.props.modifyItem(
+                              item.id,
+                              {
+                                user: {id: user.id},
+                                status: 'Closed',
+                              },
+                              'Successfully marked as Closed!'
+                            )
+                          }}
+                        >
+                          Close Offer
+                        </button>
+                      </div>
                     ))}
                 </div>
                 <a
@@ -164,7 +186,34 @@ class UserHome extends React.Component {
                   {items
                     .filter((item) => item.status === 'Closed')
                     .map((item) => (
-                      <SingleItem key={item.id} item={item} />
+                      <div key={item.id} className="mb-3">
+                        <SingleItem item={item} />
+                        <button
+                          type="button"
+                          className="btn btn-danger rounded-0 mt-1 mb-3"
+                          onClick={() => {
+                            this.props.deleteSingleItemRoute(item.id)
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-warning rounded-0 mt-1 mb-3 ms-2"
+                          onClick={() => {
+                            this.props.modifyItem(
+                              item.id,
+                              {
+                                user: {id: user.id},
+                                status: 'Open',
+                              },
+                              'Successfully marked as Open!'
+                            )
+                          }}
+                        >
+                          Re-open Offer
+                        </button>
+                      </div>
                     ))}
                 </div>
                 <a
@@ -204,6 +253,9 @@ const mapDispatch = (dispatch) => ({
   handleClick: () => {
     dispatch(logout())
   },
+  deleteSingleItemRoute: (itemId) => dispatch(deleteSingleItemRoute(itemId)),
+  modifyItem: (itemId, modifications, toastMessage) =>
+    dispatch(modifyItem(itemId, modifications, toastMessage)),
 })
 
 const mapState = (state) => {

@@ -76,7 +76,11 @@ class EditItemForm extends Component {
       this.props.location.state.item.id,
       this.state
     )
+
+    this.props.editItemButton.current.click()
+
     this.setState({buttonDisabled: true})
+
   }
 
   render() {

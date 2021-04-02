@@ -12,7 +12,7 @@ const SingleItem = (props) => {
 
   return (
     <div className="col">
-      <div className="card mb-3">
+      <div className="card">
         <Link
           to={{pathname: '/singleview', state: {item: item}}}
           className="text-decoration-none text-secondary "

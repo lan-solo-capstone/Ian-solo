@@ -123,6 +123,14 @@ const Navbar = (props) => {
                       className="dropdown-menu"
                       aria-labelledby="navbarScrollingDropdown"
                     >
+                      {console.log(props.user)}
+                      <Link
+                        className="nav-item nav-link dropdown-item"
+                        to="/users"
+                        hidden={!props.user.admin}
+                      >
+                        Admin Panel
+                      </Link>
                       <Link
                         className="nav-item nav-link dropdown-item"
                         to="/useraccount"
@@ -231,6 +239,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
     currentPage: state.navbar,
+    user: state.user,
   }
 }
 

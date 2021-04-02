@@ -22,6 +22,7 @@ const ALL_ITEMS = 'ALL_ITEMS'
 const ALL_ITEMS_UNLOAD = 'ALL_ITEMS_UNLOAD'
 
 const DELETE_ITEM = 'DELETE_ITEM'
+const DELETE_SINGLE_ITEM = 'DELETE_SINGLE_ITEM'
 /**
  * INITIAL STATE
  */
@@ -43,6 +44,13 @@ const deleteItem = (item) => {
   }
 }
 
+const deleteSingleItem = (item) => {
+  return {
+    type: DELETE_ITEM,
+    item,
+  }
+}
+
 /**
  * THUNK CREATORS
  */
@@ -52,6 +60,18 @@ export const fetchAllItems = () => async (dispatch) => {
     dispatch(allItems(res.data))
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const deleteSingleItemRoute = (itemId) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.delete(`/api/items/${itemId}`)
+      dispatch(deleteSingleItem(data))
+      toast.success('The item was successfully deleted!', toastSettings)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
@@ -87,6 +107,11 @@ export default (state = intialState, action) => {
     //04.1.21 ADD : resetting loading status = true
     case ALL_ITEMS_UNLOAD:
       return {...state, loading: true}
+    case DELETE_SINGLE_ITEM:
+      return {
+        ...state,
+        items: state.items.filter((item) => item.id !== action.item.id),
+      }
     case DELETE_ITEM: {
       console.log(
         'laskjflaskfjasdlk in delete item case, action.item',

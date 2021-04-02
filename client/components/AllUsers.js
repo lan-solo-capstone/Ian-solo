@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchUsers, removeExistingUser} from '../store/users.js'
-import {fetchAllItems, allItemsUnload} from '../store/items'
+import {
+  fetchAllItems,
+  allItemsUnload,
+  deleteSingleItemRoute,
+} from '../store/items'
 import {me} from '../store/user.js'
 import {UserView} from './index.js'
 import SingleItem from './SingleItem'
@@ -173,7 +177,18 @@ class AllUsers extends Component {
               >
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {this.props.items.map((item) => (
-                    <SingleItem key={item.id} item={item} />
+                    <div key={item.id}>
+                      <SingleItem item={item} />
+                      <button
+                        type="button"
+                        className="btn btn-danger rounded-0 mt-1 mb-3"
+                        onClick={() => {
+                          this.props.deleteSingleItemRoute(item.id)
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   ))}
                 </div>
                 <a
@@ -218,6 +233,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchUser: () => dispatch(me()),
     fetchAllItems: () => dispatch(fetchAllItems()),
     allItemsUnload: () => dispatch(allItemsUnload()),
+    deleteSingleItemRoute: (itemId) => dispatch(deleteSingleItemRoute(itemId)),
   }
 }
 
