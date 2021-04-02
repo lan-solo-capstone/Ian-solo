@@ -114,14 +114,16 @@ class SingleItemView extends React.Component {
         <div className="row gy-4 row-cols-1 justify-content-center">
           <div className="col row row-cols-1 gy-2">
             <h5 className="col text-center ">{item.itemListName}</h5>
-            <h6 className="col text-center text-secondary">
+            <div className="col text-center text-secondary fs-6 mb-2">
               Submitted by: {item.user.firstName} as
               {` ${
                 this.props.location.state.item.itemType === 'Offer'
                   ? this.props.location.state.item.itemType + 'ing'
                   : this.props.location.state.item.itemType
               }`}
-            </h6>
+              <br />
+              {`Condition: ${this.props.location.state.item.itemCondition}`}
+            </div>
             <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
               {!itemMatchesUser && (
