@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Link} from 'react-router-dom'
+import {removeUser} from '../store/user'
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, displayName, handleSubmit, error, clearError} = props
 
   return (
     <>
@@ -139,6 +140,7 @@ const AuthForm = (props) => {
                     className="btn-close"
                     data-bs-dismiss="alert"
                     aria-label="Close"
+                    onClick={clearError}
                   />{' '}
                 </div>
               )}
@@ -220,6 +222,7 @@ const mapDispatch = (dispatch) => {
         )
       )
     },
+    clearError: () => dispatch(removeUser()),
   }
 }
 
