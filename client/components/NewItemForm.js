@@ -10,7 +10,7 @@ const initialState = {
   description: '',
   itemCondition: 'New',
   uploadPhoto: null,
-  disableStatus: false,
+  buttonDisabled: false,
 }
 
 class NewItemForm extends Component {
@@ -38,7 +38,7 @@ class NewItemForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
     this.props.addNewItem(this.state, this.props.user.id)
-    this.setState({disableStatus: true})
+    this.setState({buttonDisabled: true})
   }
 
   render() {
@@ -55,7 +55,7 @@ class NewItemForm extends Component {
         handleFileSelect={handleFileSelect}
         fileInput={fileInput}
         pathname={pathname}
-        disableStatus={this.state.disableStatus}
+        buttonDisabled={this.state.buttonDisabled}
       />
     )
   }

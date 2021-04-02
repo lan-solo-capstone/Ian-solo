@@ -239,7 +239,7 @@ const ItemForm = (props) => {
           type="submit"
           className="btn btn-primary"
           style={{maxWidth: '50%'}}
-          disabled={props.disableStatus}
+          disabled={props.buttonDisabled}
         >
           Submit
         </button>
