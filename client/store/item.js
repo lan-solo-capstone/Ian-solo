@@ -85,24 +85,10 @@ export const postNewItem = (item, userId) => {
       console.log('in new item thunk, data', data)
 
       if (data.createdAt) {
-        toast.success(
-          'Your item was successfully created! Check it out on this page under Open Items =)',
-          toastSettings
-        )
+        toast.success('Success!', toastSettings)
         history.push('/useraccount')
       } else {
-        toast.warning(
-          'Sorry, something went wrong. =( Maybe try again, or contact an admin to report a problem with submitting a new item.',
-          {
-            position: 'top-right',
-            autoClose: 5001,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        )
+        toast.warning('Failed! =( Try again?', toastSettings)
       }
     } catch (err) {
       console.log('hello', 'in new item thunk error ----------!')
@@ -126,7 +112,7 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
         toast.success(toastMessage, toastSettings)
         history.push('/singleview', {item: modifiedItem})
       } else {
-        toast.warning('Something went wrong, sorry!', toastSettings)
+        toast.warning('Error! =( Try again?', toastSettings)
       }
     } catch (err) {
       console.error(err)

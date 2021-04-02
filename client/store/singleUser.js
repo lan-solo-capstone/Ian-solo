@@ -57,12 +57,9 @@ export const modifyExistingUser = (userId, modifications) => {
       // scroll smoothly to top -- JC 4.1.21
       if (data.updatedAt) {
         window.scrollTo({top: 0, behavior: 'smooth'})
-        toast.success('Your changes have been saved!', toastSettings)
+        toast.success('Changes saved!', toastSettings)
       } else {
-        toast.warning(
-          'Sorry, something went wrong. =( Maybe try again, or contact an admin to report a problem editing your profile.',
-          toastSettings
-        )
+        toast.warning('Changes failed =(. Resubmit?', toastSettings)
       }
     } catch (err) {
       console.error(err)

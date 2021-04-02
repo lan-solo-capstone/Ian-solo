@@ -130,7 +130,7 @@ class UserHome extends React.Component {
                                 user: {id: user.id},
                                 status: 'Closed',
                               },
-                              'Successfully marked as Closed!'
+                              'Item closed!'
                             )
                           }}
                         >
@@ -207,7 +207,7 @@ class UserHome extends React.Component {
                                 user: {id: user.id},
                                 status: 'Open',
                               },
-                              'Successfully marked as Open!'
+                              'Item opened!'
                             )
                           }}
                         >
