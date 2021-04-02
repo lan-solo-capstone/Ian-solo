@@ -12,6 +12,7 @@ const initialState = {
   city: '',
   state: '',
   zip: '',
+  buttonDisabled: false,
 }
 
 class EditUserForm extends Component {
@@ -61,6 +62,15 @@ class EditUserForm extends Component {
     if (prevProps.singleUser.id !== this.props.singleUser.id) {
       this.prepopulateForm()
     }
+
+    // if the user's profile has been updated,
+    // re-enable submit button -- JC 4.1.21
+    const prevUser = prevProps.singleUser.updatedAt
+    const updatedUser = this.props.singleUser.updatedAt
+
+    if (prevUser !== updatedUser) {
+      this.setState({buttonDisabled: false})
+    }
   }
 
   // update form with user input
@@ -70,14 +80,16 @@ class EditUserForm extends Component {
     })
   }
 
-  // upon submit, grab the user id and the state and dispatch modifyExistingUser
+  // upon submit, grab the user id and the state and dispatch modifyExistingUser, and disable the submit button temporarily
   handleSubmit(evt) {
     evt.preventDefault()
     const userId = this.props.singleUser.id
     this.props.modifyExistingUser(userId, this.state)
+    this.setState({buttonDisabled: true})
   }
 
   render() {
+    console.log('in EditUserForm render, this.props', this.props)
     return (
       // <div className="container" style={{maxWidth: '800px'}}>
       <form role="form" onSubmit={this.handleSubmit}>
@@ -181,7 +193,11 @@ class EditUserForm extends Component {
             />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-2 mb-5">
+        <button
+          type="submit"
+          className="btn btn-primary mt-2 mb-5"
+          disabled={this.state.buttonDisabled}
+        >
           Submit
         </button>
       </form>

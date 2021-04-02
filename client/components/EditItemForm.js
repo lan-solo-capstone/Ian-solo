@@ -9,6 +9,7 @@ const initialState = {
   itemListName: '',
   description: '',
   itemCondition: null,
+  buttonDisabled: false,
 }
 
 class EditItemForm extends Component {
@@ -35,6 +36,16 @@ class EditItemForm extends Component {
       } = this.props.location.state.item
 
       this.setState({itemType, itemListName, description, itemCondition})
+    }
+  }
+
+  // if item has been updated, then re-enable submit button
+  componentDidUpdate(prevProps) {
+    const prevItem = prevProps.location.state.item.updatedAt
+    const updatedItem = this.props.location.state.item.updatedAt
+
+    if (prevItem !== updatedItem) {
+      this.setState({buttonDisabled: false})
     }
   }
 
@@ -65,7 +76,11 @@ class EditItemForm extends Component {
       this.props.location.state.item.id,
       this.state
     )
+
     this.props.editItemButton.current.click()
+
+    this.setState({buttonDisabled: true})
+
   }
 
   render() {
