@@ -38,7 +38,6 @@ router.get('/', ensureAdmin, async (req, res, next) => {
 // users can also access their own profile, even if they're not admin
 router.get('/:userId', ensureLogin, async (req, res, next) => {
   try {
-    console.log('hello', 'hello in start of GET route for /:userId')
     const {userId} = req.params
     const user = await User.findByPk(userId, {
       include: [
@@ -177,6 +176,15 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
         let photos = await itemObj.getItemPhotos()
 
         await itemObj.removeItemPhotos(photos)
+      })
+    )
+
+    // find deassociated itemPhotos & delete
+    let orphanPhotos = await ItemPhoto.findAll({where: {itemId: null}})
+
+    await Promise.all(
+      orphanPhotos.map(async (photo) => {
+        await photo.destroy()
       })
     )
 
