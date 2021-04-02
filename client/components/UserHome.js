@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchUserItems} from '../store/useritems'
+import {fetchUserItems, deleteSingleItemRoute} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
 
@@ -168,6 +168,15 @@ class UserHome extends React.Component {
                     .map((item) => (
                       <div key={item.id} className="mb-3">
                         <SingleItem item={item} />
+                        <button
+                          type="button"
+                          className="btn btn-danger rounded-0 mt-1 mb-3"
+                          onClick={() => {
+                            this.props.deleteSingleItemRoute(item.id)
+                          }}
+                        >
+                          Delete
+                        </button>
                       </div>
                     ))}
                 </div>
@@ -208,6 +217,7 @@ const mapDispatch = (dispatch) => ({
   handleClick: () => {
     dispatch(logout())
   },
+  deleteSingleItemRoute: (itemId) => dispatch(deleteSingleItemRoute(itemId)),
 })
 
 const mapState = (state) => {

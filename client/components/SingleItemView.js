@@ -18,6 +18,7 @@ class SingleItemView extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.editItemButton = new React.createRef()
   }
 
   componentDidMount() {
@@ -158,9 +159,6 @@ class SingleItemView extends React.Component {
                       data-bs-target="#staticBackdrop"
                       type="button"
                       className="btn btn-warning"
-                      onClick={() => {
-                        console.log('hello')
-                      }}
                     >
                       Edit Item
                     </button>
@@ -188,10 +186,14 @@ class SingleItemView extends React.Component {
                               className="btn-close"
                               data-bs-dismiss="modal"
                               aria-label="Close"
+                              ref={this.editItemButton}
                             ></button>
                           </div>
                           <div className="modal-body">
-                            <EditItemForm location={this.props.location} />
+                            <EditItemForm
+                              location={this.props.location}
+                              editItemButton={this.editItemButton}
+                            />
                           </div>
                           <div className="modal-footer justify-content-center">
                             <button
