@@ -114,7 +114,9 @@ class UserHome extends React.Component {
                   {items
                     .filter((item) => item.status === 'Open')
                     .map((item) => (
-                      <SingleItem key={item.id} item={item} />
+                      <div key={item.id} className="mb-3">
+                        <SingleItem item={item} />
+                      </div>
                     ))}
                 </div>
                 <a
@@ -164,7 +166,9 @@ class UserHome extends React.Component {
                   {items
                     .filter((item) => item.status === 'Closed')
                     .map((item) => (
-                      <SingleItem key={item.id} item={item} />
+                      <div key={item.id} className="mb-3">
+                        <SingleItem item={item} />
+                      </div>
                     ))}
                 </div>
                 <a
