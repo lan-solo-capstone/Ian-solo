@@ -183,15 +183,12 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
 // DELETE route for /api/items/:itemId
 router.delete('/:itemId', ensureAdmin, async (req, res, next) => {
   try {
-    console.log('in DELETE route hello for /:itemId')
-
     const {itemId} = req.params
 
     const deletedItem = await Item.findByPk(itemId)
 
     // disassociate all photos from the item
     const photos = await deletedItem.getItemPhotos()
-    console.log('photos are coming hello', photos)
 
     await deletedItem.removeItemPhotos(photos)
 
