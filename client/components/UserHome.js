@@ -2,7 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchUserItems, deleteSingleItemRoute} from '../store/useritems'
+import {
+  fetchUserItems,
+  deleteSingleItemRoute,
+  modifyItem,
+} from '../store/useritems'
 import SingleItem from './SingleItem'
 import {logout} from '../store'
 
@@ -116,6 +120,22 @@ class UserHome extends React.Component {
                     .map((item) => (
                       <div key={item.id} className="mb-3">
                         <SingleItem item={item} />
+                        <button
+                          type="button"
+                          className="btn btn-warning rounded-0 mt-1 mb-3"
+                          onClick={() => {
+                            this.props.modifyItem(
+                              item.id,
+                              {
+                                user: {id: user.id},
+                                status: 'Closed',
+                              },
+                              'Successfully marked as Closed!'
+                            )
+                          }}
+                        >
+                          Close Offer
+                        </button>
                       </div>
                     ))}
                 </div>
@@ -177,6 +197,22 @@ class UserHome extends React.Component {
                         >
                           Delete
                         </button>
+                        <button
+                          type="button"
+                          className="btn btn-warning rounded-0 mt-1 mb-3 ms-2"
+                          onClick={() => {
+                            this.props.modifyItem(
+                              item.id,
+                              {
+                                user: {id: user.id},
+                                status: 'Open',
+                              },
+                              'Successfully marked as Open!'
+                            )
+                          }}
+                        >
+                          Re-open Offer
+                        </button>
                       </div>
                     ))}
                 </div>
@@ -218,6 +254,8 @@ const mapDispatch = (dispatch) => ({
     dispatch(logout())
   },
   deleteSingleItemRoute: (itemId) => dispatch(deleteSingleItemRoute(itemId)),
+  modifyItem: (itemId, modifications, toastMessage) =>
+    dispatch(modifyItem(itemId, modifications, toastMessage)),
 })
 
 const mapState = (state) => {
