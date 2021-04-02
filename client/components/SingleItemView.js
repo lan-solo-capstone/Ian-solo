@@ -52,7 +52,7 @@ class SingleItemView extends React.Component {
         user: {id: userId},
         status: 'Open',
       },
-      'Successfully marked as Open!'
+      'Item opened!'
     )
   }
 
@@ -77,7 +77,7 @@ class SingleItemView extends React.Component {
         user: {id: userId},
         status: 'Closed',
       },
-      'Successfully marked as Closed!'
+      'Item closed!'
     )
   }
 
