@@ -26,19 +26,19 @@ const ItemForm = (props) => {
 
   return (
     <div
-      className="container mt-3 mb-5 justify-content-center py-3"
+      className="container mt-1 mb-5 justify-content-center py-3"
       style={{maxWidth: '800px'}}
     >
       <form
-        className="row row-cols-1 gy-3 justify-content-center needs-validation"
+        className="row row-cols-1 justify-content-center needs-validation"
         role="form"
         id="wholeform"
         onSubmit={handleSubmit}
       >
-        <div className="col-12 row row-cols-1 row-cols-md-2">
-          <div className="col">
+        <div className="row row-cols-1 row-cols-md-2 mb-3">
+          <div className="col mb-2">
             <label className="form-label">
-              <h5>What kind of post is this?</h5>
+              <div className="fs-5">What kind of post is this?</div>
             </label>
 
             <div
@@ -83,7 +83,7 @@ const ItemForm = (props) => {
 
           <div className="col">
             <label className="form-label">
-              <h5>Condition of your item</h5>
+              <div className="fs-5">Condition of your item</div>
             </label>
             <select
               className="form-select itemType"
@@ -98,10 +98,10 @@ const ItemForm = (props) => {
             </select>
           </div>
         </div>
-        <div className="col row">
-          <div className="col">
+        <div className="col row mb-3">
+          <div className="col mb-2">
             <label htmlFor="itemListName" className="form-label">
-              <h5>Item Name</h5>
+              <div className="fs-5">Item Name</div>
             </label>
             <input
               type="text"
@@ -110,14 +110,14 @@ const ItemForm = (props) => {
               name="itemListName"
               value={itemListName}
               onChange={handleChange}
-              placeholder="Example Name..."
+              placeholder="Name..."
               required
             />
             <div className="invalid-feedback">Please provide a name.</div>
           </div>
           <div className="col-12">
             <label htmlFor="description">
-              <h5>Item Description</h5>
+              <div className="fs-5">Item Description</div>
             </label>
             <textarea
               className="form-control"
@@ -127,7 +127,7 @@ const ItemForm = (props) => {
               value={description}
               onChange={handleChange}
               minLength="100"
-              placeholder="Example description... Ipsum loram"
+              placeholder="This is a post about..."
               required
             />
           </div>
@@ -139,7 +139,7 @@ const ItemForm = (props) => {
             <div className="col px-4">
               <div className="mb-3">
                 <label htmlFor="uploadPhoto" className="form-label">
-                  <h5>Upload Photos</h5>
+                  <div className="fs-5">Upload Photos</div>
                 </label>
 
                 <input
@@ -171,7 +171,7 @@ const ItemForm = (props) => {
                     htmlFor="uploadPhoto"
                     className="form-label text-center"
                   >
-                    <h5>File Preview</h5>
+                    <div className="fs-5">File Preview</div>
                     <h6>
                       Currently uploading:
                       {photos.length
@@ -239,6 +239,7 @@ const ItemForm = (props) => {
           type="submit"
           className="btn btn-primary"
           style={{maxWidth: '50%'}}
+          disabled={props.buttonDisabled}
         >
           Submit
         </button>
