@@ -126,7 +126,6 @@ const ItemForm = (props) => {
               id="description"
               value={description}
               onChange={handleChange}
-              minLength="100"
               placeholder="This is a post about..."
               required
             />
