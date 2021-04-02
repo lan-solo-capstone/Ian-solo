@@ -35,8 +35,10 @@ class InboxOnly extends Component {
     console.log('in InboxContainer render, props', this.props)
     return (
       <span>
-        <div style={{height: '500px'}} ref={(c) => (this.container = c)}>
-          Loading...
+        <div className="mt-3">
+          <div style={{height: '500px'}} ref={(c) => (this.container = c)}>
+            Loading...
+          </div>
         </div>
       </span>
     )
