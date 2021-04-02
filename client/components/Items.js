@@ -95,7 +95,7 @@ class Items extends React.Component {
       headline =
         items.length > 0 ? `Matches Found: ${items.length}` : 'No Matches Found'
     } else {
-      console.log('in Items else clause before filter and sort !!!!!!')
+      // filter and sort default list by Open status and date
       items = this.props.items
         .filter((item) => item.status === 'Open')
         .sort(function (a, b) {
