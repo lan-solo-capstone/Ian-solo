@@ -45,8 +45,17 @@ class AllUsers extends Component {
       )
     }
     console.log('in render this.props', this.props)
-    if (this.props.users.length === 0) {
-      return <div>Loading, or we have no users =(</div>
+    if (this.props.loading) {
+      return (
+        <div
+          className="spinner-border position-absolute top-50 start-50 translate-middle"
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      )
+    } else if (this.props.users.length === 0) {
+      return <div>No users found.</div>
     }
 
     const {users} = this.props || []
@@ -64,29 +73,23 @@ class AllUsers extends Component {
       return 0
     })
 
-    return this.props.loading ? (
-      <div
-        className="spinner-border position-absolute top-50 start-50 translate-middle"
-        role="status"
-      >
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    ) : (
+    return (
       <div className="container mt-3" style={{marginBottom: '65px'}}>
         {console.log(this.props.items)}
-        <div className="row row-cols-1 row-cols-md-2">
-          <div className="col">
-            <div className="bg-secondary border rounded d-flex justify-content-center mb-3 p-1">
+
+        <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
+          <div className="col text-light">
+            <div className="mx-auto">
               <a
-                className="btn bg-light py-2 rounded-top text-secondary text-center"
+                className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                 style={{width: '98%'}}
                 data-bs-toggle="collapse"
-                href="#multiCollapseClosed"
+                href="#multiCollapseUsers"
                 aria-expanded="true"
-                aria-controls="multiCollapseClosed"
+                aria-controls="multiCollapseUsers"
                 role="button"
               >
-                <h4 className="m-0">Users </h4>
+                <h4 className="m-0">View Users</h4>
                 <i
                   className="bi bi-chevron-compact-down text-secondary"
                   style={{
@@ -95,13 +98,13 @@ class AllUsers extends Component {
                 />
               </a>
               <div
-                className="collapse multi-collapse p-1"
-                id="multiCollapseClosed"
+                className="collapse multi-collapse rounded bg-secondary"
+                id="multiCollapseUsers"
               >
-                <div className="row row-cols-1 row-cols-md-2 gy-4">
+                <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {sortedUsers.map((user) => {
                     return (
-                      <div key={user.id} className="col">
+                      <div key={user.id} className="col mb-3">
                         <div className="card">
                           <Link
                             to={`/users/${user.id}`}
@@ -116,7 +119,7 @@ class AllUsers extends Component {
                             onClick={() =>
                               this.props.removeExistingUser(user.id)
                             }
-                            className="btn btn-danger rounded-0 mt-1"
+                            className="btn btn-danger rounded-0 my-1"
                           >
                             Delete User
                           </button>
@@ -125,21 +128,38 @@ class AllUsers extends Component {
                     )
                   })}
                 </div>
+                <a
+                  className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                  style={{width: '98%'}}
+                  data-bs-toggle="collapse"
+                  href="#multiCollapseUsers"
+                  aria-expanded="true"
+                  aria-controls="multiCollapseUsers"
+                  role="button"
+                >
+                  <div className="m-0 fs-5">Collapse</div>
+                  <i
+                    className="bi bi-chevron-compact-up text-secondary"
+                    style={{
+                      fontSize: '1.5rem',
+                    }}
+                  />
+                </a>
               </div>
             </div>
           </div>
-          <div className="col">
-            <div className="bg-secondary border rounded d-flex justify-content-center mb-3">
+          <div className="col text-light">
+            <div className="mx-auto">
               <a
-                className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
+                className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                 style={{width: '98%'}}
                 data-bs-toggle="collapse"
-                href="#multiCollapseOpen"
+                href="#multiCollapsePost"
                 aria-expanded="true"
-                aria-controls="multiCollapseOpen"
+                aria-controls="multiCollapsePost"
                 role="button"
               >
-                <h4 className="m-0">User Items </h4>
+                <h4 className="m-0">View Posts</h4>
                 <i
                   className="bi bi-chevron-compact-down text-secondary"
                   style={{
@@ -148,15 +168,31 @@ class AllUsers extends Component {
                 />
               </a>
               <div
-                className="collapse multi-collapse"
-                id="multiCollapseOpen"
-                style={{maxWidth: '75%'}}
+                className="collapse multi-collapse rounded bg-secondary"
+                id="multiCollapsePost"
               >
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {this.props.items.map((item) => (
                     <SingleItem key={item.id} item={item} />
                   ))}
                 </div>
+                <a
+                  className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                  style={{width: '98%'}}
+                  data-bs-toggle="collapse"
+                  href="#multiCollapsePost"
+                  aria-expanded="true"
+                  aria-controls="multiCollapsePost"
+                  role="button"
+                >
+                  <div className="m-0 fs-5">Collapse</div>
+                  <i
+                    className="bi bi-chevron-compact-up text-secondary"
+                    style={{
+                      fontSize: '1.5rem',
+                    }}
+                  />
+                </a>
               </div>
             </div>
           </div>

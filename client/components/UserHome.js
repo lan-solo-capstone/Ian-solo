@@ -88,10 +88,10 @@ class UserHome extends React.Component {
         </ul>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
-            <div className="bg-secondary border rounded d-flex justify-content-center">
+            <div className="mx-auto">
               <a
-                className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
-                style={{width: '98%'}}
+                className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                style={{width: '99%'}}
                 data-bs-toggle="collapse"
                 href="#multiCollapseOpen"
                 aria-expanded="true"
@@ -106,7 +106,10 @@ class UserHome extends React.Component {
                   }}
                 />
               </a>
-              <div className="collapse multi-collapse" id="multiCollapseOpen">
+              <div
+                className="collapse multi-collapse rounded bg-secondary"
+                id="multiCollapseOpen"
+              >
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Open')
@@ -114,14 +117,31 @@ class UserHome extends React.Component {
                       <SingleItem key={item.id} item={item} />
                     ))}
                 </div>
+                <a
+                  className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                  style={{width: '99%'}}
+                  data-bs-toggle="collapse"
+                  href="#multiCollapseOpen"
+                  aria-expanded="true"
+                  aria-controls="multiCollapseOpen"
+                  role="button"
+                >
+                  <div className="m-0 fs-5">Collapse</div>
+                  <i
+                    className="bi bi-chevron-compact-up text-secondary"
+                    style={{
+                      fontSize: '1.5rem',
+                    }}
+                  />
+                </a>
               </div>
             </div>
           </div>
           <div className="col text-light">
-            <div className="bg-secondary border rounded d-flex justify-content-center">
+            <div className="mx-auto">
               <a
-                className="btn m-1 bg-light py-2 rounded-top text-secondary text-center"
-                style={{width: '98%'}}
+                className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                style={{width: '99%'}}
                 data-bs-toggle="collapse"
                 href="#multiCollapseClosed"
                 aria-expanded="true"
@@ -136,7 +156,10 @@ class UserHome extends React.Component {
                   }}
                 />
               </a>
-              <div className="collapse multi-collapse" id="multiCollapseClosed">
+              <div
+                className="collapse multi-collapse rounded bg-secondary"
+                id="multiCollapseClosed"
+              >
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {items
                     .filter((item) => item.status === 'Closed')
@@ -144,6 +167,23 @@ class UserHome extends React.Component {
                       <SingleItem key={item.id} item={item} />
                     ))}
                 </div>
+                <a
+                  className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
+                  style={{width: '99%'}}
+                  data-bs-toggle="collapse"
+                  href="#multiCollapseClosed"
+                  aria-expanded="true"
+                  aria-controls="multiCollapseClosed"
+                  role="button"
+                >
+                  <div className="m-0 fs-5">Collapse</div>
+                  <i
+                    className="bi bi-chevron-compact-up text-secondary"
+                    style={{
+                      fontSize: '1.5rem',
+                    }}
+                  />
+                </a>
               </div>
             </div>
           </div>

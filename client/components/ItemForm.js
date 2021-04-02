@@ -110,7 +110,7 @@ const ItemForm = (props) => {
               name="itemListName"
               value={itemListName}
               onChange={handleChange}
-              placeholder="Example Name..."
+              placeholder="Name..."
               required
             />
             <div className="invalid-feedback">Please provide a name.</div>
@@ -127,7 +127,7 @@ const ItemForm = (props) => {
               value={description}
               onChange={handleChange}
               minLength="100"
-              placeholder="Example description... Ipsum loram"
+              placeholder="This is a post about..."
               required
             />
           </div>
