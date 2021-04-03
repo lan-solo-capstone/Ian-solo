@@ -92,9 +92,9 @@ const AuthForm = (props) => {
                       type="number"
                       className="form-control mb-1"
                       id="exampleInputZip"
-                      placeholder="Zip (10001-11104)"
+                      placeholder="Zip (10001-11697)"
                       min="10001"
-                      max="11104"
+                      max="11697"
                       minLength="5"
                       maxLength="5"
                       required
