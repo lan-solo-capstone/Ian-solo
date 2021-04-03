@@ -5,7 +5,6 @@ import Talk from 'talkjs'
 class InboxComponent extends Component {
   componentDidMount() {
     const currentUser = this.props.user
-    console.log(currentUser)
     Talk.ready
       .then(() => {
         const me = new Talk.User({
@@ -51,7 +50,6 @@ class InboxComponent extends Component {
   }
 
   render() {
-    console.log('in InboxContainer render, props', this.props)
     return (
       <span>
         <div style={{height: '65vh'}} ref={(c) => (this.container = c)}>
