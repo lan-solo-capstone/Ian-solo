@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const {Item, User, ItemPhoto} = require('../db/models')
-// const ItemPhoto = require('../db/models/itemPhoto')
 const {ensureAnyLogin, ensureLogin, ensureAdmin} = require('./middleware')
 module.exports = router
 
@@ -48,15 +47,15 @@ router.get('/', async (req, res, next) => {
 // prob can delete this as it doesn't seem to be getting used -- JC 3.31.21
 // GET single item
 // this may be necessary to re-route the user after they create a new post
-router.get('/:itemId', async (req, res, next) => {
-  const {itemId} = req.params
-  try {
-    const item = await Item.findByPk(itemId)
-    res.json(item)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/:itemId', async (req, res, next) => {
+//   const {itemId} = req.params
+//   try {
+//     const item = await Item.findByPk(itemId)
+//     res.json(item)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 // api/items
 // POST a new item
