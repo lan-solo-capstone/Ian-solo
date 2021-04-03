@@ -30,7 +30,6 @@ const AuthForm = (props) => {
                   type="email"
                   className="form-control mb-1"
                   id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
                   placeholder="Email"
                   required
                 />
@@ -41,7 +40,6 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputFirstName"
-                      aria-describedby="emailHelp"
                       placeholder="First Name"
                       required
                     />
@@ -51,7 +49,6 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputLastName"
-                      aria-describedby="emailHelp"
                       placeholder="Last Name"
                       required
                     />
@@ -61,7 +58,6 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputStreet1"
-                      aria-describedby="emailHelp"
                       placeholder="Street Address Line 1"
                       required
                     />
@@ -71,7 +67,6 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputStreet2"
-                      aria-describedby="emailHelp"
                       placeholder="Street Address Line 2"
                     />
 
@@ -80,8 +75,7 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputCity"
-                      aria-describedby="emailHelp"
-                      placeholder="City"
+                      placeholder="New York, Brooklyn, Queens, etc."
                     />
 
                     <input
@@ -89,12 +83,8 @@ const AuthForm = (props) => {
                       type="text"
                       className="form-control mb-1"
                       id="exampleInputState"
-                      aria-describedby="emailHelp"
-                      // placeholder="NY"
-                      // pattern="NY"
                       value="NY"
                       readOnly
-                      // required
                     />
 
                     <input
@@ -102,7 +92,6 @@ const AuthForm = (props) => {
                       type="number"
                       className="form-control mb-1"
                       id="exampleInputZip"
-                      aria-describedby="emailHelp"
                       placeholder="Zip (10001-11104)"
                       min="10001"
                       max="11104"
