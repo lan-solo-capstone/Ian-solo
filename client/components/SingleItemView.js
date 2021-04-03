@@ -1,7 +1,4 @@
-/* eslint-disable no-warning-comments */
-/* eslint-disable complexity */
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
@@ -27,10 +24,7 @@ class SingleItemView extends React.Component {
 
   handleDelete(evt) {
     evt.preventDefault()
-
     const itemId = String(this.props.location.state.item.id)
-
-    console.log('in handleDelete, about to delete item with id:', itemId)
     this.props.removeItem(itemId)
   }
 
@@ -86,25 +80,11 @@ class SingleItemView extends React.Component {
   }
 
   render() {
-    console.log('in SingleItemView render, this.props', this.props)
-    console.log('in SingleItemView render, this.state', this.state)
     if (!this.props.location.state) {
       return <Redirect to="/items" />
     }
 
     let {item} = this.props.location.state
-    console.log('SingleItemView item!!!!', item)
-
-    // TODO: try this loading instead of the one above
-    // this.props.loading ? (
-    //   <div
-    //     className="spinner-border position-absolute top-50 start-50 translate-middle"
-    //     role="status"
-    //   >
-    //     <span className="visually-hidden">Loading...</span>
-    //   </div>
-    // ) :
-    // -- JC 3.29.21
 
     const itemMatchesUser = this.props.user.id === item.user.id
     const isAdmin = this.props.user.admin
@@ -164,6 +144,7 @@ class SingleItemView extends React.Component {
                     >
                       Edit Item
                     </button>
+
                     {/*Start Modal*/}
                     <div
                       className="modal fade"
@@ -228,7 +209,6 @@ class SingleItemView extends React.Component {
               )}
 
               {/* Allow admin to delete an item */}
-              {/*  TODO: put delete button here */}
               {isAdmin && (
                 <div className="col-auto closeItem mt-2 mt-md-0">
                   <button

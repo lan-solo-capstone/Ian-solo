@@ -1,4 +1,3 @@
-/* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
@@ -30,7 +29,6 @@ class NewItemForm extends Component {
   }
 
   handleFileSelect(evt) {
-    // yf 03/21/21  below line works for both single and multiple file uploads
     const photoFiles = Array.from(evt.target.files)
     this.setState({uploadPhoto: photoFiles})
   }
@@ -42,8 +40,6 @@ class NewItemForm extends Component {
   }
 
   render() {
-    // this log makes sure that state changes when user types on form
-    console.log('in NewFormItem render, this.props', this.props)
     const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
     const {pathname} = this.props.location
 
@@ -61,7 +57,7 @@ class NewItemForm extends Component {
   }
 }
 
-// yf 03.21.21  added state - need user info to associate with the created item.
+// yf 03.21.21  need user info to associate with the created item.
 const mapStateToProps = (state) => ({
   user: state.user,
 })

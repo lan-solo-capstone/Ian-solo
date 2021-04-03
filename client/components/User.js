@@ -1,4 +1,3 @@
-/* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {me} from '../store/user.js'
@@ -9,7 +8,6 @@ class User extends Component {
   componentDidMount() {
     this.props.fetchUser()
     const userId = this.props.match.params.userId
-    console.log('in componentDidMount', {userId})
     this.props.fetchExistingUser(userId)
   }
 
@@ -35,7 +33,7 @@ class User extends Component {
         </>
       )
     }
-    console.log('in User render, this.props', this.props)
+
     return (
       <div className="container mt-3" style={{maxWidth: '800px'}}>
         <UserView user={this.props.singleUser} />

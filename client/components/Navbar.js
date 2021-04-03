@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
@@ -64,7 +63,6 @@ const Navbar = (props) => {
                   >
                     {props.currentPage.page === 'listall' && (
                       <>
-                        {console.log(props.currentPage.page)}
                         <MapAllItems
                           itemsArray={props.currentPage.items}
                           prevRef={inputRef}
@@ -74,7 +72,6 @@ const Navbar = (props) => {
                     )}
                     {props.currentPage.page === 'singleview' && (
                       <>
-                        {console.log(props.currentPage.page)}
                         <MapSingleItem
                           item={props.currentPage.items}
                           prevRef={inputRef}
@@ -87,7 +84,7 @@ const Navbar = (props) => {
               </div>
             </div>
           </div>
-          {/* Ends modal */}
+          {/* End modal */}
 
           <div className="collapse navbar-collapse p-0" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -123,7 +120,6 @@ const Navbar = (props) => {
                       className="dropdown-menu"
                       aria-labelledby="navbarScrollingDropdown"
                     >
-                      {console.log(props.user)}
                       <Link
                         className="nav-item nav-link dropdown-item"
                         to="/users"
@@ -252,11 +248,3 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-/**
- * PROP TYPES
- */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired,
-// }

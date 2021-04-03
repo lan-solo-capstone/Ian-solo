@@ -55,7 +55,6 @@ class SearchBox extends Component {
   render() {
     return (
       <form
-        // className="row p-0 g-1 m-0 row-cols-3 row-cols-md-5"
         className="row p-0 g-1 m-0 row-cols-3 row-cols-sm-4"
         onSubmit={this.handleSubmit}
       >

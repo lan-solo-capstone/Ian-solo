@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import timeAgo from 'node-time-ago'
 
 // Render functional
 const SingleItem = (props) => {
   const {item} = props
-  const createdAt = item.createdAt
+  const {createdAt} = item
   const {city, state} = item.user
 
   return (
@@ -57,27 +56,6 @@ const SingleItem = (props) => {
 }
 
 export default SingleItem
-
-// Render Class
-// class Placeholder extends React.Component{
-//   render(){return (<div></div>)}
-// }
-
-/**
- * CONTAINER
- */
-
-// const mapState = (state) => ({
-//   placeholder: state.placeholder,
-// })
-
-// const mapDispatch = (dispatch) => ({
-//   placeholder: () => {
-//     dispatch(placeholder())
-//   },
-// })
-
-// export default connect()()
 
 SingleItem.propTypes = {
   itemListName: PropTypes.string,
