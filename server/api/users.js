@@ -1,7 +1,6 @@
-/* eslint-disable no-warning-comments */
 const router = require('express').Router()
 const {User, Item, ItemPhoto} = require('../db/models')
-const {ensureAdmin, ensureAnyLogin, ensureLogin} = require('./middleware')
+const {ensureAdmin, ensureLogin} = require('./middleware')
 const axios = require('axios')
 
 module.exports = router
@@ -65,7 +64,7 @@ router.get('/:userId', ensureLogin, async (req, res, next) => {
       res.status(404).send('This user does not exist in our DB apparently!')
       return
     }
-    console.log('hello', 'in end of GET route, user', user)
+
     res.json(user)
   } catch (err) {
     next(err)
@@ -89,7 +88,6 @@ router.put('/:userId', ensureLogin, async (req, res, next) => {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?bbox=-74.25909,40.477399,-73.7008391836855,40.917577&types=address&limit=1&access_token=${process.env.MAPBOX_PK}`
       )
     ).data
-    console.log(data)
 
     if (
       data &&
@@ -138,6 +136,7 @@ router.put('/:userId', ensureLogin, async (req, res, next) => {
       state,
       zip,
       email,
+
       //add calculated changes to lat & lon
       latitude: latitude,
       longitude: longitude,
@@ -156,20 +155,14 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
   try {
     const {userId} = req.params
     const deletedUser = await User.findByPk(userId)
-
     const associatedItems = await Item.findAll({where: {userId: userId}})
-
-    // console.log('associatedItems', associatedItems)
-
-    // console.log('User_Proto', User.prototype)
-    // console.log('Item_proto', Item.prototype)
 
     if (!deletedUser) {
       res.status(404).send('No such user exists in our DB apparently!')
       return
     }
 
-    // delete associated items and itemphotos first.
+    // delete associated items and itemPhotos first.
 
     await Promise.all(
       associatedItems.map(async (itemObj) => {
@@ -179,7 +172,7 @@ router.delete('/:userId', ensureAdmin, async (req, res, next) => {
       })
     )
 
-    // find deassociated itemPhotos & delete
+    // find disassociated itemPhotos & delete
     let orphanPhotos = await ItemPhoto.findAll({where: {itemId: null}})
 
     await Promise.all(
