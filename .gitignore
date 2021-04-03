@@ -6,8 +6,3 @@ secrets.js
 npm-debug.log
 yarn-error.log
 ngrok
-public/bundle.js
-public/bundle.js.map
-.vscode
-client/merging.js
-client/merging2.js
