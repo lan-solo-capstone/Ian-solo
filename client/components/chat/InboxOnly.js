@@ -5,7 +5,6 @@ import Talk from 'talkjs'
 class InboxOnly extends Component {
   componentDidMount() {
     const currentUser = this.props.user
-    console.log('in InboxOnly componentDidMount, currentUser', currentUser)
     Talk.ready
       .then(() => {
         const me = new Talk.User({
@@ -32,7 +31,6 @@ class InboxOnly extends Component {
   }
 
   render() {
-    console.log('in InboxContainer render, props', this.props)
     return (
       <span>
         <div className="mt-3">
