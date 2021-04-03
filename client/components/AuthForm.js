@@ -90,9 +90,11 @@ const AuthForm = (props) => {
                       className="form-control mb-1"
                       id="exampleInputState"
                       aria-describedby="emailHelp"
-                      placeholder="NY"
-                      pattern="NY"
-                      required
+                      // placeholder="NY"
+                      // pattern="NY"
+                      value="NY"
+                      readOnly
+                      // required
                     />
 
                     <input
@@ -101,7 +103,7 @@ const AuthForm = (props) => {
                       className="form-control mb-1"
                       id="exampleInputZip"
                       aria-describedby="emailHelp"
-                      placeholder="Zip"
+                      placeholder="Zip (10001-11104)"
                       min="10001"
                       max="11104"
                       minLength="5"
