@@ -1,13 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchAllItems, allItemsUnload} from '../store/items'
 import {updateNavbar} from '../store/navbar'
 import SingleItem from './SingleItem'
-import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
-import timeAgo from 'node-time-ago'
 
 // Render Class
 class Items extends React.Component {
@@ -25,13 +21,13 @@ class Items extends React.Component {
   render() {
     //Begin search and filter code:
     let items
-
     let headline = `All Listings`
 
     if (this.props.location.searchBoxParams) {
       const keyWords = this.props.location.searchBoxParams.searchString.split(
         ' '
       )
+
       //Calc distance between two coords using Haversine Formula
       const calcMiles = (lat1, lon1, lat2, lon2) => {
         lat1 *= Math.PI / 180
@@ -103,7 +99,6 @@ class Items extends React.Component {
         })
     }
     //end search and filter code
-    console.log('in Items after sort, items', items)
     return this.props.loading ? (
       <div
         className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -116,10 +111,8 @@ class Items extends React.Component {
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 p-2">
           {headline}
         </h3>
-        {/* {console.log(this.props.items)} */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {this.props.updateNavbar('listall', items)}
-          {console.log('in Items just before passing props, items', items)}
           {items.map((item) => (
             <SingleItem key={item.id} item={item} />
           ))}

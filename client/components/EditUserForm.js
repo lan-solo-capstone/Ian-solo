@@ -89,7 +89,6 @@ class EditUserForm extends Component {
   }
 
   render() {
-    console.log('in EditUserForm render, this.props', this.props)
     return (
       // <div className="container" style={{maxWidth: '800px'}}>
       <form role="form" onSubmit={this.handleSubmit}>
@@ -201,7 +200,6 @@ class EditUserForm extends Component {
           Submit
         </button>
       </form>
-      // </div>
     )
   }
 }

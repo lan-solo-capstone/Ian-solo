@@ -88,18 +88,14 @@ class MapAllItems extends React.Component {
       const height = this.props.prevRef?.current?.offsetHeight
 
       this.setState({
-        ...this.state,
         viewport: {
-          ...this.state.viewport,
           width: `${width}px`,
           height: `${height}px`,
         },
       })
     } else {
       this.setState({
-        ...this.state,
         viewport: {
-          ...this.state.viewport,
           width: `100%`,
           height: `100%`,
         },
