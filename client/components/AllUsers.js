@@ -48,7 +48,6 @@ class AllUsers extends Component {
         </>
       )
     }
-    console.log('in render this.props', this.props)
     if (this.props.loading) {
       return (
         <div
@@ -79,8 +78,6 @@ class AllUsers extends Component {
 
     return (
       <div className="container mt-3" style={{marginBottom: '65px'}}>
-        {console.log(this.props.items)}
-
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
             <div className="mx-auto">

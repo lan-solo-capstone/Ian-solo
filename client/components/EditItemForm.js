@@ -20,13 +20,8 @@ class EditItemForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fileInput = React.createRef()
   }
-  componentDidMount() {
-    console.log(
-      'in EditItemForm componentDidMount, this.props, this.state',
-      this.props,
-      this.state
-    )
 
+  componentDidMount() {
     if (this.props.location.state.item) {
       const {
         itemType,
@@ -60,6 +55,7 @@ class EditItemForm extends Component {
     const itemId = this.props.location.state.item.id
     const {itemType, itemListName, description, itemCondition} = this.state
     const userId = this.props.location.state.item.user.id
+
     this.props.modifyItem(
       itemId,
       {
@@ -71,27 +67,13 @@ class EditItemForm extends Component {
       },
       'Changes saved!'
     )
-    console.log(
-      'in handle Submit for edit item, this.props.location.state.item.id, state',
-      this.props.location.state.item.id,
-      this.state
-    )
 
     this.props.editItemButton.current.click()
-
     this.setState({buttonDisabled: true})
-
   }
 
   render() {
-    const {
-      handleSubmit,
-      handleChange,
-
-      // disabling updates of photos for now -- JC 3.29.21
-      // handleFileSelect,
-      // fileInput
-    } = this
+    const {handleSubmit, handleChange} = this
     const {pathname} = this.props.location
     // this log makes sure that state changes when user types on form
     console.log('in EditItemForm render, this.props', this.props)
@@ -103,8 +85,6 @@ class EditItemForm extends Component {
           {...this.state}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-          // handleFileSelect={handleFileSelect}
-          // fileInput={fileInput}
           pathname={pathname}
         />
       </div>
