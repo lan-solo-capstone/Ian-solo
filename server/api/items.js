@@ -44,18 +44,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// prob can delete this as it doesn't seem to be getting used -- JC 3.31.21
 // GET single item
-// this may be necessary to re-route the user after they create a new post
-// router.get('/:itemId', async (req, res, next) => {
-//   const {itemId} = req.params
-//   try {
-//     const item = await Item.findByPk(itemId)
-//     res.json(item)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+// this route is actually not used in production but in development can be useful for testing
+// (e.g., get a single item before deleting it) -- JC 4.3.21
+router.get('/:itemId', async (req, res, next) => {
+  const {itemId} = req.params
+  try {
+    const item = await Item.findByPk(itemId)
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // api/items
 // POST a new item
@@ -71,9 +71,8 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
       deliveryOption,
       userId,
       imageArr,
-      // dateListed,
     } = req.body
-    console.log('hello', 'in post req.body', req.body)
+
     const newItem = await Item.create({
       itemListName,
       description,
@@ -93,8 +92,6 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
       await itemPhotos.setItem(newItem)
     } else {
       imageArr.forEach(async (element) => {
-        console.log(element)
-
         const itemPhotos = await ItemPhoto.create({
           photoTitle: element.photoTitle,
           cloudREF: element.cloudRef,
@@ -113,7 +110,6 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
 // PUT route for /api/items/:itemId
 router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
-    console.log('in PUT route for item, req.body', req.body)
     const {itemId} = req.params
     const {
       itemType,
