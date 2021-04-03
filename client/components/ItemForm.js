@@ -158,7 +158,7 @@ const ItemForm = (props) => {
                     }
                     alertReference.current.hidden = true
                     photoHandle(Array.from(e.target.files))
-                    handleFileSelect(e)
+                    handleFileSelect(Array.from(e.target.files))
                   }}
                 />
                 {console.log(props.uploadPhoto, 'props')}

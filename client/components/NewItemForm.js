@@ -11,6 +11,7 @@ const initialState = {
   itemCondition: 'New',
   uploadPhoto: null,
   buttonDisabled: false,
+  files: [],
 }
 
 class NewItemForm extends Component {
@@ -29,10 +30,27 @@ class NewItemForm extends Component {
     })
   }
 
+  handleFiles = (file) => {
+    console.log('handleFiles file:', file)
+    var reader = new FileReader()
+    reader.onload = (e) => {
+      // Use reader.result
+      this.setState((prevState) => ({
+        ...prevState,
+        files: [...prevState.files, reader.result],
+      }))
+    }
+    reader.readAsDataURL(file)
+  }
+
   handleFileSelect(evt) {
     // yf 03/21/21  below line works for both single and multiple file uploads
-    const photoFiles = Array.from(evt.target.files)
-    this.setState({uploadPhoto: photoFiles})
+    this.setState((prevState) => ({
+      ...prevState,
+      files: [],
+      uploadPhoto: evt,
+    }))
+    evt.forEach((element) => this.handleFiles(element))
   }
 
   handleSubmit(evt) {

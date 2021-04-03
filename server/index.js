@@ -57,7 +57,7 @@ const createApp = () => {
   app.use(morgan('dev'))
 
   // body parsing middleware
-  app.use(express.json())
+  app.use(express.json({limit: '5MB'}))
   app.use(express.urlencoded({extended: true}))
 
   // yf 03.19.21 fileupload middleware w/debug option

@@ -45,27 +45,35 @@ export const postNewItem = (item, userId) => {
         imageArr: [],
       }
 
-      if (item.uploadPhoto) {
-        const imageInfo = await Promise.all(
-          item.uploadPhoto.map(async (element) => {
-            const random = `/images/${element.name}${Math.floor(
-              Math.random() * 100000
-            )}`
+      item.files.forEach((element) => {
+        fileInfo.imageArr.push({
+          cloudRef: 'temp',
+          downloadUrl: element,
+          photoTitle: item.itemListName,
+        })
+      })
 
-            const cloudCreate = await storage.ref(random).put(element)
+      // if (item.uploadPhoto) {
+      //   const imageInfo = await Promise.all(
+      //     item.uploadPhoto.map(async (element) => {
+      //       const random = `/images/${element.name}${Math.floor(
+      //         Math.random() * 100000
+      //       )}`
 
-            const url = await storage.ref(random).getDownloadURL()
+      //       const cloudCreate = await storage.ref(random).put(element)
 
-            return {
-              cloudRef: random,
-              downloadUrl: url,
-              photoTitle: element.name,
-            }
-          })
-        )
-        fileInfo.imageArr = imageInfo
-        console.log('hello', 'in new item thunk, imageInfo,', imageInfo)
-      }
+      //       const url = await storage.ref(random).getDownloadURL()
+
+      //       return {
+      //         cloudRef: random,
+      //         downloadUrl: url,
+      //         photoTitle: element.name,
+      //       }
+      //     })
+      //   )
+      //   fileInfo.imageArr = imageInfo
+      //   console.log('hello', 'in new item thunk, imageInfo,', imageInfo)
+      // }
 
       // vv test vv  below axios call is for testing purpose - visualize formData vv //
 
