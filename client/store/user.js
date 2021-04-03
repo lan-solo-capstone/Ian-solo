@@ -6,19 +6,24 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+
 /**
  * INITIAL STATE
  */
+
 const defaultUser = {}
 
 /**
  * ACTION CREATORS
  */
+
 const getUser = (user) => ({type: GET_USER, user})
 export const removeUser = () => ({type: REMOVE_USER})
+
 /**
  * THUNK CREATORS
  */
+
 export const me = () => async (dispatch) => {
   try {
     const res = await axios.get('/auth/me')

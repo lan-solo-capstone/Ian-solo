@@ -1,6 +1,3 @@
-import axios from 'axios'
-import history from '../history'
-
 /**
  * ACTION TYPES
  */
@@ -19,18 +16,6 @@ export const updateNavbar = (page, items) => ({
   page,
   items,
 })
-
-/**
- * THUNK CREATORS
- */
-// export const thunkName = () => async (dispatch) => {
-//   try {
-//     const res = await axios.get('/api/route')
-//     dispatch(creatorInput(res.data))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 
 /**
  * REDUCER

@@ -17,12 +17,10 @@ const toastSettings = {
  * ACTION TYPES
  */
 const ALL_ITEMS = 'ALL_ITEMS'
-
-//04.1.21 ADD : resetting loading status = true
 const ALL_ITEMS_UNLOAD = 'ALL_ITEMS_UNLOAD'
-
 const DELETE_ITEM = 'DELETE_ITEM'
 const DELETE_SINGLE_ITEM = 'DELETE_SINGLE_ITEM'
+
 /**
  * INITIAL STATE
  */
@@ -32,6 +30,7 @@ const intialState = {loading: true, items: []}
  * ACTION CREATORS
  */
 const allItems = (items) => ({type: ALL_ITEMS, items})
+
 //04.1.21 ADD : resetting loading status = true
 export const allItemsUnload = () => ({
   type: ALL_ITEMS_UNLOAD,
@@ -80,14 +79,9 @@ export const removeItem = (itemId) => {
     try {
       const {data} = await axios.delete(`/api/items/${itemId}`)
       dispatch(deleteItem(data))
-      toast.success('The item was successfully deleted!', toastSettings)
-      console.log(
-        'in removeItem thunk, about to delete item, here is the deleted item',
-        data
-      )
 
       if (data.updatedAt) {
-        console.log('successfully deleted!!!!! ------!!!!!!!!!')
+        toast.success('The item was successfully deleted!', toastSettings)
       }
 
       history.push('/')
@@ -100,11 +94,11 @@ export const removeItem = (itemId) => {
 /**
  * REDUCER
  */
+
 export default (state = intialState, action) => {
   switch (action.type) {
     case ALL_ITEMS:
       return {...state, loading: false, items: action.items}
-    //04.1.21 ADD : resetting loading status = true
     case ALL_ITEMS_UNLOAD:
       return {...state, loading: true}
     case DELETE_SINGLE_ITEM:
@@ -113,14 +107,8 @@ export default (state = intialState, action) => {
         items: state.items.filter((item) => item.id !== action.item.id),
       }
     case DELETE_ITEM: {
-      console.log(
-        'laskjflaskfjasdlk in delete item case, action.item',
-        action.item
-      )
       const copyOfState = {...state}
-      console.log('HEEEEEEY, in delete item case, copyOfState', copyOfState)
       const {items} = copyOfState
-      console.log('in delete item case, items array', items)
       const filteredItems = items.filter((item) => item.id !== action.item.id)
 
       return {...state, items: filteredItems, loading: false}
