@@ -43,13 +43,19 @@ class NewItemForm extends Component {
     reader.readAsDataURL(file)
   }
 
-  handleFileSelect(evt) {
+  handleFileSelect(evt, disable) {
     // yf 03/21/21  below line works for both single and multiple file uploads
+    if (disable) {
+      this.setState({buttonDisabled: true})
+      return
+    }
+
     this.setState((prevState) => ({
       ...prevState,
       files: [],
       uploadPhoto: evt,
     }))
+    this.setState({buttonDisabled: false})
     evt.forEach((element) => this.handleFiles(element))
   }
 

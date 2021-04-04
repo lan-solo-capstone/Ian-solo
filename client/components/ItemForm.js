@@ -153,7 +153,7 @@ const ItemForm = (props) => {
                     if (e.target.files.length > 5) {
                       alertReference.current.hidden = false
                       photoHandle([])
-                      handleFileSelect(e)
+                      handleFileSelect(e, true)
                       return
                     }
                     alertReference.current.hidden = true
