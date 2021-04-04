@@ -122,12 +122,13 @@ class SingleItemView extends React.Component {
                   : this.props.location.state.item.itemType
               }`}
               <br />
-              {`Condition: ${this.props.location.state.item.itemCondition}`}
+              {this.props.location.state.item.itemType !== 'Seeking' &&
+                `Condition: ${this.props.location.state.item.itemCondition}`}
             </div>
             <div className="col row gx-2 justify-content-center">
               {/* only render chat button if item does not belong to user */}
               {!itemMatchesUser && (
-                <div className="col-auto text-center messages">
+                <div className="col-auto text-center messages mb-2">
                   <Link
                     to={{
                       pathname: '/messages',

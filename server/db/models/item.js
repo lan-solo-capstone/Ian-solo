@@ -23,7 +23,7 @@ const Item = db.define('item', {
 
   itemCondition: {
     type: Sequelize.ENUM,
-    values: ['New', 'Gently_Used', 'Used'],
+    values: ['New', 'Gently Used', 'Used'],
     allowNull: true,
   },
   status: {

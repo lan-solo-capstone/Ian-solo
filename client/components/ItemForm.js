@@ -93,7 +93,7 @@ const ItemForm = (props) => {
               disabled={itemType !== 'Offer'}
             >
               <option value="New">Like New</option>
-              <option value="Gently_Used">Gently Used</option>
+              <option value="Gently Used">Gently Used</option>
               <option value="Used">Used</option>
             </select>
           </div>
@@ -189,14 +189,10 @@ const ItemForm = (props) => {
                             className="photoRemoveButton text-secondary"
                             onClick={() => {
                               console.log('awa')
-                              const filtered = {
-                                target: {
-                                  files: photos.filter(
-                                    (el, idxFilter) => idxFilter !== idx
-                                  ),
-                                },
-                              }
-                              photoHandle(filtered.target.files)
+                              const filtered = photos.filter(
+                                (el, idxFilter) => idxFilter !== idx
+                              )
+                              photoHandle(filtered)
                               handleFileSelect(filtered)
                             }}
                           >

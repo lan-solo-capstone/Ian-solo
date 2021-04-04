@@ -45,7 +45,7 @@ const items = [
     description:
       'Fancy Watcg in good condition. It comes with the box and a dust bag. Worn once.',
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-24 05:00:06',
@@ -56,7 +56,7 @@ const items = [
     itemListName: 'HikingBoots',
     description: 'ISO of Hiking Boots for my summer vacation!. Size 38.',
     itemType: 'Seeking',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
     createdAt: '2021-03-25 01:00:06',
@@ -124,7 +124,7 @@ const items = [
     description:
       "Hi everyone, how are you all doing today?.. Hope your day started well...Am giving out a Baldwin 5'1 Baby Grand Piano out for free to a very passionate lover who will take good card of this beautiful baby... If interested, please do drop me a phone number so i can contact you. Thanks.",
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-26 01:00:06',
@@ -160,7 +160,7 @@ const items = [
     description:
       'Three World War II and two Aviation History magazines (monthly subscription, so there will be others in the future if interested) * Sorry but won\'t "hold" * first here (State/Ontario Streets) is welcome to them.',
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Will_Deliver',
     createdAt: '2021-03-26 01:00:06',
@@ -254,7 +254,7 @@ const items = [
     description:
       'China cabinet. has glass shelves and display light. As-is (see pics)\n\n81"Tall x 55"W x 16"D.\n**Item is built as ONE piece. and needs to be transported as such.\nPick up only.',
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-25 01:00:06',
@@ -303,7 +303,7 @@ const items = [
     description:
       'Free Moving Boxes\nAvailable while they last\nmore boxes each week\n\nUnfortunately we are to busy to take calls.\nPlease stop by for boxes, there are times they\nmay not be available. Sorry for any inconvenience this\nmay cause. Just trying to keep boxes out of the landfill.\n\nMonday - Friday 9a - 2p',
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'No_Contact_Pickup',
     createdAt: '2021-03-25 01:00:06',
@@ -398,7 +398,7 @@ const items = [
     itemListName: 'fancy champagne boxes',
     description: 'two fancy champagne boxes',
     itemType: 'Offer',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-24 01:00:06',
@@ -530,7 +530,7 @@ const items = [
     description:
       'In search of a desk around 38” - 39” in length due to small space at a reasonable price range! Something similar to this, with drawer, any color\nThank you for your help!',
     itemType: 'Seeking',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-25 01:00:06',
@@ -542,7 +542,7 @@ const items = [
     description:
       'In search of desk chair minimalistic or vibrant reasonable pricing!',
     itemType: 'Seeking',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-26 01:00:06',
@@ -554,7 +554,7 @@ const items = [
     description:
       'Looking for a 5 drawer tall dresser. Please contact if you have one for sale. Can pick up. Thanks!',
     itemType: 'Seeking',
-    itemCondition: 'Gently_Used',
+    itemCondition: 'Gently Used',
     status: 'Open',
     deliveryOption: 'Pickup_Only',
     createdAt: '2021-03-22 01:00:06',

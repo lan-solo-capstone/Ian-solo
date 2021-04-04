@@ -13,6 +13,7 @@ const SingleItem = (props) => {
   return (
     <div className="col">
       <div className="card">
+        {console.log('This is our item:', item)}
         <Link
           to={{pathname: '/singleview', state: {item: item}}}
           className="text-decoration-none text-secondary "

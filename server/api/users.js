@@ -46,6 +46,7 @@ router.get('/:userId', ensureLogin, async (req, res, next) => {
           attributes: [
             'id',
             'itemListName',
+            'itemCondition',
             'description',
             'itemType',
             'status',
