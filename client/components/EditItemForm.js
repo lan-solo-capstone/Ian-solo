@@ -40,12 +40,14 @@ class EditItemForm extends Component {
   }
 
   // if item has been updated, then re-enable submit button
+  // and close modal
   componentDidUpdate(prevProps) {
     const prevItem = prevProps.location.state.item.updatedAt
     const updatedItem = this.props.location.state.item.updatedAt
 
     if (prevItem !== updatedItem) {
       this.setState({buttonDisabled: false})
+      this.props.editItemButton.current.click()
     }
   }
 
@@ -77,10 +79,7 @@ class EditItemForm extends Component {
       this.state
     )
 
-    this.props.editItemButton.current.click()
-
     this.setState({buttonDisabled: true})
-
   }
 
   render() {
