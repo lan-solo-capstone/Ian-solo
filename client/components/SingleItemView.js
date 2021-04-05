@@ -23,7 +23,7 @@ class SingleItemView extends Component {
 
   handleDelete(evt) {
     evt.preventDefault()
-    const itemId = String(this.props.location.state.item.id)
+    const itemId = this.props.location.state.item.id
     this.props.removeItem(itemId)
   }
 
@@ -32,7 +32,7 @@ class SingleItemView extends Component {
     const userIsAdmin = this.props.user.admin
 
     let userId = this.props.user.id
-    const itemId = String(this.props.location.state.item.id)
+    const itemId = this.props.location.state.item.id
 
     if (!userIsAdmin) {
       userId = this.props.user.id
@@ -62,7 +62,7 @@ class SingleItemView extends Component {
       userId = this.props.location.state.item.user.id
     }
 
-    const itemId = String(this.props.location.state.item.id)
+    const itemId = this.props.location.state.item.id
 
     this.props.modifyItem(
       itemId,
