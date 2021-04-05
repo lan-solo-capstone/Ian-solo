@@ -19,7 +19,7 @@ class EditUserForm extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
-    handleChange = handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
