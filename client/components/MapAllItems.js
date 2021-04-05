@@ -111,7 +111,7 @@ class MapAllItems extends Component {
 
   render() {
     const {items, selectedItem, loading, apiKey} = this.state
-    const {unloadModal, user} = this.props
+    const {unloadModal, user, isLoggedIn} = this.props
 
     return (
       <>
@@ -126,7 +126,7 @@ class MapAllItems extends Component {
               this.setState({viewport: viewport})
             }}
           >
-            {this.props.isLoggedIn && (
+            {isLoggedIn && (
               <Marker latitude={+user.latitude} longitude={+user.longitude}>
                 <i className="h2 bi bi-house-door-fill text-primary"></i>
               </Marker>

@@ -22,11 +22,10 @@ class Items extends Component {
     //Begin search and filter code:
     let items
     let headline = `All Listings`
+    const {searchBoxParams} = this.props.location
 
-    if (this.props.location.searchBoxParams) {
-      const keyWords = this.props.location.searchBoxParams.searchString.split(
-        ' '
-      )
+    if (searchBoxParams) {
+      const keyWords = searchBoxParams.searchString.split(' ')
 
       //Calc distance between two coords using Haversine Formula
       const calcMiles = (lat1, lon1, lat2, lon2) => {
@@ -43,24 +42,22 @@ class Items extends Component {
       items = this.props.items
         .filter((item) => item.status === 'Open')
         .filter((item) => {
-          if (this.props.location.searchBoxParams.searchItemType === 'All') {
+          if (searchBoxParams.searchItemType === 'All') {
             return item
           } else if (
-            this.props.location.searchBoxParams.searchItemType === 'Offer' &&
+            searchBoxParams.searchItemType === 'Offer' &&
             item.itemType === 'Offer'
           ) {
             return item
           } else if (
-            this.props.location.searchBoxParams.searchItemType === 'Seeking' &&
+            searchBoxParams.searchItemType === 'Seeking' &&
             item.itemType === 'Seeking'
           ) {
             return item
           }
         })
         .filter((item) => {
-          if (
-            this.props.location.searchBoxParams.searchDistance === 'Anywhere'
-          ) {
+          if (searchBoxParams.searchDistance === 'Anywhere') {
             return item
           } else if (
             calcMiles(
@@ -68,7 +65,7 @@ class Items extends Component {
               +this.props.user.longitude,
               +item.user.latitude,
               +item.user.longitude
-            ) <= +this.props.location.searchBoxParams.searchDistance
+            ) <= +searchBoxParams.searchDistance
           ) {
             return item
           }
