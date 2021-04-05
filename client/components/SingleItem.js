@@ -13,8 +13,8 @@ const SingleItem = (props) => {
     <div className="col">
       <div className="card">
         <Link
-          to={{pathname: '/singleview', state: {item: item}}}
-          className="text-decoration-none text-secondary "
+          to={{pathname: '/singleview', state: {item}}}
+          className="text-decoration-none text-secondary"
         >
           <div className="row g-0">
             <div className="col-md-4 p-2 d-flex align-items-center justify-content-center viewallMax">
