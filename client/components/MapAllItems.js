@@ -55,7 +55,6 @@ class MapAllItems extends React.Component {
     }
 
     const key = (await axios.get('/api/map/key')).data
-    console.log(this.state.loading)
     this.setState({apiKey: key})
     this.setState({loading: false})
   }

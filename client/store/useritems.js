@@ -73,9 +73,6 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
       dispatch(editItem(modifiedItem))
 
       if (modifiedItem.updatedAt) {
-        console.log(
-          '########### in modifyItem thunk, success, refactored for close/open, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
-        )
         toast.success(toastMessage, toastSettings)
       } else {
         toast.warning('Something went wrong, sorry!', toastSettings)
