@@ -12,7 +12,8 @@ const Navbar = (props) => {
   const inputRef = React.useRef(null)
   const mapButton = React.useRef(null)
   const unloadModal = () => mapButton.current.click()
-
+  const {page, items} = props.currentPage
+  const {handleClick, isLoggedIn} = props
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light px-md-5">
@@ -62,19 +63,19 @@ const Navbar = (props) => {
                     ref={inputRef}
                     style={{width: '100%', height: '85vh'}}
                   >
-                    {props.currentPage.page === 'listall' && (
+                    {page === 'listall' && (
                       <>
                         <MapAllItems
-                          itemsArray={props.currentPage.items}
+                          itemsArray={items}
                           prevRef={inputRef}
                           unloadModal={unloadModal}
                         />
                       </>
                     )}
-                    {props.currentPage.page === 'singleview' && (
+                    {page === 'singleview' && (
                       <>
                         <MapSingleItem
-                          item={props.currentPage.items}
+                          item={items}
                           prevRef={inputRef}
                           unloadModal={unloadModal}
                         />
@@ -96,7 +97,7 @@ const Navbar = (props) => {
                 Browse
               </Link>
 
-              {props.isLoggedIn ? (
+              {isLoggedIn ? (
                 <>
                   {/* The navbar will show these links after you log in */}
 
@@ -143,7 +144,7 @@ const Navbar = (props) => {
                       <a
                         className="nav-item dropdown-item nav-link"
                         href="#"
-                        onClick={props.handleClick}
+                        onClick={handleClick}
                       >
                         Logout
                       </a>
@@ -162,7 +163,7 @@ const Navbar = (props) => {
                 </>
               )}
               {/* <!-- Button trigger modal --> */}
-              {props.currentPage.page ? (
+              {page ? (
                 <button
                   type="button"
                   ref={mapButton}
@@ -178,7 +179,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="fixed-bottom d-md-none">
-          {props.currentPage.page === 'listall' ? (
+          {page === 'listall' ? (
             <div>
               <a
                 className="btn btn-secondary mx-auto mb-3 rounded-pill d-flex justify-content-evenly align-items-center"
@@ -217,7 +218,7 @@ const Navbar = (props) => {
                   id="mapContainer"
                   style={{height: '89vh'}}
                 >
-                  <MapAllItems itemsArray={props.currentPage.items} />
+                  <MapAllItems itemsArray={items} />
                 </div>
               </div>
             </div>
