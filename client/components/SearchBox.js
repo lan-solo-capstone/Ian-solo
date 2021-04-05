@@ -63,7 +63,7 @@ class SearchBox extends Component {
         className="row p-0 g-1 m-0 row-cols-3 row-cols-sm-4"
         onSubmit={handleSubmit}
       >
-        <div className={isLoggedIn ? 'm-0 col' : 'm-0 col'}>
+        <div className="m-0 col">
           <select
             name="itemType"
             className="form-select m-0 mb-1 mb-md-0"
@@ -77,7 +77,7 @@ class SearchBox extends Component {
           </select>
         </div>
 
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <div className="m-0 col">
             <select
               name="distance"
@@ -93,7 +93,7 @@ class SearchBox extends Component {
               <option value="20">Within 20 mi</option>
             </select>
           </div>
-        ) : null}
+        )}
         <div className="m-0 ocl">
           <input
             className="form-control m-0"
