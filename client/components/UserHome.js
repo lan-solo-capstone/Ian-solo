@@ -10,18 +10,13 @@ import {
 import {logout} from '../store'
 import {SingleItem} from '../components'
 
-/**
- * COMPONENT
- */
-
-// Render Class
 class UserHome extends Component {
   componentDidMount() {
     this.props.fetchUserItems(this.props.user.id)
   }
 
   render() {
-    const {user} = this.props
+    const {user, handleClick} = this.props
     let {items} = this.props.useritems
 
     // Attach the user to each item
@@ -55,11 +50,7 @@ class UserHome extends Component {
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            <a
-              className="text-decoration-none"
-              href="#"
-              onClick={this.props.handleClick}
-            >
+            <a className="text-decoration-none" href="#" onClick={handleClick}>
               Logout
             </a>
           </li>
