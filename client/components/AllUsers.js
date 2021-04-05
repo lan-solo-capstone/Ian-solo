@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers, removeExistingUser} from '../store/users.js'
+import {me} from '../store/user'
+import {fetchUsers, removeExistingUser} from '../store/users'
 import {
   fetchAllItems,
   allItemsUnload,
   deleteSingleItemRoute,
 } from '../store/items'
-import {me} from '../store/user.js'
-import {UserView} from './index.js'
-import SingleItem from './SingleItem'
+import {UserView, SingleItem} from '../components'
 import {Link} from 'react-router-dom'
 
 class AllUsers extends Component {
