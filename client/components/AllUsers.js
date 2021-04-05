@@ -36,6 +36,8 @@ class AllUsers extends Component {
 
   render() {
     const userIsAdmin = this.props.user.admin
+    const {loading, items} = this.props
+    const {users} = this.props || []
 
     // if not an admin, display this
     if (!userIsAdmin) {
@@ -51,7 +53,7 @@ class AllUsers extends Component {
     }
 
     // if waiting for data to load, display loading message
-    if (this.props.loading) {
+    if (loading) {
       return (
         <div
           className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -60,11 +62,11 @@ class AllUsers extends Component {
           <span className="visually-hidden">Loading...</span>
         </div>
       )
-    } else if (this.props.users.length === 0) {
+
+      // users is deconstructed from props
+    } else if (users.length === 0) {
       return <div>No users found.</div>
     }
-
-    const {users} = this.props || []
 
     // sort fetched users by lastName
     const sortedUsers = users.sort((a, b) => {
@@ -79,7 +81,8 @@ class AllUsers extends Component {
       return 0
     })
 
-    const sortedItems = this.props.items.sort(function (a, b) {
+    // items is deconstructed from props
+    const sortedItems = items.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt)
     })
 

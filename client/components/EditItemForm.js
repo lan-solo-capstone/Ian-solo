@@ -35,10 +35,11 @@ class EditItemForm extends Component {
   componentDidUpdate(prevProps) {
     const prevItem = prevProps.location.state.item.updatedAt
     const updatedItem = this.props.location.state.item.updatedAt
+    const {editItemButton} = this.props
 
     if (prevItem !== updatedItem) {
       this.setState({buttonDisabled: false})
-      this.props.editItemButton.current.click()
+      editItemButton.current.click()
     }
   }
 
@@ -55,6 +56,7 @@ class EditItemForm extends Component {
     const itemId = this.props.location.state.item.id
     const userId = this.props.location.state.item.user.id
     const {itemType, itemListName, description, itemCondition} = this.state
+    const {editItemButton} = this.props
 
     this.props.modifyItem(
       itemId,
@@ -69,7 +71,7 @@ class EditItemForm extends Component {
     )
 
     this.setState({buttonDisabled: true})
-    this.props.editItemButton.current.click()
+    editItemButton.current.click()
   }
 
   render() {
