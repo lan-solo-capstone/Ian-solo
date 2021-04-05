@@ -72,16 +72,20 @@ class AllUsers extends Component {
     const sortedUsers = users.sort((a, b) => {
       const nameA = a.lastName.toUpperCase()
       const nameB = b.lastName.toUpperCase()
+
       if (nameA < nameB) {
         return -1
       }
+
       if (nameA > nameB) {
         return 1
       }
+
       return 0
     })
 
     // items is deconstructed from props
+    // sort items by date created
     const sortedItems = items.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt)
     })
@@ -112,6 +116,7 @@ class AllUsers extends Component {
                 className="collapse multi-collapse rounded bg-secondary"
                 id="multiCollapseUsers"
               >
+                {/* Users, sorted by last name */}
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {sortedUsers.map((user) => {
                     return (
@@ -139,6 +144,8 @@ class AllUsers extends Component {
                     )
                   })}
                 </div>
+                {/* end users section */}
+
                 <a
                   className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                   style={{width: '98%'}}
@@ -182,6 +189,7 @@ class AllUsers extends Component {
                 className="collapse multi-collapse rounded bg-secondary"
                 id="multiCollapsePost"
               >
+                {/* Items, sorted by date created */}
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {sortedItems.map((item) => (
                     <div key={item.id}>
