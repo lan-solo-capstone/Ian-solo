@@ -35,13 +35,15 @@ class NewItemForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewItem(this.state, this.props.user.id)
+    const userId = this.props.user.id
+    this.props.addNewItem(this.state, userId)
     this.setState({buttonDisabled: true})
   }
 
   render() {
     const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
     const {pathname} = this.props.location
+    const {buttonDisabled} = this.state
 
     return (
       <ItemForm
@@ -51,7 +53,7 @@ class NewItemForm extends Component {
         handleFileSelect={handleFileSelect}
         fileInput={fileInput}
         pathname={pathname}
-        buttonDisabled={this.state.buttonDisabled}
+        buttonDisabled={buttonDisabled}
       />
     )
   }
