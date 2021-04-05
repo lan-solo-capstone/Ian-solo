@@ -43,10 +43,11 @@ class MapAllItems extends Component {
   }
 
   async componentDidMount() {
-    if (this.props.itemsArray && this.props.itemsArray.length > 0) {
+    const {itemsArray} = this.props
+    if (itemsArray && itemsArray.length > 0) {
       this.setState({
         items: [
-          ...this.props.itemsArray.map((item) => {
+          ...itemsArray.map((item) => {
             item.user.latitude = +item.user.latitude + Math.random() / 2500
             item.user.longitude = +item.user.longitude + Math.random() / 2500
             return item
@@ -61,10 +62,11 @@ class MapAllItems extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!_.isEqual(prevProps.itemsArray, this.props.itemsArray)) {
+    const {itemsArray} = this.props
+    if (!_.isEqual(prevProps.itemsArray, itemsArray)) {
       this.setState({
         items: [
-          ...this.props.itemsArray.map((item) => {
+          ...itemsArray.map((item) => {
             item.user.latitude = +item.user.latitude + Math.random() / 2500
             item.user.longitude = +item.user.longitude + Math.random() / 2500
             return item
