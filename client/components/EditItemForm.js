@@ -26,7 +26,6 @@ class EditItemForm extends Component {
     const loadedItem = this.props.location.state.item
     if (loadedItem) {
       const {itemType, itemListName, description, itemCondition} = loadedItem
-
       this.setState({itemType, itemListName, description, itemCondition})
     }
   }
@@ -49,11 +48,13 @@ class EditItemForm extends Component {
     })
   }
 
+  // on submit, send modifications and toast message
+  // also disable submit button temporarily and close modal
   handleSubmit(evt) {
     evt.preventDefault()
     const itemId = this.props.location.state.item.id
-    const {itemType, itemListName, description, itemCondition} = this.state
     const userId = this.props.location.state.item.user.id
+    const {itemType, itemListName, description, itemCondition} = this.state
 
     this.props.modifyItem(
       itemId,
@@ -67,8 +68,8 @@ class EditItemForm extends Component {
       'Changes saved!'
     )
 
-    this.props.editItemButton.current.click()
     this.setState({buttonDisabled: true})
+    this.props.editItemButton.current.click()
   }
 
   render() {
