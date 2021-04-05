@@ -27,7 +27,7 @@ class MapAllItems extends Component {
       items: [],
     }
 
-    window.addEventListener('resize', (e) => {
+    window.addEventListener('resize', () => {
       if (!this.unload) {
         this.resizer()
       }
@@ -84,7 +84,7 @@ class MapAllItems extends Component {
     this.unload = true
   }
 
-  resizer(e) {
+  resizer() {
     if (this.props?.prevRef?.current?.offsetHeight !== 0) {
       const width = this.props.prevRef?.current?.offsetWidth
       const height = this.props.prevRef?.current?.offsetHeight
