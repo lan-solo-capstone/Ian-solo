@@ -21,14 +21,11 @@ class EditItemForm extends Component {
     this.fileInput = React.createRef()
   }
 
+  // pre-populate item if the item has already loaded
   componentDidMount() {
-    if (this.props.location.state.item) {
-      const {
-        itemType,
-        itemListName,
-        description,
-        itemCondition,
-      } = this.props.location.state.item
+    const loadedItem = this.props.location.state.item
+    if (loadedItem) {
+      const {itemType, itemListName, description, itemCondition} = loadedItem
 
       this.setState({itemType, itemListName, description, itemCondition})
     }
