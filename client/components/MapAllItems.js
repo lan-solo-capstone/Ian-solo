@@ -11,12 +11,12 @@ import _ from 'lodash'
 class MapAllItems extends Component {
   constructor(props) {
     super(props)
+    const {isLoggedIn, user} = this.props
+
     this.state = {
       viewport: {
-        latitude: this.props.isLoggedIn ? +this.props.user.latitude : 40.73061,
-        longitude: this.props.isLoggedIn
-          ? +this.props.user.longitude
-          : -73.935242,
+        latitude: isLoggedIn ? +user.latitude : 40.73061,
+        longitude: isLoggedIn ? +user.longitude : -73.935242,
         width: `100%`,
         height: `100%`,
         zoom: 10,
@@ -26,6 +26,7 @@ class MapAllItems extends Component {
       selectedItem: null,
       items: [],
     }
+
     window.addEventListener('resize', (e) => {
       if (!this.unload) {
         this.resizer()
