@@ -12,12 +12,14 @@ import {SingleItem} from '../components'
 
 class UserHome extends Component {
   componentDidMount() {
-    this.props.fetchUserItems(this.props.user.id)
+    const userId = this.props.user.id
+    this.props.fetchUserItems(userId)
   }
 
   render() {
     const {user, handleClick} = this.props
     let {items} = this.props.useritems
+    const isAdmin = this.props.user.admin
 
     // Attach the user to each item
     items = items.map((item) => {
@@ -37,7 +39,7 @@ class UserHome extends Component {
               Edit Profile
             </Link>
           </li>
-          {this.props.user.admin && (
+          {isAdmin && (
             <li className="breadcrumb-item active" aria-current="page">
               <Link to="/users" className="text-decoration-none">
                 Admin Home

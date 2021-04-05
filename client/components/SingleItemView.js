@@ -18,7 +18,9 @@ class SingleItemView extends Component {
   }
 
   componentDidMount() {
-    this.props.updateNavbar('singleview', this.props.location.state.item)
+    const {item} = this.props.location.state
+
+    this.props.updateNavbar('singleview', item)
   }
 
   handleDelete(evt) {

@@ -22,7 +22,9 @@ class User extends Component {
     // only render user info if current user has the right to view it
     // must be an admin or viewing user's own profile
     const {admin, id} = this.props.user
-    if (!admin && this.props.singleUser.id !== id) {
+    const {singleUser} = this.props
+
+    if (!admin && singleUser.id !== id) {
       return (
         <>
           <div className="container-sm d-flex justify-content-center align-items-center flex-column my-4">
@@ -36,7 +38,7 @@ class User extends Component {
 
     return (
       <div className="container mt-3" style={{maxWidth: '800px'}}>
-        <UserView user={this.props.singleUser} />
+        <UserView user={singleUser} />
         <EditUserForm />
       </div>
     )
