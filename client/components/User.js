@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {me} from '../store/user.js'
-import {fetchExistingUser} from '../store/singleUser.js'
-import {UserView, EditUserForm} from './index.js'
+import {me} from '../store/user'
+import {fetchExistingUser} from '../store/singleUser'
+import {UserView, EditUserForm} from '../components'
 
 class User extends Component {
   componentDidMount() {

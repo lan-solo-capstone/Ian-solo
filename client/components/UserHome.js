@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -7,15 +7,15 @@ import {
   deleteSingleItemRoute,
   modifyItem,
 } from '../store/useritems'
-import SingleItem from './SingleItem'
 import {logout} from '../store'
+import {SingleItem} from '../components'
 
 /**
  * COMPONENT
  */
 
 // Render Class
-class UserHome extends React.Component {
+class UserHome extends Component {
   componentDidMount() {
     this.props.fetchUserItems(this.props.user.id)
   }

@@ -1,7 +1,7 @@
 /* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {modifyItem} from '../store/item.js'
+import {modifyItem} from '../store/item'
 import {ItemForm} from '../components'
 
 const initialState = {

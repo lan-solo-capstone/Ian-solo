@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
-import {ItemForm} from './index'
+import {ItemForm} from '../components'
 
 const initialState = {
   itemType: '',

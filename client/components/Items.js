@@ -1,12 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchAllItems, allItemsUnload} from '../store/items'
 import {updateNavbar} from '../store/navbar'
-import SingleItem from './SingleItem'
+import {SingleItem} from '../components'
 
 // Render Class
-class Items extends React.Component {
+class Items extends Component {
   componentDidMount() {
     this.props.fetchAllItems()
   }

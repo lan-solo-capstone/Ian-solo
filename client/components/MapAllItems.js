@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
@@ -8,7 +8,7 @@ import _ from 'lodash'
 /* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
-class MapAllItems extends React.Component {
+class MapAllItems extends Component {
   constructor(props) {
     super(props)
     this.state = {

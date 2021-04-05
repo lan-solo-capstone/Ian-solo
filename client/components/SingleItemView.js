@@ -1,14 +1,13 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {updateNavbar} from '../store/navbar'
-import MapSingleItem from './MapSingleItem'
 import {modifyItem} from '../store/item'
 import {removeItem} from '../store/items'
-import {EditItemForm} from './index'
+import {EditItemForm, MapSingleItem} from '../components'
 
 // Render Class
-class SingleItemView extends React.Component {
+class SingleItemView extends Component {
   constructor(props) {
     super(props)
 

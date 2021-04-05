@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
 //accepts props: item=object <MapSingleItem item=object>
-class MapSingleItem extends React.Component {
+class MapSingleItem extends Component {
   constructor(props) {
     super(props)
     this.state = {

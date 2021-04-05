@@ -2,11 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
-import MapSingleItem from './MapSingleItem'
-import SearchBox from './SearchBox'
-
+import {
+  MapAllItems,
+  MapSingleItem,
+  MobileFooter,
+  SearchBox,
+} from '../components'
 const Navbar = (props) => {
   const inputRef = React.useRef(null)
   const mapButton = React.useRef(null)
