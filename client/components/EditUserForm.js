@@ -19,7 +19,7 @@ class EditUserForm extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
-    this.handleChange = this.handleChange.bind(this)
+    handleChange = handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -89,9 +89,22 @@ class EditUserForm extends Component {
   }
 
   render() {
+    const {handleSubmit, handleChange} = this
+    const {
+      firstName,
+      lastName,
+      email,
+      street1,
+      street2,
+      city,
+      state,
+      zip,
+      buttonDisabled,
+    } = this.state
+
     return (
       // <div className="container" style={{maxWidth: '800px'}}>
-      <form role="form" onSubmit={this.handleSubmit}>
+      <form role="form" onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-6 m-0">
             <label htmlFor="firstName">
@@ -101,8 +114,8 @@ class EditUserForm extends Component {
               type="text"
               className="form-control"
               name="firstName"
-              value={this.state.firstName}
-              onChange={this.handleChange}
+              value={firstName}
+              onChange={handleChange}
             />
           </div>
           <div className="col-md-6 m-0">
@@ -113,8 +126,8 @@ class EditUserForm extends Component {
               type="text"
               className="form-control"
               name="lastName"
-              value={this.state.lastName}
-              onChange={this.handleChange}
+              value={lastName}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -126,8 +139,8 @@ class EditUserForm extends Component {
             type="email"
             className="form-control"
             name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={email}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -138,8 +151,8 @@ class EditUserForm extends Component {
             type="text"
             className="form-control"
             name="street1"
-            value={this.state.street1}
-            onChange={this.handleChange}
+            value={street1}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -150,8 +163,8 @@ class EditUserForm extends Component {
             type="text"
             className="form-control"
             name="street2"
-            value={this.state.street2}
-            onChange={this.handleChange}
+            value={street2}
+            onChange={handleChange}
           />
         </div>
         <div className="row">
@@ -163,8 +176,8 @@ class EditUserForm extends Component {
               type="text"
               className="form-control"
               name="city"
-              value={this.state.city}
-              onChange={this.handleChange}
+              value={city}
+              onChange={handleChange}
             />
           </div>
           <div className="col-md-3 m-0">
@@ -175,8 +188,8 @@ class EditUserForm extends Component {
               type="text"
               className="form-control"
               name="state"
-              value={this.state.state}
-              onChange={this.handleChange}
+              value={state}
+              onChange={handleChange}
             />
           </div>
           <div className="col-md-3 m-0">
@@ -187,15 +200,15 @@ class EditUserForm extends Component {
               type="text"
               className="form-control"
               name="zip"
-              value={this.state.zip}
-              onChange={this.handleChange}
+              value={zip}
+              onChange={handleChange}
             />
           </div>
         </div>
         <button
           type="submit"
           className="btn btn-primary mt-2 mb-5"
-          disabled={this.state.buttonDisabled}
+          disabled={buttonDisabled}
         >
           Submit
         </button>
