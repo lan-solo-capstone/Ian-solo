@@ -77,8 +77,6 @@ class EditItemForm extends Component {
   render() {
     const {handleSubmit, handleChange} = this
     const {pathname} = this.props.location
-    // this log makes sure that state changes when user types on form
-    console.log('in EditItemForm render, this.props', this.props)
 
     return (
       <div>
