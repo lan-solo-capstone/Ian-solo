@@ -34,18 +34,14 @@ const ItemForm = (props) => {
               <div className="fs-5">What kind of post is this?</div>
             </label>
 
-            <div
-              className="form-check"
-              name="itemType"
-              value={itemType}
-              onChange={handleChange}
-            >
+            <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
                 name="itemType"
                 value="Offer"
                 checked={itemType === 'Offer'}
+                onChange={handleChange}
                 id="itemTypeOffer"
                 required
               />
@@ -53,12 +49,7 @@ const ItemForm = (props) => {
                 It&apos;s an <b>OFFER</b> of an item
               </label>
             </div>
-            <div
-              className="form-check"
-              name="itemType"
-              value={itemType}
-              onChange={handleChange}
-            >
+            <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
@@ -66,6 +57,7 @@ const ItemForm = (props) => {
                 value="Seeking"
                 id="itemTypeSeeking"
                 checked={itemType === 'Seeking'}
+                onChange={handleChange}
                 required
               />
               <label className="form-check-label" htmlFor="itemTypeSeeking">

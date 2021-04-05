@@ -57,7 +57,7 @@ export const deleteSingleItemRoute = (itemId) => {
     try {
       const {data} = await axios.delete(`/api/items/${itemId}`)
       dispatch(deleteSingleItem(data))
-      toast.success('The item was successfully deleted!', toastSettings)
+      toast.success('Item deleted!', toastSettings)
     } catch (error) {
       console.error(error)
     }

@@ -76,6 +76,10 @@ class AllUsers extends Component {
       return 0
     })
 
+    const sortedItems = this.props.items.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt)
+    })
+
     return (
       <div className="container mt-3" style={{marginBottom: '65px'}}>
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
@@ -173,7 +177,7 @@ class AllUsers extends Component {
                 id="multiCollapsePost"
               >
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
-                  {this.props.items.map((item) => (
+                  {sortedItems.map((item) => (
                     <div key={item.id}>
                       <SingleItem item={item} />
                       <button
