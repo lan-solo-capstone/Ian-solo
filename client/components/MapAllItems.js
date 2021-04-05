@@ -107,30 +107,30 @@ class MapAllItems extends Component {
   }
 
   render() {
+    const {items, selectedItem, loading, apiKey} = this.state
+    const {unloadModal, user} = this.props
+
     return (
       <>
-        {this.state.loading === true ? (
+        {loading === true ? (
           <div>Loading...</div>
         ) : (
           <ReactMapGL
             {...this.state.viewport}
-            mapboxApiAccessToken={this.state.apiKey}
+            mapboxApiAccessToken={apiKey}
             mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
             onViewportChange={(viewport) => {
               this.setState({viewport: viewport})
             }}
           >
             {this.props.isLoggedIn && (
-              <Marker
-                latitude={+this.props.user.latitude}
-                longitude={+this.props.user.longitude}
-              >
+              <Marker latitude={+user.latitude} longitude={+user.longitude}>
                 <i className="h2 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
-            {this.state.items &&
-              this.state.items.length > 0 &&
-              this.state.items.map((item) => {
+            {items &&
+              items.length > 0 &&
+              items.map((item) => {
                 return (
                   <Marker
                     key={item.id}
@@ -154,10 +154,10 @@ class MapAllItems extends Component {
                   </Marker>
                 )
               })}
-            {this.state.selectedItem ? (
+            {selectedItem ? (
               <Popup
-                latitude={+this.state.selectedItem.user.latitude}
-                longitude={+this.state.selectedItem.user.longitude}
+                latitude={+selectedItem.user.latitude}
+                longitude={+selectedItem.user.longitude}
                 closeOnClick={false}
                 onClose={() => {
                   this.setState({selectedItem: null})
@@ -168,11 +168,11 @@ class MapAllItems extends Component {
                   style={{width: '150px', height: 'auto'}}
                 >
                   <div>
-                    {this.state.selectedItem.itemPhotos.length > 0 &&
-                    this.state.selectedItem.itemPhotos[0].downloadURL ? (
+                    {selectedItem.itemPhotos.length > 0 &&
+                    selectedItem.itemPhotos[0].downloadURL ? (
                       <img
                         width="100%"
-                        src={this.state.selectedItem.itemPhotos[0].downloadURL}
+                        src={selectedItem.itemPhotos[0].downloadURL}
                       />
                     ) : (
                       <img width="100%" src="/images/croppedFsDefault.jpg" />
@@ -183,15 +183,15 @@ class MapAllItems extends Component {
                     className="text-center text-decoration-none text-primary m-0"
                     to={{
                       pathname: '/singleview',
-                      state: {item: this.state.selectedItem},
+                      state: {item: selectedItem},
                     }}
                     onClick={() => {
-                      if (this.props.unloadModal) {
-                        this.props.unloadModal()
+                      if (unloadModal) {
+                        unloadModal()
                       }
                     }}
                   >
-                    {this.state.selectedItem.itemListName}
+                    {selectedItem.itemListName}
                   </Link>
                 </div>
               </Popup>
