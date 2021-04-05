@@ -8,21 +8,21 @@ import axios from 'axios'
 class MapSingleItem extends Component {
   constructor(props) {
     super(props)
+    const {item} = this.props
     this.state = {
       viewport: {
-        latitude: this.props.item ? +this.props.item.user.latitude : 40.73061,
-        longitude: this.props.item
-          ? +this.props.item.user.longitude
-          : -73.935242,
+        latitude: item ? +item.user.latitude : 40.73061,
+        longitude: item ? +item.user.longitude : -73.935242,
         width: '100%',
         height: '100%',
         zoom: 10,
       },
       loading: true,
       apiKey: '',
-      selectedItem: this.props.item,
+      selectedItem: item,
     }
-    window.addEventListener('resize', (e) => {
+
+    window.addEventListener('resize', () => {
       if (!this.unload) {
         this.resizer()
       }
@@ -39,7 +39,7 @@ class MapSingleItem extends Component {
     this.unload = true
   }
 
-  resizer(e) {
+  resizer() {
     if (this.props?.prevRef?.current?.offsetHeight !== 0) {
       const width = this.props.prevRef?.current?.offsetWidth
       const height = this.props.prevRef?.current?.offsetHeight
@@ -65,41 +65,40 @@ class MapSingleItem extends Component {
   }
 
   render() {
+    const {loading, apiKey, selectedItem} = this.state
+    const {isLoggedIn, user, item} = this.props
     return (
       <>
-        {this.state.loading === true ? (
+        {loading === true ? (
           <div>Loading...</div>
         ) : (
           <ReactMapGL
             {...this.state.viewport}
-            mapboxApiAccessToken={this.state.apiKey}
+            mapboxApiAccessToken={apiKey}
             mapStyle="mapbox://styles/melindaarmbruster/ckme6qk3d0u9818l9rqsrvz27"
             onViewportChange={(viewport) => {
               this.setState({viewport: viewport})
             }}
           >
-            {this.props.isLoggedIn && (
-              <Marker
-                latitude={+this.props.user.latitude}
-                longitude={+this.props.user.longitude}
-              >
+            {isLoggedIn && (
+              <Marker latitude={+user.latitude} longitude={+user.longitude}>
                 <i className="h1 bi bi-house-door-fill text-primary"></i>
               </Marker>
             )}
-            {this.props.item && (
+            {item && (
               <Marker
-                latitude={+this.props.item.user.latitude}
-                longitude={+this.props.item.user.longitude}
+                latitude={+item.user.latitude}
+                longitude={+item.user.longitude}
               >
                 <button
                   className="btn btn-link text-center text-decoration-none"
                   onClick={(evt) => {
                     evt.preventDefault()
-                    this.setState({selectedItem: this.props.item})
+                    this.setState({selectedItem: item})
                   }}
                   type="button"
                 >
-                  {this.props.item.itemType === 'Offer' ? (
+                  {item.itemType === 'Offer' ? (
                     <i className="h1 bi bi-pin-fill text-success"></i>
                   ) : (
                     <i className="h1 bi bi-pin-fill text-danger"></i>
@@ -107,10 +106,10 @@ class MapSingleItem extends Component {
                 </button>
               </Marker>
             )}
-            {this.state.selectedItem ? (
+            {selectedItem ? (
               <Popup
-                latitude={+this.state.selectedItem.user.latitude}
-                longitude={+this.state.selectedItem.user.longitude}
+                latitude={+selectedItem.user.latitude}
+                longitude={+selectedItem.user.longitude}
                 closeOnClick={false}
                 onClose={() => {
                   this.setState({selectedItem: null})
@@ -121,18 +120,18 @@ class MapSingleItem extends Component {
                   style={{width: '150px', height: 'auto'}}
                 >
                   <div>
-                    {this.state.selectedItem.itemPhotos.length > 0 &&
-                    this.state.selectedItem.itemPhotos[0].downloadURL ? (
+                    {selectedItem.itemPhotos.length > 0 &&
+                    selectedItem.itemPhotos[0].downloadURL ? (
                       <img
                         width="100%"
-                        src={this.state.selectedItem.itemPhotos[0].downloadURL}
+                        src={selectedItem.itemPhotos[0].downloadURL}
                       />
                     ) : (
                       <img width="100%" src="/images/croppedFsDefault.jpg" />
                     )}
                   </div>
 
-                  {this.state.selectedItem.itemListName}
+                  {selectedItem.itemListName}
                 </div>
               </Popup>
             ) : null}
