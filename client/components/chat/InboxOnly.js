@@ -5,6 +5,7 @@ import Talk from 'talkjs'
 class InboxOnly extends Component {
   componentDidMount() {
     const currentUser = this.props.user
+
     Talk.ready
       .then(() => {
         const me = new Talk.User({

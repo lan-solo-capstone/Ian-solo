@@ -35,8 +35,10 @@ class AllUsers extends Component {
   }
 
   render() {
+    const userIsAdmin = this.props.user.admin
+
     // if not an admin, display this
-    if (!this.props.user.admin) {
+    if (!userIsAdmin) {
       return (
         <>
           <div className="container-sm d-flex justify-content-center align-items-center flex-column my-4">
@@ -47,6 +49,8 @@ class AllUsers extends Component {
         </>
       )
     }
+
+    // if waiting for data to load, display loading message
     if (this.props.loading) {
       return (
         <div
