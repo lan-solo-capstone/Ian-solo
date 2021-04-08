@@ -62,6 +62,7 @@ class MapAllItems extends Component {
 
   componentDidUpdate(prevProps) {
     const {itemsArray} = this.props
+
     if (!_.isEqual(prevProps.itemsArray, itemsArray)) {
       this.setState({
         items: [
@@ -72,10 +73,10 @@ class MapAllItems extends Component {
           }),
         ],
       })
+
       this.setState({
-        viewport: {...this.initialViewport},
+        viewport: {...this.initialViewport, selectedItem: null},
       })
-      this.setState({selectedItem: null})
     }
   }
 
