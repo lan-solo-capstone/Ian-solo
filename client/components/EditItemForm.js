@@ -1,4 +1,3 @@
-/* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {modifyItem} from '../store/item'
