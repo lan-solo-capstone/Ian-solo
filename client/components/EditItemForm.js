@@ -52,6 +52,7 @@ class EditItemForm extends Component {
   // also disable submit button temporarily and close modal
   handleSubmit(evt) {
     evt.preventDefault()
+
     const itemId = this.props.location.state.item.id
     const userId = this.props.location.state.item.user.id
     const {itemType, itemListName, description, itemCondition} = this.state
@@ -102,4 +103,5 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(modifyItem(itemId, modifications, toastMessage)),
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(EditItemForm)
