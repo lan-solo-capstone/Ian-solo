@@ -102,6 +102,7 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
 }
 
 const initialState = {}
+
 export default function itemReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_NEW_ITEM:

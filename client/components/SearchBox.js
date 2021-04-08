@@ -11,11 +11,13 @@ const initialState = {
 class SearchBox extends Component {
   constructor() {
     super()
+
     this.state = {
       search: '',
       itemType: 'All',
       distance: 'Anywhere',
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleReset = this.handleReset.bind(this)
@@ -58,6 +60,7 @@ class SearchBox extends Component {
     const {handleSubmit, handleChange, handleReset} = this
     const {isLoggedIn} = this.props
     const {itemType, distance, search} = this.state
+
     return (
       <form
         className="row p-0 g-1 m-0 row-cols-3 row-cols-sm-4"
@@ -139,4 +142,5 @@ const mapStateToProps = (state) => {
     user: state.user,
   }
 }
+
 export default connect(mapStateToProps, null)(SearchBox)

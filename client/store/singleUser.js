@@ -58,7 +58,9 @@ export const modifyExistingUser = (userId, modifications) => {
 }
 
 // Subreducer
+
 const defaultUser = {}
+
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_EXISTING_USER:

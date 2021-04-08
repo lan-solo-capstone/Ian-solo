@@ -15,6 +15,7 @@ const toastSettings = {
 /**
  * ACTION TYPES
  */
+
 const FETCH_USER_ITEMS = 'FETCH_USER_ITEMS'
 const DELETE_SINGLE_ITEM = 'DELETE_SINGLE_ITEM'
 const EDIT_ITEM = 'EDIT_ITEM'
@@ -22,18 +23,22 @@ const EDIT_ITEM = 'EDIT_ITEM'
 /**
  * INITIAL STATE
  */
+
 const initalState = {loading: true, items: []}
 
 /**
  * ACTION CREATORS
  */
+
 const userItems = (items) => ({type: FETCH_USER_ITEMS, items})
+
 const deleteSingleItem = (item) => {
   return {
     type: DELETE_SINGLE_ITEM,
     item,
   }
 }
+
 const editItem = (item) => {
   return {
     type: EDIT_ITEM,
@@ -44,6 +49,7 @@ const editItem = (item) => {
 /**
  * THUNK CREATORS
  */
+
 export const fetchUserItems = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`api/users/${id}`)
@@ -86,6 +92,7 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
 /**
  * REDUCER
  */
+
 export default (state = initalState, action) => {
   switch (action.type) {
     case FETCH_USER_ITEMS:

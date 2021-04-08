@@ -8,12 +8,14 @@ import {
   MobileFooter,
   SearchBox,
 } from '../components'
+
 const Navbar = (props) => {
   const inputRef = React.useRef(null)
   const mapButton = React.useRef(null)
   const unloadModal = () => mapButton.current.click()
   const {page, items} = props.currentPage
   const {handleClick, isLoggedIn} = props
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light px-md-5">
@@ -154,6 +156,7 @@ const Navbar = (props) => {
               ) : (
                 <>
                   {/* The navbar will show these links before you log in */}
+
                   <Link
                     className="nav-item nav-link mx-1 d-none d-md-block"
                     to="/login"
@@ -162,6 +165,7 @@ const Navbar = (props) => {
                   </Link>
                 </>
               )}
+
               {/* <!-- Button trigger modal --> */}
               {page ? (
                 <button
