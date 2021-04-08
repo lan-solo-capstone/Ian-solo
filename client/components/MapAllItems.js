@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import _ from 'lodash'
-/* eslint-disable complexity */
 
 //accepts props: <MapAllItems items=objectArray>
 class MapAllItems extends Component {
