@@ -206,6 +206,8 @@ class AllUsers extends Component {
                     </div>
                   ))}
                 </div>
+                {/* end items section */}
+
                 <a
                   className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                   style={{width: '98%'}}
