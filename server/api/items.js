@@ -3,37 +3,43 @@ const {Item, User, ItemPhoto} = require('../db/models')
 const {ensureAnyLogin, ensureLogin, ensureAdmin} = require('./middleware')
 module.exports = router
 
+const itemAttributes = [
+  'id',
+  'itemListName',
+  'description',
+  'itemType',
+  'status',
+  'dateListed',
+  'itemCondition',
+  'createdAt',
+]
+
+const userAttributes = [
+  'id',
+  'firstName',
+  'latitude',
+  'longitude',
+  'state',
+  'city',
+  'createdAt',
+]
+
+const photoAttributes = ['photoTitle', 'cloudREF', 'downloadURL']
+
 // /api/items
 
 router.get('/', async (req, res, next) => {
   try {
     const allItems = await Item.findAll({
-      attributes: [
-        'id',
-        'itemListName',
-        'description',
-        'itemType',
-        'status',
-        'dateListed',
-        'itemCondition',
-        'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
-      ],
+      attributes: itemAttributes,
       include: [
         {
           model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'latitude',
-            'longitude',
-            'state',
-            'city',
-            'createdAt',
-          ],
+          attributes: userAttributes,
         },
         {
           model: ItemPhoto,
-          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+          attributes: photoAttributes,
         },
       ],
     })
@@ -126,32 +132,15 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
       // necessary to find by userId as well as itemId to secure API route -- JC 3.31.21
       // we compare the userId of the item to req.body.user.id to authenticate user
       where: {id: itemId, userId},
-      attributes: [
-        'id',
-        'itemListName',
-        'description',
-        'itemType',
-        'status',
-        'dateListed',
-        'itemCondition',
-        'createdAt',
-      ],
+      attributes: itemAttributes,
       include: [
         {
           model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'latitude',
-            'longitude',
-            'state',
-            'city',
-            'createdAt',
-          ],
+          attributes: userAttributes,
         },
         {
           model: ItemPhoto,
-          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+          attributes: photoAttributes,
         },
       ],
     })
