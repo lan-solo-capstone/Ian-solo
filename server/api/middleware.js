@@ -21,6 +21,7 @@ function ensureAnyLogin(req, res, next) {
     next(err)
   }
 }
+
 function ensureLogin(req, res, next) {
   try {
     const id = req.user.id
@@ -32,6 +33,7 @@ function ensureLogin(req, res, next) {
       // code breaks if this return is not here. Not sure why. -- JC 3.31.21
       return
     }
+
     // if they're a logged in user,
     // check if req.params.userId exists.
     if (req.params.userId) {
@@ -42,6 +44,7 @@ function ensureLogin(req, res, next) {
         res.send('you must be authorized to view this page (from middleware)')
       }
     }
+
     // but if there is no req.params.userId, then at least the req.body.user.id and req.user.id have to match
     else if (req.body && id === req.body.user.id) {
       next()
