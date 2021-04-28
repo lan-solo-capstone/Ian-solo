@@ -5,7 +5,7 @@ import Talk from 'talkjs'
 class InboxComponent extends Component {
   componentDidMount() {
     const currentUser = this.props.user
-    console.log(currentUser)
+
     Talk.ready
       .then(() => {
         const me = new Talk.User({
@@ -26,10 +26,9 @@ class InboxComponent extends Component {
           name: recipient.firstName,
         })
 
-        // You control the ID of a conversation. oneOnOneId is a helper method that generates
+        // oneOnOneId is a helper method that generates
         // a unique conversation ID for a given pair of users.
         const conversationId = Talk.oneOnOneId(me, other)
-
         const conversation = window.talkSession.getOrCreateConversation(
           conversationId
         )
@@ -51,7 +50,6 @@ class InboxComponent extends Component {
   }
 
   render() {
-    console.log('in InboxContainer render, props', this.props)
     return (
       <span>
         <div style={{height: '65vh'}} ref={(c) => (this.container = c)}>

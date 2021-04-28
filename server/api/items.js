@@ -1,40 +1,45 @@
 const router = require('express').Router()
 const {Item, User, ItemPhoto} = require('../db/models')
-// const ItemPhoto = require('../db/models/itemPhoto')
 const {ensureAnyLogin, ensureLogin, ensureAdmin} = require('./middleware')
 module.exports = router
+
+const itemAttributes = [
+  'id',
+  'itemListName',
+  'description',
+  'itemType',
+  'status',
+  'dateListed',
+  'itemCondition',
+  'createdAt',
+]
+
+const userAttributes = [
+  'id',
+  'firstName',
+  'latitude',
+  'longitude',
+  'state',
+  'city',
+  'createdAt',
+]
+
+const photoAttributes = ['photoTitle', 'cloudREF', 'downloadURL']
 
 // /api/items
 
 router.get('/', async (req, res, next) => {
   try {
     const allItems = await Item.findAll({
-      attributes: [
-        'id',
-        'itemListName',
-        'description',
-        'itemType',
-        'status',
-        'dateListed',
-        'itemCondition',
-        'createdAt', // YF 03.26.21 added - need this data to display "time ago" on item card
-      ],
+      attributes: itemAttributes,
       include: [
         {
           model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'latitude',
-            'longitude',
-            'state',
-            'city',
-            'createdAt',
-          ],
+          attributes: userAttributes,
         },
         {
           model: ItemPhoto,
-          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+          attributes: photoAttributes,
         },
       ],
     })
@@ -45,9 +50,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// prob can delete this as it doesn't seem to be getting used -- JC 3.31.21
 // GET single item
-// this may be necessary to re-route the user after they create a new post
+// this route is actually not used in production but in development can be useful for testing
+// (e.g., get a single item before deleting it) -- JC 4.3.21
 router.get('/:itemId', async (req, res, next) => {
   const {itemId} = req.params
   try {
@@ -72,9 +77,8 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
       deliveryOption,
       userId,
       imageArr,
-      // dateListed,
     } = req.body
-    console.log('hello', 'in post req.body', req.body)
+
     const newItem = await Item.create({
       itemListName,
       description,
@@ -94,8 +98,6 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
       await itemPhotos.setItem(newItem)
     } else {
       imageArr.forEach(async (element) => {
-        console.log(element)
-
         const itemPhotos = await ItemPhoto.create({
           photoTitle: element.photoTitle,
           cloudREF: element.cloudRef,
@@ -114,7 +116,6 @@ router.post('/', ensureAnyLogin, async (req, res, next) => {
 // PUT route for /api/items/:itemId
 router.put('/:itemId', ensureLogin, async (req, res, next) => {
   try {
-    console.log('in PUT route for item, req.body', req.body)
     const {itemId} = req.params
     const {
       itemType,
@@ -131,32 +132,15 @@ router.put('/:itemId', ensureLogin, async (req, res, next) => {
       // necessary to find by userId as well as itemId to secure API route -- JC 3.31.21
       // we compare the userId of the item to req.body.user.id to authenticate user
       where: {id: itemId, userId},
-      attributes: [
-        'id',
-        'itemListName',
-        'description',
-        'itemType',
-        'status',
-        'dateListed',
-        'itemCondition',
-        'createdAt',
-      ],
+      attributes: itemAttributes,
       include: [
         {
           model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'latitude',
-            'longitude',
-            'state',
-            'city',
-            'createdAt',
-          ],
+          attributes: userAttributes,
         },
         {
           model: ItemPhoto,
-          attributes: ['photoTitle', 'cloudREF', 'downloadURL'],
+          attributes: photoAttributes,
         },
       ],
     })

@@ -1,12 +1,9 @@
-/* eslint-disable no-warning-comments */
 import React from 'react'
-import {Link} from 'react-router-dom'
 
 const UserView = (props) => {
   const {
     id,
     firstName,
-    middleName,
     lastName,
     email,
     street1,
@@ -16,11 +13,10 @@ const UserView = (props) => {
     zip,
   } = props.user
 
-  console.log('in UserView, props', props)
   return (
     <div key={id}>
       <h5 className="card-header">
-        {firstName} {middleName} {lastName}
+        {firstName} {lastName}
       </h5>
       <div className="card-body text-secondary">
         <p className="card-text">E: {email}</p>

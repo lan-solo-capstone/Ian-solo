@@ -11,11 +11,13 @@ const initialState = {
 class SearchBox extends Component {
   constructor() {
     super()
+
     this.state = {
       search: '',
       itemType: 'All',
       distance: 'Anywhere',
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleReset = this.handleReset.bind(this)
@@ -29,9 +31,11 @@ class SearchBox extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    const searchString = this.state.search
-    const searchItemType = this.state.itemType
-    const searchDistance = this.state.distance
+    const {search, itemType, distance} = this.state
+
+    const searchString = search
+    const searchItemType = itemType
+    const searchDistance = distance
 
     //where we redirect w/ props
     history.push({
@@ -53,19 +57,22 @@ class SearchBox extends Component {
   }
 
   render() {
+    const {handleSubmit, handleChange, handleReset} = this
+    const {isLoggedIn} = this.props
+    const {itemType, distance, search} = this.state
+
     return (
       <form
-        // className="row p-0 g-1 m-0 row-cols-3 row-cols-md-5"
         className="row p-0 g-1 m-0 row-cols-3 row-cols-sm-4"
-        onSubmit={this.handleSubmit}
+        onSubmit={handleSubmit}
       >
-        <div className={this.props.isLoggedIn ? 'm-0 col' : 'm-0 col'}>
+        <div className="m-0 col">
           <select
             name="itemType"
             className="form-select m-0 mb-1 mb-md-0"
             aria-label="Listing Type"
-            onChange={this.handleChange}
-            value={this.state.itemType}
+            onChange={handleChange}
+            value={itemType}
           >
             <option value="All">All Items</option>
             <option value="Offer">Offers Only</option>
@@ -73,14 +80,14 @@ class SearchBox extends Component {
           </select>
         </div>
 
-        {this.props.isLoggedIn ? (
+        {isLoggedIn && (
           <div className="m-0 col">
             <select
               name="distance"
               className="form-select m-0 mb-1 mb-md-0"
               aria-label="Distance"
-              onChange={this.handleChange}
-              value={this.state.distance}
+              onChange={handleChange}
+              value={distance}
             >
               <option value="Anywhere">Anywhere</option>
               <option value="1">Within 1 mi</option>
@@ -89,7 +96,7 @@ class SearchBox extends Component {
               <option value="20">Within 20 mi</option>
             </select>
           </div>
-        ) : null}
+        )}
         <div className="m-0 ocl">
           <input
             className="form-control m-0"
@@ -97,8 +104,8 @@ class SearchBox extends Component {
             name="search"
             placeholder="Keywords"
             aria-label="Search"
-            onChange={this.handleChange}
-            value={this.state.search}
+            onChange={handleChange}
+            value={search}
           ></input>
         </div>
         <div className="m-0 col">
@@ -117,7 +124,7 @@ class SearchBox extends Component {
                 className="btn btn-outline-primary m-0 form-control"
                 role="button"
                 type="button"
-                onClick={this.handleReset}
+                onClick={handleReset}
               >
                 Reset
               </button>
@@ -135,4 +142,5 @@ const mapStateToProps = (state) => {
     user: state.user,
   }
 }
+
 export default connect(mapStateToProps, null)(SearchBox)

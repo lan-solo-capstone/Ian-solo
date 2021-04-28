@@ -1,8 +1,7 @@
-/* eslint-disable no-warning-comments */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {postNewItem} from '../store/item.js'
-import {ItemForm} from './index'
+import {ItemForm} from '../components'
 
 const initialState = {
   itemType: '',
@@ -30,22 +29,21 @@ class NewItemForm extends Component {
   }
 
   handleFileSelect(evt) {
-    // yf 03/21/21  below line works for both single and multiple file uploads
     const photoFiles = Array.from(evt.target.files)
     this.setState({uploadPhoto: photoFiles})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewItem(this.state, this.props.user.id)
+    const userId = this.props.user.id
+    this.props.addNewItem(this.state, userId)
     this.setState({buttonDisabled: true})
   }
 
   render() {
-    // this log makes sure that state changes when user types on form
-    console.log('in NewFormItem render, this.props', this.props)
     const {handleSubmit, handleChange, handleFileSelect, fileInput} = this
     const {pathname} = this.props.location
+    const {buttonDisabled} = this.state
 
     return (
       <ItemForm
@@ -55,13 +53,13 @@ class NewItemForm extends Component {
         handleFileSelect={handleFileSelect}
         fileInput={fileInput}
         pathname={pathname}
-        buttonDisabled={this.state.buttonDisabled}
+        buttonDisabled={buttonDisabled}
       />
     )
   }
 }
 
-// yf 03.21.21  added state - need user info to associate with the created item.
+// yf 03.21.21  need user info to associate with the created item.
 const mapStateToProps = (state) => ({
   user: state.user,
 })

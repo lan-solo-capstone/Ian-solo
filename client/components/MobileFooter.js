@@ -1,10 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 // Render functional
-const MobileFooter = (props) => (
+const MobileFooter = () => (
   <div className="row cols-3 gx-2 bg-secondary" style={{height: '6vh'}}>
     <div className="col text-center">
       <Link to="/items" className="text-decoration-none m-0">
@@ -26,24 +24,5 @@ const MobileFooter = (props) => (
     </div>
   </div>
 )
-
-// Render Class
-// class Placeholder extends React.Component{
-//   render(){return (<div></div>)}
-// }
-
-/**
- * CONTAINER
- */
-
-// const mapState = (state) => ({
-//   placeholder: state.placeholder,
-// })
-
-// const mapDispatch = (dispatch) => ({
-//   placeholder: () => {
-//     dispatch(placeholder())
-//   },
-// })
 
 export default MobileFooter

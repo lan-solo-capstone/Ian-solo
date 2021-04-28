@@ -1,16 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchAllItems, allItemsUnload} from '../store/items'
 import {updateNavbar} from '../store/navbar'
-import SingleItem from './SingleItem'
-import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
-import timeAgo from 'node-time-ago'
+import {SingleItem} from '../components'
 
 // Render Class
-class Items extends React.Component {
+class Items extends Component {
   componentDidMount() {
     this.props.fetchAllItems()
   }
@@ -25,13 +21,12 @@ class Items extends React.Component {
   render() {
     //Begin search and filter code:
     let items
-
     let headline = `All Listings`
+    const {searchBoxParams} = this.props.location
 
-    if (this.props.location.searchBoxParams) {
-      const keyWords = this.props.location.searchBoxParams.searchString.split(
-        ' '
-      )
+    if (searchBoxParams) {
+      const keyWords = searchBoxParams.searchString.split(' ')
+
       //Calc distance between two coords using Haversine Formula
       const calcMiles = (lat1, lon1, lat2, lon2) => {
         lat1 *= Math.PI / 180
@@ -47,24 +42,22 @@ class Items extends React.Component {
       items = this.props.items
         .filter((item) => item.status === 'Open')
         .filter((item) => {
-          if (this.props.location.searchBoxParams.searchItemType === 'All') {
+          if (searchBoxParams.searchItemType === 'All') {
             return item
           } else if (
-            this.props.location.searchBoxParams.searchItemType === 'Offer' &&
+            searchBoxParams.searchItemType === 'Offer' &&
             item.itemType === 'Offer'
           ) {
             return item
           } else if (
-            this.props.location.searchBoxParams.searchItemType === 'Seeking' &&
+            searchBoxParams.searchItemType === 'Seeking' &&
             item.itemType === 'Seeking'
           ) {
             return item
           }
         })
         .filter((item) => {
-          if (
-            this.props.location.searchBoxParams.searchDistance === 'Anywhere'
-          ) {
+          if (searchBoxParams.searchDistance === 'Anywhere') {
             return item
           } else if (
             calcMiles(
@@ -72,7 +65,7 @@ class Items extends React.Component {
               +this.props.user.longitude,
               +item.user.latitude,
               +item.user.longitude
-            ) <= +this.props.location.searchBoxParams.searchDistance
+            ) <= +searchBoxParams.searchDistance
           ) {
             return item
           }
@@ -103,7 +96,6 @@ class Items extends React.Component {
         })
     }
     //end search and filter code
-    console.log('in Items after sort, items', items)
     return this.props.loading ? (
       <div
         className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -116,10 +108,8 @@ class Items extends React.Component {
         <h3 className="display-6 text-center text-light bg-secondary rounded-3 p-2">
           {headline}
         </h3>
-        {/* {console.log(this.props.items)} */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {this.props.updateNavbar('listall', items)}
-          {console.log('in Items just before passing props, items', items)}
           {items.map((item) => (
             <SingleItem key={item.id} item={item} />
           ))}

@@ -1,4 +1,3 @@
-/* eslint-disable no-warning-comments */
 import axios from 'axios'
 import history from '../history'
 import {storage} from '../../firebase/firebase'
@@ -35,7 +34,6 @@ const editItem = (item) => {
 export const postNewItem = (item, userId) => {
   return async (dispatch) => {
     try {
-      console.log('hello', 'in new item thunk, try block')
       let fileInfo = {
         itemType: item.itemType,
         itemListName: item.itemListName,
@@ -64,25 +62,12 @@ export const postNewItem = (item, userId) => {
           })
         )
         fileInfo.imageArr = imageInfo
-        console.log('hello', 'in new item thunk, imageInfo,', imageInfo)
       }
-
-      // vv test vv  below axios call is for testing purpose - visualize formData vv //
-
-      // axios
-      //   .post('https://httpbin.org/anything', fileInfo)
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
-      //   .catch((err) => console.log(err))
-
-      // ^^ test ^^//
 
       //sending formData to api(express)
       const {data} = await axios.post(`/api/items`, fileInfo)
 
       dispatch(createNewItem(data))
-      console.log('in new item thunk, data', data)
 
       if (data.createdAt) {
         toast.success('Success!', toastSettings)
@@ -91,7 +76,6 @@ export const postNewItem = (item, userId) => {
         toast.warning('Failed! =( Try again?', toastSettings)
       }
     } catch (err) {
-      console.log('hello', 'in new item thunk error ----------!')
       console.error(err)
     }
   }
@@ -106,9 +90,6 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
       dispatch(editItem(modifiedItem))
 
       if (modifiedItem.updatedAt) {
-        console.log(
-          '########### in modifyItem thunk, success, refactored for close/open, toast happening now  with refactored toastMessage!!! @!@@#$@#%#$%$#--------'
-        )
         toast.success(toastMessage, toastSettings)
         history.push('/singleview', {item: modifiedItem})
       } else {
@@ -120,8 +101,8 @@ export const modifyItem = (itemId, modifications, toastMessage) => {
   }
 }
 
-// TODO: add loading: true to initialState and loading: false to returns -- JC 3.29.21
 const initialState = {}
+
 export default function itemReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_NEW_ITEM:

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -7,36 +7,28 @@ import {
   deleteSingleItemRoute,
   modifyItem,
 } from '../store/useritems'
-import SingleItem from './SingleItem'
 import {logout} from '../store'
+import {SingleItem} from '../components'
 
-/**
- * COMPONENT
- */
-
-// Render Class
-class UserHome extends React.Component {
+class UserHome extends Component {
   componentDidMount() {
-    this.props.fetchUserItems(this.props.user.id)
-    console.log(
-      'in UserHome componentDidMount ------------, this.props',
-      this.props
-    )
+    const userId = this.props.user.id
+    this.props.fetchUserItems(userId)
   }
 
   render() {
-    const {user} = this.props
+    const {user, handleClick} = this.props
     let {items} = this.props.useritems
+    const isAdmin = this.props.user.admin
 
     // Attach the user to each item
     items = items.map((item) => {
       item.user = user
       return item
     })
-    console.log('in UserHome render, this.props', this.props)
+
     return (
       <div className="containter-sm container-xl mt-3 footerSpacing">
-        {this.props.useritems.loading ? null : console.log(items)}
         <h3>Welcome {user.firstName}!</h3>
         <ol className="breadcrumb">
           <li className="breadcrumb-item" aria-current="page">
@@ -47,7 +39,7 @@ class UserHome extends React.Component {
               Edit Profile
             </Link>
           </li>
-          {this.props.user.admin && (
+          {isAdmin && (
             <li className="breadcrumb-item active" aria-current="page">
               <Link to="/users" className="text-decoration-none">
                 Admin Home
@@ -60,11 +52,7 @@ class UserHome extends React.Component {
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            <a
-              className="text-decoration-none"
-              href="#"
-              onClick={this.props.handleClick}
-            >
+            <a className="text-decoration-none" href="#" onClick={handleClick}>
               Logout
             </a>
           </li>

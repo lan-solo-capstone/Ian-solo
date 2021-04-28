@@ -1,8 +1,6 @@
-/* eslint-disable no-warning-comments */
 import React from 'react'
 
 const ItemForm = (props) => {
-  console.log('in Itemform, props', props)
   const {
     handleChange,
     handleSubmit,
@@ -12,16 +10,10 @@ const ItemForm = (props) => {
     description,
     itemCondition,
     fileInput,
-    uploadPhoto,
     pathname,
   } = props
 
   const alertReference = React.useRef(null)
-  console.log('in ItemForm, fileInput', fileInput)
-  // if (fileInput.current?.files) {
-  //   console.log(fileInput.current)
-  //   delete fileInput.current.files[2]
-  // }
   const [photos, photoHandle] = React.useState([])
 
   return (
@@ -153,7 +145,6 @@ const ItemForm = (props) => {
                     handleFileSelect(e)
                   }}
                 />
-                {console.log(props.uploadPhoto, 'props')}
                 <div
                   className="row mt-3 justify-content-center"
                   hidden={!photos}
@@ -180,7 +171,6 @@ const ItemForm = (props) => {
                           <a
                             className="photoRemoveButton text-secondary"
                             onClick={() => {
-                              console.log('awa')
                               const filtered = {
                                 target: {
                                   files: photos.filter(

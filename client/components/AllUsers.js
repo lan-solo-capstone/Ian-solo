@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers, removeExistingUser} from '../store/users.js'
+import {me} from '../store/user'
+import {fetchUsers, removeExistingUser} from '../store/users'
 import {
   fetchAllItems,
   allItemsUnload,
   deleteSingleItemRoute,
 } from '../store/items'
-import {me} from '../store/user.js'
-import {UserView} from './index.js'
-import SingleItem from './SingleItem'
+import {UserView, SingleItem} from '../components'
 import {Link} from 'react-router-dom'
 
 class AllUsers extends Component {
@@ -36,8 +35,12 @@ class AllUsers extends Component {
   }
 
   render() {
+    const userIsAdmin = this.props.user.admin
+    const {loading, items} = this.props
+    const {users} = this.props || []
+
     // if not an admin, display this
-    if (!this.props.user.admin) {
+    if (!userIsAdmin) {
       return (
         <>
           <div className="container-sm d-flex justify-content-center align-items-center flex-column my-4">
@@ -48,8 +51,9 @@ class AllUsers extends Component {
         </>
       )
     }
-    console.log('in render this.props', this.props)
-    if (this.props.loading) {
+
+    // if waiting for data to load, display loading message
+    if (loading) {
       return (
         <div
           className="spinner-border position-absolute top-50 start-50 translate-middle"
@@ -58,33 +62,36 @@ class AllUsers extends Component {
           <span className="visually-hidden">Loading...</span>
         </div>
       )
-    } else if (this.props.users.length === 0) {
+
+      // users is deconstructed from props
+    } else if (users.length === 0) {
       return <div>No users found.</div>
     }
-
-    const {users} = this.props || []
 
     // sort fetched users by lastName
     const sortedUsers = users.sort((a, b) => {
       const nameA = a.lastName.toUpperCase()
       const nameB = b.lastName.toUpperCase()
+
       if (nameA < nameB) {
         return -1
       }
+
       if (nameA > nameB) {
         return 1
       }
+
       return 0
     })
 
-    const sortedItems = this.props.items.sort(function (a, b) {
+    // items is deconstructed from props
+    // sort items by date created
+    const sortedItems = items.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt)
     })
 
     return (
       <div className="container mt-3" style={{marginBottom: '65px'}}>
-        {console.log(this.props.items)}
-
         <div className="row gx-2 row-cols-1 row-cols-md-2 text-secondary mt-3">
           <div className="col text-light">
             <div className="mx-auto">
@@ -109,6 +116,7 @@ class AllUsers extends Component {
                 className="collapse multi-collapse rounded bg-secondary"
                 id="multiCollapseUsers"
               >
+                {/* Users, sorted by last name */}
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {sortedUsers.map((user) => {
                     return (
@@ -136,6 +144,8 @@ class AllUsers extends Component {
                     )
                   })}
                 </div>
+                {/* end users section */}
+
                 <a
                   className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                   style={{width: '98%'}}
@@ -179,6 +189,7 @@ class AllUsers extends Component {
                 className="collapse multi-collapse rounded bg-secondary"
                 id="multiCollapsePost"
               >
+                {/* Items, sorted by date created */}
                 <div className="row gx-2 p-2 row-cols-1 row-cols-md-2">
                   {sortedItems.map((item) => (
                     <div key={item.id}>
@@ -195,6 +206,8 @@ class AllUsers extends Component {
                     </div>
                   ))}
                 </div>
+                {/* end items section */}
+
                 <a
                   className="btn btn-secondary m-1 bg-light py-2 text-secondary text-center"
                   style={{width: '98%'}}

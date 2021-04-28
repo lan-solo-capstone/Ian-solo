@@ -1,17 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import MapAllItems from './MapAllItems'
-import MobileFooter from './MobileFooter'
-import MapSingleItem from './MapSingleItem'
-import SearchBox from './SearchBox'
+import {
+  MapAllItems,
+  MapSingleItem,
+  MobileFooter,
+  SearchBox,
+} from '../components'
 
 const Navbar = (props) => {
   const inputRef = React.useRef(null)
   const mapButton = React.useRef(null)
   const unloadModal = () => mapButton.current.click()
+  const {page, items} = props.currentPage
+  const {handleClick, isLoggedIn} = props
 
   return (
     <>
@@ -62,21 +65,19 @@ const Navbar = (props) => {
                     ref={inputRef}
                     style={{width: '100%', height: '85vh'}}
                   >
-                    {props.currentPage.page === 'listall' && (
+                    {page === 'listall' && (
                       <>
-                        {console.log(props.currentPage.page)}
                         <MapAllItems
-                          itemsArray={props.currentPage.items}
+                          itemsArray={items}
                           prevRef={inputRef}
                           unloadModal={unloadModal}
                         />
                       </>
                     )}
-                    {props.currentPage.page === 'singleview' && (
+                    {page === 'singleview' && (
                       <>
-                        {console.log(props.currentPage.page)}
                         <MapSingleItem
-                          item={props.currentPage.items}
+                          item={items}
                           prevRef={inputRef}
                           unloadModal={unloadModal}
                         />
@@ -87,7 +88,7 @@ const Navbar = (props) => {
               </div>
             </div>
           </div>
-          {/* Ends modal */}
+          {/* End modal */}
 
           <div className="collapse navbar-collapse p-0" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -98,7 +99,7 @@ const Navbar = (props) => {
                 Browse
               </Link>
 
-              {props.isLoggedIn ? (
+              {isLoggedIn ? (
                 <>
                   {/* The navbar will show these links after you log in */}
 
@@ -123,7 +124,6 @@ const Navbar = (props) => {
                       className="dropdown-menu"
                       aria-labelledby="navbarScrollingDropdown"
                     >
-                      {console.log(props.user)}
                       <Link
                         className="nav-item nav-link dropdown-item"
                         to="/users"
@@ -146,7 +146,7 @@ const Navbar = (props) => {
                       <a
                         className="nav-item dropdown-item nav-link"
                         href="#"
-                        onClick={props.handleClick}
+                        onClick={handleClick}
                       >
                         Logout
                       </a>
@@ -156,6 +156,7 @@ const Navbar = (props) => {
               ) : (
                 <>
                   {/* The navbar will show these links before you log in */}
+
                   <Link
                     className="nav-item nav-link mx-1 d-none d-md-block"
                     to="/login"
@@ -164,8 +165,9 @@ const Navbar = (props) => {
                   </Link>
                 </>
               )}
+
               {/* <!-- Button trigger modal --> */}
-              {props.currentPage.page ? (
+              {page ? (
                 <button
                   type="button"
                   ref={mapButton}
@@ -181,7 +183,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="fixed-bottom d-md-none">
-          {props.currentPage.page === 'listall' ? (
+          {page === 'listall' ? (
             <div>
               <a
                 className="btn btn-secondary mx-auto mb-3 rounded-pill d-flex justify-content-evenly align-items-center"
@@ -220,7 +222,7 @@ const Navbar = (props) => {
                   id="mapContainer"
                   style={{height: '89vh'}}
                 >
-                  <MapAllItems itemsArray={props.currentPage.items} />
+                  <MapAllItems itemsArray={items} />
                 </div>
               </div>
             </div>
@@ -252,11 +254,3 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-/**
- * PROP TYPES
- */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired,
-// }

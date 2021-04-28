@@ -168,6 +168,7 @@ const AuthForm = (props) => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
+
 const mapLogin = (state) => {
   return {
     name: 'login',
@@ -188,6 +189,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
@@ -198,6 +200,7 @@ const mapDispatch = (dispatch) => {
       const city = evt.target.city ? evt.target.city.value : null
       const state = evt.target.state ? evt.target.state.value : null
       const zip = evt.target.zip ? evt.target.zip.value : null
+
       dispatch(
         auth(
           email,
@@ -213,6 +216,7 @@ const mapDispatch = (dispatch) => {
         )
       )
     },
+
     clearError: () => dispatch(removeUser()),
   }
 }
