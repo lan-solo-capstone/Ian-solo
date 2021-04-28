@@ -29,14 +29,11 @@ function ensureLogin(req, res, next) {
     // if it's an admin, let them go do whatever
     if (req.user.admin) {
       next()
-
-      // code breaks if this return is not here. Not sure why. -- JC 3.31.21
-      return
     }
 
     // if they're a logged in user,
     // check if req.params.userId exists.
-    if (req.params.userId) {
+    else if (req.params.userId) {
       // if it does exist, id and req.params.userId must match
       if (id === Number(req.params.userId)) {
         next()

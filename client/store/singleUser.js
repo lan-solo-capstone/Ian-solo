@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import axios from 'axios'
 import {me} from './user'
 import {toast} from 'react-toastify'
@@ -12,6 +13,8 @@ const toastSettings = {
   draggable: true,
   progress: undefined,
 }
+
+// TODO: need to refactor this subreducer for clarity
 
 // the user subreducer will be for validating logins
 // this one will be to fetch a single user to view as an admin -- JC

@@ -6,7 +6,6 @@ const Item = db.define('item', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -14,13 +13,11 @@ const Item = db.define('item', {
       notEmpty: true,
     },
   },
-
   itemType: {
     type: Sequelize.ENUM,
     values: ['Offer', 'Seeking'],
     allowNull: true,
   },
-
   itemCondition: {
     type: Sequelize.ENUM,
     values: ['New', 'Gently_Used', 'Used'],
@@ -51,7 +48,6 @@ const Item = db.define('item', {
   itemIdTEMP: {
     type: Sequelize.INTEGER,
   },
-
   userIdTEMP: {
     type: Sequelize.INTEGER,
   },
